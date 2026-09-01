@@ -249,13 +249,16 @@ def main() -> None:
 
     # Citation/archive metadata are syntactically readable and do not claim a DOI.
     citation = yaml.safe_load((ROOT / "CITATION.cff").read_text(encoding="utf-8"))
-    assert citation["version"] == "11.19" and citation["license"] == "MIT"
+    assert citation["version"] == "11.19" and "license" not in citation
     assert citation["title"].startswith("AGROLATTICE")
     assert "doi" not in citation
     zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
-    assert zenodo["version"] == "11.19" and zenodo["license"] == "MIT"
+    assert zenodo["version"] == "11.19" and "license" not in zenodo
     codemeta = json.loads((ROOT / "codemeta.json").read_text(encoding="utf-8"))
     assert codemeta["version"] == "11.19"
+    license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
+    assert "All rights reserved" in license_text
+    assert "NOT AN OPEN-SOURCE LICENSE" in license_text
 
     # The reference lock is exact (no ranges) for all active dependency lines.
     lock_lines = [x.strip() for x in (ROOT / "requirements_publication_reference_lock.txt").read_text(encoding="utf-8").splitlines() if x.strip() and not x.lstrip().startswith("#")]

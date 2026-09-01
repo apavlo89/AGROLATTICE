@@ -10,7 +10,6 @@
   ],
   "version": "11.19",
   "publication_date": "2026-08-12",
-  "license": "MIT",
   "keywords": [
     "agricultural informatics",
     "digital twin",
@@ -22,5 +21,5 @@
     "field experiments",
     "scientific reproducibility"
   ],
-  "notes": "Before public deposition, replace placeholder repository metadata in CITATION.cff and add the repository/DOI returned by the selected archive service."
+  "notes": "AGROLATTICE is proprietary source-visible software under the repository LICENSE. Before any archival deposition, choose an access/licensing setting consistent with commercialization plans, then add the repository/DOI metadata. Do not assume an MIT or other open-source license."
 }

@@ -1,21 +1,108 @@
-MIT License
+AGROLATTICE PORTFOLIO EVALUATION LICENSE
+Version 1.0 — 1 September 2026
 
-Copyright (c) 2026 Achilleas Pavlou
+Copyright © 2026 Achilleas Pavlou. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+IMPORTANT: THIS IS NOT AN OPEN-SOURCE LICENSE.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+AGROLATTICE and the original AGROLATTICE source code, documentation, figures,
+interfaces, workflows, and other original materials in this repository
+(collectively, the "Software") are proprietary works of the copyright holder,
+except for third-party materials that are separately identified or licensed.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. LIMITED PORTFOLIO-EVALUATION PERMISSION
+
+Subject to the terms below, you may view the Software and, where technically
+necessary for evaluation, make or use a temporary local copy solely for:
+
+(a) recruitment, hiring, or professional portfolio assessment of the author;
+(b) academic peer review or research-software assessment; or
+(c) personal, non-production evaluation of the Software's design and
+    capabilities.
+
+This limited permission does not grant any right to exploit the Software or to
+use it for operational, production, commercial, competitive, or service-delivery
+purposes.
+
+2. PROHIBITED ACTIVITIES
+
+Except with the copyright holder's prior written permission, you may not:
+
+(a) use the Software, in whole or in part, for commercial, production,
+    operational, consulting, SaaS, hosted-service, or revenue-generating use;
+(b) copy, reproduce, republish, redistribute, transmit, mirror, or make the
+    Software available to another person or service, except as necessarily
+    enabled by GitHub's own repository-viewing and forking functionality under
+    GitHub's applicable Terms of Service;
+(c) modify, adapt, translate, reverse engineer, create derivative works from,
+    or build a competing or substantially similar product from the Software;
+(d) sell, rent, lease, sublicense, assign, transfer, or otherwise commercialize
+    any rights in the Software;
+(e) remove, obscure, or alter copyright, authorship, provenance, trademark, or
+    licensing notices;
+(f) represent the Software or any substantial portion of it as your own work; or
+(g) use the Software as training material for a commercial machine-learning or
+    generative-AI system, except to the extent that such rights are separately
+    granted to GitHub or its affiliates under GitHub's applicable Terms of
+    Service and cannot be restricted by this license.
+
+3. GITHUB PLATFORM RIGHTS
+
+If this repository is made public on GitHub, GitHub's Terms of Service may grant
+GitHub and GitHub users limited rights necessary to host, display, access, and
+fork public repository content through GitHub's functionality. Nothing in this
+license is intended to revoke rights that the copyright holder is required to
+grant under those Terms while using the service.
+
+No additional copyright license is granted merely because the repository can be
+viewed publicly.
+
+4. NO PATENT, TRADEMARK, OR BRAND LICENSE
+
+No patent, trademark, trade-name, logo, branding, or other intellectual-property
+license is granted except for the narrow copyright permission expressly stated
+above. "AGROLATTICE" and associated branding may not be used to imply endorsement,
+affiliation, or authorship.
+
+5. THIRD-PARTY MATERIALS
+
+Third-party packages, libraries, datasets, APIs, imagery, publications, models,
+and other separately licensed materials remain subject to their own licenses and
+terms. This license applies only to original AGROLATTICE materials owned by the
+copyright holder.
+
+6. CONTRIBUTIONS
+
+No external code contribution is accepted under this license unless the
+copyright holder expressly agrees in writing to separate contribution terms.
+Submitting an issue, suggestion, or bug report does not grant the submitter any
+ownership interest in AGROLATTICE.
+
+7. TERMINATION
+
+Any permission granted by this license terminates automatically if you breach
+its terms. Upon termination, you must stop exercising the permissions granted
+under Section 1 and delete any local evaluation copies to the extent permitted
+by applicable law and platform terms.
+
+8. NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS" FOR PORTFOLIO AND EVALUATION PURPOSES, WITHOUT
+WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT,
+ACCURACY, RELIABILITY, OR FITNESS FOR AGRONOMIC OR OPERATIONAL DECISION-MAKING.
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDER SHALL NOT BE LIABLE
+FOR ANY CLAIM, LOSS, DAMAGE, OR OTHER LIABILITY ARISING FROM OR RELATED TO THE
+SOFTWARE OR ITS USE.
+
+9. COMMERCIAL OR OTHER LICENSING
+
+Commercial, research-collaboration, deployment, redistribution, derivative-work,
+or other rights not expressly granted here require a separate written agreement
+with the copyright holder.
+
+10. RESERVATION OF RIGHTS
+
+All rights not expressly granted in this license are reserved by the copyright
+holder.

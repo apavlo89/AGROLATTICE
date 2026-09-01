@@ -12,7 +12,7 @@
   <img alt="Release" src="https://img.shields.io/badge/release-11.19-2F6B4F">
   <img alt="Publication reference" src="https://img.shields.io/badge/publication%20reference-AGROLATTICE--11.19--PRR--2026--08--12-4C7A64">
   <img alt="Framework" src="https://img.shields.io/badge/UI-Streamlit-FF4B4B">
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
+  <img alt="License" src="https://img.shields.io/badge/license-Proprietary%20portfolio%20evaluation-lightgrey">
 </p>
 
 ---
@@ -30,6 +30,12 @@ AGROLATTICE-11.19-PRR-2026-08-12
 ```
 
 This repository also contains the retained **AC3 adaptive climate-clustering build** and the **SB1 spatially balanced climate-clustering build** used to extend the 11.19 analysis interface without changing the displayed release identity.
+
+
+> **Portfolio-source notice:** This repository is source-visible for professional and
+> research-software evaluation. AGROLATTICE is not released as open-source software.
+> Commercial use, redistribution, modification, derivative products, and production
+> deployment require prior written permission. See [`LICENSE`](LICENSE).
 
 > **Research-software status:** AGROLATTICE outputs are decision-support and research outputs, not guarantees of agronomic performance. Model predictions, climate similarity, cluster membership, crop-model simulations, and recommendations require appropriate local validation.
 
@@ -147,7 +153,7 @@ AGROLATTICE 11.19 freezes the integrated 11.x platform for the associated platfo
 - reproducible publication figures in PNG and SVG;
 - example output tables and manuscript-safe demonstration results;
 - `CITATION.cff`, `codemeta.json`, and `.zenodo.json` metadata;
-- an MIT license for original AGROLATTICE source code;
+- a restrictive proprietary portfolio-evaluation license for original AGROLATTICE source code;
 - source and release manifests plus verification utilities;
 - schema-only exports for protected local databases;
 - a publication-safe archive builder that excludes local databases, installed datasets, caches, attachments, and run artifacts.
@@ -326,7 +332,7 @@ AGROLATTICE/
 ├── codemeta.json                      # Software metadata
 ├── .zenodo.json                       # Archive/deposition metadata
 ├── THIRD_PARTY_NOTICE.md              # Third-party/data/method boundary
-└── LICENSE                            # MIT license for original source
+└── LICENSE                            # Restrictive portfolio-evaluation license
 ```
 
 ---
@@ -344,21 +350,36 @@ Pavlou, A. (2026). AGROLATTICE: Publication Reference Release (Version 11.19). S
 Publication reference: AGROLATTICE-11.19-PRR-2026-08-12
 ```
 
-A DOI should be added to `CITATION.cff`, `.zenodo.json`, and the manuscript after the exact frozen release is deposited with a DOI-granting archive such as Zenodo.
+If a DOI is required for a manuscript, choose an archival route and access setting that is compatible with the project's proprietary licensing and commercialization plans. Do not publicly archive the full source merely to obtain a DOI without first deciding what rights and access should persist.
 
 ---
 
 ## License and third-party material
 
-Original AGROLATTICE source code in this repository is released under the **MIT License**. See [`LICENSE`](LICENSE).
+AGROLATTICE is **proprietary source-visible software**, not open-source software.
 
-The MIT license does not relicense third-party Python packages, external executables, datasets, APIs, satellite imagery, scientific publications, or separately licensed models. See [`THIRD_PARTY_NOTICE.md`](THIRD_PARTY_NOTICE.md) for details.
+The repository is made available primarily to demonstrate the author's software-engineering,
+data-science, scientific-computing, GIS, agricultural-modelling, and research-platform work
+for professional portfolio and evaluation purposes.
 
+The [`LICENSE`](LICENSE) permits limited viewing/evaluation but does **not** grant general
+rights to use, modify, redistribute, commercialize, deploy, sublicense, or create derivative
+products from the original AGROLATTICE code.
+
+**All rights are reserved except those expressly granted in the LICENSE.**
+
+Third-party Python packages, external executables, datasets, APIs, satellite imagery,
+scientific publications, and separately licensed models remain subject to their own terms.
+See [`THIRD_PARTY_NOTICE.md`](THIRD_PARTY_NOTICE.md).
+
+> If this repository is public on GitHub, GitHub's platform Terms may independently permit
+> viewing and forking through GitHub functionality. Public visibility should therefore not be
+> interpreted as an open-source grant or permission for commercial reuse.
 ---
 
 ## Contributing and issue reporting
 
-Bug reports, reproducibility problems, scientific-method concerns, and clearly scoped feature proposals can be submitted through GitHub Issues.
+Bug reports, reproducibility problems, scientific-method concerns, and clearly scoped feature proposals can be submitted through GitHub Issues. External code contributions are not accepted unless separate written contribution terms are agreed in advance.
 
 When reporting a scientific or software issue, include the AGROLATTICE release/build identifier, operating system, Python environment, relevant workspace, reproducible steps, and—where safe—minimal non-sensitive example data. Do not upload private field data, credentials, protected databases, or licensed datasets to a public issue.
 

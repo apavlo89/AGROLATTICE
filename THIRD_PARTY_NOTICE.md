@@ -1,6 +1,6 @@
 # Third-party software, data and scientific methods
 
-The MIT licence in this release applies to original AGROLATTICE source code distributed by the copyright holder. It does **not** relicense third-party packages, external executables, datasets, satellite imagery, APIs, papers, models or other separately licensed material.
+Original AGROLATTICE material is proprietary and governed by the restrictive portfolio-evaluation `LICENSE` in this repository. That license does **not** relicense third-party packages, external executables, datasets, satellite imagery, APIs, papers, models or other separately licensed material.
 
 AGROLATTICE depends on open-source Python packages whose own licence notices and terms continue to apply. Optional backends such as AquaCrop-OSPy, DSSAT, APSIM, TabPFN and other external models/packages must be installed and used under their respective terms.
 

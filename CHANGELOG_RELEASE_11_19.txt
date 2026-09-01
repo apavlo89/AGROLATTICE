@@ -18,7 +18,7 @@ ADDED
 5. Four 300-dpi PNG + SVG reference figures.
 6. Deterministic example output tables/results summary.
 7. CITATION.cff, codemeta.json and .zenodo.json archive metadata.
-8. MIT LICENSE plus third-party/data/scientific-method notice.
+8. Restrictive proprietary LICENSE plus third-party/data/scientific-method notice.
 9. requirements_publication_reference_lock.txt.
 10. FREEZE_PUBLICATION_ENV.bat to record the exact target runtime used for the paper.
 11. RUN_PUBLICATION_REFERENCE_DEMO.bat.

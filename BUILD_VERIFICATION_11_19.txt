@@ -65,7 +65,7 @@ PUBLICATION REFERENCE ASSETS
 Added and verified:
 - Stable internal publication reference identifier.
 - CITATION.cff, codemeta.json and archive-ready .zenodo.json metadata.
-- MIT LICENSE and THIRD_PARTY_NOTICE.md.
+- Restrictive proprietary LICENSE and THIRD_PARTY_NOTICE.md.
 - PAPER_STARTER_AGROLATTICE_11_19.md.
 - Publication workflow and screenshot/figure capture checklist.
 - requirements_publication_reference_lock.txt.

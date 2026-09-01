@@ -19,7 +19,7 @@ WHAT IS NEW
 • Four reproducible reference figures in 300-dpi PNG and SVG.
 • Example output tables plus a manuscript-safe demonstration results summary.
 • CITATION.cff, codemeta.json and archive-ready .zenodo.json metadata.
-• MIT licence for original AGROLATTICE source plus a third-party/data/method notice.
+• Restrictive proprietary portfolio-evaluation licence for original AGROLATTICE source plus a third-party/data/method notice.
 • Publication-reference dependency lock and a Windows helper to freeze the exact target environment actually used for the paper.
 • Reproducibility workflow, screenshot/figure checklist and manuscript starter scaffold.
 • Source-file SHA-256 manifest and protected-artifact verification in the 11.19 verifier.
