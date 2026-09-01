@@ -11,6 +11,16 @@
       "givenName": "Achilleas",
       "familyName": "Pavlou",
       "affiliation": "University of Nicosia"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Tania Karina",
+      "familyName": "Garcia-Vite"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Gabino",
+      "familyName": "Garcia De los Santos"
     }
   ],
   "applicationCategory": "Agricultural research software",

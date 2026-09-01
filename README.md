@@ -346,7 +346,7 @@ GitHub can read [`CITATION.cff`](CITATION.cff) directly and expose a **Cite this
 Current software metadata:
 
 ```text
-Pavlou, A. (2026). AGROLATTICE: Publication Reference Release (Version 11.19). Software.
+Pavlou, A., Garcia-Vite, T. K., & Garcia De los Santos, G. (2026). AGROLATTICE: Publication Reference Release (Version 11.19). Software.
 Publication reference: AGROLATTICE-11.19-PRR-2026-08-12
 ```
 
@@ -358,7 +358,7 @@ If a DOI is required for a manuscript, choose an archival route and access setti
 
 AGROLATTICE is **proprietary source-visible software**, not open-source software.
 
-The repository is made available primarily to demonstrate the author's software-engineering,
+The repository is made available primarily to demonstrate the authors' software-engineering,
 data-science, scientific-computing, GIS, agricultural-modelling, and research-platform work
 for professional portfolio and evaluation purposes.
 
