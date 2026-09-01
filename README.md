@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/brand/agrolattice_logo.png" alt="AGROLATTICE" width="680">
+  <img src="assets/brand/agrolattice_logo.png" alt="AGROLATTICE" width="520">
 </p>
 
 <h1 align="center">AGROLATTICE</h1>
@@ -35,10 +35,26 @@ This repository also contains the retained **AC3 adaptive climate-clustering bui
 
 ---
 
+
+## AGROLATTICE in action
+
+<p align="center">
+  <img src="docs/images/agrolattice_app_overview.png" alt="AGROLATTICE 11.19 Research Command Centre" width="100%">
+</p>
+
+<p align="center">
+  <em>
+    AGROLATTICE 11.19 Research Command Centre: a field- and season-aware entry point linking mapped research context,
+    environmental evidence, persistent Twin state, model evidence and scientifically useful next actions.
+  </em>
+</p>
+
+---
+
 ## Platform architecture
 
 <p align="center">
-  <img src="publication_reference/figures/figure_01_platform_architecture.png" alt="AGROLATTICE platform architecture" width="900">
+  <img src="publication_reference/figures/figure_01_platform_architecture.png" alt="AGROLATTICE platform architecture" width="820">
 </p>
 
 AGROLATTICE uses a spatial hierarchy of:
@@ -80,6 +96,15 @@ environment → soil/root zone → crop development → phenology/stress
 ```
 
 Twins support state, timelines, observations, scenarios, calibration, uncertainty, experiment links, recommendations, and cross-season learning. The preferred modelling direction is **mechanistic crop modelling + observations + remote sensing + statistical/ML residual correction + uncertainty**, rather than replacing useful crop biology with an opaque predictor.
+
+
+### Persistent research workflow
+
+<p align="center">
+  <img src="publication_reference/figures/figure_02_evidence_workflow.png" alt="AGROLATTICE persistent research workflow and evidence chain" width="820">
+</p>
+
+The workflow deliberately keeps missing stages explicit. A model output is not silently relabelled as a measurement, a recommendation is not treated as an actual operation, and provenance remains attached as evidence moves from mapped field to frozen report.
 
 ### Climate and agroclimatic analysis
 
@@ -128,6 +153,26 @@ AGROLATTICE 11.19 freezes the integrated 11.x platform for the associated platfo
 - a publication-safe archive builder that excludes local databases, installed datasets, caches, attachments, and run artifacts.
 
 The deterministic demo is for **software reproducibility**, not empirical validation. It must not be described as field, NASA POWER, Sentinel, sensor, or agronomic validation data.
+
+---
+
+
+### Synthetic publication-reference figures
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="publication_reference/figures/figure_03_demo_trial_layout.png" alt="Synthetic trial layout" width="390"><br>
+      <strong>Synthetic trial layout</strong><br>
+      <sub>4 blocks × 6 treatments; demonstration only.</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="publication_reference/figures/figure_04_demo_observed_vs_predicted.png" alt="Synthetic observed versus predicted synchrony" width="390"><br>
+      <strong>Observed vs predicted demo</strong><br>
+      <sub>Deterministic software-reproduction metric; not field validation.</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -267,6 +312,7 @@ AGROLATTICE/
 ├── RUN_APP.bat                        # Preferred Windows launcher/preflight
 ├── INSTALL_DEPENDENCIES.bat           # Core dependency installer
 ├── requirements_ml_agriculture.txt    # Core application dependencies
+├── docs/images/                       # README/public documentation images
 ├── publication_reference/             # Deterministic reproducibility bundle
 ├── assets/brand/                      # AGROLATTICE branding assets
 ├── components/                        # Custom UI components

@@ -331,97 +331,372 @@ def write_demo_bundle(output_dir: Path) -> dict[str, str]:
     return {name: str(path) for name, path in files.items()} | {"manifest": str(manifest_path), "readme": str(readme)}
 
 
+
 def _save_figure(fig: plt.Figure, output_base: Path) -> list[Path]:
+    """Save publication-reference figures as high-resolution PNG and vector SVG."""
     png = output_base.with_suffix(".png")
     svg = output_base.with_suffix(".svg")
-    fig.savefig(png, dpi=300, bbox_inches="tight")
-    fig.savefig(svg, bbox_inches="tight")
+    fig.savefig(png, dpi=300, bbox_inches="tight", pad_inches=0.16)
+    fig.savefig(svg, bbox_inches="tight", pad_inches=0.16)
     plt.close(fig)
     return [png, svg]
 
 
+def _diagram_box(
+    ax,
+    x: float,
+    y: float,
+    w: float,
+    h: float,
+    title: str,
+    subtitle: str | None = None,
+    linewidth: float = 1.4,
+    title_size: float = 10.0,
+    subtitle_size: float = 8.2,
+) -> None:
+    box = FancyBboxPatch(
+        (x, y), w, h,
+        boxstyle="round,pad=0.04,rounding_size=0.07",
+        fill=False,
+        linewidth=linewidth,
+    )
+    ax.add_patch(box)
+    if subtitle:
+        ax.text(
+            x + w / 2, y + h * 0.62, title,
+            ha="center", va="center",
+            fontsize=title_size, fontweight="bold",
+        )
+        ax.text(
+            x + w / 2, y + h * 0.30, subtitle,
+            ha="center", va="center",
+            fontsize=subtitle_size,
+        )
+    else:
+        ax.text(
+            x + w / 2, y + h / 2, title,
+            ha="center", va="center",
+            fontsize=title_size, fontweight="bold",
+        )
+
+
+
 def figure_architecture(output_dir: Path) -> list[Path]:
-    output_dir = Path(output_dir); output_dir.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(14.5, 7.4))
-    ax.set_xlim(0, 15.5); ax.set_ylim(0, 8); ax.axis("off")
-    ax.text(7.6, 7.65, "AGROLATTICE 11.19 publication-reference architecture", ha="center", va="center", fontsize=18, fontweight="bold")
-    workspaces = [
-        ("Fields & Operations", 0.45, 5.75), ("Persistent Twin", 3.25, 5.75),
-        ("Climate & EO", 6.05, 5.75), ("Crop Decisions", 8.85, 5.75),
-        ("Experiments", 0.45, 3.15), ("Models & Evidence", 3.25, 3.15),
-        ("Reports", 6.05, 3.15), ("Data & Settings", 8.85, 3.15),
+    """Compact publication-ready architecture figure."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(12.8, 7.2))
+    ax.set_xlim(0, 12.8)
+    ax.set_ylim(0, 7.2)
+    ax.axis("off")
+
+    ax.text(
+        6.4, 6.90,
+        "AGROLATTICE 11.19 — integrated research architecture",
+        ha="center", va="center",
+        fontsize=18, fontweight="bold",
+    )
+    ax.text(
+        6.4, 6.55,
+        "Spatial identity links field evidence, persistent Twins, experiments, models and decisions.",
+        ha="center", va="center",
+        fontsize=10.4,
+    )
+
+    # Section headings are centred over their own columns to prevent collisions.
+    ax.text(
+        1.675, 5.92, "SPATIAL & DATA FOUNDATION",
+        ha="center", fontsize=8.5, fontweight="bold",
+    )
+    ax.text(
+        7.68, 5.92, "INTEGRATED PLATFORM CORE",
+        ha="center", fontsize=8.5, fontweight="bold",
+    )
+
+    _diagram_box(
+        ax, 0.55, 4.70, 2.25, 0.92,
+        "Mapped field hierarchy", "Country → Farm → Field",
+        title_size=8.7, subtitle_size=7.6,
+    )
+    _diagram_box(
+        ax, 0.55, 3.47, 2.25, 0.92,
+        "Experimental identity", "Trial → Unit → Observation",
+        title_size=8.7, subtitle_size=7.6,
+    )
+    _diagram_box(
+        ax, 0.55, 2.24, 2.25, 0.92,
+        "Environmental evidence", "Climate • Soil • EO • Sensors",
+        title_size=8.5, subtitle_size=7.2,
+    )
+
+    core = [
+        ("Fields & Operations", "geometry • management"),
+        ("AgroLattice Twin", "state • timeline • scenarios"),
+        ("Climate & EO", "climate • satellite • risk"),
+        ("Crop Decisions", "phenology • water • planning"),
+        ("Experiments", "design • treatments • G×E×M"),
+        ("Models & Evidence", "validation • ensembles • UQ"),
+        ("Reports", "provenance • figures • export"),
+        ("Data & Settings", "datasets • diagnostics • control"),
     ]
-    for label, x, y in workspaces:
-        patch = FancyBboxPatch((x, y), 2.3, 1.08, boxstyle="round,pad=0.05,rounding_size=0.08", fill=False, linewidth=1.6)
-        ax.add_patch(patch); ax.text(x + 1.15, y + 0.54, label, ha="center", va="center", fontsize=9.7, fontweight="bold", wrap=True)
-    spine = FancyBboxPatch((0.85, 1.0), 10.65, 1.12, boxstyle="round,pad=0.05,rounding_size=0.08", fill=False, linewidth=2.2)
+    positions = [
+        (3.25, 4.70), (5.55, 4.70), (7.85, 4.70), (10.15, 4.70),
+        (3.25, 3.47), (5.55, 3.47), (7.85, 3.47), (10.15, 3.47),
+    ]
+    for (title, subtitle), (x, y) in zip(core, positions):
+        _diagram_box(
+            ax, x, y, 1.95, 0.92, title, subtitle,
+            title_size=8.15, subtitle_size=6.65,
+        )
+
+    # Foundation enters the integrated platform.
+    for y in (5.16, 3.93, 2.70):
+        ax.annotate(
+            "", xy=(3.10, y), xytext=(2.82, y),
+            arrowprops=dict(arrowstyle="->", linewidth=1.15),
+        )
+
+    spine = FancyBboxPatch(
+        (3.25, 2.05), 8.85, 0.88,
+        boxstyle="round,pad=0.04,rounding_size=0.07",
+        fill=False, linewidth=1.8,
+    )
     ax.add_patch(spine)
-    ax.text(6.175, 1.72, "Persistent evidence spine", ha="center", va="center", fontsize=11.2, fontweight="bold")
-    ax.text(6.175, 1.37, "Field → Trial → Experimental Unit → Twin → Model → Recommendation → Outcome → Report", ha="center", va="center", fontsize=9.6)
-    ax.text(6.175, 0.55, "Spatial identity, provenance, uncertainty and validation remain attached to the evidence chain", ha="center", fontsize=9.8)
-    for _, x, y in workspaces:
-        ax.annotate("", xy=(x + 1.15, 2.14), xytext=(x + 1.15, y), arrowprops=dict(arrowstyle="->", linewidth=1.0))
-    ax.text(11.9, 5.95, "Scientific guardrails", fontsize=11, fontweight="bold")
-    guards = ["Measured ≠ retrieved", "Mechanistic ≠ validated", "Prediction ≠ causality", "Recommendation ≠ actual operation", "Climate similarity ≠ agronomic equivalence"]
-    for i, item in enumerate(guards):
-        ax.text(11.9, 5.45 - 0.62*i, f"• {item}", fontsize=9.3)
+    ax.text(
+        7.68, 2.60, "Persistent evidence spine",
+        ha="center", va="center",
+        fontsize=11.0, fontweight="bold",
+    )
+    ax.text(
+        7.68, 2.29,
+        "Field → Trial → Experimental unit → Twin → Model → Recommendation → Outcome → Report",
+        ha="center", va="center",
+        fontsize=8.6,
+    )
+
+    for x in (4.23, 6.53, 8.83, 11.13):
+        ax.annotate(
+            "", xy=(x, 2.95), xytext=(x, 3.43),
+            arrowprops=dict(arrowstyle="->", linewidth=1.0),
+        )
+
+    ax.text(0.55, 1.62, "SCIENTIFIC GUARDRAILS", fontsize=8.8, fontweight="bold")
+    ax.text(
+        0.55, 1.18,
+        "Measured ≠ retrieved   •   Mechanistic ≠ validated   •   Prediction ≠ causality\n"
+        "Recommendation ≠ actual operation   •   Climate similarity ≠ agronomic equivalence",
+        fontsize=8.8, va="top", linespacing=1.55,
+    )
+    ax.text(
+        6.4, 0.42,
+        "Spatial identity, provenance, uncertainty and validation remain attached to the evidence chain.",
+        ha="center", va="center",
+        fontsize=9.3,
+    )
     return _save_figure(fig, output_dir / "figure_01_platform_architecture")
 
 
 def figure_workflow(output_dir: Path) -> list[Path]:
-    output_dir = Path(output_dir); output_dir.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(15.5, 5.0)); ax.axis("off"); ax.set_xlim(0, 17); ax.set_ylim(0, 5)
-    ax.text(8.5, 4.55, "Persistent research workflow and evidence chain", ha="center", fontsize=17, fontweight="bold")
-    labels = ["Mapped\nfield", "Experiment", "Twin\nstate", "Model +\nvalidation", "Decision", "Measured\noutcome", "Frozen\nreport"]
-    xs = [0.4, 2.8, 5.2, 7.6, 10.0, 12.4, 14.8]
-    width = 1.8
-    for i, (x, label) in enumerate(zip(xs, labels)):
-        box = FancyBboxPatch((x, 2.18), width, 1.05, boxstyle="round,pad=0.04", fill=False, linewidth=1.5)
-        ax.add_patch(box); ax.text(x+width/2, 2.705, label, ha="center", va="center", fontsize=9.3, fontweight="bold", linespacing=1.05)
-        if i < len(labels)-1:
-            ax.annotate("", xy=(xs[i+1]-0.08, 2.70), xytext=(x+width+0.08, 2.70), arrowprops=dict(arrowstyle="->", linewidth=1.35))
-    ax.text(8.5, 1.22, "Each hand-off retains identity and provenance; missing stages remain explicit rather than silently inferred.", ha="center", fontsize=10.5)
-    ax.text(8.5, 0.58, "AGROLATTICE 11.19 freezes the reference release so manuscript figures, tables and software descriptions can cite one immutable version.", ha="center", fontsize=10.2)
+    """Readable persistent evidence-chain figure."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(12.8, 4.3))
+    ax.set_xlim(0, 12.8)
+    ax.set_ylim(0, 4.3)
+    ax.axis("off")
+
+    ax.text(
+        6.4, 4.02,
+        "Persistent research workflow and evidence chain",
+        ha="center", va="center",
+        fontsize=17.5, fontweight="bold",
+    )
+    ax.text(
+        6.4, 3.66,
+        "A result remains traceable to the mapped unit, observations, model state and frozen report.",
+        ha="center", va="center",
+        fontsize=10.0,
+    )
+
+    labels = [
+        ("Mapped field", "spatial identity"),
+        ("Experiment", "treatments"),
+        ("Twin state", "saved evidence"),
+        ("Model + validation", "prediction + UQ"),
+        ("Decision", "recommendation"),
+        ("Measured outcome", "field evidence"),
+        ("Frozen report", "reproducible record"),
+    ]
+
+    start_x = 0.35
+    width = 1.47
+    gap = 0.30
+    y = 2.05
+    h = 0.92
+
+    for i, (title, subtitle) in enumerate(labels):
+        x = start_x + i * (width + gap)
+        _diagram_box(
+            ax, x, y, width, h, title, subtitle,
+            title_size=8.6 if len(title) < 16 else 7.9,
+            subtitle_size=7.0,
+        )
+        if i < len(labels) - 1:
+            ax.annotate(
+                "",
+                xy=(x + width + gap - 0.05, y + h / 2),
+                xytext=(x + width + 0.05, y + h / 2),
+                arrowprops=dict(arrowstyle="->", linewidth=1.15),
+            )
+
+    provenance = FancyBboxPatch(
+        (1.10, 0.82), 10.60, 0.62,
+        boxstyle="round,pad=0.04,rounding_size=0.06",
+        fill=False, linewidth=1.4,
+    )
+    ax.add_patch(provenance)
+    ax.text(
+        6.4, 1.13,
+        "Identity + provenance + uncertainty + validation are retained at every hand-off",
+        ha="center", va="center",
+        fontsize=9.5, fontweight="bold",
+    )
+    ax.text(
+        6.4, 0.34,
+        "Missing stages remain explicit rather than silently inferred. "
+        "The publication-reference release freezes an immutable software state.",
+        ha="center", va="center",
+        fontsize=9.0,
+    )
     return _save_figure(fig, output_dir / "figure_02_evidence_workflow")
 
 
+
 def figure_demo_layout(output_dir: Path) -> list[Path]:
-    output_dir = Path(output_dir); output_dir.mkdir(parents=True, exist_ok=True)
-    design = demo_trial_design()
+    """Synthetic 4×6 experimental layout without scientific-notation map axes."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    design = demo_trial_design().copy()
+
+    lon_order = {v: i + 1 for i, v in enumerate(sorted(design["centroid_lon"].unique()))}
+    lat_order = {v: i + 1 for i, v in enumerate(sorted(design["centroid_lat"].unique()))}
+    design["plot_col"] = design["centroid_lon"].map(lon_order)
+    design["plot_row"] = design["centroid_lat"].map(lat_order)
+
+    fig, ax = plt.subplots(figsize=(10.8, 6.6))
+    fig.subplots_adjust(top=0.82, bottom=0.16, left=0.10, right=0.98)
+
+    fig.suptitle(
+        "Synthetic publication-reference trial layout",
+        fontsize=15.5, fontweight="bold", y=0.975,
+    )
+    fig.text(
+        0.5, 0.915,
+        "4 blocks × 6 treatments • cell labels show treatment ID and male sowing offset",
+        ha="center", va="center",
+        fontsize=9.6,
+    )
+
+    hatches = ["", "//", "\\\\", "xx", "..", "++"]
     treatments = sorted(design["treatment_id"].unique())
-    treatment_index = {t: i for i, t in enumerate(treatments)}
-    fig, ax = plt.subplots(figsize=(10, 6.5))
+    treatment_hatch = {t: hatches[i % len(hatches)] for i, t in enumerate(treatments)}
+
     for _, row in design.iterrows():
-        x = float(row["centroid_lon"]); y = float(row["centroid_lat"])
-        idx = treatment_index[row["treatment_id"]]
-        rect = Rectangle((x-0.000225, y-0.000150), 0.00045, 0.00030, alpha=0.32 + 0.07*(idx % 5), linewidth=1.0, edgecolor="black")
+        x = float(row["plot_col"])
+        y = float(row["plot_row"])
+        rect = Rectangle(
+            (x - 0.48, y - 0.43),
+            0.96, 0.86,
+            fill=False,
+            linewidth=1.15,
+            hatch=treatment_hatch[row["treatment_id"]],
+        )
         ax.add_patch(rect)
-        ax.text(x, y, f"{row['treatment_id']}\n{int(row['male_sowing_offset_days']):+d} d", ha="center", va="center", fontsize=8)
-    ax.set_xlim(design["centroid_lon"].min()-0.00035, design["centroid_lon"].max()+0.00035)
-    ax.set_ylim(design["centroid_lat"].min()-0.00025, design["centroid_lat"].max()+0.00025)
-    ax.set_xlabel("Longitude (synthetic demo coordinates)"); ax.set_ylabel("Latitude (synthetic demo coordinates)")
-    ax.set_title("Synthetic publication-reference experiment: 4 blocks × 6 treatments", fontsize=14, fontweight="bold")
-    ax.text(0.5, -0.12, "Synthetic layout for software demonstration only; not a real field or randomisation recommendation.", transform=ax.transAxes, ha="center", fontsize=9)
+        ax.text(
+            x, y + 0.08, str(row["treatment_id"]),
+            ha="center", va="center",
+            fontsize=9.6, fontweight="bold",
+        )
+        ax.text(
+            x, y - 0.14,
+            f"{int(row['male_sowing_offset_days']):+d} d",
+            ha="center", va="center",
+            fontsize=8.4,
+        )
+
+    ax.set_xlim(0.35, 6.65)
+    ax.set_ylim(0.35, 4.65)
+    ax.set_xticks(range(1, 7))
+    ax.set_yticks(range(1, 5))
+    ax.set_xlabel("Plot position (west → east)")
+    ax.set_ylabel("Block")
+    ax.set_aspect("equal", adjustable="box")
+    ax.grid(False)
+
+    fig.text(
+        0.5, 0.045,
+        "Synthetic layout for software demonstration only — not a real field or randomisation recommendation.",
+        ha="center", va="center",
+        fontsize=8.8,
+    )
+
     return _save_figure(fig, output_dir / "figure_03_demo_trial_layout")
 
 
 def figure_demo_validation(output_dir: Path) -> list[Path]:
-    output_dir = Path(output_dir); output_dir.mkdir(parents=True, exist_ok=True)
+    """Balanced observed-vs-predicted synthetic demonstration plot."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     _, validation = demo_flowering_and_model()
     obs = validation["observed_synchrony_gap_days"].astype(float)
     pred = validation["predicted_synchrony_gap_days"].astype(float)
-    lo = float(min(obs.min(), pred.min()) - 0.5); hi = float(max(obs.max(), pred.max()) + 0.5)
-    fig, ax = plt.subplots(figsize=(7.2, 6.4))
-    ax.scatter(obs, pred, s=42)
-    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1.2)
-    ax.set_xlim(lo, hi); ax.set_ylim(lo, hi)
-    ax.set_xlabel("Synthetic observed synchrony gap (days)"); ax.set_ylabel("Synthetic predicted synchrony gap (days)")
-    ax.set_title("Publication-reference demo: observed vs predicted", fontsize=14, fontweight="bold")
-    summary = demo_summary()
-    ax.text(0.03, 0.97, f"Demo RMSE = {summary['demo_rmse_days']:.3f} d\nDemo MAE = {summary['demo_mae_days']:.3f} d", transform=ax.transAxes, va="top", fontsize=10)
-    ax.text(0.5, -0.13, "Demonstration metric only — not evidence of field predictive performance.", transform=ax.transAxes, ha="center", fontsize=9)
-    return _save_figure(fig, output_dir / "figure_04_demo_observed_vs_predicted")
 
+    lo = float(min(obs.min(), pred.min()) - 0.5)
+    hi = float(max(obs.max(), pred.max()) + 0.5)
+    summary = demo_summary()
+
+    fig, ax = plt.subplots(figsize=(7.6, 7.0))
+    ax.scatter(obs, pred, s=48, zorder=3)
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1.4, zorder=2)
+
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
+    ax.set_aspect("equal", adjustable="box")
+    ax.set_xlabel("Synthetic observed synchrony gap (days)")
+    ax.set_ylabel("Synthetic predicted synchrony gap (days)")
+    ax.set_title(
+        "Synthetic demo: observed vs predicted synchrony",
+        fontsize=15.0, fontweight="bold", pad=14,
+    )
+    ax.text(
+        0.04, 0.96,
+        f"n = {len(validation)}\n"
+        f"RMSE = {summary['demo_rmse_days']:.3f} d\n"
+        f"MAE = {summary['demo_mae_days']:.3f} d",
+        transform=ax.transAxes,
+        va="top", ha="left",
+        fontsize=9.8,
+        bbox=dict(boxstyle="round,pad=0.35", fill=False, linewidth=1.0),
+    )
+    ax.text(
+        0.96, 0.04,
+        "Dashed line: 1:1 agreement",
+        transform=ax.transAxes,
+        ha="right", va="bottom",
+        fontsize=8.8,
+    )
+    ax.text(
+        0.5, -0.13,
+        "Demonstration metric only — not evidence of field predictive performance.",
+        transform=ax.transAxes,
+        ha="center",
+        fontsize=9.0,
+    )
+    ax.grid(True, linewidth=0.5, alpha=0.25)
+    return _save_figure(fig, output_dir / "figure_04_demo_observed_vs_predicted")
 
 def build_reference_figures(output_dir: Path) -> list[str]:
     paths: list[Path] = []
