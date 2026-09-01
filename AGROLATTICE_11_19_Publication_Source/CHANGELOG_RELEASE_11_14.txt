@@ -1,0 +1,157 @@
+AGROLATTICE 11.14 — Model Evidence Command Centre & Scientific Validation
+=======================================================================
+Based on: AGROLATTICE 11.13 — Experiment Command Centre & Trial Intelligence
+
+PURPOSE
+-------
+11.14 turns Models & Evidence into the scientific-governance layer of AGROLATTICE. The workspace now connects datasets, persistent training runs, immutable model versions, validation evidence, calibration/uncertainty, applicability, model comparison, benchmark evidence, predictions, recommendations and observed outcomes.
+
+HEADLINE CHANGES
+----------------
+1. New lazy Model Evidence Command Centre
+   - Overview
+   - Models
+   - Training
+   - Validation
+   - Uncertainty & calibration
+   - Explainability
+   - Comparison & ensembles
+   - Benchmarks & transferability
+   - Evidence & reproducibility
+   Only the selected section executes.
+
+2. Research Evidence database upgraded additively from schema 1.3.0 to 2.0.0.
+   New tables:
+   - dataset_snapshots
+   - model_versions
+   - model_status_history
+   - validation_runs
+   - prediction_outcome_links
+   - model_health_events
+   Existing predecessor tables and rows are preserved. A byte-for-byte pre-11.14 Research Evidence database is included at models_evidence/backups/pre_11_14_research_evidence.sqlite.
+
+3. Persistent training runs are now used by Research Model Lab.
+   Every attempted candidate is retained, including failed candidates. Dataset ID, validation design, split manifest, leakage guards, seed, declared primary metric, metrics and failure notes are saved.
+
+4. Immutable model version 1 is created when a Model Lab candidate is registered.
+   The version stores:
+   - artifact path
+   - SHA-256
+   - computational environment
+   - feature contract
+   - model lineage/version number
+
+5. Evidence-gated model promotion.
+   Model status changes are no longer a simple dropdown mutation. Promotion requirements are checked and every status change requires a written rationale. Overrides remain possible for research governance but are permanently recorded and do not manufacture missing evidence.
+
+6. Registry-aware Validation Centre.
+   - pair registered predictions with canonical measured outcomes where possible
+   - accept genuinely independent external paired tables
+   - regression and classification metrics
+   - empirical interval coverage where intervals are available
+   - save validation run and evidence level
+   - link prediction to observed outcome without claiming causality
+
+7. Uncertainty & Calibration workspace.
+   Keeps separate:
+   - data/measurement uncertainty
+   - model/parameter uncertainty
+   - conformal-style intervals
+   - model disagreement
+   - probability calibration
+   - applicability/out-of-domain status
+   No generic confidence score is substituted for calibrated uncertainty.
+
+8. Model Explainability workspace.
+   - feature contracts
+   - artifact hash verification before loading
+   - model-agnostic permutation importance on explicit evaluation data
+   - partial dependence for compatible numerical features
+   - advanced SHAP-capable pest workflow remains available
+   Predictive importance is explicitly not presented as causal influence.
+
+9. Registry-native Model Comparison & Disagreement.
+   Registered models can be compared only when they share target, registered validation dataset and common held-out rows. Invalid cross-target/cross-dataset averaging is blocked. An equal-weight OOF diagnostic can be viewed, but learned ensemble weights/stacking are not falsely labelled validated without nested/OOF meta-training.
+
+10. Benchmark Centre.
+    CropNet, YieldSAT and WorldCereal remain external resources and are never silently downloaded. Researchers can evaluate a registered local model against an explicitly supplied benchmark/local subset, declare whether the official split was reproduced, and save benchmark evidence with provenance.
+
+11. Model applicability and health are surfaced.
+    Out-of-domain prediction counts feed Priority Evidence Gaps. Model health events can record Stable, Monitoring, Drift suspected, Recalibration recommended, Retraining recommended or Retired.
+
+12. Prediction -> outcome loop.
+    Prediction/outcome links are now first-class evidence. Models & Evidence highlights predictions that have not yet been matched with measured outcomes.
+
+13. Dataset snapshot manifests and model reproducibility packages.
+    Model packages can export model card, training runs, validation evidence, versions, status history and prediction-outcome links. Raw training data/model artifacts are not silently redistributed; inclusion of a local artifact is explicit.
+
+14. Training workflow upgrades.
+    - Research Data Hub and Experiment/G×E×M session tables are selectable directly
+    - agricultural validation presets include grouped CV, leave-one-field/site/trial, LOYO, LORO, leave-one-genotype, leave-one-parent-pair, spatial block, frozen group holdout, forward time and random diagnostic CV
+    - reproducible split/model seed
+    - primary metric declared before model comparison
+    - repeated-measure/spatial leakage warnings
+
+15. Models & Evidence no longer promotes the old climate Statistics/Yield Validation pages as primary top-level navigation. Those legacy tools remain accessible where appropriate, while scientific model evaluation is registry-native.
+
+SCIENTIFIC BOUNDARIES
+---------------------
+- Internal validation is not external validation.
+- A model card/status does not create evidence.
+- Feature importance is predictive, not causal.
+- A benchmark run is only an official reproduction if the official split/preprocessing were actually reproduced.
+- Model disagreement is not a calibrated interval.
+- Prediction/outcome chronology does not establish a causal treatment effect.
+- Operational eligibility remains a human scientific-governance decision backed by recorded evidence.
+
+DATABASE MIGRATION
+------------------
+Research Evidence: 1.3.0 -> 2.0.0, additive only.
+Field Operations: unchanged.
+Maize Pollination Lab: unchanged at 3.0.0.
+Persistent Twin: unchanged at 3.0.0.
+Crop Profile Registry: unchanged at 1.0.0.
+Mechanistic Maize Twin: byte-for-byte unchanged.
+
+DEPENDENCIES
+------------
+No new mandatory dependency. Existing optional SHAP/boosting/TabPFN backends remain optional.
+
+PERFORMANCE
+-----------
+Models & Evidence uses true lazy navigation. Expensive artifact loading, permutation importance, validation calculations, benchmark execution and legacy advanced tools run only after explicit researcher actions.
+
+ADDITIONAL SCIENTIFIC-GOVERNANCE POLISH
+----------------------------------------
+16. Validation split preview before model fitting.
+    Researchers can inspect train/test sizes and group overlap before launching a comparison. A proposed grouped split with overlapping groups is flagged before training.
+
+17. Repeated grouped holdout.
+    A reproducible GroupShuffleSplit-style protocol is available for ranking/stability diagnostics while keeping each group intact within a repeat. It is complementary evidence, not independent external validation.
+
+18. Model-ranking stability.
+    Model Lab reports median/mean rank, rank SD and fold wins across held-out folds/repeats for the declared primary metric. Small unstable differences are not presented as a definitive winner.
+
+19. Stronger classification evidence.
+    Where genuine held-out class probabilities are available, validation can report ROC-AUC, PR-AUC, Brier score and log loss in addition to balanced accuracy/F1/precision/recall. Class-specific precision/recall and a confusion matrix are available. Metrics requiring probabilities are omitted when probabilities are unavailable rather than invented.
+
+20. Safer prediction-outcome pairing.
+    Automatic pairing now prefers experimental-unit context when available, otherwise trial/field context, and constrains matches to the declared season when timestamp evidence supports it. Prediction and observation chronology are shown so retrospective validation records are not mistaken for prospective deployment evidence. Existing links are not duplicated silently.
+
+21. Applicability & drift view.
+    Model Detail now exposes the training-support profile, OOD/extrapolation share, outcome-linked deployment errors and a transparent recent-vs-earlier error diagnostic. Any drift warning is explicitly a monitoring signal, not proof of temporal drift.
+
+22. Paired model-difference uncertainty.
+    Registry-native model comparison adds paired bootstrap confidence intervals for ΔRMSE on common held-out rows. A ranking whose interval spans zero is not presented as clearly separated.
+
+23. Automatic training dataset snapshot manifests.
+    Model Lab now freezes the analysis-table columns, target, features, validation settings and split manifest when registering a model version. Raw bytes are only considered immutable when the parent dataset also has a stable file/hash.
+
+24. Richer immutable feature/environment contract.
+    Model versions now retain predictor role/type, missingness and imputation expectations, numeric ranges or categorical levels, core Python/numpy/pandas/scikit-learn/joblib versions, optional research backends, AGROLATTICE release and random seed.
+
+25. Stricter evidence ladder.
+    New models always enter as Prototype and upserts cannot silently promote an existing model. Internal validation requires a completed non-diagnostic held-out run with documented split/leakage safeguards. External/operational promotion requires explicitly recorded independent external, cross-site, cross-season or benchmark evidence rather than treating every leave-one-group split as external validation.
+
+26. Source-method comparison.
+    Model Detail shows source method/citation, AGROLATTICE implementation relationship and limitations so an adaptation is not confused with an exact paper reproduction.

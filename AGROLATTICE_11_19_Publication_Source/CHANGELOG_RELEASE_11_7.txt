@@ -1,0 +1,96 @@
+AGROLATTICE 11.7 — Research Command Centre & Home Polish
+========================================================
+Application version: 20.7-release11.7-research-command-centre
+Based on: AGROLATTICE 11.6 — Performance & Branding Update
+
+PURPOSE
+-------
+Release 11.7 is a focused Home-workspace and researcher-UX release. It keeps the
+11.6 fast runtime architecture and all scientific engines intact, while replacing
+the previous launcher/session-readiness Home with a lightweight, persistent-data-
+aware Research Command Centre.
+
+HOME / RESEARCHER WORKFLOW
+--------------------------
+1. Replaced the old Home launcher with a Research Command Centre focused on:
+   - what field/project/trial is active;
+   - what changed recently;
+   - what data are current or missing;
+   - what the Twin/model evidence currently says;
+   - what needs attention next.
+2. Added a prominent Continue current work card with direct Resume Twin, Open
+   experiment, Open field and View evidence actions according to context.
+3. Replaced static role-based recommendations with transparent, state-derived
+   priority actions based on persisted field tasks, alerts, data freshness, trial
+   observations, model status, prediction applicability, recommendations/outcomes
+   and saved Twin uncertainty.
+4. Added Twin Pulse using the latest saved/current Twin state without silently
+   recomputing the Twin on Home entry. It explicitly labels modelled, retrieved,
+   derived and diagnostic information.
+5. Added a "Most useful next measurement" prompt. This is a transparent rules-
+   based research aid, not an autonomous optimizer.
+6. Added persistent Data freshness & completeness for weather, Sentinel-2,
+   root-zone state, sensors and (when a trial is active) phenology observations.
+   Historical seasons are handled as historical evidence rather than being marked
+   stale merely because their records pre-date today.
+7. Added model/evidence status with current registry model status, target,
+   uncertainty method, latest prediction interval and applicability flag.
+8. Added a 14-day research timeline combining due field tasks and saved Twin
+   flowering/silking timing estimates.
+9. Added "What changed recently" from field timeline, data-acquisition,
+   prediction and recommendation records.
+10. Replaced legacy recent-project tables with compact recent-project cards and
+    one-click activation.
+11. Removed the nested legacy Detailed Command Centre / System Readiness panel
+    from Home. Full diagnostics remain under Data & Settings → System diagnostics.
+12. Replaced session-only "daily weather loaded" / "satellite loaded" notices
+    with persistent field/season-aware metadata checks.
+
+PERFORMANCE
+-----------
+- Home does NOT read the full historical country climate CSV beyond the existing
+  process-cached runtime.
+- Home does NOT make NASA POWER calls, STAC searches, run satellite processing,
+  build the Twin, train models or execute optimizers automatically.
+- It reads small SQLite/project metadata summaries only. Expensive work remains
+  explicit behind researcher actions.
+- Release 11.6 process-local climate and database-service caches are preserved.
+
+SCIENTIFIC INTEGRITY
+--------------------
+- No crop-model equation, phenology equation, pest-model method, irrigation
+  optimizer, causal estimator or validation method was changed.
+- Saved Twin outputs remain identified as model outputs; Home never presents them
+  as measured observations.
+- Prediction applicability warnings remain visible.
+- Historical-season freshness is contextual rather than judged against today's
+  date.
+- Priority actions are heuristics based on stored evidence and are not causal or
+  agronomic guarantees.
+
+DATA / DATABASES
+----------------
+No schema migration.
+The following database schemas are unchanged:
+- Field Operations
+- Maize Pollination Lab
+- Persistent Twin
+- Research Evidence
+
+The packaged protected databases are carried forward byte-for-byte from the
+supplied 11.6 release. The Mechanistic Maize Twin implementation is also carried
+forward byte-for-byte.
+
+DEPENDENCIES
+------------
+No new mandatory dependency. home_command_centre.py uses pandas/numpy already
+required by AGROLATTICE.
+
+KNOWN LIMITATIONS
+-----------------
+- Home can only summarize persistent evidence that has been linked/registered to
+  the active field/trial; unregistered external files cannot be inferred.
+- The "next best measurement" logic is intentionally transparent rules-based
+  guidance, not a formal expected-information-gain algorithm.
+- A full interactive Streamlit browser session cannot be performance-tested in
+  the packaging environment when Streamlit is unavailable there.

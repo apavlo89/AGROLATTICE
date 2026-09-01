@@ -1,0 +1,67 @@
+AGROLATTICE 11.19 — spatially balanced clustering verification
+Date: 2026-08-14
+Build: SPATIALLY-BALANCED-CLUSTERING-SB1
+
+STATUS: PASSED
+
+Static checks
+- agrolattice.py compiled successfully.
+- spatial_clustering_balance.py compiled successfully.
+- verify_release11_19_spatial_balance.py compiled successfully.
+- Existing AC3 adaptive-clustering verification passed.
+
+Frozen Mexico inventory
+- Climate locations: 1,012
+- Federal entities: 32
+- Oaxaca locations: 80
+- Mexico catalogue keys used for coordinates: 1,012
+- Authoritative climate CSV SHA-256:
+  653690a345d298056b780edc0588a56d879ba52f76a8a21834a83476de1f8687
+
+Default equal-area support verification
+- Projection: spherical Lambert cylindrical equal-area
+- Cell size: 50 km × 50 km
+- Eligible locations: 1,012
+- Occupied support cells: 377
+- Effective spatial sample size: 377
+- Maximum locations in one cell: 25
+- Sum of exported per-location weights: 377
+- Sum of member weights within every occupied cell: exactly 1.0
+- Unassigned locations after support-to-location expansion: 0
+
+Actual Mexico feature integration check
+- Period: 1991–2020
+- Months: all 12
+- Variables: TEMPERATURE, PRECIPITATION_AVG, EVAPOTRANSPIRATION,
+  SOLAR_RADIATION
+- Eligible locations: 1,012
+- Support units: 377
+- States represented after assignment: 32
+- Oaxaca locations after assignment: 80
+- Illustrative k=2 support-cell silhouette: 0.3536
+- Unassigned locations: 0
+
+Synthetic engine integration checks
+- Focused researcher-defined K-means: passed location-to-support aggregation,
+  clustering and assignment expansion.
+- Automatic K-means variable/k selection: passed support-level selection and
+  complete location assignment.
+- Multi-method workflow: passed support-level method comparison and complete
+  location assignment.
+- Raw-location sensitivity mode: retained all locations as separate units and
+  assigned weight 1.0 to each.
+
+User-facing disclosure checks
+- Spatial sampling correction is enabled by default.
+- Method explanation is displayed before analysis.
+- Raw and effective sample sizes are displayed after analysis.
+- Density histogram and densest-support table are displayed.
+- Maps expose support-cell identifier, cell membership count and location weight.
+- Reproducibility downloads include city assignments, support-unit assignments,
+  the spatial sampling audit, diagnostics and selected settings.
+
+Scientific boundary
+The correction prevents city-catalogue density from determining model weight. It
+does not make catalogue counts equivalent to land area or cropland area, and the
+resulting climate groups remain exploratory rather than official agroecological
+zones.

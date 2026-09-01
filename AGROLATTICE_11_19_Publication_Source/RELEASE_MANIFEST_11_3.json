@@ -1,0 +1,62 @@
+{
+  "release": "AGROLATTICE 11.3",
+  "title": "Research Foundation & Predictive Evidence Update",
+  "application_version": "20.3-release11.3-research-foundation",
+  "based_on": "AGROLATTICE 11.2 — Spatial & Upgrade Integrity Update",
+  "readme": "README_START_HERE_RELEASE11_3.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_3.txt",
+  "changelog": "CHANGELOG_RELEASE_11_3.txt",
+  "database_schema_changes": true,
+  "database_migration": "Adds a separate additive models_evidence/research_evidence.sqlite schema 1.1.0. Field Operations, Maize Pollination Lab and AgroLattice Twin SQLite schemas are unchanged. Safe migration now snapshots/migrates the Research Evidence DB when it exists and remains compatible with 11.2 sources that do not contain it.",
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "protected_database_schema_changes": false,
+  "module_versions": {
+    "research_registry": "1.0.0 / DB 1.1.0",
+    "agricultural_validation": "1.0.0",
+    "research_models": "1.0.0",
+    "pest_early_warning": "1.0.0",
+    "phenology_service": "1.0.0",
+    "research_benchmarks": "1.0.0",
+    "multimodal_fusion": "1.0.0",
+    "maize_pollination_lab": "2.2.0 / DB 2.0.0",
+    "agrolattice_twin": "2.8.0 / DB 2.3.0",
+    "field_operations_suite": "7.1.0"
+  },
+  "key_features": [
+    "Additive Research Model, Dataset, Observation, Prediction, Recommendation and Outcome Registry with model cards and provenance",
+    "Agricultural validation protocols: grouped CV, leave-one-year-out, leave-one-region-out, leave-one-group-out and forward/walk-forward validation",
+    "Leakage-safe model laboratory with preprocessing fitted inside training folds and optional XGBoost, LightGBM, CatBoost and TabPFN backends",
+    "Data-readiness checks before model fitting, including target observation, feature completeness and validation-split structure",
+    "Prediction registry supports numeric regression outputs plus categorical class labels and probability maps",
+    "Universal recommendation/outcome forms preserve proposed action, applied treatment and measured outcome as separate records",
+    "Environmental Pest & Disease Early Warning adaptation using Wadhwa & Malik environmental feature engineering, fold-contained SMOTE-ENN, model comparison and SHAP support",
+    "Central phenology service combining generic thermal-time staging with the unchanged Mechanistic Maize Twin",
+    "CropNet, YieldSAT and WorldCereal benchmark metadata/adapters without bundling large external datasets",
+    "Validation-weighted multimodal late-fusion baseline with missing-modality handling and explicit non-Bayesian disagreement reporting",
+    "Persistent Twin hooks for registered research predictions and recommendations",
+    "Country-switch state isolation extended to new research/pest/phenology/fusion workflows",
+    "Source-authoritative migration extended to research evidence/model artifacts"
+  ],
+  "not_claimed_as_implemented": [
+    "Exact MMST-ViT reproduction",
+    "Exact PhenoYieldNet reproduction",
+    "Exact PB-CNN Bayesian architecture",
+    "Exact ALIC deep architecture",
+    "Weakly supervised high-resolution yield training",
+    "SCM-GAT causal graph model",
+    "Causal recommendation-effect estimators",
+    "Remote-sensing/crop-model nitrogen optimizer",
+    "Deep-RL irrigation control",
+    "NSGA-II fertilizer optimization",
+    "Market GNN/Transformer production models",
+    "Federated-learning production stack"
+  ],
+  "limitations": [
+    "Research models are prototypes until validated on independent site/season data and promoted through the model registry.",
+    "External benchmark data are not bundled; users must obtain datasets under their original terms and register local snapshots.",
+    "Inter-modality spread is disagreement, not calibrated predictive uncertainty.",
+    "Pest prediction is not disease confirmation; pest-disease mappings are decision-support context only.",
+    "TabPFN is optional and not required to start AGROLATTICE."
+  ]
+}

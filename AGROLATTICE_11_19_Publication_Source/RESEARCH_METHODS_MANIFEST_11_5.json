@@ -1,0 +1,63 @@
+{
+  "release": "AGROLATTICE 11.5",
+  "implemented_adaptations": [
+    {
+      "method": "Irrigation decision policy comparison",
+      "paper": "Optimizing irrigation decisions with Seq2Seq modeling and deep reinforcement learning",
+      "venue": "Computers and Electronics in Agriculture 245 (2026) 111448",
+      "doi": "10.1016/j.compag.2026.111448",
+      "status": "Independent transparent AGROLATTICE adaptation of forecast/state versus policy separation",
+      "implementation": "Existing FAO-style daily root-zone model + explicit Rainfed/RAW/deficit/fixed/sensor-threshold candidate strategies + seasonal water/event constraints + Pareto screening",
+      "guardrail": "No exact Seq2Seq/DRL claim and no irrigation-hardware control. NASA is historical/near-real-time gridded evidence, not future forecast."
+    },
+    {
+      "method": "Multi-objective nutrient-rate optimisation",
+      "paper": "Multiobjective spatial optimization of fertilizer rates enables sustainable crop production in southwest China",
+      "venue": "npj Sustainable Agriculture 4 (2026) 22",
+      "doi": "10.1038/s44264-026-00127-y",
+      "status": "Independent empirical-response/Pareto adaptation",
+      "implementation": "Second-order N/P/K response surface + Ridge regularisation + grouped/K-fold validation + bounded exhaustive candidate grid + Pareto screening",
+      "guardrail": "Not exact NSGA-II; requires measured outcomes/rates and is bounded by local validation/support."
+    },
+    {
+      "method": "Crop-state assimilation foundation",
+      "paper": "Developing remote sensing- and crop model-based methods to optimize nitrogen management in rice fields",
+      "venue": "Computers and Electronics in Agriculture 220 (2024) 108899",
+      "doi": "10.1016/j.compag.2024.108899",
+      "status": "General same-state uncertainty-weighted assimilation foundation",
+      "implementation": "Single-state Gaussian update + independent time-varying paired prior/observation updates + recursive repeated-measurement update for static/calibration states, all with stored sequences/provenance",
+      "guardrail": "Not exact rice N workflow; evolving crop states are not recursively carried across time without a process-model prior, and no universal NDVI/EO-to-state mapping is assumed."
+    },
+    {
+      "method": "Recommendation effectiveness causal audit",
+      "paper": "Evaluating Digital Tools for Sustainable Agriculture using Causal Inference",
+      "identifier": "arXiv:2211.03195",
+      "status": "Independent implementation of standard observational estimators motivated by the paper",
+      "implementation": "Cross-fitted propensity and outcome models; numeric/categorical pre-treatment covariates; explicit treated level; naive diagnostic, IPW, T-learner and AIPW-style effect; grouped bootstrap; overlap, balance, ESS and placebo diagnostics; persisted adjustment-rationale notes",
+      "guardrail": "Pre-treatment adjustment assumptions must be defensible; no estimator eliminates unmeasured confounding or substitutes for randomized/field experimental validation."
+    }
+  ],
+  "carried_forward_from_11_4": [
+    "Research Data Hub and automatic NASA/field-data reuse",
+    "Adaptive multimodal fusion",
+    "Hybrid mechanistic + residual ML",
+    "Weakly supervised spatial-yield baseline",
+    "G×E×M dataset builder",
+    "Environmental pest early warning",
+    "Central phenology service",
+    "Agricultural grouped/LOYO/LORO/forward validation",
+    "Research Model & Evidence Registry"
+  ],
+  "reviewed_but_still_deferred": [
+    "Exact MMST-ViT",
+    "Exact PhenoYieldNet",
+    "Exact PB-CNN",
+    "Exact ALIC",
+    "SCM-GAT production implementation",
+    "Exact Seq2Seq + deep-RL irrigation",
+    "Exact NSGA-II fertiliser workflow",
+    "Crop-specific EO/crop-model nitrogen optimisation",
+    "Market forecasting GNN/Transformers",
+    "Federated plant-disease learning"
+  ]
+}

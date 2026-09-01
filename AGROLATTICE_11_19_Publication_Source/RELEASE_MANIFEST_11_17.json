@@ -1,0 +1,41 @@
+{
+  "release": "AGROLATTICE 11.17",
+  "title": "Help, Onboarding & Researcher Guidance",
+  "application_version": "20.17-release11.17-help-onboarding-ux-consistency",
+  "based_on": "AGROLATTICE 11.16 — Platform Control Centre, Data Settings & Tool Catalogue",
+  "readme": "README_START_HERE_RELEASE11_17.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_17.txt",
+  "changelog": "CHANGELOG_RELEASE_11_17.txt",
+  "technical_basis": "TECHNICAL_BASIS_HELP_ONBOARDING_11_17.md",
+  "research_methods_manifest": "RESEARCH_METHODS_MANIFEST_11_17.json",
+  "database_schema_changes": false,
+  "database_migration": "No schema changes. All protected scientific databases remain on their 11.16 schemas.",
+  "new_dependencies": [],
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "field_operations_schema": "8.0.0 unchanged",
+  "pollination_database_schema": "3.0.0 unchanged",
+  "persistent_twin_schema": "3.0.0 unchanged",
+  "research_evidence_schema": "2.0.0 unchanged",
+  "crop_profile_schema": "1.0.0 unchanged",
+  "reporting_schema": "1.0.0 unchanged",
+  "module_versions": {
+    "researcher_guidance": "1.0.0",
+    "help_command_centre": "1.0.0",
+    "ui_release10_4_help": "10.4.4",
+    "maize_mechanistic_twin": "1.0.0 unchanged"
+  },
+  "headline_features": [
+    "Help Command Centre with Start Here, guided workflows, workspace guides, data readiness, scientific labels, terminology, troubleshooting and search.",
+    "Context-aware onboarding progress derived from persistent AGROLATTICE records without running heavy analysis.",
+    "Consistent What do I need here? panels across all primary research/data workspaces.",
+    "Standardised scientific evidence vocabulary and interpretation boundaries across the guidance layer.",
+    "Guided workflows for fields/seasons, experiments, maize synchrony, Persistent Twins, model validation, decision-to-outcome and reproducible reporting.",
+    "Expanded contextual hover-help terminology and current-release documentation."
+  ],
+  "limitations": [
+    "Readiness is metadata-based and does not rerun complete QC/validation on every workspace entry.",
+    "Full interactive browser verification requires the target Streamlit environment.",
+    "Highly specialised legacy/advanced workflows remain discoverable through All Tools rather than receiving dedicated onboarding sequences."
+  ]
+}

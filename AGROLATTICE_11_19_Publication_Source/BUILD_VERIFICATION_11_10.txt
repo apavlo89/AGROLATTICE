@@ -1,0 +1,114 @@
+AGROLATTICE 11.10 — BUILD VERIFICATION
+======================================
+
+Release
+-------
+AGROLATTICE 11.10 — Climate & Earth Observation Command Centre
+Application version: 20.10-release11.10-climate-earth-observation-command-centre
+Built from: supplied AGROLATTICE 11.9 Persistent Twin Command Centre & Mechanistic Integration
+
+Verification result
+-------------------
+PASS — verify_release11_10.py completed successfully.
+PASS — 58 top-level Python files compile with py_compile.
+PASS — Climate & EO Command Centre targeted smoke tests passed.
+PASS — process-level climate-location catalogue tests passed.
+PASS — Research Evidence snapshot serialization/registration smoke test passed with a temporary fake registry.
+PASS — all four protected SQLite databases pass PRAGMA integrity_check and foreign_key_check.
+PASS — all four protected SQLite databases are byte-for-byte unchanged from the supplied 11.9 baseline.
+PASS — maize_mechanistic_twin.py is byte-for-byte unchanged.
+PASS — mandatory requirements files are byte-for-byte unchanged from the supplied 11.9 release.
+
+Protected-artifact SHA-256 verification
+---------------------------------------
+field_operations/field_operations.sqlite
+  fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+
+pollination_lab/maize_flowering_trials.sqlite
+  6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+
+agrolattice_twin/agrolattice_twin.sqlite
+  ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+
+models_evidence/research_evidence.sqlite
+  516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+
+maize_mechanistic_twin.py
+  a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+SQLite verification
+-------------------
+Field Operations: integrity_check=ok; foreign-key violations=0
+Maize Pollination Lab: integrity_check=ok; foreign-key violations=0
+Persistent Twin: integrity_check=ok; foreign-key violations=0
+Research Evidence: integrity_check=ok; foreign-key violations=0
+
+No 11.10 schema migration is required.
+
+Targeted 11.10 checks
+---------------------
+1. climate_earth_command_centre.MODULE_VERSION == 1.0.0.
+2. Climate & EO view set contains:
+   Overview; Field Climate; Climate Comparison; Spatial & Transferability;
+   Climate Risk; Earth Observation; Evidence & Data.
+3. The Field Climate variable groups contain exactly the established 19 canonical
+   agroclimate variables with no duplicate variable identifiers.
+4. Active-field nearest-location resolution was tested on synthetic mapped
+   coordinates using haversine distance.
+5. Field Climate location-subset caching was tested to reuse the same process/
+   session subset under the same dataset signature.
+6. Analysis-snapshot persistence was tested with a temporary artifact directory;
+   the JSON bundle retained a climate-similarity table and produced the expected
+   Research Evidence registration payload.
+7. performance_runtime.build_country_runtime was tested with a temporary
+   multi-location country dataset. The climate-location catalogue contained only
+   locations with climate coverage and dataset status reused its precomputed
+   location count.
+8. RUN_APP.bat source preflight checks the 11.10 command-centre module and the
+   CountryRuntimeData.climate_locations performance contract.
+9. Release-note sorting uses numeric release keys so 11.10 sorts after 11.9.
+
+Dependency status
+-----------------
+No new mandatory dependency was added in 11.10.
+The following requirement files match the supplied 11.9 archive exactly:
+- requirements_ml_agriculture.txt
+- requirements_research_optional.txt
+- requirements_aquacrop.txt
+
+Scientific-integrity checks
+---------------------------
+- Full 19-variable climate set remains present in the explorer/runtime contract.
+- Mapped-field climate reference is labelled as a nearest installed gridded/
+  location proxy rather than an on-field measurement.
+- Direct NASA field-weather retrieval reuses the established canonical Research
+  Data Hub pathway and does not fabricate unavailable optional variables.
+- Structured sowing dates are used only when actually recorded; no default crop
+  date is invented for EO/weather context.
+- Local sensor evidence is not silently merged with gridded climate data.
+- Saving climate/EO session analyses is documented as provenance persistence,
+  not causal/field validation.
+- Sentinel-2 quick update is an explicit researcher action and retains QA/masking
+  provenance.
+
+Performance guards
+------------------
+Opening Climate & Earth Observation does NOT automatically:
+- call NASA POWER;
+- query Sentinel/STAC catalogues;
+- process Sentinel rasters;
+- compute climate similarity;
+- fit PCA/clusters/nonlinear embeddings;
+- run climate-risk calculations;
+- run crop models.
+
+The process-cached full country climate table from 11.6 is retained. Release
+11.10 additionally prepares a small climate-location catalogue once and caches
+only selected location subsets for the new Field Climate view.
+
+Interactive-test limitation
+---------------------------
+Streamlit is not installed in the packaging/build container, so a complete
+browser-driven interactive Streamlit session could not be executed here. This is
+not represented as tested. RUN_APP.bat performs package/module/schema preflight
+in the user's Windows/Anaconda environment before launching Streamlit.

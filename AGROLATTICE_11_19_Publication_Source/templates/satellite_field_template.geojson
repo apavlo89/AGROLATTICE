@@ -1,0 +1,21 @@
+{
+  "type": "Feature",
+  "properties": {
+    "Field": "Example field",
+    "Crop": "Maize",
+    "PlantingDate": "2026-05-01",
+    "Irrigation": "Rainfed"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-98.905, 19.455],
+        [-98.900, 19.455],
+        [-98.900, 19.450],
+        [-98.905, 19.450],
+        [-98.905, 19.455]
+      ]
+    ]
+  }
+}

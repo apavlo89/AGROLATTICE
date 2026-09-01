@@ -1,0 +1,6 @@
+{
+  "name": "Example field season",
+  "description": "Portable project template",
+  "location": {"name": "Montecillo", "latitude": 19.45, "longitude": -98.90},
+  "season": {"crop": "Maize", "planting_date": "2026-05-01", "expected_harvest_date": "2026-09-17"}
+}

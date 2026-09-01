@@ -1,0 +1,5 @@
+Task,CITY,STATE,Year,Start Year,End Year,Crop,Stage,Variable
+similarity,Montecillo,Mexico,2023,,,,,
+crop_suitability,Montecillo,Mexico,2023,,,Maize,Full growing season,
+water_stress,Montecillo,Mexico,,1985,2024,,,
+trend,Montecillo,Mexico,,1985,2024,,,TEMPERATURE

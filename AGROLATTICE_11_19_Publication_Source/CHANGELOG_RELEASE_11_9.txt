@@ -1,0 +1,99 @@
+AGROLATTICE 11.9 — Persistent Twin Command Centre & Mechanistic Integration
+==========================================================================
+
+Baseline
+--------
+Built from AGROLATTICE 11.8 — Field Command Centre & Operations Polish.
+
+Major changes
+-------------
+1. Rebuilt AgroLattice Twin around one persistent Active Twin context.
+2. Added Twin Command Centre views:
+   Overview; Spatial Twin; Development & water; Timeline; Scenarios;
+   Measurements & copilot; Evidence & validation; Setup.
+3. Connected the Persistent Twin directly to the existing disclosed Mechanistic
+   Maize Twin implementation for maize synchrony trials.
+4. Parent-specific tln, coblf and ebR1 physiology can be read from the Maize
+   Synchrony parent-physiology registry; otherwise publication priors remain
+   explicitly labelled as priors.
+5. Added model-disagreement reporting between the mechanistic flowering timing
+   and the legacy/observed-target GDD timing pathway.
+6. Retained 650/670-GDD timing only as a transparent fallback when the
+   mechanistic path cannot be used; it is no longer the preferred maize path.
+7. Added a prior-regularised Calibration Assistant using flowering dates and
+   collared-leaf observations already linked to the trial.
+8. Added parent physiology provenance cards, flowering timing timeline,
+   mechanistic leaf-development trajectories, root-zone and EO trajectories.
+9. Added a Spatial Twin map with field/trial/EU context plus optional sensors,
+   scouting observations, operation polygons and treatment-unit analytical
+   overlays.
+10. Expanded Twin time travel into a research timeline combining checkpoints,
+    management, observations and phenology evidence.
+11. Added mechanistic male-sowing strategy exploration using the existing
+    uncertainty-aware synchrony optimiser.
+12. Kept environmental/management scenario responses separate and clearly
+    labelled as exploratory/heuristic where they are not mechanistic crop
+    simulations.
+13. Added Twin measurement/coplay guidance that can create field tasks linked
+    to trial/experimental-unit context and reusable flowering protocols.
+14. Connected Twin recommendations to the Research Evidence
+    Recommendation → Action → Outcome ledger.
+15. Replaced raw provenance-first presentation with researcher-facing Evidence
+    & Validation cards/tables; raw manifest remains available under Advanced.
+16. Added observed season-outcome inspection and linked registered prediction /
+    recommendation evidence.
+17. Added persistent Twin event, calibration-run and climate-analogue storage.
+18. Added explicit research checkpoints and audit logging for Twin-relevant
+    actions.
+19. Reworked Setup into Data sources, Crop model & calibration, Data readiness,
+    and Export & advanced sections.
+20. Preserved the 11.6+ performance philosophy: opening the Twin does not
+    automatically fetch NASA, query STAC, process raster data, recalibrate a
+    model or run an optimiser.
+
+Scientific-integrity changes
+----------------------------
+- Measured/retrieved/derived/mechanistic/forecast/heuristic information remains
+  distinguished in the UI.
+- Publication priors are not presented as measurements of local lines.
+- Mechanistic flowering timing does not imply pollen quantity, fertilisation,
+  seed purity or yield.
+- The disclosed Laurent et al. (2025) MFS equations already present in
+  AGROLATTICE are used; this is not an exact reproduction of the paper's
+  proprietary dataset or original C++ Bayesian sampler.
+- Time-travel state reconstruction uses weather available up to the selected
+  date for mechanistic event detection, avoiding future-weather leakage.
+- The previous composite 'health score' is retained only as a compatibility
+  alias; the UI uses 'Composite state indicator' and separates data completeness,
+  parameter uncertainty and model disagreement.
+
+Database migration
+------------------
+AgroLattice Twin DB schema: 2.3.0 → 3.0.0.
+Migration is additive and creates:
+- twin_events
+- calibration_runs
+- analogue_seasons
+
+A pre-migration backup is included at:
+agrolattice_twin/backups/pre_11_9_agrolattice_twin.sqlite
+
+All pre-existing Twin records were compared before/after migration and preserved.
+Field Operations, Maize Pollination and Research Evidence databases are unchanged.
+
+Dependencies
+------------
+No new mandatory dependency was added for 11.9.
+
+Known limitations
+-----------------
+- Full browser-level Streamlit interaction was not executable in the packaging
+  environment because Streamlit is not installed there; RUN_APP.bat performs
+  11.9 module/schema preflight in the user's Windows/Anaconda environment.
+- Parameter-uncertainty date intervals require weather coverage far enough to
+  reach the simulated flowering event. When future weather is unavailable,
+  the point forecast uses recent-GDD extrapolation and is labelled accordingly.
+- Exact pollen shed quantity and silk receptivity distributions are not inferred
+  without corresponding observations/validated models.
+- Generic non-maize Twins retain the transparent generic/fallback phenology path;
+  crop-specific mechanistic models require crop-specific validated parameters.

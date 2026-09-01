@@ -1,0 +1,85 @@
+AGROLATTICE 11.2 - CURRENT USER GUIDE
+=====================================
+
+This guide supersedes the legacy Release 10.3 PDF for current workflows. The old
+PDF is retained as LEGACY_AgroLattice_User_Manual_Release_10_3.pdf only for
+historical reference; menus and safeguards have changed since that release.
+
+CORE WORKSPACES
+---------------
+Home
+  Entry point and workflow orientation.
+
+Fields & Operations
+  Create research centres/farms and authoritative mapped fields; manage field
+  geometry, operations, observations, sensors and spatial records. Field geometry
+  is the spatial source of truth for linked trials and Persistent Twins.
+
+AGROLATTICE Twin
+  Persistent field/season digital twins linking environment, soil/root-zone,
+  crop development, management, satellite/sensor observations, experiments,
+  outcomes, calibration, scenarios and uncertainty.
+
+Climate & Earth Observation
+  Global country-aware agroclimate analysis using the established 19 NASA-derived
+  variables, daily weather/phenology tools and satellite monitoring.
+
+Crop Decisions
+  Calendar/suitability, water/yield/economics and process-based crop-model tools.
+
+Experiments -> Maize Synchrony Lab
+  Build mapped hybrid-maize seed-production experiments. Treatment units can vary
+  by female genotype, male genotype, parent combination, sowing density, sowing
+  date, male/female sowing dates and sowing-date difference. Blocks/replications
+  and mapped experimental-unit assignment are retained.
+
+Models & Evidence / Reports
+  Validation, model comparison, statistics, scientific robustness and reproducible
+  export/report workflows.
+
+Data & Settings / Help
+  Country datasets, dataset updates, projects, crop parameters, backups, system
+  diagnostics, contextual help and current release notes.
+
+RELEASE 11.2 SAFETY RULES
+-------------------------
+1. Plot/treatment-unit re-randomisation is blocked after plot-linked scientific
+   records exist. AGROLATTICE will not silently cascade-delete observations.
+2. Factor metadata and plot randomisation are saved atomically.
+3. Treatment-unit polygons may share borders but may not overlap by positive area.
+4. Changing a trial's mapped field/boundary is rejected before commit if an existing
+   treatment unit would fall outside the proposed trial boundary.
+5. Field/research-centre/trial deletion checks linked Trials and Persistent Twins.
+6. Archiving is the preferred way to retire a trial. Hard deletion shows affected
+   row counts, requires the exact trial name and explicit destructive confirmation.
+7. Use MIGRATE_USER_DATA_FROM_EXISTING_APP.bat when upgrading from a working older
+   installation. The selected older/current working folder becomes source-of-truth;
+   source and destination SQLite snapshots are backed up and integrity-checked first.
+
+MECHANISTIC MAIZE TWIN
+----------------------
+Release 11.2 retains the Release 11.0 Laurent et al. (2025)-inspired implementation:
+- 30.6 GDD planting -> emergence.
+- Leaf number = 2.5*exp(post-emergence GDD*coblf), capped at tln.
+- Ear-growth onset Vn = 0.67*tln.
+- Ear biomass begins at 0.01 g.
+- Female 50% silking at ebR1.
+- Male anthesis 40 GDD after final-leaf expansion.
+- Genotype parameters: tln, coblf and ebR1.
+
+Publication priors are priors, not measurements of local lines. Calibrate with local
+flowering dates/leaf counts and propagate uncertainty. Timing predictions do not
+by themselves guarantee pollen quantity, genetic purity or seed yield.
+
+UPGRADING TO 11.2
+-----------------
+1. Extract the complete Release 11.2 folder.
+2. Close any running older AGROLATTICE app.
+3. If your live data are in an older working folder, run
+   MIGRATE_USER_DATA_FROM_EXISTING_APP.bat from the new 11.2 folder.
+4. Select the root of the older/current working AGROLATTICE folder.
+5. Type MIGRATE when asked. Backups and a migration_report.json are created under
+   migration_backups before the active 11.2 research databases are replaced.
+6. Run RUN_APP.bat.
+
+Do not manually overwrite individual SQLite files while the app is running.

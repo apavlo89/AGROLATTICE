@@ -1,0 +1,75 @@
+AGROLATTICE 11.18 USER GUIDE — RELIABILITY & INTEGRATION
+======================================================
+
+CORE WORKSPACES
+---------------
+Home; Fields & Operations; AgroLattice Twin; Climate & Earth Observation; Crop Decisions; Experiments; Models & Evidence; Reports; All Tools; Data & Settings; Help.
+
+INTEGRATION & RELIABILITY
+-------------------------
+Open Data & Settings → Integration & reliability.
+
+Active workflow chain
+~~~~~~~~~~~~~~~~~~~~~
+The table follows the currently selected Field/Trial through persisted stages:
+• mapped field;
+• structured season;
+• field observations/operations;
+• experiment;
+• experimental units;
+• experimental observations;
+• harvest/trial outcome;
+• Persistent Twin link;
+• Twin environmental/state evidence;
+• registered models/validation;
+• context-linked prediction;
+• recommendation;
+• measured decision outcome;
+• traceable report/publication.
+
+"Missing / not yet linked" is not automatically an error. Interpret it in relation to the actual study phase.
+
+Cross-workspace audit
+~~~~~~~~~~~~~~~~~~~~~
+Press Run integration audit after upgrades, restores, field-boundary edits, or whenever data appear disconnected between workspaces.
+
+PASS means the structural/reference check passed.
+WARN means the data remain readable but a link or snapshot needs review.
+FAIL indicates a database/reference problem that should be investigated before relying on the affected workflow.
+
+A stale field-geometry warning means the authoritative Field boundary changed after the Trial stored its source-field snapshot. Review the Trial layout before using spatial assignments; AGROLATTICE does not silently rewrite experimental-unit geometry.
+
+PERFORMANCE PROFILING
+---------------------
+Open Data & Settings → Performance & storage after navigating through the application.
+
+The Session page-performance profile reports:
+• Runs;
+• Median ms;
+• P95 ms;
+• Max ms;
+• Errors;
+• Last run.
+
+The profiler is bounded to the current Streamlit session. Use Clear session performance history to start a fresh diagnostic window. This does not touch scientific databases or caches.
+
+Use timings to identify accidental expensive page entry. Do not treat an explicitly triggered NASA, Sentinel, model-training or crop-model run as ordinary navigation latency.
+
+SAFE NAVIGATION
+---------------
+11.18 continues the two-stage navigation approach introduced in 11.12. Programmatic shortcuts queue the requested destination and apply it before the destination widget is created on the rerun. This avoids Streamlit widget state restoring the previous view and making buttons appear unresponsive.
+
+DATA SAFETY
+-----------
+Scientific databases are user-owned. 11.18 has no schema migration. Before replacing installations, use Data & Settings → Databases & backups or MIGRATE_USER_DATA_FROM_EXISTING_APP.bat.
+
+SCIENTIFIC LABELS
+-----------------
+Keep the Help vocabulary distinct:
+Observed; Recorded; Retrieved; Derived; Mechanistic; ML prediction; Forecast; Scenario; Recommendation; Actual operation; Outcome; Causal estimate.
+
+Passing an integration audit never upgrades one evidence type into another.
+
+PCA / CLUSTERING
+----------------
+Climate-space and agroclimatic K-means exploration supports k=2–20 where the data permit. Silhouette, inertia and cluster-size diagnostics should be considered together. More clusters are not automatically better and do not define official agroecological zones.

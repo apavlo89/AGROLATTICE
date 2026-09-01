@@ -1,0 +1,31 @@
+AGROLATTICE 11.19 AC3 — MEXICO DATASET COVERAGE CERTIFICATE
+============================================================
+
+Authoritative dataset:
+Datasets/countries/mexico/agroclimate_longformat.csv
+
+SHA-256:
+653690a345d298056b780edc0588a56d879ba52f76a8a21834a83476de1f8687
+
+Frozen publication-reference inventory:
+- Mexico locations: 1,012
+- Federal entities: 32
+- Oaxaca locations: 80
+- Years represented: 1985-2025
+- Canonical variables: 19
+
+Focused K-means regression setting:
+- Period: 1991-2020
+- Months: January-December
+- Variables: TEMPERATURE, PRECIPITATION_AVG, EVAPOTRANSPIRATION,
+  SOLAR_RADIATION
+- Minimum completeness: 80%
+- Eligible locations: 1,012
+- Eligible Oaxaca locations: 80
+
+The climate-zone page must display "Active climate inventory: 1,012 mapped
+locations". If it displays fewer locations, an older or incomplete
+package is running and analysis is blocked.
+
+Candidate k values can be screened through 50. Automatic focused K-means
+requires every selected zone to contain at least 2% of analysed locations.

@@ -1,0 +1,196 @@
+{
+  "release": "AGROLATTICE 11.3",
+  "principle": "Paper-derived methods are independently adapted only when scientifically and operationally appropriate. Publication does not imply local validation or operational eligibility.",
+  "papers": [
+    {
+      "paper_id": "cropnet_2024",
+      "title": "An Open and Large-Scale Dataset for Multi-Modal Climate Change-aware Crop Yield Predictions",
+      "year": 2024,
+      "doi": "10.1145/3637528.3671536",
+      "method": "Aligned Sentinel-2, weather and agricultural yield data with multimodal benchmarking",
+      "11_3_status": "Foundation integrated",
+      "implementation": "External benchmark catalog/adapter and canonical evidence/provenance schema; no bulk dataset bundled",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "mmst_vit_2023",
+      "title": "Climate Change-aware Crop Yield Prediction via Multi-Modal Spatial-Temporal Vision Transformer",
+      "year": 2023,
+      "doi": null,
+      "method": "Multimodal contrastive pretraining plus spatial and temporal transformers",
+      "11_3_status": "Roadmap",
+      "implementation": "Not implemented in 11.3; registry/validation interfaces prepared for a later optional GPU backend",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "phenoyieldnet_2026",
+      "title": "PhenoYieldNet: Learning Crop-Aware Phenological Responses for Multi-Crop Yield Prediction",
+      "year": 2026,
+      "doi": null,
+      "method": "Foundation EO representation, temporal adaptation and crop-aware phenology attention",
+      "11_3_status": "Foundation integrated / advanced backend roadmap",
+      "implementation": "Central Phenology Service implemented; exact PhenoYieldNet network not included",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "adaptive_fusion_2025",
+      "title": "Adaptive fusion of multi-modal remote sensing data for optimal sub-field crop yield prediction",
+      "year": 2025,
+      "doi": null,
+      "method": "Modality-specific encoders with sample-dependent gated fusion",
+      "11_3_status": "Adapted baseline integrated",
+      "implementation": "CPU validation-weighted modality-aware late fusion with per-row missing-modality renormalisation; explicitly not the source neural gating architecture",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "yieldsat_2026",
+      "title": "YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield Prediction",
+      "year": 2026,
+      "doi": null,
+      "method": "10 m multimodal yield benchmark with leave-year/region transfer evaluation",
+      "11_3_status": "Foundation integrated",
+      "implementation": "Benchmark metadata/adapter plus LOYO/LORO validation support; dataset not bundled",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "pbcnn_2023",
+      "title": "A Phenology-guided Bayesian-CNN (PB-CNN) framework for soybean yield estimation and uncertainty analysis",
+      "year": 2023,
+      "doi": "10.1016/j.isprsjprs.2023.09.025",
+      "method": "Phenology-guided multi-stream Bayesian CNN with aleatoric and epistemic uncertainty",
+      "11_3_status": "Schema foundation integrated / model roadmap",
+      "implementation": "Registry supports explicit uncertainty fields; exact PB-CNN is not implemented",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "weak_supervision_2023",
+      "title": "A weakly supervised framework for high-resolution crop yield forecasts",
+      "year": 2023,
+      "doi": "10.1088/1748-9326/acf50e",
+      "method": "Fine-resolution prediction trained against aggregate yield labels",
+      "11_3_status": "Roadmap",
+      "implementation": "Canonical spatial-support metadata prepares for this; aggregate-consistency loss not yet implemented",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "worldcereal_2023",
+      "title": "WorldCereal: a dynamic open-source system for global-scale, seasonal, and reproducible crop and irrigation mapping",
+      "year": 2023,
+      "doi": "10.5194/essd-15-5491-2023",
+      "method": "Operational global EO crop/irrigation mapping with harmonised reference data and confidence",
+      "11_3_status": "Foundation integrated",
+      "implementation": "Benchmark/product catalog and provenance registration; no automatic WorldCereal overwrite of recorded crop/irrigation",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "scm_gat_2024",
+      "title": "Estimating Soybean Yields Using Causal Inference and Deep Learning Approaches With Satellite Remote Sensing Data",
+      "year": 2024,
+      "doi": "10.1109/JSTARS.2024.3435699",
+      "method": "Structural causal model hypotheses combined with graph attention prediction",
+      "11_3_status": "Roadmap",
+      "implementation": "No causal/GAT model yet; registry preserves model/evidence provenance needed for later graph work",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "causal_digital_tools_2022",
+      "title": "Evaluating Digital Tools for Sustainable Agriculture using Causal Inference",
+      "year": 2022,
+      "doi": null,
+      "method": "DAG/backdoor observational treatment-effect evaluation of recommendations",
+      "11_3_status": "Data foundation integrated / estimator roadmap",
+      "implementation": "Recommendation and treatment-outcome persistence implemented; causal estimators intentionally deferred",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "irrigation_seq2seq_drl_2026",
+      "title": "Optimizing irrigation decisions with Seq2Seq modeling and deep reinforcement learning",
+      "year": 2026,
+      "doi": "10.1016/j.compag.2026.111448",
+      "method": "Soil-state forecasting separated from deep-RL irrigation policy",
+      "11_3_status": "Roadmap",
+      "implementation": "No RL controller in 11.3; recommendation/outcome data contract prepares for simulation-only future policy evaluation",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "tabpfn_yield_2026",
+      "title": "From rows to yields: how foundation models for tabular data simplify crop yield prediction",
+      "year": 2026,
+      "doi": "10.1038/s41598-026-50338-z",
+      "method": "TabPFN as a small-data agricultural tabular baseline",
+      "11_3_status": "Optional backend integrated",
+      "implementation": "Runtime-discovered optional TabPFN classifier/regressor in leakage-safe model laboratory; not required for app start",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "rs_cropmodel_n_2024",
+      "title": "Developing remote sensing- and crop model-based methods to optimize nitrogen management in rice fields",
+      "year": 2024,
+      "doi": "10.1016/j.compag.2024.108899",
+      "method": "EO assimilation into crop model followed by nitrogen optimization",
+      "11_3_status": "Roadmap",
+      "implementation": "Not yet implemented; registry and observation schema prepare EO/model-state provenance",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "alic_2024",
+      "title": "Intelligent pest forecasting with meteorological data: An explainable deep learning approach",
+      "year": 2024,
+      "doi": "10.1016/j.eswa.2024.124137",
+      "method": "Feature attention → separate LSTM encoders → interaction CNN → dense forecast; walk-forward evaluation",
+      "11_3_status": "Roadmap",
+      "implementation": "Full paper reviewed; 11.3 implements the lower-data environmental pest baseline and walk-forward validation infrastructure, not exact ALIC",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "fertilizer_nsga2_2026",
+      "title": "Multiobjective spatial optimization of fertilizer rates enables sustainable crop production in southwest China",
+      "year": 2026,
+      "doi": "10.1038/s44264-026-00127-y",
+      "method": "Spatial nutrient response modeling with NSGA-II Pareto optimization",
+      "11_3_status": "Roadmap",
+      "implementation": "Not implemented in 11.3",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "pest_wadhwa_2024",
+      "title": "A generalizable and interpretable model for early warning of pest-induced crop diseases using environmental data",
+      "year": 2024,
+      "doi": "10.1016/j.compag.2024.109472",
+      "method": "Environmental feature engineering, model comparison, imbalance handling, Optuna-tuned tree boosting and SHAP",
+      "11_3_status": "Independent adaptation integrated",
+      "implementation": "Temp_Diff, Hum_Diff, Avg_Hum, Magnus VPD; RF/BRF/XGB/CatBoost/etc; fold-contained SMOTE-ENN; LOYO/LORO/group/forward validation; SHAP; pest-disease guardrails",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "price_exogenous_2024",
+      "title": "Exogenous variable driven deep learning models for improved price forecasting of TOP crops in India",
+      "year": 2024,
+      "doi": "10.1038/s41598-024-68040-3",
+      "method": "Deep price forecasting with exogenous environmental variables",
+      "11_3_status": "Roadmap",
+      "implementation": "Not implemented in 11.3",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "price_gnn_2025",
+      "title": "RNN and GNN based prediction of agricultural prices with multivariate time series and its short-term fluctuations smoothing effect",
+      "year": 2025,
+      "doi": "10.1038/s41598-025-97724-7",
+      "method": "Multivariate recurrent/graph price forecasting",
+      "11_3_status": "Roadmap",
+      "implementation": "Not implemented in 11.3",
+      "exact_reproduction": false
+    },
+    {
+      "paper_id": "federated_disease_2025",
+      "title": "Plant Disease Detection Using Federated Learning and Cloud Infrastructure for Scalability and Data Privacy",
+      "year": 2025,
+      "doi": "10.5753/jisa.2025.5055",
+      "method": "Federated plant-disease learning across distributed clients",
+      "11_3_status": "Roadmap",
+      "implementation": "Not implemented in 11.3; requires privacy/security/non-IID validation architecture",
+      "exact_reproduction": false
+    }
+  ]
+}

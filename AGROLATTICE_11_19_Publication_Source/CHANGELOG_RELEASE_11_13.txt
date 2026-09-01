@@ -1,0 +1,35 @@
+AGROLATTICE 11.13 — Experiment Command Centre & Trial Intelligence
+
+ADDED
+- Persistent Active Experiment context and lazy Experiment Command Centre.
+- Experiment Pulse and priority evidence-gap actions.
+- Expanded lifecycle: Draft, Designed, Randomised, Field-Ready, Data Collection, Completed, Analysed, Archived.
+- Versioned experiment protocol, first-class factor definitions and trial audit trail.
+- Additive design-version records with random seed, algorithm, constraints, factor matrix and allocation manifest.
+- Optional spatially constrained randomisation search to reduce identical-treatment adjacency.
+- Design-family/replication declaration with safe lock against changing a mapped allocation.
+- Treatment-matrix/design-readiness view and approximate power planning.
+- Spatial design diagnostics and Experimental-unit data card.
+- Data completeness, broad field-data QC and measurement requirements.
+- Field Operations observation-protocol/task linkage to trial and experimental unit.
+- Improved flowering/synchrony state, parent physiology provenance and outcome workflow.
+- Analysis-ready G×E×M table, treatment means/intervals and optional block-aware mixed model.
+- Research evidence status, audit trail and expanded reproducible export package.
+- Agroclimatic and Climate Space K-means exploration up to k=20 with diagnostics.
+- 20-category geographic cluster palette.
+
+CHANGED
+- Maize Pollination Lab module/schema -> 3.0.0.
+- Experiment workspace no longer eagerly executes the large collection of legacy Streamlit tabs.
+- Legacy trial/synchrony/G×E×M/project workbenches remain accessible as explicit advanced loads.
+- Stale Experiments 11.7 branding updated to current scientific/workbench language.
+
+DATABASE
+- Additive tables: experiment_protocols, experiment_protocol_versions, trial_factor_definitions, design_versions, trial_measurement_requirements, trial_audit_log.
+- Backup: pollination_lab/backups/pre_11_13_maize_flowering_trials.sqlite.
+- No schema changes to Field Operations, Persistent Twin, Research Evidence or Crop Profile databases.
+
+LIMITATIONS
+- No browser-level Streamlit session was executed in the build container if Streamlit is unavailable there.
+- General split-plot/strip-plot/incomplete-block allocation and design-specific power simulation are not falsely claimed; those design families can be documented/mapped but require correct researcher-defined strata and analysis.
+- Sentinel resolution may be inadequate for very small experimental units; 11.13 does not invent plot-scale EO precision.

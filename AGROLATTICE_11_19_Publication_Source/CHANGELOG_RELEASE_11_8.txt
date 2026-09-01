@@ -1,0 +1,70 @@
+AGROLATTICE 11.8 — Field Command Centre & Operations Polish
+Application version: 20.8-release11.8-field-command-centre
+Based on: AGROLATTICE 11.7 — Research Command Centre & Home Polish
+
+FIELDS & OPERATIONS UX
+- Replaced the consolidated Fields & Operations launcher with a single persistent
+  active-field command centre.
+- Added Overview / Map / Work & scouting / Operations / Sensors & samples /
+  Crop health / Precision / History / Administration views.
+- Added Field Pulse, persistent data freshness, recent activity and batch-SQL
+  Portfolio Attention.
+- Kept expensive map construction, uploads, EO retrieval and model execution out
+  of the default Overview path.
+
+SPATIAL WORKSPACE
+- Combined field, trial, experimental-unit, scouting, sensor, nutrient-sample,
+  persistent sampling and prescription layers.
+- Added field geometry validity, organisation containment and sibling-overlap QA.
+- Added authoritative field GeoJSON export.
+- Kept geometry editing inside Administration to reduce accidental changes.
+
+FIELD RESEARCH WORKFLOW
+- Added structured field seasons.
+- Added editable task metadata and recurrence generation after completion.
+- Added observation protocols, quantitative measurement JSON, trial/EU/plant
+  linkage and map-click scouting coordinates.
+- Added planned-vs-actual operation details, purpose/equipment/method/active
+  ingredient/batch metadata, recommendation linkage and optional treated polygon.
+- Added sensor lifecycle and calibration-history records.
+- Added structured nutrient/sample metadata and explicit laboratory/units fields.
+
+CROP HEALTH & ALERTS
+- Field health can read field-linked acquisition/prediction/Twin metadata from
+  persistent stores instead of relying only on current Streamlit session state.
+- Added alert templates and source-specific metric selectors.
+- Added persisted consecutive-trigger state and cooldown enforcement.
+- Added incident acknowledgement, snooze, resolution note, false-positive flag
+  and scouting-task workflow.
+- Replaced the old leaderboard with Portfolio Attention using aggregate SQL.
+
+PRECISION RESEARCH
+- Added systematic, random and stratified-random sampling designs with persistent
+  sample points.
+- Added direct use of existing nutrient samples for exploratory spatial clustering.
+- Added multi-variable scaling, optional PCA, K-means and silhouette diagnostics.
+- Kept continuous prescription-zone claims conservative: point clustering is
+  labelled exploratory unless additional interpolation/validation exists.
+
+DATABASE
+- Field Operations module 8.0.0 / additive DB schema 8.0.0.
+- New extension tables only; no destructive modification of Release 11.7 core tables.
+- Backup created before packaged DB migration and core-row identity verified.
+- Pollination Lab DB unchanged.
+- Persistent Twin DB unchanged.
+- Research Evidence DB unchanged.
+
+PERFORMANCE
+- Overview uses small SQL summaries and persisted metadata.
+- Portfolio Attention uses one batch query instead of multiple queries per field.
+- Spatial maps are only built when the Map / spatial workflow is opened.
+- NASA, Sentinel/STAC, crop models and training remain explicit actions.
+
+LIMITATIONS
+- Vendor-specific live sensor APIs are not invented; generic CSV import remains
+  until a documented connector/endpoint is configured.
+- Custom operation polygons require interactive Streamlit boundary-editor testing
+  in the user's environment.
+- Full browser interaction was not available in the packaging environment because
+  Streamlit is not installed there; static compilation, DB migration and pure core
+  workflow regression tests were run instead.

@@ -1,0 +1,94 @@
+AGROLATTICE 11.6 USER GUIDE — PERFORMANCE & BRANDING
+====================================================
+
+WHAT YOU SHOULD NOTICE
+----------------------
+- The new AGROLATTICE logo appears in the app navigation/header area.
+- Moving between Home, Fields & Operations, Twin, Climate, Crop Decisions,
+  Experiments, Models & Evidence, Reports and Data & Settings should avoid the
+  repeated full climate-file work that occurred previously.
+- The first load of a large country (especially Mexico) can still be slower
+  because the authoritative CSV has to be parsed once in the running process.
+
+HOW THE FAST RUNTIME WORKS
+--------------------------
+AGROLATTICE keeps the prepared active-country climate table as a process-local
+resource. Normal Streamlit reruns reuse that same read-only table. The source
+CSV remains authoritative and is not replaced by a hidden database or derived
+copy.
+
+When Dataset Updater installs a changed country CSV, AGROLATTICE detects the
+new file size/modification time and prepares a fresh runtime automatically.
+
+PERFORMANCE CONTROLS
+--------------------
+Open:
+Data & Settings -> System diagnostics -> Performance & navigation cache
+
+You can inspect:
+- climate source size
+- source row count
+- rows matched to mapped catalogue locations
+- number of variables
+- runtime-cache readiness
+
+Two manual controls are provided:
+1. Reload active-country data
+   Use this only if you manually replaced a climate CSV outside AGROLATTICE
+   while the app was already running.
+2. Reinitialise database services
+   Forces the app to reconstruct its database service objects and re-run their
+   safe schema initialisation checks. Normal use does not require this.
+
+DATASET UPDATER
+---------------
+Continue using Data & Settings -> Dataset updater exactly as before. Do not
+manually edit a huge country CSV merely to refresh the app. A successfully
+installed candidate automatically invalidates the runtime cache on the next
+rerun because the source file signature changes.
+
+BRANDING
+--------
+Brand assets are stored in assets/brand:
+- agrolattice_logo.png — transparent horizontal logo used by the app
+- agrolattice_icon.png — compact square icon for collapsed navigation
+- agrolattice_logo_source.png — source image retained for traceability
+
+The logo is presentation only. Missing/corrupt logo assets must never block
+scientific work; RUN_APP checks the release assets and the app also fails softly
+if Streamlit cannot render the branding API.
+
+RESEARCH/DATA INTEGRITY
+-----------------------
+11.6 is not a modelling-method release. It does not change:
+- the 19-variable NASA-derived historical climate data model
+- Mechanistic Maize Twin equations or Laurent-derived assumptions
+- Maize Synchrony database schema
+- Persistent Twin database schema
+- Field Operations database schema
+- Research Evidence database schema
+- Decision Intelligence estimators or recommendation semantics
+
+The optimisation layer deliberately reuses the exact source rows and the same
+cleaning rules as 11.5. It changes when expensive work is done, not the values
+being analysed.
+
+IF NAVIGATION STILL FEELS SLOW
+------------------------------
+1. Open System diagnostics and confirm Runtime cache = Ready.
+2. Note which page is slow. Some pages intentionally perform expensive work
+   when opened (large satellite maps, model fitting, external API retrieval,
+   large interactive tables). Those are different from the repeated country
+   CSV loading fixed in 11.6.
+3. Avoid clearing caches repeatedly; doing so forces preparation again.
+4. Keep the app on SSD storage where possible and allow sufficient RAM for the
+   selected country dataset.
+5. Use DIAGNOSE_APP.bat if startup/preflight itself fails.
+
+LIMITATION
+----------
+The first active-country load is still bounded by parsing the authoritative CSV
+and preparing its location coordinates. Release 11.6 intentionally avoids
+adding a second binary source of truth solely for speed. A future release may
+add an optional verified on-disk acceleration cache, but only if source hashes,
+invalidation and data-provenance behaviour remain explicit and safe.

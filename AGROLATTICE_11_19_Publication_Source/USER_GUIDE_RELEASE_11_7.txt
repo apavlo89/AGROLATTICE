@@ -1,0 +1,105 @@
+AGROLATTICE 11.7 — HOME / RESEARCH COMMAND CENTRE GUIDE
+=======================================================
+
+1. SET THE RESEARCH CONTEXT
+---------------------------
+Use Change context at the top of Home to select a persistent Project, mapped
+Field and/or Maize Synchrony trial. Home is designed to become more informative
+as identifiers are linked across the platform.
+
+2. CONTINUE CURRENT WORK
+------------------------
+The first large card shows the active field/trial, crop, season and linked Twin.
+Use Resume Twin when a Twin exists, Open experiment for the active trial, or View
+evidence for registered models/predictions.
+
+3. TWIN PULSE
+-------------
+Twin Pulse summarizes the latest saved/current Twin state without recalculating
+it on page entry. Labels distinguish:
+- Modelled: model/twin state or timing estimate
+- Retrieved: external observation such as field EO/weather
+- Derived: calculations from recorded/retrieved data
+- Model diagnostic: uncertainty/data-quality indicators
+
+If no saved Twin state exists, Home tells you rather than silently running one.
+
+4. MOST USEFUL NEXT MEASUREMENT
+-------------------------------
+When evidence gaps are obvious, Home suggests a measurement such as flowering,
+leaf development or soil moisture. This is a rules-based research prompt. It is
+not a statistical value-of-information calculation and should be interpreted
+with study design and field feasibility.
+
+5. PRIORITY ACTIONS
+-------------------
+Home ranks a small number of actions from persisted information, including:
+- overdue/due field tasks;
+- open crop-health alerts;
+- missing/stale field weather or EO;
+- absent root-zone state;
+- sparse/outdated trial observations;
+- Prototype model status;
+- prediction applicability warnings;
+- acted-on recommendations missing outcomes;
+- high Twin uncertainty with sparse observations.
+
+Open takes you to the appropriate workspace/tool. No action is executed
+silently.
+
+6. DATA FRESHNESS & COMPLETENESS
+--------------------------------
+Weather, satellite, root-zone and sensor evidence are summarized from persistent
+Twin/Research Evidence/Field Operations records. Trial phenology is added when a
+trial is active.
+
+Current = within the normal update interval.
+Review = getting old enough to check.
+Stale = outside the intended current-season interval.
+Missing = no linked persistent record found.
+Historical = an older/completed season, so the record is treated as historical
+             evidence rather than compared with today's date.
+
+Use Retrieve / reuse field data to open the Research Data Hub. The purpose is to
+reuse data AGROLATTICE can already retrieve instead of forcing unnecessary CSV
+uploads.
+
+7. MODEL & EVIDENCE STATUS
+--------------------------
+Shows the latest relevant registered model/prediction where available, including
+model status, target, uncertainty method, registered interval and applicability.
+"Prototype" or out-of-scope/applicability warnings should be resolved before
+operational decision use.
+
+8. NEXT 14 DAYS
+---------------
+Combines upcoming field tasks with saved modelled maize flowering/silking timing
+when available. Predicted events are explicitly identified as modelled timing
+estimates and should trigger observation, not be treated as observed flowering.
+
+9. WHAT CHANGED RECENTLY
+------------------------
+Combines recent persistent field timeline events, data acquisitions, predictions
+and recommendations for the active context.
+
+10. RECENT RESEARCH PROJECTS
+----------------------------
+The three most recently updated readable projects are shown as compact cards.
+Activate changes the active project context; it does not delete or overwrite
+other projects.
+
+11. SYSTEM DIAGNOSTICS
+----------------------
+Detailed dependency/runtime readiness is intentionally not duplicated on Home.
+Use Data & Settings → System diagnostics. This keeps Home focused and fast.
+
+12. PERFORMANCE EXPECTATION
+---------------------------
+The Home page uses small metadata queries. It does not automatically:
+- fetch NASA POWER;
+- search/process Sentinel-2;
+- run the Persistent Twin;
+- run AquaCrop/DSSAT/APSIM;
+- train ML models;
+- run optimization/causal analysis.
+Those actions remain explicit.

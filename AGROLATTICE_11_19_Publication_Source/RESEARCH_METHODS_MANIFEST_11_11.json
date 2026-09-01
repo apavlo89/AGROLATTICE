@@ -1,0 +1,54 @@
+{
+  "release": "AGROLATTICE 11.11",
+  "title": "Crop Decision Command Centre & Agronomic Planning",
+  "methods": [
+    {
+      "name": "Field-aware evidence reuse",
+      "type": "data/provenance workflow",
+      "implementation": "Persisted Field/Twin weather and decision evidence are preferred before a new external retrieval is requested.",
+      "boundary": "Reusing evidence does not imply that gridded weather is a local station measurement."
+    },
+    {
+      "name": "Historical sowing-date climate exposure",
+      "type": "environmental screening",
+      "implementation": "Candidate sowing dates are compared across historical daily weather using explicit heat, water-balance, dry-spell and GDD summaries.",
+      "boundary": "Not an official crop calendar, mechanistic cultivar yield simulation or causal treatment recommendation."
+    },
+    {
+      "name": "Versioned crop/cultivar profiles",
+      "type": "research provenance",
+      "implementation": "Independent SQLite registry with parent profile identity plus immutable parameter-version history, author, region, evidence grade and citation.",
+      "boundary": "Researcher profiles do not overwrite validated source profiles or automatically become global defaults."
+    },
+    {
+      "name": "Operational pest-risk inference",
+      "type": "registered-model inference",
+      "implementation": "Only Research Model Registry artifacts explicitly marked Operationally eligible can be used from the main Crop Decisions operational pathway; model inputs and applicability are checked.",
+      "boundary": "Risk prediction is not pest confirmation, disease diagnosis or pesticide instruction."
+    },
+    {
+      "name": "Nutrient optimisation readiness",
+      "type": "research-design guardrail",
+      "implementation": "Checks structured samples, nutrient operations, rate variation and observed outcomes before promoting nutrient-response optimisation.",
+      "boundary": "Readiness indicators do not prove identifiability or causal nutrient response."
+    },
+    {
+      "name": "Yield evidence disagreement",
+      "type": "model evidence synthesis",
+      "implementation": "Registered model predictions and observed outcomes are compared without silently averaging predictions from heterogeneous model families.",
+      "boundary": "Model disagreement requires validation/applicability review rather than selection by convenience."
+    },
+    {
+      "name": "Field-aware AquaCrop / DSSAT / APSIM evidence",
+      "type": "crop-model interoperability",
+      "implementation": "Active field/season and persisted canonical weather can populate model workflows; run status and configuration provenance can be preserved.",
+      "boundary": "A successful executable run is not evidence that cultivar, soil, nitrogen or management parameterisation is calibrated or equivalent across backends."
+    },
+    {
+      "name": "Recommendation → Action → Outcome",
+      "type": "decision evidence lifecycle",
+      "implementation": "Crop Decisions exposes the existing decision ledger so proposed recommendations remain distinct from actual action and measured outcome.",
+      "boundary": "Recommendation acceptance/application is not proof of agronomic benefit or causality."
+    }
+  ]
+}

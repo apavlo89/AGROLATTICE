@@ -1,0 +1,52 @@
+{
+  "release": "AGROLATTICE 11.7",
+  "title": "Research Command Centre & Home Polish",
+  "application_version": "20.7-release11.7-research-command-centre",
+  "based_on": "AGROLATTICE 11.6 — Performance & Branding Update",
+  "readme": "README_START_HERE_RELEASE11_7.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_7.txt",
+  "changelog": "CHANGELOG_RELEASE_11_7.txt",
+  "technical_basis": "TECHNICAL_BASIS_HOME_11_7.md",
+  "database_schema_changes": false,
+  "database_migration": "None. Field Operations, Maize Pollination Lab, Persistent Twin and Research Evidence schemas are unchanged from 11.6.",
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "protected_database_schema_changes": false,
+  "research_evidence_schema_changed": false,
+  "module_versions": {
+    "home_command_centre": "1.0.0",
+    "performance_runtime": "1.0.0",
+    "global_country_support": "10.3.0",
+    "decision_intelligence": "1.0.0",
+    "research_registry": "1.2.0 / DB 1.3.0",
+    "multimodal_fusion": "2.0.0",
+    "maize_pollination_lab": "2.2.0 / DB 2.0.0",
+    "agrolattice_twin": "2.8.0 / DB 2.3.0",
+    "field_operations_suite": "7.1.0"
+  },
+  "home_features": [
+    "Research Command Centre",
+    "Continue current work / Resume Twin",
+    "Dynamic persistent-data-aware priority actions",
+    "Twin Pulse without automatic Twin recomputation",
+    "Rules-based next useful measurement prompt",
+    "Historical-context-aware data freshness",
+    "Model and prediction evidence status",
+    "14-day research timeline",
+    "Recent activity synthesis",
+    "Recent project activation cards"
+  ],
+  "performance_guards": [
+    "No automatic NASA POWER request on Home",
+    "No automatic Sentinel/STAC request or raster processing on Home",
+    "No automatic Twin build/model training/optimizer on Home",
+    "No full country-climate CSV reread for Home status",
+    "Release 11.6 process-local runtime caches retained"
+  ],
+  "scientific_changes": [],
+  "limitations": [
+    "Home summarizes only persistent evidence linked to the active context.",
+    "Next-measurement prompts are transparent heuristics, not formal expected-information-gain optimization.",
+    "Full interactive Streamlit browser testing may require the user's installed Windows/Anaconda environment."
+  ]
+}

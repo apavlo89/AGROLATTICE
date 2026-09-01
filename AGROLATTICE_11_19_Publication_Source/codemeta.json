@@ -1,0 +1,20 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "AGROLATTICE",
+  "version": "11.19",
+  "datePublished": "2026-08-12",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Achilleas",
+      "familyName": "Pavlou",
+      "affiliation": "University of Nicosia"
+    }
+  ],
+  "applicationCategory": "Agricultural research software",
+  "operatingSystem": "Windows (primary); Python/Streamlit source is cross-platform subject to dependencies",
+  "programmingLanguage": "Python",
+  "description": "Spatial agricultural intelligence and persistent digital-twin research platform integrating GIS, environmental data, crop physiology, experiments, remote sensing, prediction, validation, decisions, outcomes and reproducible reporting."
+}

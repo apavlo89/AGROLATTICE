@@ -1,0 +1,92 @@
+AGROLATTICE 11.11 — BUILD & VERIFICATION REPORT
+=======================================================
+
+Release: AGROLATTICE 11.11 — Crop Decision Command Centre & Agronomic Planning
+Application version: 20.11-release11.11-crop-decision-command-centre
+Baseline archive: AGROLATTICE_Release_11_10_Climate_Earth_Observation_Command_Centre(1).zip
+Baseline SHA-256: 3ed625087b76e9c5128a1d2cbc10217cbb4764cb59610cba65491f759e962a3d
+
+IMPLEMENTED RELEASE SCOPE
+-------------------------
+- Field/season/Twin-aware Crop Decision Command Centre with eight researcher-facing decision areas.
+- Lightweight Decision Pulse, priority evidence gaps, Decision Inbox and persisted Crop Decision Timeline.
+- Field-aware daily weather/phenology with reuse of saved Field/Twin weather before optional retrieval.
+- Historical daily sowing-date climate-exposure comparison across candidate dates and years.
+- Versioned Crop Profile Registry with author, region, evidence grade, citation, immutable version history and cloning.
+- Water/irrigation consolidation around persisted root-zone evidence, recorded operations and the Irrigation Policy Studio.
+- Nutrient optimisation readiness checks against samples, treatment-rate variation and observed outcomes.
+- Operational pest-risk inference restricted to Research Model Registry artifacts explicitly marked Operationally eligible, with reproducible predictor/applicability checks.
+- Yield Evidence comparison with uncertainty/applicability columns and no silent averaging of model disagreement.
+- Economics can start from recorded operations context while keeping assumptions editable.
+- Active-field AquaCrop readiness/evidence integration and canonical NASA weather aliases.
+- Field-aware DSSAT/APSIM weather/evidence integration; failed runs remain visible provenance.
+- Recommendation → Action → Outcome lifecycle surfaced in Crop Decisions.
+- Country-safe crop-planning guidance; Mexico-specific SIAP/INIFAP guidance is scoped to Mexico.
+- Legacy development-era module/release labels demoted from the primary Crop Decisions workflow.
+
+DATABASE / DATA-SAFETY STATUS
+-----------------------------
+No schema migration was performed on the four protected research/operational databases.
+A new independent additive database was introduced: models_evidence/crop_profiles.sqlite (schema 1.0.0).
+The legacy custom_crop_profiles.json pathway remains available and its source file is not deleted by import.
+
+Protected baseline byte comparison:
+- field_operations/field_operations.sqlite: identical=True
+    11.10: fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+    11.11: fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+- pollination_lab/maize_flowering_trials.sqlite: identical=True
+    11.10: 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+    11.11: 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+- agrolattice_twin/agrolattice_twin.sqlite: identical=True
+    11.10: ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+    11.11: ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+- models_evidence/research_evidence.sqlite: identical=True
+    11.10: 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+    11.11: 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+- maize_mechanistic_twin.py: identical=True
+    11.10: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+    11.11: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+SQLite integrity / foreign-key checks:
+- agrolattice_twin/agrolattice_twin.sqlite: integrity=ok; foreign_key_violations=0; bytes=421888
+- agrolattice_twin/backups/pre_11_9_agrolattice_twin.sqlite: integrity=ok; foreign_key_violations=0; bytes=421888
+- field_operations/backups/pre_11_8_field_operations.sqlite: integrity=ok; foreign_key_violations=0; bytes=143360
+- field_operations/field_operations.sqlite: integrity=ok; foreign_key_violations=0; bytes=270336
+- models_evidence/crop_profiles.sqlite: integrity=ok; foreign_key_violations=0; bytes=40960
+- models_evidence/research_evidence.sqlite: integrity=ok; foreign_key_violations=0; bytes=180224
+- pollination_lab/maize_flowering_trials.sqlite: integrity=ok; foreign_key_violations=0; bytes=159744
+
+Packaged Crop Profile Registry contains profiles=0, versions=0; no synthetic verification records were left in the packaged DB.
+
+REGRESSION / STATIC VERIFICATION
+--------------------------------
+- Top-level Python files compiled: 61
+- Full recursive python compileall: PASS.
+- verify_release11_11.py: PASS.
+- Crop Profile Registry regression: two successive saves retain v1 + v2; clone receives separate profile ID; SQLite integrity PASS.
+- Safe data migration regression: a pre-11.11 source containing the four established databases migrates into an 11.11 destination without deleting/replacing the new Crop Profile Registry when the source has no such database.
+- RELEASE_MANIFEST_11_11.json and RESEARCH_METHODS_MANIFEST_11_11.json parse as valid JSON.
+- RUN_APP.bat contains 11.11 module/version/schema preflight hooks for Crop Decision Command Centre and Crop Profile Registry.
+
+PERFORMANCE GUARDS
+------------------
+- Opening Crop Decisions does not automatically retrieve NASA weather.
+- Opening Crop Decisions does not automatically train or run pest models.
+- Opening Crop Decisions does not automatically run irrigation/nutrient optimisers.
+- Opening Crop Decisions does not automatically execute AquaCrop, DSSAT or APSIM.
+- Persisted evidence is offered before duplicate remote retrieval.
+- The large country climate runtime cache introduced in Release 11.6 is retained.
+
+SCIENTIFIC BOUNDARIES / KNOWN LIMITATIONS
+-----------------------------------------
+- Daily sowing-date output is climate-exposure screening with explicit assumptions, not an official planting calendar or cultivar-specific mechanistic yield optimiser.
+- Operational pest inference requires an explicitly eligible registered artifact and predictors that can be reproduced without fabrication; risk is not field confirmation or disease diagnosis.
+- Nutrient readiness is a guardrail, not proof that a causal/identifiable response surface exists.
+- AquaCrop/DSSAT/APSIM execution success does not establish local calibration, parameter equivalence, cross-season validation or decision benefit.
+- Recorded operation costs may not be complete production accounting.
+- Chronology in the Crop Decision Timeline does not establish causality.
+- The build container does not include Streamlit, so a full interactive browser/widget test was not executed here. RUN_APP.bat performs the runtime dependency/module/schema preflight in the target Windows/Anaconda environment.
+
+FINAL OFFLINE VERDICT
+---------------------
+PASS — source compiles, verifier passes, all SQLite databases pass integrity/foreign-key checks, protected baseline databases and the Mechanistic Maize Twin source are byte-for-byte unchanged, and the new crop-profile database is additive and empty of test records.

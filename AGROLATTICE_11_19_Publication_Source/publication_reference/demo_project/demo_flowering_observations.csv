@@ -1,0 +1,25 @@
+experimental_unit_id,block,treatment_id,male_sowing_offset_days,observed_female_50pct_silking_das,observed_male_50pct_anthesis_das,observed_synchrony_gap_days,evidence_type
+EU-01-01,1,T01,-6,71.13,64.73,6.4,Synthetic demonstration
+EU-01-02,1,T04,3,70.54,70.09,0.45,Synthetic demonstration
+EU-01-03,1,T02,-3,71.79,66.34,5.45,Synthetic demonstration
+EU-01-04,1,T06,9,71.89,76.26,-4.37,Synthetic demonstration
+EU-01-05,1,T03,0,70.99,68.81,2.17,Synthetic demonstration
+EU-01-06,1,T05,6,71.03,73.8,-2.77,Synthetic demonstration
+EU-02-01,2,T05,6,70.79,73.99,-3.2,Synthetic demonstration
+EU-02-02,2,T02,-3,72.61,65.87,6.74,Synthetic demonstration
+EU-02-03,2,T06,9,71.03,76.77,-5.74,Synthetic demonstration
+EU-02-04,2,T01,-6,72.11,64.49,7.62,Synthetic demonstration
+EU-02-05,2,T04,3,70.73,71.59,-0.86,Synthetic demonstration
+EU-02-06,2,T03,0,71.19,67.35,3.84,Synthetic demonstration
+EU-03-01,3,T03,0,72.2,68.41,3.79,Synthetic demonstration
+EU-03-02,3,T06,9,70.94,76.67,-5.73,Synthetic demonstration
+EU-03-03,3,T04,3,72.03,71.47,0.56,Synthetic demonstration
+EU-03-04,3,T02,-3,72.69,67.79,4.9,Synthetic demonstration
+EU-03-05,3,T05,6,71.76,74.93,-3.17,Synthetic demonstration
+EU-03-06,3,T01,-6,72.36,65.42,6.94,Synthetic demonstration
+EU-04-01,4,T02,-3,73.01,67.35,5.66,Synthetic demonstration
+EU-04-02,4,T05,6,71.47,74.58,-3.11,Synthetic demonstration
+EU-04-03,4,T01,-6,72.89,65.87,7.01,Synthetic demonstration
+EU-04-04,4,T03,0,73.22,70.36,2.86,Synthetic demonstration
+EU-04-05,4,T06,9,72.07,77.49,-5.42,Synthetic demonstration
+EU-04-06,4,T04,3,72.38,72.05,0.33,Synthetic demonstration

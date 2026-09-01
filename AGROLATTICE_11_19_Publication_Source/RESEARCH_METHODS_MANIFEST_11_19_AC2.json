@@ -1,0 +1,45 @@
+{
+  "build_id": "AGROLATTICE-11.19-AC2-2026-08-12",
+  "base_reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "analysis": "Adaptive agroclimatic variable-subset and K-means selection",
+  "feature_unit": "location by selected variable-month climatological mean",
+  "candidate_variable_role": "researcher-supplied search space",
+  "minimum_variables": 2,
+  "maximum_k": 20,
+  "search": {
+    "strategy": "greedy forward selection followed by backward removal",
+    "full_data_k_screening": true,
+    "repeated_holdout_shortlist_k": 3,
+    "train_fraction": 0.8,
+    "publication_search_repeats": 5,
+    "training_only_standardisation": true,
+    "held_out_metric": "silhouette coefficient",
+    "stability_metric": "pairwise adjusted Rand index among resampled predictions"
+  },
+  "penalties": {
+    "extra_variable": 0.005,
+    "tiny_cluster_resample": 0.1,
+    "tiny_cluster_definition": "fewer than max(3, ceil(2% of locations))"
+  },
+  "parsimony_rule": {
+    "type": "one-sided repeated-resampling operational non-inferiority",
+    "margin": 0.02,
+    "normal_quantile": 1.645,
+    "inferential_boundary": "not a population-level equivalence test"
+  },
+  "independent_audit": {
+    "publication_repeats": 10,
+    "seed_offset": 500003
+  },
+  "final_model": {
+    "algorithm": "K-means",
+    "n_init": 50,
+    "fit_scope": "all retained locations after selection and audit"
+  },
+  "pca": {
+    "selection": "smallest component count reaching selected cumulative variance",
+    "default_threshold": 0.9,
+    "relationship_to_clusters": "independent descriptive dimensionality"
+  },
+  "scientific_boundary": "Exploratory empirical partition; not causal variable discovery, an official agroecological classification, or external validation."
+}

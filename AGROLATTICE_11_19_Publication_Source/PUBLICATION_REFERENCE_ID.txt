@@ -1,0 +1,7 @@
+AGROLATTICE Publication Reference Release
+Release: 11.19
+Permanent internal reference identifier: AGROLATTICE-11.19-PRR-2026-08-12
+Reference date: 2026-08-12
+
+This identifier is stable inside the 11.19 source/archive. It is not a DOI.
+After depositing the exact 11.19 archive in a DOI-granting repository, record the external DOI in CITATION.cff, .zenodo.json/codemeta metadata as applicable, and the manuscript.

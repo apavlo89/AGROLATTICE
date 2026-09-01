@@ -1,0 +1,26 @@
+{
+  "title": "AGROLATTICE: Publication Reference Release",
+  "upload_type": "software",
+  "description": "Frozen publication-reference release of AGROLATTICE, a spatial agricultural intelligence and persistent digital-twin platform integrating fields, climate/weather, soil-water state, Earth observation, crop physiology, experiments, model validation, decisions, outcomes and reproducible reporting. The bundled demonstration project is synthetic and is not empirical agronomic validation.",
+  "creators": [
+    {
+      "name": "Pavlou, Achilleas",
+      "affiliation": "University of Nicosia"
+    }
+  ],
+  "version": "11.19",
+  "publication_date": "2026-08-12",
+  "license": "MIT",
+  "keywords": [
+    "agricultural informatics",
+    "digital twin",
+    "precision agriculture",
+    "crop modelling",
+    "remote sensing",
+    "GxExM",
+    "maize",
+    "field experiments",
+    "scientific reproducibility"
+  ],
+  "notes": "Before public deposition, replace placeholder repository metadata in CITATION.cff and add the repository/DOI returned by the selected archive service."
+}

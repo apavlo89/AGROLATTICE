@@ -1,0 +1,17 @@
+{
+  "release": "AGROLATTICE 11.8",
+  "scientific_method_change": true,
+  "statement": "Release 11.8 is primarily a field-research workflow and spatial-operations release. It does not change the Mechanistic Maize Twin, multimodal crop models, causal estimators or decision-intelligence mathematical methods. It adds explicit rule-persistence logic, structured observation/operation provenance and conservative exploratory spatial clustering semantics.",
+  "new_methods_or_semantics": {
+    "alert_persistence": "Consecutive threshold evaluations plus cooldown are persisted per field/rule before a new alert incident is generated.",
+    "observation_protocols": "Reusable measurement definitions with quantitative values linked to field/trial/experimental-unit/plant context.",
+    "spatial_operation_support": "Actual/planned operation records may carry a whole-field or contained custom polygon; spatial support is not causal effect evidence.",
+    "exploratory_multivariate_zoning": "StandardScaler + optional PCA + KMeans + silhouette on georeferenced point measurements. Results remain exploratory point clusters unless additional spatial interpolation and validation are supplied.",
+    "sampling_designs": "Systematic, random and stratified-random point designs are generated inside authoritative field geometry and can be persisted."
+  },
+  "mechanistic_maize_changed": false,
+  "multimodal_model_changed": false,
+  "decision_intelligence_model_changed": false,
+  "research_evidence_schema_changed": false,
+  "field_operations_schema": "8.0.0 additive extensions"
+}

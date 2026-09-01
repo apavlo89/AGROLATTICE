@@ -1,0 +1,47 @@
+{
+  "release": "AGROLATTICE 11.15",
+  "title": "Research Reporting & Publication Command Centre",
+  "application_version": "20.15-release11.15-research-reporting-publication-command-centre",
+  "based_on": "AGROLATTICE 11.14 — Model Evidence Command Centre & Scientific Validation",
+  "readme": "README_START_HERE_RELEASE11_15.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_15.txt",
+  "changelog": "CHANGELOG_RELEASE_11_15.txt",
+  "technical_basis": "TECHNICAL_BASIS_REPORTING_11_15.md",
+  "research_methods_manifest": "RESEARCH_METHODS_MANIFEST_11_15.json",
+  "database_schema_changes": true,
+  "database_migration": "No protected scientific database schema changes. A new additive reports/reporting.sqlite schema 1.0.0 is introduced; legacy study_store JSON remains intact and can be imported explicitly.",
+  "new_dependencies": [],
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "field_operations_schema": "8.0.0 unchanged",
+  "pollination_database_schema": "3.0.0 unchanged",
+  "persistent_twin_schema": "3.0.0 unchanged",
+  "research_evidence_schema": "2.0.0 unchanged",
+  "crop_profile_schema": "1.0.0 unchanged",
+  "reporting_schema": "1.0.0 new additive database",
+  "module_versions": {
+    "report_command_centre": "1.0.0",
+    "reporting_registry": "1.0.0 / DB 1.0.0",
+    "publication_builder": "2.0.0",
+    "model_evidence_command_centre": "1.0.0 unchanged",
+    "experiment_command_centre": "1.0.0 unchanged",
+    "maize_mechanistic_twin": "1.0.0 unchanged"
+  },
+  "headline_features": [
+    "Persistent Reporting & Publication Command Centre with lazy navigation.",
+    "Field/Experiment/Twin/Model-aware report scope and report-readiness checks.",
+    "Immutable report versions and frozen evidence snapshots with SHA-256.",
+    "Publication table/figure registry with provenance and multi-panel figures.",
+    "Claim-evidence ledger and scientific-wording audit.",
+    "Citation library and method implementation-relationship tracking.",
+    "Internal/public reproducibility packages with transparent redaction manifest.",
+    "Improved structured abstract, manuscript metadata, word counts and DOCX/Markdown/HTML export.",
+    "Legacy Release-3 JSON studies remain importable without deletion."
+  ],
+  "limitations": [
+    "Full interactive browser verification requires the target Streamlit environment.",
+    "Automated redaction does not guarantee complete de-identification of arbitrary free text.",
+    "Automated report auditing is advisory and does not replace scientific/statistical review.",
+    "Journal-specific current formatting rules are not assumed without explicit verification."
+  ]
+}

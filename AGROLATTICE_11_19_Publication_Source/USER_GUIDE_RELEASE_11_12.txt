@@ -1,0 +1,36 @@
+AGROLATTICE 11.12 — USER GUIDE ADDENDUM
+=======================================
+
+Release 11.12 keeps the 11.11 Crop Decision Command Centre and adds a navigation
+reliability fix.
+
+CROP DECISIONS — PRIORITY BUTTONS
+---------------------------------
+On Crop Decisions → Overview, the Priority decisions & evidence gaps panel may
+show actions such as:
+  • Record the season and sowing date
+  • Review / update field weather evidence
+  • Compare irrigation strategies
+  • Refresh field scouting evidence
+  • Check nutrient evidence readiness
+  • Record outcomes for applied decisions
+
+Clicking Open <area> now changes the Crop Decisions navigation control to the
+requested destination and opens that area immediately. The destination displays
+a short note showing the priority action that routed you there.
+
+If the evidence state changes, the number and order of Priority actions can also
+change. This is expected: the panel is generated from current persisted field,
+Twin and Research Evidence records.
+
+TWIN / CLIMATE SHORTCUTS
+------------------------
+Programmatic shortcut buttons in the Persistent Twin and Climate & Earth
+Observation command centres were hardened with the same routing mechanism.
+Manual use of their navigation controls is unchanged.
+
+SCIENTIFIC BOUNDARY
+-------------------
+A navigation shortcut only changes which workspace area is displayed. It never
+executes a recommendation, applies irrigation/fertilizer/pesticide, changes a
+field record, or runs a model merely by navigating to a destination.

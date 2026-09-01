@@ -1,0 +1,106 @@
+AGROLATTICE 11.13 — BUILD VERIFICATION
+======================================
+Release: Experiment Command Centre & Trial Intelligence
+Baseline: supplied AGROLATTICE 11.12 Navigation Reliability & Interaction Fix
+
+SOURCE / STATIC VERIFICATION
+----------------------------
+PASS — verify_release11_13.py
+PASS — recursive Python compileall
+PASS — 65 top-level Python modules compile in the build environment
+PASS — Experiment Command Centre contains no st.tabs() and uses true lazy top-level navigation
+PASS — current Experiments workspace routes through experiment_command_centre.py
+PASS — current app version is 20.13-release11.13-experiment-command-centre
+
+EXPERIMENT FUNCTIONAL REGRESSION
+--------------------------------
+PASS — fresh temporary PollinationDatabase initialises at schema 3.0.0
+PASS — experiment creation and factor-design persistence
+PASS — first protocol save creates version 1
+PASS — second protocol save creates version 2 while retaining immutable version 1 snapshot
+PASS — factor-definition persistence
+PASS — measurement-requirement persistence
+PASS — declared design settings update before allocation
+PASS — factorial treatment construction
+PASS — constrained randomisation with spatial-adjacency search
+PASS — mapped experimental-unit persistence
+PASS — reproducible design-version persistence
+PASS — design-setting change is blocked after a mapped allocation exists
+PASS — experimental-unit data-completeness matrix generation
+PASS — complete experiment package includes protocol version history
+PASS — trial audit events persisted
+
+POLLINATION DATABASE MIGRATION
+------------------------------
+Packaged predecessor backup:
+  pollination_lab/backups/pre_11_13_maize_flowering_trials.sqlite
+Predecessor SHA-256:
+  6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+Predecessor schema: 1.4.0
+11.13 packaged schema: 3.0.0
+
+PASS — SQLite integrity_check = ok
+PASS — foreign_key_check = 0 issues
+PASS — every predecessor table still exists
+PASS — every predecessor row projected onto predecessor columns is identical after migration
+PASS — schema_version is the only intentionally changed predecessor metadata value
+PASS — no synthetic verification records in the new 11.13 experiment tables
+
+New additive tables:
+  experiment_protocols
+  experiment_protocol_versions
+  trial_factor_definitions
+  design_versions
+  trial_measurement_requirements
+  trial_audit_log
+
+PROTECTED ARTIFACT VERIFICATION
+-------------------------------
+PASS — Field Operations DB byte-for-byte unchanged from supplied 11.12
+  fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+PASS — Persistent Twin DB byte-for-byte unchanged
+  ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+PASS — Research Evidence DB byte-for-byte unchanged
+  516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+PASS — Crop Profile Registry DB byte-for-byte unchanged
+  84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+PASS — Mechanistic Maize Twin source byte-for-byte unchanged
+  a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+PASS — all packaged SQLite databases report integrity_check = ok and zero foreign-key violations.
+
+SAFE MIGRATION REGRESSION
+-------------------------
+PASS — backup-first safe_data_migration.py creates before_11_13_* recovery folder
+PASS — representative pre-11.13 research databases migrate into a temporary 11.13 destination
+PASS — source/destination table row counts match after activation
+PASS — migrated temporary databases pass integrity and foreign-key checks
+
+PCA / K-MEANS k=20 REQUEST
+---------------------------
+PASS — Agroclimatic clustering manual slider allows k=2..20
+PASS — automatic candidate search evaluates feasible k up to 20
+PASS — automatic maximum respects n_samples - 1 and distinct climate profile count
+PASS — diagnostics include silhouette score, inertia, smallest cluster and largest cluster
+PASS — Climate Space K-means slider allows k=2..20
+PASS — high-k Climate Space view reports silhouette and cluster-size diagnostics
+PASS — geographic cluster map uses a 20-category palette
+PASS — interface warns that high-k groups are exploratory rather than official agroecological zones
+
+SCIENTIFIC SAFEGUARDS
+---------------------
+- Trial/block/replicate/parent/experimental-unit identifiers are retained in modelling tables.
+- Protocol and randomisation provenance are persistent.
+- Broad data QC flags records but never silently deletes measurements.
+- Retrospective flowering-window climate features are explicitly labelled and warned against decision-time leakage.
+- Split-plot/strip-plot/incomplete-block design families can be documented, but the release does not falsely claim the current allocator is a universal generator for their error structures.
+- The power calculation is explicitly a planning approximation.
+- Maize flowering timing does not imply pollen quantity, fertilisation, seed purity or yield.
+
+DEPENDENCIES
+------------
+No new mandatory third-party dependency was added. scipy, statsmodels and Shapely were already present in the existing ML_AGRICULTURE dependency set.
+
+BROWSER TEST LIMITATION
+-----------------------
+The build container does not include Streamlit, therefore a complete interactive browser session was not executed here. RUN_APP.bat performs the 11.13 Streamlit/dependency/module/schema preflight in the user's Windows/Anaconda environment before launching the app.

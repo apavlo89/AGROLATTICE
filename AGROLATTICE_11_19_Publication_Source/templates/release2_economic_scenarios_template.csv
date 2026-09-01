@@ -1,0 +1,4 @@
+Scenario,Yield (t/ha),Area (ha),Seasonal ETc (mm),Effective rainfall (mm),Gross irrigation (mm),Crop price (currency/t),Non-water variable cost (currency/ha),Fixed cost (currency/ha),Water price (currency/m3),Pumping energy (kWh/m3),Electricity price (currency/kWh)
+Rainfed baseline,5.0,1.0,550,430,0,300,800,200,0.0,0.0,0.0
+Deficit irrigation,6.2,1.0,575,410,120,300,880,210,0.03,0.25,0.15
+Full irrigation,7.0,1.0,600,380,250,300,950,220,0.03,0.25,0.15

@@ -1,0 +1,71 @@
+AGROLATTICE 11.14 — Models & Evidence User Guide
+================================================
+
+OVERVIEW
+Models & Evidence is the scientific-governance workspace. It answers:
+- Which models exist?
+- What data trained them?
+- How were they validated?
+- Where do they generalise or extrapolate?
+- Are their intervals/probabilities calibrated?
+- Which predictions have measured outcomes?
+- What evidence justifies model promotion?
+
+OVERVIEW
+The landing page shows registered models, operationally eligible models, validation evidence, out-of-domain predictions and prediction-outcome gaps. Priority Evidence Gaps route to the relevant section.
+
+MODELS
+Filter by status, family, target and search text. Model Detail shows summary, validation, immutable versions/artifact integrity, status/health, predictions and advanced provenance.
+
+MODEL STATUS
+Statuses are Prototype, Internally validated, Externally validated, Operationally eligible and Retired. Promotion is evidence-gated. Every change requires a written rationale. A governance override is possible but is permanently recorded and does not create missing validation evidence.
+
+TRAINING
+Use AGROLATTICE-owned data first:
+- Research Data Hub
+- Experiment/G×E×M table
+- multimodal/hybrid/weak-supervision workflows
+External uploads remain available for genuinely external data.
+
+Declare the analysis goal and primary metric before model comparison. Choose a deployment-relevant split. Repeated measurements from the same plant/EU/plot/field must remain grouped where appropriate.
+
+VALIDATION
+You can match registered predictions to canonical observations or upload an independent paired validation table. Save the validation evidence level explicitly: Diagnostic, Internal, Cross-season, Cross-site, Unseen genotype/parent pair, Independent external or Benchmark.
+
+UNCERTAINTY & CALIBRATION
+Inspect the uncertainty method separately from applicability. Where row-level held-out evidence exists, AGROLATTICE can assess interval coverage or probability reliability. A nominal interval/probability label is not evidence of calibration by itself.
+
+EXPLAINABILITY
+Permutation importance and partial dependence are available for locally loadable model artifacts and explicit evaluation tables. Artifact SHA-256 is checked when an immutable model version provides one. Interpretability describes predictive behaviour, not causal effects.
+
+COMPARISON & ENSEMBLES
+Models must predict the same target and share matched held-out rows from the same validation dataset. AGROLATTICE blocks invalid cross-dataset averaging. Learned ensemble weights/stacking require a separate leakage-safe meta-training design.
+
+BENCHMARKS
+CropNet, YieldSAT and WorldCereal are not bundled or silently downloaded. Use a verified local copy/subset and declare whether the official split was reproduced. The saved benchmark record preserves that status.
+
+EVIDENCE & REPRODUCIBILITY
+Inspect the evidence chain Dataset -> Training run -> Model -> Validation -> Prediction -> Recommendation -> Outcome. Export a reproducibility package containing model card, versions, training runs, validation evidence, status history and outcome links. Raw source data are not silently redistributed.
+
+SCIENTIFIC INTERPRETATION
+- Prediction != recommendation.
+- Recommendation != applied operation.
+- Observed outcome != causal effect.
+- Internal CV != independent validation.
+- Feature importance != causal importance.
+- Out-of-domain predictions require explicit caution.
+
+VALIDATION SPLIT PREVIEW & STABILITY
+Before training, expand Preview validation split to inspect train/test counts and group overlap. Repeated grouped holdout can be used to see whether model ranking is stable across multiple group-isolated holdouts; it is not a substitute for a genuinely independent site/season/dataset.
+
+MODEL TEMPLATES
+Model Lab includes researcher-facing templates for experimental yield, maize synchrony, pest risk, phenology timing, sensor/root-zone state and EO/subfield prediction. Templates provide validation guidance; they do not override the scientific design of your study.
+
+CLASSIFICATION PROBABILITIES
+If held-out probability columns are available, use names such as P(class=label) or prob_label when uploading paired validation evidence. Probability-based metrics are only calculated when real probabilities are supplied.
+
+APPLICABILITY & DRIFT
+Model Detail -> Applicability & drift shows the training-support profile, OOD flags and outcome-linked errors. Recent-vs-earlier error changes are monitoring diagnostics. Investigate data quality, covariate shift and calibration before labelling a model as drifting.
+
+SOURCE METHOD / PAPER
+Model Detail -> Summary -> Compare with source method / paper shows the registered citation and whether the AGROLATTICE model is an independent adaptation, approximation or other implementation relationship. Publication performance is not assumed to transfer to local data.

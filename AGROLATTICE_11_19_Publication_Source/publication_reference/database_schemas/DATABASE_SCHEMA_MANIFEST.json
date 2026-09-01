@@ -1,0 +1,43 @@
+{
+  "release": "AGROLATTICE 11.19",
+  "reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "contains_user_rows": false,
+  "schemas": {
+    "field_operations": {
+      "source_database": "field_operations/field_operations.sqlite",
+      "schema_version": "8.0.0",
+      "schema_file": "field_operations_schema.sql",
+      "sha256": "adb81faecb0c16e8ca382529f81583ec5114356b589a8fb30f182c3cc41b111e"
+    },
+    "experiments": {
+      "source_database": "pollination_lab/maize_flowering_trials.sqlite",
+      "schema_version": "3.0.0",
+      "schema_file": "experiments_schema.sql",
+      "sha256": "3f6e86e2fdcce5354e6a48fb31cbe8db6d30a1b2eddaeaf1147b329a817a3316"
+    },
+    "persistent_twin": {
+      "source_database": "agrolattice_twin/agrolattice_twin.sqlite",
+      "schema_version": "3.0.0",
+      "schema_file": "persistent_twin_schema.sql",
+      "sha256": "58351832de872c92c2f6cf5ef227cb133327bfb16a56808e8a2871b293bdfad0"
+    },
+    "research_evidence": {
+      "source_database": "models_evidence/research_evidence.sqlite",
+      "schema_version": "2.0.0",
+      "schema_file": "research_evidence_schema.sql",
+      "sha256": "398b7d43c9d8ac71f581cdd73b790c88ee98d230739f8e697de4e212111a4d62"
+    },
+    "crop_profiles": {
+      "source_database": "models_evidence/crop_profiles.sqlite",
+      "schema_version": "1.0.0",
+      "schema_file": "crop_profiles_schema.sql",
+      "sha256": "83783d25c19d744555fd162f57964324afd59dacac72207741de698c6860bd1a"
+    },
+    "reporting": {
+      "source_database": "reports/reporting.sqlite",
+      "schema_version": "1.0.0",
+      "schema_file": "reporting_schema.sql",
+      "sha256": "2b3363a893187053a847a3b96c6a4cab6a80a0d91e53b739f7c724ffc8dfc37a"
+    }
+  }
+}

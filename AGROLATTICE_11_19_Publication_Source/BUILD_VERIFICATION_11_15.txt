@@ -1,0 +1,173 @@
+AGROLATTICE 11.15 — BUILD & VERIFICATION REPORT
+================================================
+Release: AGROLATTICE 11.15 — Research Reporting & Publication Command Centre
+Application version: 20.15-release11.15-research-reporting-publication-command-centre
+Source release: AGROLATTICE 11.14 — Model Evidence Command Centre & Scientific Validation
+Source archive SHA-256: 956fb93a85d9553d2e58053af8783f11b492f65c2ce7469737ba61c20e9db302
+Build date: 2026-08-10
+
+IMPLEMENTATION SCOPE
+--------------------
+11.15 rebuilds Reports as a persistent scientific-reporting and publication workspace rather than a session-state/project export page.
+Major implemented capabilities include:
+- true lazy Reports Command Centre with Overview, Report Builder, Publications, Tables & Figures, Evidence & Claims, Reproducibility, and Report Library;
+- persistent report scope using portfolio/field/trial/Twin/model-linked evidence;
+- purpose-built report templates for experiments, maize synchrony, Persistent Twin seasons, field seasons, climate/EO, crop decisions, model validation, recommendation/outcome audit, G×E×M, manuscripts and supplementary/reproducibility packages;
+- direct persistent evidence collection from Field Operations, Experiments, Persistent Twin and Research Evidence rather than requiring CSV re-upload or current Streamlit session objects;
+- report data-readiness checks and explicit preliminary/incomplete-evidence warnings;
+- immutable evidence snapshots and immutable report versions;
+- persistent report/study registry, report artifact registry, claim ledger, citation library, export history and audit trail;
+- structured manuscript metadata, authors/affiliations/ORCID, structured abstract, generic manuscript presets, funding/conflicts/ethics/data/code availability and section word counts;
+- modern global methods registry with native/paper-derived/external/legacy relationship labels and source references;
+- publication-quality table controls and standard scientific table shortcuts;
+- expanded scientific figure builder including intervals, calibration, ROC/PR, residuals, observed-vs-predicted, confusion matrices, PCA/climate space and spatial points;
+- PNG 300/600-dpi and true SVG figure export, underlying CSV and figure-generation manifests;
+- multi-panel figure assembly;
+- Results Builder for evidence-grounded descriptive result blocks;
+- Claim Ledger with evidence type, source/statistic linkage and scientific-wording audit;
+- report audit for placeholders, unsupported/high-risk claim language, citation gaps, evidence readiness and selective-reporting warnings;
+- limitation suggestions derived from actual evidence/readiness and model information;
+- researcher-friendly Evidence & Claims view plus advanced raw provenance on request;
+- rich reproducibility manifests containing database/model/dataset/report evidence identifiers where available;
+- one-click manuscript/reproducibility ZIP generation with Markdown, HTML, DOCX, tables, figures, citations, claims, audit and README;
+- Internal versus Public package privacy profiles with explicit heuristic redaction controls and warnings;
+- persistent report version/export history;
+- optional AI-assisted reporting audit constrained to frozen AGROLATTICE evidence and explicitly prohibited from inventing measurements, significance, causal effects or references;
+- legacy Release-3 publication/workflow utilities retained under All Tools / Legacy instead of remaining the primary Reports interface;
+- climate-centric Statistics and Scientific Robustness tools recategorised outside the primary Reports workflow;
+- retention of k=2..20 PCA/K-means climate exploration introduced in 11.13.
+
+NEW REPORTING DATABASE
+----------------------
+New independent additive database:
+reports/reporting.sqlite
+Reporting schema: 1.0.0
+Tables:
+- metadata
+- studies
+- evidence_snapshots
+- report_versions
+- report_artifacts
+- claims
+- citations
+- study_citations
+- export_packages
+- audit_log
+
+Packaged reporting DB SHA-256 before final ZIP packaging:
+f1e3cd3dfce0a91e65db13f282d940245d5f42716551c276a6cef5af3d5e81d4
+PRAGMA integrity_check: ok
+PRAGMA foreign_key_check: 0 issues
+Packaged user/report content counts:
+- studies: 0
+- report_versions: 0
+- evidence_snapshots: 0
+- report_artifacts: 0
+- claims: 0
+- export_packages: 0
+- audit_log: 0
+- built-in citations: 7
+No synthetic verification report records are packaged.
+
+DATA MIGRATION
+--------------
+No protected scientific database schema is changed in 11.15.
+safe_data_migration.py now recognises reports/reporting.sqlite and reports/assets.
+A regression test simulated migration from a pre-11.15 installation containing the existing protected databases but no reporting database. The packaged clean 11.15 reporting database was preserved while legacy user data migrated normally.
+Legacy study_store JSON files remain supported for explicit import; they are not silently deleted or overwritten.
+
+PROTECTED DATA / BIOLOGY
+------------------------
+The following artifacts are byte-for-byte unchanged from the supplied 11.14 baseline:
+- field_operations/field_operations.sqlite
+  SHA-256: fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+- pollination_lab/maize_flowering_trials.sqlite
+  SHA-256: 87511c0a9921e731f8bd8b3111118e452b9aa6d6ee32905fee3b7af73a258819
+- agrolattice_twin/agrolattice_twin.sqlite
+  SHA-256: ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+- models_evidence/research_evidence.sqlite
+  SHA-256: 7e80e599285753c026ff47e86127ad3df42b4cfdb7ff662fb6cd1011b1052a25
+- models_evidence/crop_profiles.sqlite
+  SHA-256: 84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+- maize_mechanistic_twin.py
+  SHA-256: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+All six primary packaged SQLite databases passed integrity_check and foreign_key_check.
+No field geometry, experiment design, Twin state, model evidence, crop profile or mechanistic maize equation is altered by this release.
+
+DEPENDENCIES
+------------
+No new mandatory dependency was added.
+Dependency files remain byte-for-byte identical to 11.14:
+- requirements_aquacrop.txt
+  SHA-256: 88668d4701ed35eb4c979dc38d7887ae9cada27d934dbef241b208004ac2d855
+- requirements_ml_agriculture.txt
+  SHA-256: 605e2b86698f4298776d0927dabd4f4819ad8328c5d9fa180006ddeddfa32f27
+- requirements_research_optional.txt
+  SHA-256: cfa4e609950412af1162d0d9e470dcd491aee6358bcb9f2a38f7d5d1910a5bf2
+
+AUTOMATED VERIFICATION
+----------------------
+PASS — Python recursive compileall.
+PASS — 70 top-level Python source files compile.
+PASS — verify_release11_15.py.
+PASS — Reporting Registry schema/integrity/foreign-key checks.
+PASS — immutable evidence snapshot regression.
+PASS — immutable report-version regression.
+PASS — persistent table/figure artifact regression.
+PASS — Claim Ledger high-risk causal-wording audit regression.
+PASS — citation-library/linking regression.
+PASS — publication package generation regression.
+PASS — embedded manuscript DOCX is valid OOXML.
+PASS — SVG scientific figure generation and inclusion in publication package.
+PASS — report export-history regression.
+PASS — migration from pre-11.15 source preserves clean packaged reporting DB.
+PASS — protected artifact SHA-256 checks.
+PASS — all primary SQLite integrity and foreign-key checks.
+PASS — k<=20 climate/PCA clustering controls retained.
+PASS — RUN_APP.bat module/schema/version preflight updated for 11.15.
+
+DOCX / REPORT ARTIFACT QA
+-------------------------
+A synthetic 11.15 scientific manuscript package was generated during build verification.
+The DOCX was rendered using the document-rendering QA workflow and visually inspected across three pages. Headings, manuscript text, table, figure, captions and page layout rendered without clipping or overlap in the test document.
+This is artifact-generation QA, not a full interactive Streamlit browser test.
+
+SCIENTIFIC-INTEGRITY GUARDS
+---------------------------
+- Reports are built from selected/frozen evidence rather than silently generating new scientific results.
+- Frozen evidence snapshots retain source/provenance manifests and checksums where available.
+- Report versions are immutable; revised manuscripts become new versions.
+- High-risk wording such as caused, improved, optimal, validated, significant, generalizable and guaranteed is surfaced for review when claim evidence may not support it.
+- AI-assisted reporting is optional and is instructed not to invent measurements, significance, causal effects or references.
+- Built-in paper-derived methods explicitly record whether AGROLATTICE is a native method, independent adaptation, external implementation or legacy approximation where known.
+- Public-package redaction is explicitly heuristic and is not represented as guaranteed anonymisation.
+- Missing/incomplete outcomes and validation evidence remain visible in report readiness and audit outputs.
+- Saving a report or evidence snapshot does not upgrade the validation/causal status of the underlying evidence.
+
+PERFORMANCE
+-----------
+The primary Reports workspace uses true lazy navigation and contains no top-level eager st.tabs().
+Opening Reports reads lightweight persisted summaries only.
+Full artifact loading, figure generation, evidence freezing, report audit and publication-package assembly occur only after explicit researcher actions.
+NASA/STAC retrieval, model fitting, EO processing and crop-model execution are never triggered merely by entering Reports.
+
+KNOWN LIMITATIONS / DELIBERATE SAFEGUARDS
+-----------------------------------------
+1. A full interactive Streamlit browser session could not be run in this packaging environment because Streamlit is not installed here. RUN_APP.bat performs the target-environment preflight on Windows/Anaconda.
+2. Public-package redaction uses explicit column-name/text heuristics. Researchers must review exported files before public release; 11.15 does not claim automatic de-identification is complete.
+3. Generic manuscript presets are provided; current journal-specific submission rules are not invented or assumed. Researchers should configure/verify target-journal requirements independently.
+4. The Results Builder produces evidence-grounded descriptive result blocks. It does not infer causal conclusions or statistical significance that are absent from source analyses.
+5. Automatic method inference depends on persisted evidence/model metadata. Researchers must review the final Methods text and citations.
+6. Restricted/proprietary data are not automatically bundled into public reproducibility packages; manifests and access information can be included instead.
+7. Legacy publication/project workflows are retained only for backward compatibility under All Tools / Legacy and may still use session-state-oriented behavior.
+8. Citation records are only as complete as the stored bibliographic metadata. The application does not fabricate missing reference details.
+
+RESULT
+------
+AGROLATTICE 11.15 passed the available static, database, functional, migration and report-artifact verification checks and is ready for local Streamlit testing in the user's Windows/Anaconda environment.
+
+FINAL PACKAGE VERIFICATION
+--------------------------
+The final ZIP SHA-256 is recorded in the separately supplied .sha256.txt file because the ZIP cannot reliably contain a self-referential hash of its own final byte stream.
+The final ZIP must pass compressed-data integrity testing, clean-directory extraction, recursive compileall and verify_release11_15.py before delivery.

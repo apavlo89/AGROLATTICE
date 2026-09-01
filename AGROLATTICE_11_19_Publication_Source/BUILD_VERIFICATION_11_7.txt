@@ -1,0 +1,111 @@
+AGROLATTICE 11.7 — BUILD VERIFICATION
+=====================================
+Release: AGROLATTICE 11.7 — Research Command Centre & Home Polish
+Application version: 20.7-release11.7-research-command-centre
+Build date: 2026-08-10
+Source of truth used: user-supplied AGROLATTICE 11.6 Performance & Branding Update archive
+
+IMPLEMENTED SCOPE
+-----------------
+- Replaced the 11.6 Home launcher with a persistent-data-aware Research Command Centre.
+- Added Continue current work / Resume Twin card.
+- Added Twin Pulse from saved/current Twin state without automatic recomputation.
+- Added transparent dynamic priority actions.
+- Added rules-based next useful measurement prompt.
+- Added persistent data freshness for weather, Sentinel-2, root-zone, sensors and active-trial phenology.
+- Added historical-season freshness semantics.
+- Added model/prediction evidence status and applicability display.
+- Added 14-day task + modelled flowering timeline.
+- Added recent field/data/prediction/recommendation activity synthesis.
+- Added compact recent-project activation cards.
+- Removed nested legacy Detailed Command Centre/System Readiness from Home.
+- Preserved 11.6 runtime caches and AGROLATTICE branding.
+
+PERFORMANCE GUARDS VERIFIED
+---------------------------
+The 11.7 Home implementation does not automatically invoke:
+- NASA POWER network retrieval
+- Sentinel/STAC search
+- satellite raster processing
+- Persistent Twin state rebuild
+- AquaCrop execution
+- model training/optimisation
+- direct iteration over merged_df_long
+
+Home reads small persisted summaries only. Heavy work remains explicit behind buttons.
+
+REGRESSION VERIFICATION
+-----------------------
+PASS: verify_release11_7.py
+The 11.7 verifier carries forward the scientific/decision regression checks from 11.5/11.6, including:
+- Research Evidence registry/acquisition
+- 11.4→11.5 registry migration behaviour
+- Research Data Hub and phenology
+- pest-paper equations/fold resampling
+- adaptive fusion
+- hybrid residual modelling
+- weak supervision
+- G×E×M builder
+- LOYO/applicability
+- decision registry
+- Pareto/state assimilation
+- irrigation policy engine
+- nutrient-response engine
+- categorical/grouped causal audit
+- source-authoritative migration
+- 11.6 runtime cache equivalence/signature invalidation
+- country-settings write optimisation
+- brand assets
+
+Additional 11.7 checks:
+- priority-action ordering and deep links
+- prediction applicability warning
+- next-measurement logic near flowering
+- upcoming timeline preserves Task vs Modelled distinction
+- legacy nested Home command centre absent
+- session-only weather/satellite readiness absent from Home
+- no heavy analytical/network call in Home source
+- all new Home sections present
+- historical-season safeguard present
+
+PYTHON COMPILATION
+------------------
+PASS: 52 top-level Python modules compiled successfully.
+
+PROTECTED DATA / MODEL INVARIANTS
+---------------------------------
+The following files are byte-for-byte identical to the user-supplied 11.6 source:
+Field Operations DB
+  SHA-256 e1b2c1e4efe8a846a3fb6563262abcbd59d7ad2e057e70adb3bad3d03041f525
+Maize Pollination Lab DB
+  SHA-256 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+Persistent Twin DB
+  SHA-256 2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a
+Research Evidence DB
+  SHA-256 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+Mechanistic Maize Twin implementation
+  SHA-256 a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+SQLite checks for all four databases:
+- PRAGMA integrity_check = ok
+- PRAGMA foreign_key_check = 0 violations
+
+DATABASE MIGRATION
+------------------
+None. No database schema version is changed in Release 11.7.
+
+DEPENDENCIES
+------------
+No new mandatory dependency. home_command_centre.py uses pandas/numpy already required by AGROLATTICE.
+RUN_APP.bat now checks the new module and Release 11.7 identity before launch.
+
+SCIENTIFIC MODEL STATUS
+-----------------------
+No scientific model equation was changed.
+The Laurent-derived Mechanistic Maize Twin implementation is byte-for-byte unchanged.
+No validation semantics, uncertainty definitions, causal estimators, pest-model equations or decision-engine equations were changed.
+
+LIMITATIONS OF BUILD ENVIRONMENT
+--------------------------------
+Streamlit is not installed in the packaging container, so a full interactive browser session was not executed here.
+RUN_APP.bat performs the Streamlit/dependency/module preflight in the user's Windows/Anaconda environment.

@@ -1,0 +1,25 @@
+{
+  "release": "AGROLATTICE 11.9",
+  "scientific_method_change": true,
+  "statement": "Release 11.9 does not alter the equations in maize_mechanistic_twin.py. It changes the Persistent Twin orchestration so the disclosed mechanistic maize physiology becomes the preferred flowering engine for linked maize synchrony trials, with explicit parent-parameter provenance, local calibration support, model disagreement and uncertainty semantics.",
+  "mechanistic_source": {
+    "paper": "Laurent et al. (2025), Crop Science 65",
+    "doi": "10.1002/csc2.21453",
+    "status": "Independent implementation of disclosed concepts already present in AGROLATTICE; not an exact reproduction of proprietary data or original C++ Bayesian sampler."
+  },
+  "new_methods_or_semantics": {
+    "persistent_mechanistic_integration": "Parent-specific mechanistic anthesis/silking thermal targets drive maize Twin timing when trial, sowing dates and daily weather are available.",
+    "parent_provenance": "tln/coblf/ebR1 values are resolved from the parent registry when available, otherwise publication priors are explicitly labelled as priors.",
+    "calibration_assistant": "Prior-regularised local physiology calibration uses linked flowering-event and collared-leaf observations and requires explicit save confirmation.",
+    "model_disagreement": "Difference between mechanistic flowering timing and the pre-existing target-GDD pathway is surfaced rather than silently averaged.",
+    "time_travel_leakage_guard": "Mechanistic event detection at historical as-of dates uses weather only through the selected date.",
+    "uncertainty_semantics": "Data completeness, parameter provenance, event-date interval when computable, and model disagreement are separated.",
+    "mechanistic_sowing_scenarios": "Male sowing offsets are compared with the existing uncertainty-aware mechanistic synchrony optimiser; this optimises timing, not pollen quantity.",
+    "decision_evidence_link": "Twin measurement/recommendation outputs can be persisted into the universal Recommendation → Action → Outcome ledger."
+  },
+  "mechanistic_maize_source_file_changed": false,
+  "multimodal_model_changed": false,
+  "decision_intelligence_model_changed": false,
+  "research_evidence_schema_changed": false,
+  "twin_schema": "3.0.0 additive events/calibration/analogue extensions"
+}

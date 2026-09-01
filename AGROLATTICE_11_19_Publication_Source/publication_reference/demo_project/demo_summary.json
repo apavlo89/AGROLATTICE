@@ -1,0 +1,12 @@
+{
+  "reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "synthetic": true,
+  "experimental_units": 24,
+  "blocks": 4,
+  "treatments": 6,
+  "weather_days": 145,
+  "weather_variables": 19,
+  "demo_rmse_days": 0.81,
+  "demo_mae_days": 0.643,
+  "scientific_boundary": "These metrics demonstrate the software workflow only and are not evidence of agronomic predictive performance."
+}

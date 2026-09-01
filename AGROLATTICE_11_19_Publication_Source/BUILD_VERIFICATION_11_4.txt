@@ -1,0 +1,105 @@
+AGROLATTICE 11.4 — BUILD VERIFICATION
+=====================================
+Release: AGROLATTICE 11.4 — Multimodal Crop Intelligence & Hybrid Twin Learning
+Application version: 20.4-release11.4-multimodal-hybrid
+Source archive: AGROLATTICE_Release_11_3_Research_Foundation_Predictive_Evidence(1).zip
+Source SHA-256: e765d2280f91429835f59b93288fe3b9466cec8064b8c933bf0068d6688b8e5b
+Build date: 2026-08-08
+
+RESULT
+------
+PASS — standalone AGROLATTICE 11.4 regression verification completed successfully.
+PASS — all 45 top-level Python source files compile successfully.
+PASS — release manifests parse as valid JSON.
+PASS — protected databases are byte-for-byte identical to the supplied 11.3 source.
+PASS — Mechanistic Maize Twin implementation is byte-for-byte identical to 11.3.
+PASS — Research Evidence DB schema 1.2.0 has SQLite integrity_check=ok and no foreign-key violations.
+PASS — Research Evidence DB contains no synthetic build/test research records.
+PASS — 11.3 Research Evidence schema -> 1.2.0 migration was tested with an existing record and preserved it.
+PASS — source-authoritative user-data migration behavior is covered by the regression suite.
+
+STANDALONE REGRESSION SUITE
+---------------------------
+verify_release11_4.py checks:
+- Research Evidence registry schema 1.2.0 and data-acquisition provenance.
+- Backup/migration preservation from schema 1.1.0 to 1.2.0.
+- NASA POWER canonicalization to the full 19-variable AGROLATTICE weather profile.
+- FAO-56 daily ETo derivation and explicit daily soil-heat-flux approximation provenance.
+- Daily/weekly/monthly weather aggregation semantics.
+- NASA-compatible pest feature engineering without fabricating morning/evening RH.
+- Date-matched retrieved weather + measured-label joins.
+- Canonical NASA weather -> generic GDD phenology and unchanged Mechanistic Maize Twin inputs.
+- Installed climate-dataset pivoting.
+- Wadhwa & Malik temperature/humidity feature equations and fold-contained imbalance handling.
+- Adaptive multimodal fusion row-wise weights, missing-modality handling and normalization.
+- Hybrid mechanistic/base + ML residual learning with held-out improvement guard.
+- Weakly supervised aggregate-consistency yield baseline and reaggregation.
+- G×E×M table construction from a Maize Synchrony-compatible schema.
+- LOYO/applicability utilities.
+- Mechanistic maize scientific constants and protected DB/module invariants.
+- Required 11.4 release files and RUN_APP.bat preflight entries.
+
+PROTECTED SOURCE HASHES
+-----------------------
+field_operations/field_operations.sqlite
+  e1b2c1e4efe8a846a3fb6563262abcbd59d7ad2e057e70adb3bad3d03041f525  PASS
+
+pollination_lab/maize_flowering_trials.sqlite
+  6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30  PASS
+
+agrolattice_twin/agrolattice_twin.sqlite
+  2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a  PASS
+
+maize_mechanistic_twin.py
+  a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8  PASS
+
+RESEARCH EVIDENCE DATABASE
+--------------------------
+models_evidence/research_evidence.sqlite
+Schema version: 1.2.0
+Integrity check: ok
+Foreign-key violations: 0
+Added table: data_acquisitions
+Synthetic build records: none
+
+Release 11.4 also adds a runtime pre-schema-upgrade backup in research_registry.py. If an
+existing Research Evidence DB has an older schema, the committed SQLite/WAL state is copied
+using SQLite's online backup API to models_evidence/backups/ before the schema is advanced.
+The backup is integrity-checked, and post-migration verification confirms existing tables were
+not removed and row counts did not decrease.
+
+DATA-RETRIEVAL VERIFICATION
+---------------------------
+The 11.4 Research Data Hub reuses existing AGROLATTICE data pathways instead of making the
+new research tools CSV-only:
+- Existing NASA POWER client/cache for mapped-field or coordinate-based weather retrieval.
+- Installed country agroclimate dataset.
+- Existing Field Operations observations, operations, sensors/readings, nutrients and crop history.
+- Existing in-session Daily Weather, Sentinel-2, root-zone water-balance and current-season monitor data.
+- Retrieved-table registration with source/request/field/date/variable provenance.
+
+Phenology can retrieve mapped-field NASA daily weather directly or reuse current Daily Weather/
+Research Data Hub data. Non-daily inputs are blocked from thermal-time calculations.
+
+Pest Early Warning can retrieve mapped-field NASA weather directly for forecasts. NASA mean RH
+is not relabelled as the source paper's RH1/RH2, and weather retrieval cannot manufacture pest
+presence/absence labels.
+
+SCIENTIFIC/IMPLEMENTATION LIMITS
+--------------------------------
+- NASA POWER values are gridded environmental estimates, not local station measurements.
+- Exact MMST-ViT, PhenoYieldNet, PB-CNN, ALIC, SCM-GAT, causal treatment-effect estimators,
+  EO/crop-model nitrogen optimization, DRL irrigation, NSGA-II fertilizer optimization,
+  market GNNs/transformers and federated learning are not claimed as implemented in 11.4.
+- Adaptive fusion gate weights are predictive reliability signals, not causal effects.
+- Multimodal disagreement is not a calibrated uncertainty interval.
+- Hybrid residual correction is promoted only when held-out RMSE improves.
+- Weakly supervised fine-scale yield estimates are not independently validated subfield measurements.
+- Field geometry remains authoritative for spatial products.
+
+INTERACTIVE STARTUP TEST
+------------------------
+A full Streamlit browser-session launch was not executed in the packaging container because
+Streamlit is not installed in this build environment. This is not reported as a passed test.
+RUN_APP.bat has been updated to perform module/dependency/version preflight checks in the user's
+Windows/Anaconda environment before launching Streamlit.

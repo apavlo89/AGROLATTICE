@@ -1,0 +1,38 @@
+AGROLATTICE 11.15 USER GUIDE — REPORTS & PUBLICATION
+====================================================
+
+1. Choose Reports & Publication.
+2. Set the report scope: active context, specific field, experiment, Persistent Twin or portfolio.
+3. Use Report Builder to create/select a report type.
+4. Review Report readiness. Missing protocol, observations, outcomes, validation or environmental evidence are shown before manuscript generation.
+5. In Publications, enter authors/affiliations, structured abstract, manuscript sections, data/code statements and limitations. Save the draft, then freeze explicit report versions when needed.
+6. In Tables & Figures, select persisted AGROLATTICE evidence directly. Create publication tables or figures; each registered artifact stores source, settings, time and file hash.
+7. In Evidence & Claims, freeze an evidence snapshot before a formal report version. Add important claims to the claim ledger and link them to an evidence source/statistic. High-risk wording such as causal, validated, optimal or significant is flagged for review.
+8. Link built-in AGROLATTICE method citations or add verified manual citations (DOI/BibTeX/RIS supported).
+9. In Reproducibility, inspect database/schema health, inferred method inventory, reporting audit, optional AI evidence audit and privacy settings.
+10. Build an Internal research package or Public package. Public exports can redact exact coordinates, private field names, genotype identifiers and researcher names, and always include a redaction report.
+11. Report Library retains studies, versions, evidence snapshots, claims and export history.
+
+REPORT TYPES
+------------
+Experiment report
+Maize Synchrony report
+Persistent Twin season report
+Field season report
+Climate & EO report
+Crop decision report
+Model validation report
+Recommendation/outcome audit
+G×E×M analysis report
+Full scientific manuscript
+Supplementary/reproducibility package
+
+EVIDENCE LABELS
+---------------
+Measured | Retrieved | Derived | Mechanistic | Predictive | Scenario | Recommendation | Observed outcome | Causal estimate
+
+These labels are intentionally not interchangeable.
+
+LEGACY REPORTING
+----------------
+Older Study & publication builder and Workflow & reporting tools remain under All Tools / Legacy. Existing study_store JSON files can be imported into the new reporting registry without deleting the originals.

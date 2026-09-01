@@ -1,0 +1,106 @@
+AGROLATTICE 11.12 — BUILD VERIFICATION
+======================================
+Release: Navigation Reliability & Interaction Fix
+Baseline: AGROLATTICE 11.11 — Crop Decision Command Centre & Agronomic Planning
+
+BUG REPRODUCTION / ROOT CAUSE
+-----------------------------
+User report: the Priority decisions & evidence gaps buttons on Crop Decisions →
+Overview appeared to do nothing.
+
+Inspection of the actual 11.11 source found two navigation states:
+  crop_decision_command_view        (logical mirror)
+  crop_decision_command_view_radio  (Streamlit widget-owned state)
+
+The buttons changed only the logical mirror. On rerun the keyed radio restored
+its persisted Overview value, overriding the requested destination. Mutating the
+radio key from a button after the radio had already been instantiated would also
+be unsafe in Streamlit.
+
+FIX IMPLEMENTED
+---------------
+Added navigation_state.py 1.0.0 with a two-phase queued route mechanism:
+  button -> non-widget request key -> rerun -> consume before widget creation ->
+  synchronize widget + mirror state -> render requested destination.
+
+Applied to:
+  1. Crop Decision priority-action buttons.
+  2. Persistent Twin programmatic workspace shortcuts (same latent pattern).
+  3. Climate & EO Update field EO -> Earth Observation shortcut (same latent
+     widget-state pattern).
+
+Crop Decision target areas regression-tested:
+  PASS Crop & planting
+  PASS Water & irrigation
+  PASS Nutrition
+  PASS Pest & crop health
+  PASS Yield & economics
+  PASS Crop models
+  PASS Recommendations & outcomes
+
+The destination also receives a one-time contextual note identifying the
+priority action that routed the user there.
+
+SOURCE / TEST RESULTS
+---------------------
+- 63 top-level Python modules present.
+- Recursive Python compileall: PASS.
+- verify_release11_12.py: PASS.
+- Pure queued-navigation state-machine regression: PASS.
+- Invalid route request preserves the current valid view: PASS.
+- RUN_APP.bat preflight updated for navigation_state 1.0.0 and command-centre
+  module patch versions: PASS.
+
+MODULE VERSIONS
+---------------
+- navigation_state: 1.0.0 (new internal helper)
+- crop_decision_command_centre: 1.0.1
+- twin_command_centre: 1.0.1
+- climate_earth_command_centre: 1.0.1
+- crop_profile_registry: 1.0.0 / DB 1.0.0 (unchanged)
+- agrolattice_twin: 3.0.0 / DB 3.0.0 (unchanged)
+- field_operations_suite: 8.0.0 / DB 8.0.0 (unchanged)
+- research_registry: 1.2.0 / DB 1.3.0 (unchanged)
+
+DATABASE SAFETY
+---------------
+No database migration or schema change in 11.12.
+
+Byte-for-byte comparison with the supplied/packaged 11.11 baseline:
+- field_operations/field_operations.sqlite: IDENTICAL
+  SHA-256 fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+- pollination_lab/maize_flowering_trials.sqlite: IDENTICAL
+  SHA-256 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+- agrolattice_twin/agrolattice_twin.sqlite: IDENTICAL
+  SHA-256 ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+- models_evidence/research_evidence.sqlite: IDENTICAL
+  SHA-256 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+- models_evidence/crop_profiles.sqlite: IDENTICAL
+  SHA-256 84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+
+All five SQLite databases:
+- PRAGMA integrity_check = ok
+- PRAGMA foreign_key_check = 0 violations
+
+SCIENTIFIC INTEGRITY
+--------------------
+maize_mechanistic_twin.py is byte-for-byte identical to 11.11:
+SHA-256 a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+No crop model equations, pest methods, irrigation/nutrient decision methods,
+climate methods, validation methods or research thresholds were changed.
+
+DEPENDENCIES
+------------
+No new third-party dependency.
+requirements_aquacrop.txt: IDENTICAL to 11.11
+requirements_ml_agriculture.txt: IDENTICAL to 11.11
+requirements_research_optional.txt: IDENTICAL to 11.11
+
+RUNTIME TESTING LIMITATION
+--------------------------
+The packaging environment does not contain Streamlit, so a full interactive
+browser click-through cannot be executed here. The specific routing failure was
+isolated to a Streamlit-independent state lifecycle and is covered by the pure
+navigation regression above. RUN_APP.bat performs the full Streamlit/module
+preflight on the user's Windows/Anaconda installation.

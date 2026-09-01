@@ -1,0 +1,18 @@
+{
+  "release": "AGROLATTICE 11.6",
+  "research_method_changes": false,
+  "statement": "Release 11.6 is a performance/branding release. It carries forward the scientific methods and guardrails of 11.5 without changing model equations, validation semantics or database evidence definitions.",
+  "carried_forward_manifests": [
+    "RESEARCH_METHODS_MANIFEST_11_5.json",
+    "RESEARCH_METHODS_MANIFEST_11_4.json",
+    "RESEARCH_METHODS_MANIFEST_11_3.json"
+  ],
+  "scientific_invariants": [
+    "19-variable NASA-derived agroclimate model preserved",
+    "Mechanistic Maize Twin implementation preserved",
+    "Grouped/site/season-aware validation principles preserved",
+    "Recommendation remains distinct from recorded action",
+    "Observations, derived values, forecasts and model outputs remain distinct",
+    "No new causal or operational claims introduced by performance caching"
+  ]
+}

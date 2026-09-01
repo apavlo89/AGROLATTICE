@@ -1,0 +1,15 @@
+AGROLATTICE 11.19 AC2 CHANGELOG
+===============================
+
+- Added agroclimatic_selection_ac2.py.
+- Added forward variable-block selection and backward removal.
+- Added full k=2–20 screening for every proposed subset.
+- Added repeated held-out silhouette with training-only standardisation.
+- Added resampling stability based on adjusted Rand agreement.
+- Added variable-count and tiny-cluster penalties.
+- Added operational non-inferiority selection favouring the simplest subset.
+- Added independent final audit splits.
+- Added PCA component retention based on a separate cumulative-variance target.
+- Added variable-subset, k-selection, audit and reproducibility exports.
+- Retained the original 11.19 manual-variable clustering workflow.
+- No database schema changes and no new dependencies.

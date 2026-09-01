@@ -1,0 +1,121 @@
+AGROLATTICE 11.19 USER GUIDE — PUBLICATION REFERENCE RELEASE
+===========================================================
+
+CORE WORKSPACES
+---------------
+Home; Fields & Operations; AgroLattice Twin; Climate & Earth Observation; Crop Decisions; Experiments; Models & Evidence; Reports; All Tools; Data & Settings; Help.
+
+PUBLICATION REFERENCE PAGE
+--------------------------
+Open Help → Publication reference.
+
+The page shows the stable reference identifier, publication architecture/workflow figures, synthetic-demo status and downloads for citation/reproducibility material.
+
+REFERENCE IDENTIFIER
+--------------------
+AGROLATTICE-11.19-PRR-2026-08-12
+
+Use this identifier alongside the release version in draft manuscripts. Once the exact archive has been deposited externally, also report the archive DOI and ZIP SHA-256.
+
+SYNTHETIC DEMONSTRATION PROJECT
+-------------------------------
+Folder: publication_reference/demo_project/
+
+The project is deterministic (seed 1119), contains 24 experimental units in 4 blocks × 6 treatments, and includes a synthetic daily table with the full 19-variable AGROLATTICE environmental contract.
+
+It is a software demonstration only. Never describe its values as empirical field/NASA/Sentinel/sensor data or model validation.
+
+Run RUN_PUBLICATION_REFERENCE_DEMO.bat to regenerate the demo project, figures and outputs and verify file hashes.
+
+PUBLICATION FIGURES
+-------------------
+publication_reference/figures/ contains:
+• Figure 1 — platform architecture;
+• Figure 2 — persistent evidence workflow;
+• Figure 3 — synthetic experimental layout;
+• Figure 4 — synthetic observed-vs-predicted demonstration.
+
+Each is provided as 300-dpi PNG and SVG.
+
+For genuine Streamlit UI screenshots, use the frozen 11.19 Windows environment and follow SCREENSHOT_AND_FIGURE_CAPTURE_CHECKLIST.md. Do not present generated diagrams as screenshots.
+
+CITATION / ARCHIVE METADATA
+---------------------------
+• CITATION.cff
+• codemeta.json
+• .zenodo.json
+• PUBLICATION_REFERENCE_ID.txt
+
+The release does not contain a DOI. A DOI must be issued by an external archive after depositing the exact ZIP/checksum.
+
+DEPENDENCY REPRODUCIBILITY
+--------------------------
+requirements_publication_reference_lock.txt contains the exact reference pins documented for 11.19.
+
+After the actual paper environment is confirmed working, run FREEZE_PUBLICATION_ENV.bat. It writes the exact Python/runtime and pip-freeze snapshot used on the target Windows/Anaconda system.
+
+SOURCE INTEGRITY
+----------------
+SOURCE_FILE_MANIFEST_11_19.sha256 contains SHA-256 hashes for the release files used to verify the frozen source tree. The final archive has its own SHA-256 checksum file.
+
+PUBLIC SOURCE ARCHIVE
+---------------------
+Run `python build_public_archive.py` to create a publication-safe source archive. It excludes user SQLite databases, installed country datasets, caches, attachments and run outputs. Schema-only SQL exports are retained under publication_reference/database_schemas/. Review PUBLIC_ARCHIVE_EXCLUSIONS.md before public deposition.
+
+SCIENTIFIC DATABASE SAFETY
+--------------------------
+11.19 has no scientific database schema migration. Safe migration remains backup-first and protects all six user-owned databases.
+
+PUBLICATION WORKFLOW
+--------------------
+1. Use 11.19 as the frozen software version for the platform manuscript.
+2. Use Reports to freeze real empirical evidence used in manuscript results.
+3. Use publication-reference figures/demo only for software architecture/reproducibility illustration.
+4. Freeze the exact target runtime.
+5. Capture any genuine UI screenshots from 11.19.
+6. Run verify_release11_19.py.
+7. Archive the exact final ZIP + checksum in a DOI-granting repository.
+8. Cite release 11.19, the DOI and the associated paper.
+
+SCIENTIFIC LABELS
+-----------------
+Observed; Recorded; Retrieved; Derived; Mechanistic; ML prediction; Forecast; Scenario; Recommendation; Actual operation; Outcome; Causal estimate.
+
+A publication reference freeze does not upgrade the scientific validity of any model or result. Report validation scope, applicability and uncertainty from the actual saved evidence.
+
+CLIMATE-ZONE DISCOVERY
+----------------------
+Open Climate & Earth Observation > Climate Zones & Transferability >
+Climate-zone discovery.
+
+For most research use, select "Robust multi-method analysis (recommended)".
+Choose the period, months and candidate variables, then decide whether the app
+should identify a compact variable subset or retain every selected variable.
+The advanced section controls the clustering methods, largest zone count,
+validation depth, completeness threshold, PCA variance target and optional
+density-based diagnostic.
+
+Use "Focused K-means analysis" only when a simpler K-means workflow or direct
+comparability with a prespecified analysis is required. It can optimise the
+variable subset and zone count or retain researcher-selected variables.
+
+Candidate zone counts can be examined through k=50. Automatic K-means will not
+select a solution whose smallest zone contains fewer than 2% of analysed
+locations, although such solutions remain in the diagnostic table and can be
+requested manually for explicitly exploratory work.
+
+Before analysis, the Mexico publication-reference workspace verifies that the
+complete 1,012-location inventory and all 32 administrative regions are present.
+After analysis, open Location coverage audit to reconcile source, eligible,
+mapped and excluded locations. Do not interpret a geographic gap until this
+audit has been checked.
+
+The results separate the selected method, number of climate zones, held-out
+separation, resampling stability, assignment confidence and PCA dimensionality.
+Inspect the climate-space map, geographic distribution, method comparison,
+assignment confidence, robustness, method-assignment flow and zone profiles.
+The number of PCA components is not the number of climate zones.
+
+More zones are not automatically better. Results are empirical environmental
+groups rather than official agroecological zones. Technical engine identifiers
+are retained only in reproducibility metadata and developer documentation.

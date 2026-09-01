@@ -1,0 +1,29 @@
+{
+  "release": "AGROLATTICE 11.10",
+  "scientific_method_change": false,
+  "statement": "Release 11.10 primarily reorganises and connects existing climate, Earth-observation, field-context, provenance and acquisition capabilities. It does not claim a new crop-response, causal, risk or satellite algorithm.",
+  "preserved_methods": {
+    "canonical_climate_dataset": "Established 19-variable country agroclimate dataset retained without changing its variable set.",
+    "climate_similarity": "Existing similarity, explanation, robustness and analogue methods preserved; active-field reference is a transparent nearest-installed-location proxy.",
+    "spatial_climate": "Existing PCA/clustering/nonlinear visualisation tools preserved with clearer interpretation guidance.",
+    "climate_risk": "Existing risk/hazard calculations preserved; crop/season context and hazard-versus-consequence semantics are made more explicit.",
+    "sentinel2": "Existing Sentinel-2 L2A/STAC, SCL masking and index processing is reused; quick update is an orchestration preset, not a new remote-sensing algorithm.",
+    "nasa_weather": "Existing Research Data Hub canonical NASA-derived daily weather retrieval is reused for mapped-field acquisition."
+  },
+  "new_integration_semantics": {
+    "field_context": "Mapped field centroid/geometry can drive environmental reference selection and explicit data retrieval.",
+    "gridded_vs_measured": "Nearest installed climate and NASA-derived values remain labelled separately from local measured sensor/station evidence.",
+    "evidence_persistence": "User-approved climate/EO session analyses can be persisted as provenance snapshots in the existing Research Evidence system.",
+    "performance": "A small process-level climate-location catalogue avoids repeated full-dataset location de-duplication."
+  },
+  "database_schema_changed": false,
+  "research_evidence_schema_changed": false,
+  "mechanistic_maize_model_changed": false,
+  "decision_intelligence_model_changed": false,
+  "limitations": [
+    "Climate similarity is not proof of agronomic equivalence.",
+    "EO indices and anomalies are not direct measurements of yield, stress cause, crop identity or management.",
+    "Nearest installed climate reference is a spatial proxy, not a field station.",
+    "Risk/hazard outputs do not quantify crop consequences without validated response models."
+  ]
+}

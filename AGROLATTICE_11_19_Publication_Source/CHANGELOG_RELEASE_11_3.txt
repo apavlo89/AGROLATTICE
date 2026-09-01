@@ -1,0 +1,107 @@
+AGROLATTICE 11.3 — Research Foundation & Predictive Evidence Update
+===================================================================
+Based on: AGROLATTICE 11.2 — Spatial & Upgrade Integrity Update
+Application version: 20.3-release11.3-research-foundation
+
+WHAT CHANGED
+------------
+1. Research Evidence Registry
+   - Adds an additive models_evidence/research_evidence.sqlite database (schema 1.1.0).
+   - Persists datasets, canonical long-form observations, model cards, training runs,
+     predictions, uncertainty fields, recommendations, treatment outcomes and external
+     benchmark runs.
+   - Explicit evidence types distinguish Measured, Derived, Assumption, Prior,
+     Forecast and Model output.
+
+2. Agricultural validation framework
+   - Adds grouped CV, leave-one-group-out, leave-one-year-out (LOYO),
+     leave-one-region-out (LORO), forward/walk-forward evaluation and random CV as a
+     diagnostic option.
+   - Preprocessing is cloned/fitted inside each training fold.
+   - Adds regression/classification metrics, binary calibration tables and an
+     applicability/support diagnostic for new cases.
+
+3. Research Model Laboratory
+   - Adds leakage-safe CPU baselines: Ridge/Logistic, Random Forest, Extra Trees and
+     Histogram Gradient Boosting.
+   - Adds optional/runtime-supported XGBoost, LightGBM, CatBoost and TabPFN backends.
+   - Adds model registration, artifact persistence and prediction registration.
+   - Stores regression outputs or classification labels/probability maps without
+     forcing categorical predictions into a numeric field.
+   - Adds data-readiness checks before training so inadequate rows, missing targets,
+     poor feature completeness or weak split structure are surfaced before fitting.
+   - TabPFN remains optional so AGROLATTICE still starts without it.
+
+4. Environmental Pest & Disease Early Warning
+   - Independent adaptation of Wadhwa & Malik (2024), DOI 10.1016/j.compag.2024.109472.
+   - Implements Temp_Diff, Hum_Diff, Avg_Hum and Magnus-form VPD engineering.
+   - Supports multiple baseline classifiers, SMOTE-ENN inside the training fold,
+     agricultural validation protocols, optional CatBoost/Optuna tuning and SHAP.
+   - Pest-disease mapping is contextual decision support; predicted pest risk is not a
+     confirmed disease diagnosis.
+
+5. Central Phenology Service
+   - Adds generic thermal-time crop-stage estimation.
+   - Integrates, rather than replaces, the existing Mechanistic Maize Twin.
+   - The Release 11.0 Laurent-inspired maize constants and genotype priors are unchanged.
+   - Supports phenology evidence/consensus workflows while keeping observed and modeled
+     states distinct.
+
+6. External benchmark foundation
+   - Adds metadata/adapters for CropNet, YieldSAT and WorldCereal.
+   - Large external datasets are not bundled or silently downloaded.
+   - Local benchmark snapshots can be registered with source/version/licence/provenance.
+
+7. Multimodal fusion foundation
+   - Adds a CPU, validation-weighted modality-aware late-fusion baseline.
+   - Separate modality models are evaluated using held-out agricultural folds.
+   - Missing modalities are handled per row by renormalizing remaining weights.
+   - Inter-modality spread is explicitly labeled model disagreement, not calibrated UQ.
+
+8. Persistent Twin and workspace integration
+   - AgroLattice Twin gains a Research evidence view for registered field/trial
+     predictions and recommendations; field-linked evidence remains visible when a
+     trial is also active and vice versa.
+   - Crop Decisions gains Phenology service and Pest early warning.
+   - Models & Evidence gains Research registry, Research model lab, Multimodal fusion
+     and External benchmarks.
+   - Research Registry can separately record proposed recommendations and later
+     measured treatment/outcome records, preserving the causal-audit data contract.
+   - Country changes clear country-specific research/pest/phenology/fusion session state.
+
+9. Upgrade integrity
+   - Safe migration is extended to the Research Evidence DB when present and to
+     non-SQLite model artifacts in models_evidence/.
+   - Release 11.2 sources with only the three protected legacy DBs remain supported.
+
+DATABASE CHANGES
+----------------
+NEW additive database:
+  models_evidence/research_evidence.sqlite — schema 1.1.0
+
+UNCHANGED protected databases:
+  field_operations/field_operations.sqlite
+  pollination_lab/maize_flowering_trials.sqlite
+  agrolattice_twin/agrolattice_twin.sqlite
+
+No schema migration was made to those three protected databases.
+
+DEPENDENCIES
+------------
+Default research dependencies added to requirements_ml_agriculture.txt:
+  xgboost, lightgbm, catboost, optuna, imbalanced-learn, shap, packaging
+
+Optional advanced dependency:
+  requirements_research_optional.txt -> tabpfn
+
+SCIENTIFIC LIMITS
+-----------------
+- A model begins as Prototype. Publication performance does not automatically validate it
+  for a local field, crop, genotype, season or management regime.
+- The applicability score is a robust support diagnostic, not a probability of correctness.
+- The multimodal fusion baseline is an AGROLATTICE adaptation and not an exact reproduction
+  of the Mena et al. neural gated-fusion network.
+- Exact MMST-ViT, PhenoYieldNet, PB-CNN, ALIC, weakly supervised yield, SCM-GAT,
+  causal-effect estimators, N optimizer, DRL irrigation, NSGA-II fertilization,
+  market GNNs and federated learning remain future modules.
+- Mechanistic maize timing does not guarantee pollen quantity, seed set or seed purity.

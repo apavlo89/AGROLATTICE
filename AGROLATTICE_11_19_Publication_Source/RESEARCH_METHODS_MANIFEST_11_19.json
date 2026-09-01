@@ -1,0 +1,14 @@
+{
+  "release": "AGROLATTICE 11.19",
+  "scientific_methods_changed": false,
+  "mechanistic_maize_changed": false,
+  "new_scientific_dependencies": [],
+  "publication_reference_module": "1.0.0",
+  "notes": [
+    "Release 11.19 freezes the integrated 11.x software for publication/reproducibility and changes no scientific method.",
+    "The deterministic bundled demo is synthetic and is not empirical validation.",
+    "All 11.18 crop, climate, EO, statistical, mechanistic, ML, causal and reporting methods are preserved.",
+    "The Laurent et al. mechanistic maize implementation is byte-for-byte unchanged.",
+    "The publication reference identifier and archive metadata establish software identity only, not scientific validity."
+  ]
+}

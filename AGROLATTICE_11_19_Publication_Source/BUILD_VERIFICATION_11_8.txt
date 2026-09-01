@@ -1,0 +1,132 @@
+AGROLATTICE 11.8 — BUILD VERIFICATION
+====================================
+
+Release: AGROLATTICE 11.8 — Field Command Centre & Operations Polish
+Application version: 20.8-release11.8-field-command-centre
+Source baseline: AGROLATTICE 11.7 — Research Command Centre & Home Polish
+Verification date: 2026-08-10
+
+RESULT
+------
+PASS — verify_release11_8.py completed successfully.
+54 top-level Python source files compiled successfully.
+
+CORE WORKFLOW REGRESSION
+------------------------
+A temporary clean Field Operations database was created and tested with Streamlit
+imports stubbed because Streamlit is not installed in the packaging environment.
+The regression exercised:
+- research-centre + mapped-field creation;
+- structured field season persistence;
+- recurring task completion and next-occurrence generation;
+- observation protocol + quantitative observation details;
+- actual operation + spatial/provenance extension;
+- sensor lifecycle extension + calibration event;
+- structured nutrient sample detail;
+- persistent sampling points;
+- alert persistence: 2 consecutive triggers required, then 24 h cooldown;
+- SQLite integrity and foreign-key checks.
+All checks passed.
+
+FIELD OPERATIONS MIGRATION
+--------------------------
+Field Operations module: 8.0.0
+Field Operations DB schema: 8.0.0 (additive extension tables)
+
+Backup made BEFORE packaged database migration:
+  field_operations/backups/pre_11_8_field_operations.sqlite
+SHA-256:
+  e1b2c1e4efe8a846a3fb6563262abcbd59d7ad2e057e70adb3bad3d03041f525
+
+That hash exactly matches the Field Operations database contained in the supplied
+AGROLATTICE 11.7 source ZIP.
+
+Migrated packaged Field Operations database:
+  field_operations/field_operations.sqlite
+SHA-256:
+  fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+
+SQLite integrity_check: ok
+SQLite foreign_key_check: zero violations
+
+Every row in every Release 11.7 core Field Operations table was canonicalised and
+compared before/after migration. All legacy rows were identical:
+  farms, fields, crop_history, users, field_access, tasks, observations,
+  operations, sensors, sensor_readings, nutrient_samples, alert_rules, alerts,
+  prescriptions, audit_log.
+
+Packaged legacy/core row counts after migration:
+  farms=1; fields=1; users=1; tasks=0; observations=0; operations=0;
+  sensors=0; sensor_readings=0; nutrient_samples=0; alert_rules=6;
+  alerts=0; prescriptions=0; audit_log=11.
+
+All new extension tables contain zero synthetic verification records in the
+packaged release.
+
+UNTOUCHED PROTECTED ASSETS
+--------------------------
+The following files are byte-for-byte identical to the supplied Release 11.7 ZIP:
+
+Maize Pollination Lab DB
+  SHA-256 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+
+Persistent Twin DB
+  SHA-256 2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a
+
+Research Evidence DB
+  SHA-256 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+
+Mechanistic Maize Twin implementation
+  SHA-256 a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+The three untouched SQLite databases also pass integrity_check and foreign-key
+verification.
+
+DEPENDENCIES
+------------
+No mandatory or optional requirements file changed from Release 11.7:
+- requirements_ml_agriculture.txt — identical
+- requirements_research_optional.txt — identical
+- requirements_aquacrop.txt — identical
+
+Release 11.8 uses existing installed libraries (pandas/numpy/scikit-learn,
+Shapely/Folium/Plotly/Streamlit) and introduces no new mandatory dependency.
+
+PERFORMANCE SAFEGUARDS
+----------------------
+- Fields & Operations Overview uses lightweight SQL summaries and small persisted
+  metadata reads.
+- Portfolio Attention uses one aggregate SQL query instead of multiple count
+  queries per field.
+- Folium spatial maps are built only when a spatial workflow is selected.
+- Overview does not automatically call NASA POWER.
+- Overview does not automatically query Sentinel/STAC or process raster imagery.
+- Overview does not run the Persistent Twin, crop models, ML training or optimizers.
+- Release 11.6 process-local climate/service caching remains intact.
+
+SCIENTIFIC / DATA-INTEGRITY SAFEGUARDS
+--------------------------------------
+- Field geometry remains authoritative.
+- Planned operations and actual operations are explicitly separated.
+- Recommendations are linked but are not silently converted to applied operations.
+- Custom operation polygons must be contained by the field geometry.
+- Alert persistence/cooldown is explicit rule logic, not pest/disease diagnosis.
+- Observation protocols record quantitative values with provenance; they do not
+  invent significance or biological interpretation.
+- Sensor QC remains broad physical/data-quality screening, not calibration proof.
+- K-means outputs are labelled exploratory point clusters unless further spatial
+  modelling/validation supports management-zone interpretation.
+- Mechanistic Maize Twin code is unchanged.
+
+INTERACTIVE TEST LIMITATION
+---------------------------
+A complete live Streamlit browser session could not be executed in this packaging
+environment because the Streamlit package is not installed here. Therefore no
+claim is made that every interactive widget was browser-tested in this container.
+
+Mitigations performed:
+- all Python files compile;
+- field_command_centre imports successfully with Streamlit/component stubs;
+- core database/workflow methods were executed on a temporary database;
+- RUN_APP.bat now checks Streamlit >=1.48, Field Operations 8.0.0/DB 8.0.0 and
+  field_command_centre 1.0.0 before launch in the user's Windows/Anaconda setup.

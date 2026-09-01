@@ -1,0 +1,31 @@
+{
+  "release": "AGROLATTICE 11.19",
+  "build": "SPATIALLY-BALANCED-CLUSTERING-SB1",
+  "date": "2026-08-14",
+  "publication_reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "purpose": "Correct unequal geographic density in city-indexed climate clustering while retaining all location assignments.",
+  "default_spatial_method": {
+    "projection": "Spherical Lambert cylindrical equal-area",
+    "support_geometry": "Equal-area square cells",
+    "cell_width_km": 50,
+    "cell_height_km": 50,
+    "cell_nominal_area_km2": 2500,
+    "within_cell_feature_aggregation": "Arithmetic mean",
+    "analysis_weight": "One equal vote per occupied support cell",
+    "location_weight": "1 / number of eligible locations in the support cell",
+    "assignment_back_to_locations": true
+  },
+  "verified_mexico_inventory": {
+    "locations": 1012,
+    "federal_entities": 32,
+    "oaxaca_locations": 80,
+    "occupied_50km_support_cells": 377,
+    "maximum_locations_per_support_cell": 25
+  },
+  "clustering_scope": [
+    "Robust multi-method climate-zone analysis",
+    "Focused automatic K-means analysis",
+    "Focused researcher-defined K-means analysis"
+  ],
+  "scientific_boundary": "Empirical climate clusters are not official agroecological zones, causal evidence, or guaranteed transferability."
+}

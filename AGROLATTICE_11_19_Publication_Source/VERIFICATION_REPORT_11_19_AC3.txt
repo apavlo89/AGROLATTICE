@@ -1,0 +1,84 @@
+AGROLATTICE 11.19 AC3 VERIFICATION REPORT
+=========================================
+
+Build: AGROLATTICE-11.19-AC3-2026-08-13
+Verification date: 2026-08-13 UTC
+
+Static verification
+-------------------
+- agrolattice.py, agroclimatic_selection_ac2.py and
+  agroclimatic_selection_ac3.py compile successfully.
+- AC3 application version, workflow selector, leaderboard, confidence,
+  consensus, agreement, Sankey, cluster fingerprint and export integrations
+  are present.
+- The original 11.19 and AC2 workflows are retained.
+- The task-oriented Climate Zones & Transferability navigation, recommended
+  multi-method workflow and focused K-means workflow are present without
+  exposing historical release choices to new users.
+- The invalid Plotly polar `zeroline` property is absent and the compatible
+  `showgrid` configuration is present.
+- The frozen Mexico climate table matches its authoritative SHA-256 and
+  contains 1,012 locations across 32 federal entities, including 80 Oaxaca
+  locations. This guards against partially completed dataset-update jobs.
+- The climate-zone UI blocks incomplete Mexico inventories, displays an
+  explicit source/eligible/mapped/excluded audit, and exposes candidate
+  k values through 50.
+- Focused automatic K-means applies the same 2% minimum-zone safeguard used by
+  the robust workflows; ineligible high-k solutions remain diagnostic only.
+- The six scientific SQLite files have their preserved AC2 hashes and pass
+  SQLite integrity and foreign-key checks.
+
+Deterministic synthetic verification
+------------------------------------
+A fixed-seed 1119 three-group dataset was evaluated with all six inductive
+families and HDBSCAN diagnostics. AC3 selected K-means with k=3. Independent
+held-out silhouette exceeded 0.60 and stability ARI was 1.0. A repeated run
+returned the same configuration and labels.
+
+Bundled Mexico publication benchmark
+------------------------------------
+Input: 1,012 locations; 1985-2025; all 12 months; 19 candidate variables;
+location by variable-month climatological means; 80% completeness; seed 42;
+maximum k 12; 5 search repeats; 10 independent audit repeats.
+
+AC2 selected: SURFACE_PRESSURE, TEMPERATURE_MIN
+AC3 selected: K-means (k=2)
+Independent mean held-out silhouette: 0.6081137003
+Independent silhouette SE: 0.0061315410
+Independent stability ARI: 0.9726817587
+Independent mean assignment confidence: 0.6925861618
+Independent tiny-cluster rate: 0.0
+
+Family audit held-out silhouette / stability ARI
+- K-means: 0.608114 / 0.972682
+- Bisecting K-means: 0.608145 / 0.976569
+- Average-cosine hierarchy: 0.595632 / 0.980645
+- Ward hierarchy: 0.606755 / 0.931872
+- Gaussian mixture: 0.601423 / 0.876476
+- BIRCH: 0.606518 / 0.790665
+
+HDBSCAN diagnostic
+------------------
+The strongest tested diagnostic returned two non-noise clusters with 84.29%
+assigned coverage and assigned-point silhouette 0.6112. It was not eligible
+for the inductive championship.
+
+Focused K-means full-inventory regression
+-----------------------------------------
+Input: 1,012 locations; 1991-2020; all 12 months; temperature, mean
+precipitation, FAO-56 reference evapotranspiration and solar radiation; 80%
+completeness; seed 42; candidate k=2-50.
+
+All 1,012 locations and all 80 Oaxaca locations passed the feature-matrix
+completeness rule. Raw silhouette reached 0.4430 at k=49, but its smallest zone
+contained only four locations and therefore failed the prespecified 2%
+minimum-zone safeguard (21 locations). Among eligible solutions, k=2 had the
+strongest silhouette (0.3715; smallest zone 355 locations). This confirms why
+raw silhouette alone must not select the reported zone count.
+
+Runtime boundary
+----------------
+The current verification container does not include Streamlit, so interactive
+browser rendering was not launched here. The locked release environment and
+Windows launcher perform the Streamlit/module preflight before starting the
+application.

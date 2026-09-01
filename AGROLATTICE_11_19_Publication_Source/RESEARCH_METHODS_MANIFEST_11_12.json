@@ -1,0 +1,11 @@
+{
+  "release": "AGROLATTICE 11.12",
+  "scientific_methods_changed": false,
+  "summary": "Navigation reliability release only. All scientific methods and assumptions are carried forward unchanged from AGROLATTICE 11.11.",
+  "carried_forward_from": "RESEARCH_METHODS_MANIFEST_11_11.json",
+  "mechanistic_maize_changed": false,
+  "climate_methods_changed": false,
+  "pest_methods_changed": false,
+  "decision_optimisation_changed": false,
+  "validation_methods_changed": false
+}

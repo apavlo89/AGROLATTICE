@@ -1,0 +1,77 @@
+AGROLATTICE 11.16 — BUILD & VERIFICATION REPORT
+================================================
+Release: Platform Control Centre, Data Settings & Tool Catalogue
+Build date: 2026-08-12
+Source baseline: AGROLATTICE 11.15 — Research Reporting & Publication Command Centre
+Baseline ZIP SHA-256: d282c9104dd965356d2a93d4e19d639e2422cae5444530ed61183d5471367267
+
+IMPLEMENTED
+-----------
+- Dedicated Data & Settings Platform Control Centre with lazy selected-view execution.
+- Data Sources inventory with explicit evidence/source types.
+- Metadata-only Data Library; large climate CSVs/model artifacts are not parsed merely to render the inventory.
+- Country Climate workspace inventory using the canonical global country storage layout.
+- Connections page for NASA POWER, Sentinel STAC providers, optional research packages and reusable DSSAT/APSIM executable paths.
+- Database & Backup Centre covering Field Operations, Experiments, Persistent Twin, Research Evidence, Crop Profiles and Reporting.
+- SQLite-consistent snapshots using sqlite3 online backup API.
+- Backup SHA-256 manifest plus SQLite integrity/foreign-key verification.
+- Same-release scientific-database restore with archive path sanitisation, typed RESTORE confirmation, pre-restore recovery backup and post-restore verification.
+- Performance/storage inventory and safe deletion restricted to reproducible NASA daily, Sentinel-2 and dataset-updater caches.
+- Persistent platform preferences stored atomically in platform_settings.json.
+- Searchable All Tools catalogue with workspace search/filtering, Primary/Advanced/Legacy labels, data requirements, favourites, recent tools and active-context suggestions.
+- Cross-release migration preserves platform_settings.json and existing system_backups.
+- No scientific algorithm/database schema changes.
+
+SCIENTIFIC DATA SAFETY
+----------------------
+Protected artifacts were compared against the user-supplied 11.15 baseline and are byte-for-byte unchanged:
+Field Operations DB SHA-256: fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+Experiment DB SHA-256: 87511c0a9921e731f8bd8b3111118e452b9aa6d6ee32905fee3b7af73a258819
+Persistent Twin DB SHA-256: ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+Research Evidence DB SHA-256: 7e80e599285753c026ff47e86127ad3df42b4cfdb7ff662fb6cd1011b1052a25
+Crop Profile DB SHA-256: 84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+Reporting DB SHA-256: f1e3cd3dfce0a91e65db13f282d940245d5f42716551c276a6cef5af3d5e81d4
+Mechanistic Maize Twin SHA-256: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+SQLite checks on packaged primary databases:
+- field_operations.sqlite: integrity_check=ok, foreign_key_check=0 issues
+- maize_flowering_trials.sqlite: integrity_check=ok, foreign_key_check=0 issues
+- agrolattice_twin.sqlite: integrity_check=ok, foreign_key_check=0 issues
+- research_evidence.sqlite: integrity_check=ok, foreign_key_check=0 issues
+- crop_profiles.sqlite: integrity_check=ok, foreign_key_check=0 issues
+- reporting.sqlite: integrity_check=ok, foreign_key_check=0 issues
+
+SCHEMA STATUS
+-------------
+Field Operations: 8.0.0 unchanged
+Experiments/Maize Pollination: 3.0.0 unchanged
+Persistent Twin: 3.0.0 unchanged
+Research Evidence: 2.0.0 unchanged
+Crop Profiles: 1.0.0 unchanged
+Reporting: 1.0.0 unchanged
+
+REGRESSION TESTS
+----------------
+- verify_release11_16.py: PASS
+- Python recursive compileall: PASS
+- 74 top-level Python modules compile: PASS
+- PlatformSettings atomic persistence/favourites/recent tool regression: PASS
+- Backup creation/manifest/hash validation regression: PASS
+- Backup restore/recovery regression: PASS
+- SQLite integrity/foreign-key checks: PASS
+- safe_data_migration cross-release smoke test including platform_settings/system_backups: PASS
+- Requested k<=20 PCA/K-means exploration remains present: PASS
+- Legacy/advanced tool classification smoke tests: PASS
+
+DEPENDENCIES
+------------
+No new mandatory third-party dependency.
+Streamlit minimum remains 1.48.0.
+RUN_APP.bat preflight updated for platform_settings.py, data_settings_command_centre.py and tool_catalogue.py.
+
+KNOWN LIMITATIONS
+-----------------
+- Streamlit is not installed in the packaging environment, so a full browser/widget interaction session could not be executed here.
+- The in-app restore control is intentionally same-release/database-only; use MIGRATE_USER_DATA_FROM_EXISTING_APP.bat for complete cross-release installation migration.
+- Network availability for NASA POWER/STAC providers is not tested on page entry because remote work must remain explicit and avoid slowing navigation.
+- Optional crop-model executables are only inspected/configured; they are never executed from Data & Settings without the relevant crop-model workflow.

@@ -1,0 +1,64 @@
+AGROLATTICE 11.6 — Performance & Branding Update
+================================================
+Application version: 20.6-release11.6-performance-branding
+Based on: AGROLATTICE 11.5 — Decision Intelligence & Research Optimisation
+
+PRIMARY CHANGES
+---------------
+1. Integrated the new AGROLATTICE brand logo and compact icon in assets/brand.
+2. Replaced the giant active-country `st.cache_data`/rerun path with a
+   process-local zero-copy runtime resource keyed by cheap file signatures.
+3. Removed repeated top-level `country_dataset_status()` CSV rereads. Status is
+   now calculated from the already prepared climate table.
+4. Avoided a complete duplicated climate DataFrame for coordinate attachment
+   when every climate location matches the country catalogue.
+5. Cached database/store service objects so normal page reruns do not repeatedly
+   initialise Field Operations, Pollination Lab, Persistent Twin, Research
+   Evidence, ProjectStore and StudyStore services.
+6. Kept SQLite connections short-lived per operation; transaction state is not
+   cached.
+7. Added performance diagnostics and manual cache/service reload controls.
+8. Country settings are atomically rewritten only when logical values changed.
+9. Dataset-updater changes invalidate runtime data using source size+mtime.
+10. Decision recommendation provenance now records the actual app version rather
+    than embedding 11.5 in newly created provenance text.
+
+MEASURED BUILD-TIME BOTTLENECK
+------------------------------
+A direct Release-11.5-style status read of the bundled Mexico climate CSV in the
+Linux build container took ~9.43 s and ~1.51 GB maximum RSS. That full reread no
+longer occurs on ordinary navigation reruns. Hardware-specific user timings will
+differ.
+
+DATABASE MIGRATION
+------------------
+None. Protected database schemas and Research Evidence DB schema remain exactly
+as in Release 11.5.
+
+DEPENDENCIES
+------------
+No new mandatory Python dependency. Existing Streamlit >=1.48 requirement is
+retained. Pillow was already a required dependency and is used only for bundled
+brand assets at build time; normal app display uses Streamlit's image/logo API.
+
+TESTS
+-----
+- Python compilation of all top-level modules
+- Release 11.6 regression verification
+- Performance-runtime equivalence/invalidation checks on synthetic data
+- Country settings no-op write test
+- Logo PNG integrity/dimension checks
+- SQLite integrity/foreign-key checks
+- Protected database SHA-256 equality against supplied Release 11.5
+- Mechanistic Maize Twin SHA-256 equality against supplied Release 11.5
+- Final ZIP archive integrity test
+
+LIMITATIONS
+-----------
+- First opening of a very large active-country CSV still requires one real CSV
+  parse/preparation per Python process.
+- Expensive pages such as satellite rendering, large maps, model training and
+  external API calls still take the time required by those tasks.
+- Streamlit was not installed in the packaging container, so full interactive
+  browser timing was not falsely claimed. RUN_APP.bat performs the installed
+  environment preflight on the user's Windows/Anaconda system.

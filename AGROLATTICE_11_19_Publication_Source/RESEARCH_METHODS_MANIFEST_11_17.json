@@ -1,0 +1,11 @@
+{
+  "release": "AGROLATTICE 11.17",
+  "scientific_methods_changed": false,
+  "mechanistic_maize_changed": false,
+  "notes": [
+    "This release changes Help, onboarding, researcher guidance and cross-workspace UX consistency only.",
+    "All 11.16 scientific methods, database schemas, validation safeguards and mechanistic maize equations are preserved.",
+    "No new paper-derived model is claimed or introduced in 11.17.",
+    "The standardised evidence vocabulary is an interface/interpretation layer and does not rewrite historical scientific records."
+  ]
+}

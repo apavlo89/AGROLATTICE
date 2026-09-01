@@ -1,0 +1,127 @@
+AGROLATTICE 11.10 — CLIMATE & EARTH OBSERVATION COMMAND CENTRE
+===============================================================
+
+Release purpose
+---------------
+Release 11.10 reorganises Climate & Earth Observation around the active mapped
+field and turns the workspace into a coherent environmental research workflow.
+It preserves the established 19-variable country climate dataset, existing
+climate-comparison/risk/spatial methods and Sentinel-2 processing while making
+field context, data acquisition, evidence provenance and navigation clearer.
+
+New Climate & EO Command Centre
+--------------------------------
+- New lightweight landing view with Environmental Pulse for the active field.
+- Persistent workspace navigation:
+  Overview | Field Climate | Climate Comparison | Spatial & Transferability |
+  Climate Risk | Earth Observation | Evidence & Data.
+- Weather, EO, root-zone and sensor freshness are shown from saved evidence;
+  entering the page does not trigger remote retrieval or model execution.
+- Active field/research-centre/crop/season context is carried into the workspace.
+- Quick navigation to Research Data Hub, Twin and Fields & Operations.
+
+Field Climate Explorer
+----------------------
+- New 19-variable explorer over the installed canonical agroclimate dataset.
+- Variables grouped into Temperature, Water & atmospheric demand,
+  Radiation & cloud, Soil energy, and Wind & pressure.
+- Monthly selected-year vs long-term climatology with variability context.
+- Annual trend view and year × month heatmap.
+- Coverage and source information remain visible.
+- When a mapped field is active, the nearest installed climate reference is
+  selected by field centroid and explicitly labelled as gridded/location
+  evidence rather than an on-field station measurement.
+- Local field-sensor observations are displayed separately; they are not
+  silently merged with gridded climate values.
+
+Direct environmental data acquisition
+-------------------------------------
+- Added explicit one-click NASA POWER weather update for a mapped field.
+- Retrieves the canonical 19-variable daily weather bundle already supported by
+  the Research Data Hub.
+- Uses authoritative field centroid and a defensible season/date window:
+  structured sowing/harvest dates when available, otherwise recorded season
+  year, otherwise a rolling 12-month period.
+- No crop date is invented.
+- Retrieval provenance is saved to Research Evidence and compatible linked Twin
+  weather is updated when a Twin exists.
+- Added explicit Quick update EO for active mapped fields using the existing
+  Sentinel-2 L2A processing system with provider failover and quality masking.
+- EO results are saved to Research Evidence and may update a compatible linked
+  Twin satellite record.
+- Neither remote operation runs automatically on page entry.
+
+Climate comparison & transferability polish
+-------------------------------------------
+- Climate similarity can now use the active mapped field as the reference
+  environment through its nearest installed climate location.
+- The UI states that this is a gridded/location proxy and not a field weather
+  measurement.
+- Existing similarity, explanation, robustness, analogue and spatial-climate
+  methods are preserved rather than replaced.
+- Spatial & Transferability includes clearer scientific guidance: PCA remains
+  the most interpretable default, while nonlinear embeddings are not presented
+  as literal agronomic distance.
+
+Earth Observation polish
+------------------------
+- Satellite Monitoring is presented as Earth Observation and automatically
+  preloads the authoritative active-field geometry when available.
+- Legacy internal "Module A / Module B" wording was replaced with researcher-
+  facing crop-development, root-zone, phenology/stress and evidence language.
+- Satellite navigation was simplified to:
+  Field status & time series | Imagery | Seasonal anomalies |
+  Phenology & stress | Advanced methods.
+- Structured field-season sowing dates may prepopulate EO context; AGROLATTICE
+  does not fabricate a sowing date from the season year.
+- Full manual AOI/search/processing controls remain available for advanced use.
+
+Evidence & provenance
+---------------------
+- Field-linked weather/EO acquisitions and Persistent Twin environmental
+  attachments are visible from one Evidence & Data view.
+- Researchers can explicitly persist current session climate/EO analyses as a
+  JSON evidence snapshot registered in the Research Evidence database.
+- Saving an analysis does not upgrade a similarity score, EO index, anomaly or
+  heuristic risk result into causal or field-validated agronomic evidence.
+
+Performance
+-----------
+- Release 11.10 reuses the process-cached climate table introduced in 11.6.
+- A small climate-location catalogue is constructed once per country runtime and
+  reused for field-reference selectors, avoiding repeated de-duplication of the
+  multi-million-row climate table.
+- Field Climate caches only the selected location subset by dataset signature.
+- Remote NASA/STAC work, similarity, risk, PCA and raster processing remain
+  explicit actions/views rather than running on workspace entry.
+
+Polish / maintenance
+--------------------
+- Fixed the shared workspace header that could incorrectly label Climate & EO as
+  "Field Command Centre".
+- Fixed release-artifact sorting so 11.10 is correctly treated as newer than
+  11.9 (numeric rather than lexicographic ordering).
+- Help now points to the 11.10 user guide.
+- RUN_APP.bat now preflights the 11.10 Climate & EO module and the cached climate
+  location catalogue.
+
+Database / dependency status
+----------------------------
+- No database schema migration in 11.10.
+- Field Operations, Maize Pollination, Persistent Twin and Research Evidence
+  SQLite files are not intentionally modified by this release.
+- No new mandatory dependency was added.
+
+Scientific limitations
+----------------------
+- NASA/gridded climate values are environmental estimates, not equivalent to a
+  local station or field sensor.
+- Nearest installed climate location is a transparent spatial proxy; climate
+  similarity does not establish agronomic equivalence or causal transferability.
+- Sentinel-2 indices depend on cloud masking, usable pixels, scene availability
+  and spatial support; small plots may be mixed-pixel observations.
+- Hazard/risk outputs must not be interpreted as validated yield effects unless
+  a validated crop-response model supports that inference.
+- Full interactive Streamlit browser testing must be performed in the user's
+  Windows/Anaconda installation because Streamlit is unavailable in the build
+  container.

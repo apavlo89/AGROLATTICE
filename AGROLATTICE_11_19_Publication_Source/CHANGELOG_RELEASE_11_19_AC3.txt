@@ -1,0 +1,54 @@
+AGROLATTICE 11.19 AC3 CHANGELOG
+===============================
+
+- Added agroclimatic_selection_ac3.py.
+- Added common-split optimisation across K-means, bisecting K-means, Gaussian
+  mixtures, BIRCH, Ward hierarchy and average-cosine hierarchy.
+- Added method-specific k and hyperparameter screening with common Euclidean
+  held-out silhouette for championship comparability.
+- Added independent family-wise audit, resampling stability, tiny-cluster
+  safeguards and assignment-confidence reporting.
+- Added a separate HDBSCAN density/noise diagnostic that cannot win the
+  inductive championship.
+- Added consensus heatmap, algorithm agreement matrix, Sankey assignment flow,
+  silhouette violin plots, confidence plot, confidence-aware map, fingerprint
+  heatmap and radar profiles.
+- Added full AC3 tables and reproducibility-package export.
+- Retained AC2 automatic variable selection and original 11.19 manual
+  clustering as selectable workflows.
+- Retained the displayed release name AGROLATTICE 11.19.
+- No database schema changes and no new dependencies beyond the existing
+  locked scikit-learn installation.
+- Replaced developer-facing AC2/AC3 and historical-release workflow labels in
+  the app with task-oriented names for climate-zone discovery, focused K-means
+  analysis and site transferability.
+- Reorganised the climate-zone page around a recommended workflow and moved
+  method, validation and density controls into a clearly labelled advanced
+  section.
+- Renamed result tabs, metrics and downloads around the research questions
+  they answer while retaining technical engine identifiers in reproducibility
+  metadata.
+- Fixed the Plotly radar-chart crash caused by the unsupported polar radial-axis
+  property `zeroline`; the compatible `showgrid` property is now used.
+- Restored the complete frozen Mexico climate dataset after detecting that an
+  interrupted 210-location working copy had entered the previous AC3 archive.
+  The package again contains all 1,012 catalogue locations, including 80 in
+  Oaxaca and coverage across all 32 federal entities.
+- Added a frozen-dataset hash and semantic location-coverage check to prevent a
+  partial country update from silently entering a future AC3 package.
+- Added a blocking in-app Mexico inventory guard. The climate-zone page now
+  refuses to run if fewer than 1,012 frozen locations or fewer than 80 Oaxaca
+  locations are active, instead of silently producing a biased map.
+- Added an expanded source-to-analysis-to-map audit reporting source, eligible,
+  mapped and excluded locations plus Oaxaca retention after every run.
+- Increased the candidate zone-count ceiling from 20 to 50 in focused K-means,
+  automatic variable/k selection, the multi-method workflow and the ancillary
+  climate-space colouring control.
+- Prevented focused automatic K-means from selecting a high-k solution solely
+  because of apparent full-data silhouette: automatic selection now requires
+  every zone to contain at least 2% of analysed locations. All k up to the
+  chosen ceiling remain in the diagnostic table, and researchers may still set
+  k manually up to 50 with an explicit small-zone warning.
+- Replaced the seven-variable climate-zone default with the prespecified
+  four-process set: temperature, mean precipitation, FAO-56 reference
+  evapotranspiration and solar radiation.

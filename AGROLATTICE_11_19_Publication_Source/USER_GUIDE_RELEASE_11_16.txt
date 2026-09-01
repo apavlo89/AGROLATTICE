@@ -1,0 +1,53 @@
+AGROLATTICE 11.16 USER GUIDE — PLATFORM CONTROL CENTRE
+
+DATA & SETTINGS
+---------------
+Overview
+  Shows active country, installed climate size, database health, cache storage and quick actions.
+
+Data sources
+  Lists the major persistent/retrievable sources AGROLATTICE can use. The evidence type column helps distinguish measured/recorded information from gridded/retrieved and model/evidence stores.
+
+Data library
+  Metadata-only inventory of installed country climate data, caches, model artifacts, report assets, attachments and external-model output. It does not load the large files.
+
+Country climate
+  Shows every installed country workspace. Use Dataset updater to retrieve/update NASA-derived historical climate data for any supported country.
+
+Connections
+  Shows NASA POWER and Sentinel STAC endpoints, optional Python research packages and reusable DSSAT/APSIM executable paths. Saving an executable path does not run the model.
+
+Databases & backups
+  Displays schema/health/size/row information for the six scientific databases.
+  Create verified backup package: snapshots all scientific databases and optionally projects, attachments, report assets and large climate datasets.
+  Restore scientific databases: accepts a verified AGROLATTICE backup ZIP, validates hashes and SQLite integrity, creates a pre-restore recovery backup and only then replaces recognised databases.
+
+Performance & storage
+  Shows climate/runtime size and reproducible cache storage. Cache cleanup is limited to NASA daily, Sentinel-2 and dataset-updater caches; it does not target scientific data.
+
+Preferences
+  Save the default workspace role and whether advanced tools should be shown by default in All Tools.
+
+Diagnostics
+  Full technical system/dependency diagnostics.
+
+Updates & migration
+  Shows database schema health and links to the backup-first migration/updater workflow.
+
+ALL TOOLS
+---------
+Search by scientific task (examples: PCA, silking, SHAP, Sentinel, irrigation).
+Filter by primary workspace and maturity: Primary, Advanced or Legacy.
+Favourite frequently used tools and revisit recently opened tools.
+Suggested tools use the active Field/Trial/Crop context but never hide the complete catalogue.
+Legacy workflows are retained for backward compatibility and labelled clearly.
+
+BACKUP RECOMMENDATION
+---------------------
+Create a verified backup before:
+- installing/upgrading AGROLATTICE;
+- replacing a country climate dataset;
+- major experiment import/cleanup;
+- manual database maintenance.
+
+For a complete migration from another AGROLATTICE installation, use MIGRATE_USER_DATA_FROM_EXISTING_APP.bat rather than the database-only restore control.

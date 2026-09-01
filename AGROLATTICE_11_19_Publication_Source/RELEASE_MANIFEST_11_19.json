@@ -1,0 +1,56 @@
+{
+  "release": "AGROLATTICE 11.19",
+  "title": "Publication Reference Release",
+  "application_version": "20.19-release11.19-publication-reference-release",
+  "publication_reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "based_on": "AGROLATTICE 11.18 — End-to-End Reliability, Performance Profiling & Integration QA",
+  "readme": "README_START_HERE_RELEASE11_19.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_19.txt",
+  "changelog": "CHANGELOG_RELEASE_11_19.txt",
+  "technical_basis": "TECHNICAL_BASIS_PUBLICATION_REFERENCE_11_19.md",
+  "research_methods_manifest": "RESEARCH_METHODS_MANIFEST_11_19.json",
+  "citation_file": "CITATION.cff",
+  "license_file": "LICENSE",
+  "source_manifest": "SOURCE_FILE_MANIFEST_11_19.sha256",
+  "database_schema_changes": false,
+  "database_migration": "No schema changes. All six protected scientific/reporting databases remain on their 11.18 schemas.",
+  "new_dependencies": [],
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "field_operations_schema": "8.0.0 unchanged",
+  "pollination_database_schema": "3.0.0 unchanged",
+  "persistent_twin_schema": "3.0.0 unchanged",
+  "research_evidence_schema": "2.0.0 unchanged",
+  "crop_profile_schema": "1.0.0 unchanged",
+  "reporting_schema": "1.0.0 unchanged",
+  "module_versions": {
+    "publication_reference": "1.0.0",
+    "integration_reliability": "1.0.0 unchanged",
+    "field_command_centre": "1.0.1 unchanged",
+    "data_settings_command_centre": "1.1.0 unchanged",
+    "maize_mechanistic_twin": "1.0.0 unchanged"
+  },
+  "headline_features": [
+    "Frozen publication-reference identifier and citation/archive metadata.",
+    "Deterministic synthetic reference project and reproducible example outputs.",
+    "Publication-ready architecture/workflow/demo figures in PNG and SVG.",
+    "Exact dependency reference lock plus target-environment freeze helper.",
+    "Source-tree SHA-256 manifest and publication-specific release verification.",
+    "Publication-safe source-only archive builder that excludes user data and installed country datasets.",
+    "Schema-only SQL exports for all six protected databases to document the frozen data architecture without publishing user rows."
+  ],
+  "scientific_boundaries": [
+    "Synthetic demo values are not empirical agricultural evidence.",
+    "Publication reference identity does not imply scientific validation.",
+    "No DOI is claimed until the exact archive is deposited externally."
+  ],
+  "limitations": [
+    "Full interactive Streamlit browser verification and genuine UI screenshots require the target Windows/Anaconda environment.",
+    "The bundled dependency lock should be complemented by the exact pip-freeze snapshot from the environment actually used for manuscript analyses.",
+    "An external DOI must be minted after final archive deposition."
+  ],
+  "build_verification": "BUILD_VERIFICATION_11_19.txt",
+  "public_source_archive_builder": "build_public_archive.py",
+  "public_archive_exclusions": "PUBLIC_ARCHIVE_EXCLUSIONS.md",
+  "schema_only_exports": "publication_reference/database_schemas/"
+}

@@ -1,0 +1,23 @@
+AGROLATTICE 11.1 - Research Integrity Update
+
+Fixed:
+- Prevent destructive plot re-randomisation after plot-linked research data exist.
+- Atomic factor-design + mapped-randomisation commit/rollback.
+- Reject overlapping treatment-unit polygons while allowing shared borders.
+- Block field/farm/trial deletion when Trial/Twin references would be orphaned.
+- Require and verify Streamlit >=1.48.
+- Dynamic current-release README resolution in Help.
+- Safe migration script with timestamped backup and SQLite overwrite protection.
+- Synchrony observation completeness/gap diagnostics.
+
+Database schema: unchanged; no migration required.
+Mechanistic maize equations/priors: unchanged from Release 11.0.
+
+Verification:
+- Python compilation/AST: PASS
+- Release 11.0 mechanistic regression suite: PASS
+- Release 11.1 research-integrity regression suite: PASS
+- All three protected SQLite integrity checks: PASS
+
+Limitation:
+- Browser-level Streamlit AppTest was not run in the build container because Streamlit is absent there; launch-time version checking is included.

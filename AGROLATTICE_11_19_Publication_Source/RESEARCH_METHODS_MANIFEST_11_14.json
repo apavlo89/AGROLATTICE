@@ -1,0 +1,67 @@
+{
+  "release": "AGROLATTICE 11.14",
+  "scientific_scope": "Predictive model governance, persistent training evidence, validation, uncertainty/calibration, explainability, applicability, benchmark evaluation and reproducibility.",
+  "methods": [
+    {
+      "name": "Agricultural grouped and transfer-aware validation",
+      "implementation": "Grouped CV, leave-one-group variants, LOYO, LORO, frozen group holdout and forward-time protocols with fold-contained preprocessing.",
+      "limitations": "The split label does not guarantee independence; researchers must choose grouping variables that match the deployment question."
+    },
+    {
+      "name": "Out-of-fold absolute-residual interval",
+      "implementation": "Research Model Lab can store a 90% absolute-residual conformal-style half-width from OOF residuals for regression.",
+      "limitations": "This is not automatically distribution-free under arbitrary grouped/shifted deployment and must be assessed for empirical coverage."
+    },
+    {
+      "name": "Model applicability profile",
+      "implementation": "Training-support feature ranges/categories are stored and prediction-level applicability warnings can be persisted.",
+      "limitations": "Range/category checks are useful OOD diagnostics but not a complete density or causal transportability model."
+    },
+    {
+      "name": "Permutation importance and partial dependence",
+      "implementation": "Model-agnostic predictive interpretation on explicit evaluation data, with artifact-integrity verification.",
+      "limitations": "Importance/dependence is predictive and may be distorted by correlated features; it is not causal effect estimation."
+    },
+    {
+      "name": "Model disagreement",
+      "implementation": "Paired held-out predictions from compatible registered models are compared on common validation rows.",
+      "limitations": "Disagreement is not a calibrated predictive interval. Learned ensemble weights require separate leakage-safe meta-training."
+    },
+    {
+      "name": "Evidence-gated model promotion",
+      "implementation": "Promotion checks persistent validation scope, applicability and uncertainty/calibration metadata and records append-only status history.",
+      "limitations": "Operational eligibility remains a scientific governance decision; override records do not create missing empirical evidence."
+    },
+    {
+      "name": "Repeated group-isolated holdout and ranking stability",
+      "implementation": "Group-isolated repeated holdouts with reproducible seed; fold metrics are retained and candidate median/mean rank, rank SD and fold wins can be inspected.",
+      "limitations": "Repeated internal holdouts are stability diagnostics, not independent external validation."
+    },
+    {
+      "name": "Probability-aware classification validation",
+      "implementation": "Balanced accuracy, macro/weighted F1, class-specific precision/recall and, when genuine held-out probabilities exist, ROC-AUC, PR-AUC, Brier score and log loss.",
+      "limitations": "Probability metrics are omitted when probabilities are unavailable; probability calibration must be evaluated rather than assumed."
+    },
+    {
+      "name": "Paired bootstrap model-difference diagnostic",
+      "implementation": "Bootstrap confidence intervals for paired delta-RMSE on common held-out records from compatible registered models.",
+      "limitations": "A paired bootstrap comparison does not validate stacking or create external evidence."
+    },
+    {
+      "name": "Prediction-outcome chronology and drift monitoring",
+      "implementation": "Canonical outcome pairing respects spatial context/season where possible and exposes chronology; outcome-linked errors support transparent recent-vs-earlier monitoring.",
+      "limitations": "Automated matches require researcher review; an error trend is not proof of temporal drift or causation."
+    }
+  ],
+  "integrity_rules": [
+    "Retain failed and inferior model attempts as training-run provenance.",
+    "Do not use test outcomes to choose ensemble weights or hyperparameters.",
+    "Do not call an internal split external validation.",
+    "Do not interpret feature importance as causal effect.",
+    "Do not silently download or redistribute large benchmark datasets.",
+    "Do not conflate prediction, recommendation, applied treatment and measured outcome.",
+    "New models enter as Prototype; registry upserts cannot silently promote evidence status.",
+    "Generic leave-one-group validation is not automatically treated as external validation.",
+    "Show prediction/observation chronology when automatically linking outcomes."
+  ]
+}

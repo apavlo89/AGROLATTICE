@@ -1,0 +1,77 @@
+AGROLATTICE 11.17 — BUILD & VERIFICATION REPORT
+=================================================
+
+Release: AGROLATTICE 11.17 — Help, Onboarding & Researcher Guidance
+Baseline: AGROLATTICE 11.16 — Platform Control Centre, Data Settings & Tool Catalogue
+Baseline ZIP SHA-256: eaa17300e6c830edee3006410dd18068dc9a07aa77a6b483c58a2c88651641eb
+
+Implemented scope
+-----------------
+- Dedicated Help Command Centre with Start Here, guided workflows, workspace guides, data-readiness matrix, scientific labels, terminology, troubleshooting, search and release guide.
+- Context-aware onboarding state derived from small persisted Field/Experiment/Twin/Model/Report summaries.
+- Guided workflows for first field/season, first experiment, maize synchrony, Persistent Twin, train/validate model, decision-to-outcome and reproducible publication.
+- Standardised evidence vocabulary: Observed, Recorded, Retrieved, Derived, Mechanistic, ML prediction, Forecast, Scenario, Recommendation, Actual operation, Outcome, Causal estimate.
+- Consistent "What do I need here?" panel integrated into Home, Fields & Operations, AgroLattice Twin, Climate & Earth Observation, Crop Decisions, Experiments, Models & Evidence, Reports and Data & Settings.
+- Searchable scientific glossary and safe troubleshooting guidance.
+- Contextual hover-help engine updated to 10.4.4 with Experimental Unit, Applicability, Forecast and Mechanistic Model terminology.
+- Current-release guide, README, changelog, manifest, methods manifest and technical basis updated.
+
+Scientific/data boundary
+------------------------
+- No new scientific model or paper-derived method is introduced.
+- No scientific database schema changes.
+- No mechanistic maize equation or parameter prior changed.
+- Readiness checks are metadata availability checks, not validation/QC certification.
+- Guidance does not automatically retrieve NASA/Sentinel data, execute crop models, train ML models or rebuild the large climate dataset.
+
+Protected artifacts
+-------------------
+Field Operations: field_operations/field_operations.sqlite
+  SHA-256 fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5 | integrity=ok | foreign_keys=0
+Experiments: pollination_lab/maize_flowering_trials.sqlite
+  SHA-256 87511c0a9921e731f8bd8b3111118e452b9aa6d6ee32905fee3b7af73a258819 | integrity=ok | foreign_keys=0
+Persistent Twin: agrolattice_twin/agrolattice_twin.sqlite
+  SHA-256 ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4 | integrity=ok | foreign_keys=0
+Research Evidence: models_evidence/research_evidence.sqlite
+  SHA-256 7e80e599285753c026ff47e86127ad3df42b4cfdb7ff662fb6cd1011b1052a25 | integrity=ok | foreign_keys=0
+Crop Profiles: models_evidence/crop_profiles.sqlite
+  SHA-256 84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6 | integrity=ok | foreign_keys=0
+Reporting: reports/reporting.sqlite
+  SHA-256 f1e3cd3dfce0a91e65db13f282d940245d5f42716551c276a6cef5af3d5e81d4 | integrity=ok | foreign_keys=0
+Mechanistic Maize Twin: maize_mechanistic_twin.py
+  SHA-256 a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+Verification performed
+----------------------
+- verify_release11_17.py: PASS
+- All top-level Python modules parsed/compiled: 77 modules
+- Recursive compileall: PASS
+- Protected-artifact byte hashes match supplied 11.16: PASS
+- All six primary SQLite databases integrity_check=ok and foreign_key_check empty: PASS
+- Researcher-guidance workflow/readiness/search regression tests: PASS
+- Help Command Centre/static module import regression with Streamlit stub: PASS
+- Contextual help module version and terminology assertions: PASS
+- RUN_APP.bat includes 11.17 modules/version preflight: PASS
+- k<=20 climate/PCA/K-means exploration preserved: PASS
+- Release ZIP compressed-data integrity test: PASS
+- Final ZIP extracted into a clean directory; verify_release11_17.py rerun against packaged copy: PASS
+- Recursive compileall rerun against the clean packaged copy: PASS
+
+Database migration
+------------------
+None.
+Field Operations: 8.0.0 unchanged
+Experiments: 3.0.0 unchanged
+Persistent Twin: 3.0.0 unchanged
+Research Evidence: 2.0.0 unchanged
+Crop Profiles: 1.0.0 unchanged
+Reporting: 1.0.0 unchanged
+
+Dependencies
+------------
+No new mandatory third-party dependency.
+Streamlit minimum remains 1.48.0.
+
+Known verification limitation
+-----------------------------
+A complete interactive browser-based Streamlit session cannot be executed in this packaging environment because Streamlit is not installed here. RUN_APP.bat performs the 11.17 runtime/module/version preflight in the target Windows/Anaconda environment.

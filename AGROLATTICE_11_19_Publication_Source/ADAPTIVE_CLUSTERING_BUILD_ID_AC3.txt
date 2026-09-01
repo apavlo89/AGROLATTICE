@@ -1,0 +1,15 @@
+AGROLATTICE 11.19 ADAPTIVE CLUSTERING BUILD AC3
+================================================
+
+Displayed release name: AGROLATTICE 11.19
+Derivative build identifier: AGROLATTICE-11.19-AC3-2026-08-13
+Interface revision: 2026-08-14 task-oriented climate-zone UI and Plotly radar fix
+Base frozen reference identifier: AGROLATTICE-11.19-PRR-2026-08-12
+Base source archive SHA-256:
+d74eb3758a09762f1d52dedbdaea6da969613b442ba1de3b8705335f56b6f23a
+Retained AC2 archive SHA-256:
+e52dce553a6fcaa5b8eb0d5731bdfaaaf1c650a66ab1d1e2e834ec6b234c0174
+
+AC3 is a derivative analysis build. It does not replace or modify the original
+AGROLATTICE 11.19 Publication Reference Release or the separately retained AC2
+archive. The original and AC2 workflows remain accessible from the app.

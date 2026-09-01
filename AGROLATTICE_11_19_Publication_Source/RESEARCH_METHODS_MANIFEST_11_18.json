@@ -1,0 +1,13 @@
+{
+  "release": "AGROLATTICE 11.18",
+  "scientific_methods_changed": false,
+  "mechanistic_maize_changed": false,
+  "new_scientific_dependencies": [],
+  "notes": [
+    "Release 11.18 changes integration reliability, navigation routing, runtime diagnostics and end-to-end QA only.",
+    "The cross-workspace audit is a structural/reference audit and must not be described as scientific validation.",
+    "The active workflow chain is a persisted-evidence readiness view, not a study-quality score.",
+    "All 11.17 crop, climate, EO, statistical, mechanistic, ML, causal and reporting methods are preserved.",
+    "The Laurent et al. mechanistic maize implementation is byte-for-byte unchanged."
+  ]
+}

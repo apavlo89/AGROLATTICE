@@ -1,0 +1,23 @@
+AGROLATTICE 11.2 BUILD VERIFICATION
+===================================
+
+Build target: AGROLATTICE 11.2 - Spatial & Upgrade Integrity Update
+Application version: 20.2-release11.2-spatial-upgrade-integrity
+
+PASS - All 31 Python source files compile.
+PASS - Release 11.0 mechanistic regression suite.
+PASS - Release 11.1 research-integrity regression suite.
+PASS - Release 11.2 spatial/upgrade-integrity regression suite.
+PASS - Existing-trial exact_match spatial status regression.
+PASS - Pre-commit spatial re-link containment/rollback regression.
+PASS - Data-bearing trial hard-delete protection and exact-name confirmation regression.
+PASS - Source-authoritative migration regression with destination/source backups.
+PASS - Migration against the actual Release 11.1 Field Operations, Pollination Lab and Persistent Twin databases; table counts matched after migration.
+PASS - Injected mid-activation migration failure rolled active research databases back to their pre-migration state.
+PASS - Packaged field_operations.sqlite: integrity_check=ok, foreign_key_check=0 issues.
+PASS - Packaged maize_flowering_trials.sqlite: integrity_check=ok, foreign_key_check=0 issues.
+PASS - Packaged agrolattice_twin.sqlite: integrity_check=ok, foreign_key_check=0 issues.
+PASS - Packaged research SQLite files are byte-for-byte unchanged from Release 11.1 before any user migration.
+
+Build-environment limitation:
+A genuine Streamlit browser/AppTest session was not executed because Streamlit is not installed in the Linux build container. The application source compiles, non-UI logic was tested headlessly, and RUN_APP.bat enforces Streamlit >=1.48.0 and module compatibility on the user's Windows/Anaconda environment.

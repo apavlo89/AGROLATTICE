@@ -1,0 +1,10 @@
+{
+  "release": "AGROLATTICE 11.16",
+  "scientific_methods_changed": false,
+  "mechanistic_maize_changed": false,
+  "notes": [
+    "This release changes platform/data-management UX, backup safety, preferences and tool discovery only.",
+    "All 11.15 scientific methods, provenance boundaries and evidence labels are preserved.",
+    "No new paper-derived model is claimed or introduced in 11.16."
+  ]
+}

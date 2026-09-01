@@ -1,0 +1,36 @@
+{
+  "reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "dataset_name": "AGROLATTICE 11.19 deterministic synthetic publication-reference project",
+  "seed": 1119,
+  "synthetic": true,
+  "not_field_data": true,
+  "not_nasa_or_sentinel": true,
+  "purpose": "Reproduce the software demonstration figures/tables without using private research data.",
+  "files": {
+    "trial_design": {
+      "path": "demo_trial_design.csv",
+      "sha256": "cf199e187501c86ae570337b605b8e9416d7c4de4fc2354d3684438c04faf6d5"
+    },
+    "flowering_observations": {
+      "path": "demo_flowering_observations.csv",
+      "sha256": "35f02701ddf7cdb6c7a47325a177cc3dfbdc29789c395d03c383c7cd6d612c9d"
+    },
+    "model_validation": {
+      "path": "demo_model_validation.csv",
+      "sha256": "8c683db295c63647acde012295b7fb4ea3184b8bc21a6688cbd1367271ca29ac"
+    },
+    "weather": {
+      "path": "demo_weather_19_variables.csv",
+      "sha256": "8c256aae1d8b83897378de61107c6c95b49f40042f55f313f1b28c40e08e3c4e"
+    },
+    "field": {
+      "path": "demo_field.geojson",
+      "sha256": "759ce761be5e52baa39add68b6ff39b73cdd2ab7e0dd7364466146c88f76e6c9"
+    },
+    "summary": {
+      "path": "demo_summary.json",
+      "sha256": "f2ab91fecc21120b48ca7755bafba259a8a156dcb0e669e41c875633994079d7"
+    }
+  },
+  "scientific_boundary": "The example project verifies software plumbing and reproducible rendering only; it must not be used as empirical validation of AGROLATTICE models or recommendations."
+}

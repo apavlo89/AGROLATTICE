@@ -1,0 +1,60 @@
+AGROLATTICE 11.19 — PUBLICATION REFERENCE RELEASE
+================================================
+
+BASELINE
+--------
+Built from AGROLATTICE 11.18 — End-to-End Reliability, Performance Profiling & Integration QA.
+
+PURPOSE
+-------
+Freeze the mature 11.x platform for manuscript description, citation, reproducibility and archival while keeping scientific methods and protected research data unchanged.
+
+ADDED
+-----
+1. publication_reference.py module 1.0.0.
+2. Stable publication reference ID: AGROLATTICE-11.19-PRR-2026-08-12.
+3. Help → Publication reference view.
+4. Deterministic synthetic publication demo project (seed 1119).
+5. Four 300-dpi PNG + SVG reference figures.
+6. Deterministic example output tables/results summary.
+7. CITATION.cff, codemeta.json and .zenodo.json archive metadata.
+8. MIT LICENSE plus third-party/data/scientific-method notice.
+9. requirements_publication_reference_lock.txt.
+10. FREEZE_PUBLICATION_ENV.bat to record the exact target runtime used for the paper.
+11. RUN_PUBLICATION_REFERENCE_DEMO.bat.
+12. PAPER_STARTER_AGROLATTICE_11_19.md.
+13. PUBLICATION_REFERENCE_WORKFLOW.md and screenshot/figure capture checklist.
+14. SOURCE_FILE_MANIFEST_11_19.sha256.
+15. Dedicated verify_release11_19.py.
+16. build_public_archive.py plus PUBLIC_ARCHIVE_EXCLUSIONS.md for a publication-safe source-only archive.
+17. Schema-only SQL exports for all six protected databases under publication_reference/database_schemas/.
+18. Public-source archive manifest generation with explicit exclusion of user databases, installed country datasets, caches, attachments and run outputs.
+
+PUBLICATION / REPRODUCIBILITY FIXES
+----------------------------------
+• Current app/version labels now consistently identify 11.19.
+• Help exposes the frozen reference identifier and assets without remote calls/model execution.
+• Current-release guide and runtime preflight point to 11.19.
+• Safe data migration backups are labelled before_11_19_<timestamp>.
+• Publication reference separates synthetic demonstration outputs from empirical evidence explicitly.
+• DOI metadata is prepared without falsely claiming that a DOI has already been minted.
+
+CACHE / ARCHIVE HYGIENE
+-----------------------
+Packaged reproducible NASA/Sentinel/updater cache contents are removed from the frozen publication archive. Cache directories remain available and user caches may be migrated/rebuilt normally. Scientific databases, model artifacts and installed country datasets are not deleted.
+
+DATABASES / MIGRATION
+---------------------
+No schema changes.
+All six protected databases remain byte-for-byte unchanged from 11.18.
+
+SCIENTIFIC METHODS
+------------------
+No scientific-method change. The Mechanistic Maize Twin source remains byte-for-byte unchanged.
+
+LIMITATIONS
+-----------
+• The build container cannot run the complete Streamlit browser app because Streamlit is unavailable offline; genuine UI screenshots must be captured in the target Windows/Anaconda environment.
+• The internal publication reference ID is not a DOI.
+• The bundled dependency lock documents the reference stack; the exact environment actually used for the paper should also be frozen with FREEZE_PUBLICATION_ENV.bat.
+• Synthetic demo metrics are not agronomic validation evidence.

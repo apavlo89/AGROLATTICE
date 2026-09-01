@@ -1,0 +1,37 @@
+AGROLATTICE 11.12 — NAVIGATION RELIABILITY & INTERACTION FIX
+=============================================================
+
+FIXED
+-----
+1. Crop Decisions Priority decisions & evidence gaps buttons could appear to do
+   nothing because the requested logical view was overwritten on rerun by the
+   persisted radio-widget session-state value.
+2. Added a two-phase navigation request state machine that applies requested
+   destinations before the navigation widget is instantiated.
+3. Priority-action navigation now displays a one-time context message in the
+   destination area.
+4. Hardened equivalent programmatic navigation in Persistent Twin.
+5. Hardened Climate & EO's Update field EO → Earth Observation route.
+
+INTERNAL
+--------
+- Added navigation_state.py 1.0.0, a Streamlit-independent session-state routing
+  helper that can be tested without a browser runtime.
+- crop_decision_command_centre.py: 1.0.0 → 1.0.1
+- twin_command_centre.py: 1.0.0 → 1.0.1
+- climate_earth_command_centre.py: 1.0.0 → 1.0.1
+- Updated RUN_APP.bat preflight and current-release documentation.
+
+DATABASES
+---------
+No schema migration. Existing protected databases and the Crop Profile Registry
+are unchanged.
+
+DEPENDENCIES
+------------
+No new third-party dependency.
+
+SCIENTIFIC METHODS
+------------------
+No scientific model, equation, threshold, validation protocol or mechanistic
+maize assumption was changed.

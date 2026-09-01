@@ -1,0 +1,3 @@
+CITY,STATE,Year,Month,Variable,Value,Scenario
+Montecillo,Mexico,2031,JANUARY,TEMPERATURE,16.5,SSP245
+Montecillo,Mexico,2031,JANUARY,PRECIPITATION_AVG,1.2,SSP245

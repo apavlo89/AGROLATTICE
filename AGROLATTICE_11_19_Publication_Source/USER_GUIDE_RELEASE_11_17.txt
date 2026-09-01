@@ -1,0 +1,102 @@
+AGROLATTICE 11.17 USER GUIDE — RESEARCHER WORKFLOW
+==================================================
+
+CORE IDEA
+---------
+AGROLATTICE is a persistent spatial research platform. The preferred hierarchy is:
+Country → research centre/farm → field → season → trial → experimental unit → plant/observation.
+
+Create the authoritative field/season once and let the Twin, Climate/EO, Crop Decisions, Experiments, Models & Evidence and Reports reuse the same context.
+
+HELP & ONBOARDING
+-----------------
+Help now contains:
+• Start Here — detects which core research records already exist.
+• Guided workflows — step-by-step paths for common research goals.
+• Workspace guides — what each workspace is for, what it needs and what it produces.
+• Data requirements — a platform-wide readiness matrix.
+• Scientific labels — one consistent evidence vocabulary.
+• Terminology — searchable AGROLATTICE glossary plus contextual ? help.
+• Troubleshooting — safe fixes for common map, navigation, data-source, performance and database problems.
+• Search — searches workflows, workspace guidance, troubleshooting and glossary.
+
+WHAT DO I NEED HERE?
+--------------------
+Every major research workspace now exposes a collapsed "What do I need here?" panel. It reports only whether the necessary persistent record/evidence exists. It does not automatically run retrieval, QC or validation.
+
+Evidence labels used consistently in guidance:
+Observed — direct local measurement/observation.
+Recorded — user-recorded identity/management/geometry fact.
+Retrieved — external data such as NASA POWER or Sentinel-2.
+Derived — deterministic calculation such as GDD or VPD.
+Mechanistic — process-based/physiological model output.
+ML prediction — statistical/machine-learning prediction.
+Forecast — future estimate/input.
+Scenario — hypothetical alternative.
+Recommendation — proposed action.
+Actual operation — action recorded as actually applied.
+Outcome — measured later result.
+Causal estimate — effect estimate under explicit causal assumptions.
+
+WORKSPACE PURPOSES
+------------------
+HOME
+Resume the active research context, see freshness/changes and identify the next useful action. Home remains lightweight and does not run expensive analysis automatically.
+
+FIELDS & OPERATIONS
+Maintain authoritative research-centre/field geometry, seasons, tasks, scouting, operations, sensors, samples, alerts and field history. Preserve spatial support for partial-field records.
+
+AGROLATTICE TWIN
+Maintain the persistent field/season digital twin. Maize can use the Laurent-derived mechanistic engine with parent-specific tln/coblf/ebR1, local calibration evidence and uncertainty. Timing predictions do not guarantee pollen quantity or seed purity.
+
+CLIMATE & EARTH OBSERVATION
+Explore the complete 19-variable historical climate dataset, retrieve field NASA weather, process Sentinel-2, compare environments and inspect climate risk/transferability. Climate similarity is not agronomic equivalence.
+
+CROP DECISIONS
+Compare crop/planting, irrigation, nutrient, pest/health, yield/economic and crop-model evidence. Keep prediction → recommendation → actual operation → outcome as separate records.
+
+EXPERIMENTS
+Design and map trials, preserve randomisation seed/design/factor structure, collect protocol-driven observations and retain Trial/Block/Replicate/Experimental Unit identities through analysis. PCA/K-means exploration supports k up to 20 where feasible.
+
+MODELS & EVIDENCE
+Persist training runs, model versions, validation, calibration, applicability, benchmark evidence and prediction-outcome links. Prefer grouped/site/season-aware validation over random row splits that leak repeated units.
+
+REPORTS
+Build versioned reports/manuscripts from persistent frozen evidence. Claims, tables and figures should remain traceable to the underlying dataset/model/validation/Twin/experiment snapshot.
+
+DATA & SETTINGS
+Manage country climate data, sources/connections, protected databases, verified backups, storage/performance and migrations. Do not delete scientific databases as a troubleshooting step.
+
+GUIDED WORKFLOW — MAIZE SYNCHRONY
+---------------------------------
+1. Map the real field and create the season.
+2. Create a trial with male/female genotype, density, male/female sowing dates/difference, block/replication and management/irrigation factors.
+3. Map/randomise experimental units.
+4. Attach daily weather from persisted evidence or explicit NASA retrieval.
+5. Record repeated male anthesis/pollen-shed, female silking/receptivity and tagged-plant leaf observations.
+6. Link a Persistent Twin and inspect mechanistic parent physiology/calibration.
+7. Compare candidate sowing strategies with uncertainty.
+8. Record harvest/seed-set/purity outcomes. Synchrony alone does not establish these outcomes.
+9. Validate across seasons/sites/parent pairs before claiming generalisation.
+
+GUIDED WORKFLOW — MODEL VALIDATION
+----------------------------------
+1. Build an analysis-ready dataset with target, predictors and field/trial/site/season/group IDs.
+2. Inspect the validation split before fitting.
+3. Fit preprocessing/resampling inside training folds only.
+4. Save the training run and immutable model version.
+5. Evaluate on deployment-relevant held-out groups (field/site/year/trial/genotype/parent pair/forward time as appropriate).
+6. Assess uncertainty/calibration and applicability/OOD.
+7. Link future measured outcomes to predictions to monitor real-world performance.
+
+TROUBLESHOOTING PRINCIPLES
+--------------------------
+• Blank/disappearing map: verify saved geometry/database before redrawing or deleting anything.
+• NASA/STAC failure: keep persisted data, inspect dates/AOI/provider and retry; never invent missing values.
+• Slow page: distinguish first-load cost from an explicit expensive analysis; Data & Settings shows performance/storage state.
+• Database/schema error: stop writing, verify backup/integrity, then use the supported migration/restore workflow.
+• Suspiciously high model score: inspect grouping and leakage before promoting the model.
+
+SCIENTIFIC INTEGRITY
+--------------------
+Measured data, retrieved data, derived values, priors, mechanistic outputs, predictions, forecasts, scenarios, recommendations and outcomes should remain distinguishable. AGROLATTICE should surface uncertainty and provenance where feasible and should not convert observational association into causal proof.

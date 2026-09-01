@@ -1,0 +1,85 @@
+AGROLATTICE 11.5 — BUILD VERIFICATION
+=====================================
+Generated: 2026-08-09T00:04:09.404585+00:00
+
+SOURCE
+------
+Archive: AGROLATTICE_Release_11_4_Multimodal_Crop_Intelligence_Hybrid_Twin_Learning.zip
+Source SHA-256: 9609f2accda661d6f41ff58db66de94d37e42f433bbb3978e30e4ee3893fcc55
+Baseline: AGROLATTICE 11.4 — Multimodal Crop Intelligence & Hybrid Twin Learning
+
+RELEASE
+-------
+AGROLATTICE 11.5 — Decision Intelligence & Research Optimisation
+Application version: 20.5-release11.5-decision-intelligence
+
+VERIFICATION EXECUTED
+---------------------
+- verify_release11_5.py: PASS
+- Python compileall: PASS
+- Top-level Python modules compiled: 48
+- RELEASE_MANIFEST_11_5.json: valid JSON
+- RESEARCH_METHODS_MANIFEST_11_5.json: valid JSON
+
+RESEARCH EVIDENCE DATABASE
+--------------------------
+- Schema: 1.3.0
+- SQLite integrity_check: ok
+- Foreign-key violations: 0
+- state_assimilations.sequence_json present: True
+- Packaged research-evidence records (must not contain synthetic verification data):
+  datasets: 0
+  data_acquisitions: 0
+  observations: 0
+  models: 0
+  training_runs: 0
+  predictions: 0
+  recommendations: 0
+  recommendation_status_history: 0
+  treatment_outcomes: 0
+  benchmark_runs: 0
+  decision_runs: 0
+  state_assimilations: 0
+  causal_analyses: 0
+
+PROTECTED DATA / BIOLOGY INVARIANTS
+------------------------------------
+- Field Operations DB: BYTE-IDENTICAL TO 11.4
+  SHA-256: e1b2c1e4efe8a846a3fb6563262abcbd59d7ad2e057e70adb3bad3d03041f525
+- Maize Pollination Lab DB: BYTE-IDENTICAL TO 11.4
+  SHA-256: 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+- Persistent Twin DB: BYTE-IDENTICAL TO 11.4
+  SHA-256: 2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a
+- Mechanistic Maize module: BYTE-IDENTICAL TO 11.4
+  SHA-256: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+11.5 CAPABILITIES VERIFIED
+--------------------------
+- Mapped-field irrigation policy comparison using existing crop/root-zone machinery.
+- Direct NASA POWER / Research Data Hub weather reuse with acquisition provenance.
+- Rainfed, RAW-trigger, deficit-refill, fixed-interval and optional recorded sensor-threshold policies.
+- Seasonal irrigation allocation and maximum-event constraints; infeasible alternatives remain auditable.
+- Pareto screening and researcher-selectable water/yield/profit/balanced objectives.
+- Local N/P/K response modelling with grouped validation, bounded support and Pareto trade-offs.
+- Single-state, evolving time-varying and repeated-measurement state-assimilation modes.
+- Recommendation -> status history -> actual action -> measured outcome evidence chain.
+- Explicit acknowledgement before creating a Field Operations task from a research recommendation.
+- Observational causal audit with explicit treated level, numeric/categorical pre-treatment adjustment, grouped cross-fitting, overlap/balance/ESS/placebo diagnostics and saved adjustment rationale.
+- Decision/state/causal evidence drill-down in Models & Evidence.
+
+SCIENTIFIC / OPERATIONAL NON-CLAIMS
+----------------------------------
+- No autonomous pump, valve, irrigation-controller or fertiliser-hardware actuation.
+- No exact reproduction claim for Seq2Seq+DRL irrigation, NSGA-II fertiliser optimisation or crop-specific EO-N assimilation.
+- Pareto efficiency is not agronomic validation.
+- Ky-based relative-yield output is a water-stress proxy unless locally calibrated.
+- Observational causal estimates are conditional on explicit assumptions and are not causal proof.
+- NASA POWER is gridded environmental data, not a local station and not a future operational forecast.
+
+INTERACTIVE STARTUP TEST
+------------------------
+- Streamlit installed in packaging environment: False
+- Full browser-based Streamlit interaction was NOT claimed because Streamlit is absent from the packaging environment.
+- RUN_APP.bat includes dependency/module/version preflight for the user Windows/Anaconda environment.
+
+RESULT: PASS

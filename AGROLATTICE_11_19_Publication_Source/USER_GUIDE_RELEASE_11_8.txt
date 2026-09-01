@@ -1,0 +1,66 @@
+AGROLATTICE 11.8 — FIELDS & OPERATIONS GUIDE
+===========================================
+
+1. ACTIVE FIELD
+Choose one mapped field at the top. The selection persists across the complete
+Fields & Operations workspace. This prevents repeatedly reselecting the same field
+for tasks, sensors, scouting, crop health and precision work.
+
+2. OVERVIEW
+Field Pulse summarises area, open/overdue work, alerts, sensors, latest persisted
+weather and latest persisted EO evidence. "What needs attention" uses saved state
+and transparent rules. It does not autonomously fetch external data or run models.
+
+3. MAP
+Use the authoritative spatial workspace to view the field boundary, linked maize
+experiments/treatment units, scouting, sensors, nutrient samples, persistent
+sampling designs and saved prescriptions. Geometry QA checks validity, containment
+inside a saved organisation boundary and overlaps with sibling fields.
+
+4. WORK & SCOUTING
+Tasks can be edited and recurring tasks generate their next occurrence when marked
+Completed. Observation protocols standardise repeated measurements. Scouting can
+record quantitative measurements and link to trial, experimental unit and tagged
+plant IDs when available. Use Click map to place an observation spatially.
+
+5. OPERATIONS
+Choose Actual only for work that really occurred. Planned and Actual remain
+explicitly distinct. Record purpose, equipment, method, active ingredient, batch,
+rate, water and cost. Link to a Research Evidence recommendation when appropriate.
+Whole-field support is default; a custom treated polygon can be drawn for partial-
+field work and must remain inside the authoritative field boundary.
+
+6. SENSORS & SAMPLES
+Sensor dashboard shows freshness/QC summaries. Lifecycle lets sensors become
+Active, Maintenance or Retired without deleting historical readings. Calibration
+records are persistent. Nutrient/soil/tissue/water samples now have explicit depth,
+stage, tissue, laboratory, analytical method, unit and detection-limit metadata.
+
+7. CROP HEALTH
+The Field health view reads persistent data-acquisition, model and Twin metadata
+when available. Alert rules use source-specific metric choices. Persistence means a
+rule may require multiple consecutive triggered evaluations before generating an
+incident; cooldown prevents repeated alerts in the configured period.
+
+8. PRECISION
+Sampling supports systematic grid, random and stratified-random designs and can
+persist points. Management-zone exploration can directly use stored nutrient
+samples or an uploaded point dataset. Multi-variable clustering is exploratory and
+is not automatically a validated variable-rate prescription.
+
+9. HISTORY
+Timeline provides a chronological field diary. Structured seasons preserve crop /
+genotype / sowing / harvest context across years. Exports & offline pack retains the
+existing disconnected field-work workflow.
+
+10. ADMINISTRATION
+Create/edit farms/research centres and authoritative fields here. Destructive field
+or organisation actions remain intentionally separated from everyday operations.
+
+SCIENTIFIC INTERPRETATION
+- An alert is an evidence-based screening rule, not a diagnosis.
+- A model prediction is not a measurement.
+- A recommendation is not an applied operation.
+- A planned operation is not an actual operation.
+- A K-means cluster is not automatically an agronomic management zone.
+- A sensor value is only as trustworthy as its calibration, installation and QC.

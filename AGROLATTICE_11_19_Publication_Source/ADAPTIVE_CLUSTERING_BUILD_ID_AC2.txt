@@ -1,0 +1,11 @@
+AGROLATTICE 11.19 ADAPTIVE CLUSTERING BUILD
+===========================================
+
+Displayed release name: AGROLATTICE 11.19
+Derivative build identifier: AGROLATTICE-11.19-AC2-2026-08-12
+Base frozen reference identifier: AGROLATTICE-11.19-PRR-2026-08-12
+Base source archive SHA-256:
+d74eb3758a09762f1d52dedbdaea6da969613b442ba1de3b8705335f56b6f23a
+
+AC2 is a derivative analysis build. It does not replace or modify the original
+AGROLATTICE 11.19 Publication Reference Release archive.

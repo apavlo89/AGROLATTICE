@@ -1,0 +1,138 @@
+AGROLATTICE 11.14 — BUILD & VERIFICATION REPORT
+================================================
+Release: AGROLATTICE 11.14 — Model Evidence Command Centre & Scientific Validation
+Application version: 20.14-release11.14-model-evidence-command-centre
+Source release: AGROLATTICE 11.13 — Experiment Command Centre & Trial Intelligence
+Source archive SHA-256: 86d8f5597eb9e9cce6960e34ee8a5a17e5356af9ba0aac706ada9939ecb9ee7a
+Build date: 2026-08-10
+
+IMPLEMENTATION SCOPE
+--------------------
+11.14 rebuilds Models & Evidence as AGROLATTICE's scientific-governance workspace.
+Major implemented capabilities include:
+- true lazy Model Evidence Command Centre;
+- registry model filtering and coherent Model Detail pages;
+- persistent training-run records for successful, inferior and failed candidates;
+- immutable model versions with artifact SHA-256, dataset snapshot link, feature contract and computational environment;
+- Prototype-first model registration and append-only model-status history;
+- evidence-gated promotion with auditable written override;
+- registry-aware validation against canonical observations or explicit independent paired datasets;
+- regression, classification and probability-aware validation metrics;
+- empirical interval-coverage and probability-reliability diagnostics;
+- grouped/transfer-aware validation, frozen holdout, repeated group-isolated holdout and split preview;
+- model-ranking stability across folds/repeated holdouts;
+- applicability/OOD inspection and outcome-linked model-health/drift monitoring;
+- predictive explainability with artifact-integrity checks;
+- registry-native compatible-model comparison, disagreement and paired bootstrap delta-RMSE uncertainty;
+- external benchmark execution from explicit researcher-supplied local resources with reproduction-status provenance;
+- prediction -> measured outcome linking with spatial/season context and chronology visibility;
+- Evidence Graph and reproducibility ZIP export;
+- dataset snapshot manifests and source-method/paper implementation relationship display;
+- retention of k=2..20 PCA/K-means climate exploration introduced in 11.13.
+
+RESEARCH EVIDENCE DATABASE MIGRATION
+------------------------------------
+Research Evidence schema: 1.3.0 -> 2.0.0
+Migration type: additive.
+New tables:
+- dataset_snapshots
+- model_versions
+- model_status_history
+- validation_runs
+- prediction_outcome_links
+- model_health_events
+
+Exact predecessor copy included:
+models_evidence/backups/pre_11_14_research_evidence.sqlite
+SHA-256: 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+
+Migrated packaged Research Evidence DB:
+models_evidence/research_evidence.sqlite
+SHA-256: 7e80e599285753c026ff47e86127ad3df42b4cfdb7ff662fb6cd1011b1052a25
+Schema version: 2.0.0
+PRAGMA integrity_check: ok
+PRAGMA foreign_key_check: 0 issues
+All six new governance tables contain zero synthetic verification records in the packaged release.
+Every predecessor table and every predecessor column/row was projected and compared before/after migration. All were identical except metadata.schema_version, which is intentionally updated.
+A clean temporary migration from the exact pre-11.14 database to schema 2.0.0 was also executed successfully and generated its backup before migration.
+
+PROTECTED DATA / BIOLOGY
+------------------------
+The following artifacts are byte-for-byte unchanged from the supplied 11.13 baseline:
+- field_operations/field_operations.sqlite
+  SHA-256: fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+- pollination_lab/maize_flowering_trials.sqlite
+  SHA-256: 87511c0a9921e731f8bd8b3111118e452b9aa6d6ee32905fee3b7af73a258819
+- agrolattice_twin/agrolattice_twin.sqlite
+  SHA-256: ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+- models_evidence/crop_profiles.sqlite
+  SHA-256: 84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+- maize_mechanistic_twin.py
+  SHA-256: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+All packaged SQLite databases and retained database backups passed integrity_check and foreign_key_check.
+No field geometry, trials, experimental units, Twin states, crop profiles or mechanistic maize equations were altered by this release.
+
+DEPENDENCIES
+------------
+No new mandatory dependency was added.
+Dependency files are byte-for-byte unchanged from 11.13:
+- requirements_aquacrop.txt
+- requirements_ml_agriculture.txt
+- requirements_research_optional.txt
+Optional XGBoost, LightGBM, CatBoost, Optuna, SHAP and TabPFN capabilities remain optional and are discovered at runtime.
+
+AUTOMATED VERIFICATION
+----------------------
+PASS — Python recursive compileall.
+PASS — 67 top-level Python source files compile.
+PASS — verify_release11_14.py.
+PASS — Research Evidence clean predecessor migration regression.
+PASS — Research Registry functional regression:
+       dataset registration; immutable dataset snapshot; model registration;
+       Prototype-only upsert governance; failed and completed training runs;
+       held-out validation; internal status promotion; blocked unsupported external promotion;
+       immutable version/artifact SHA; prediction; measured observation;
+       prediction-outcome match; model-health event; status history.
+PASS — frozen group holdout regression.
+PASS — repeated group-isolated holdout regression.
+PASS — repeated grouped model-comparison smoke test using Ridge and Random Forest.
+PASS — all primary SQLite integrity and foreign-key checks.
+PASS — protected artifact hash checks.
+PASS — k<=20 climate/PCA clustering controls retained.
+PASS — RUN_APP.bat module/schema/version preflight updated for 11.14.
+PASS — diagnostic/install/migration batch labels updated to 11.14.
+
+SCIENTIFIC-GOVERNANCE GUARDS VERIFIED
+-------------------------------------
+- New model registrations cannot silently start at a promoted status.
+- Existing model upserts cannot silently mutate evidence status.
+- Model promotion requires written rationale.
+- Internal validation excludes diagnostic-only evidence and requires documented split/leakage safeguards.
+- External/operational promotion does not treat every generic leave-one-group result as external validation.
+- OOD/model disagreement is not labelled calibrated uncertainty.
+- Equal-weight OOF ensembles are diagnostic only; learned stacking weights are not promoted without leakage-safe meta-training.
+- Predictive feature importance is explicitly not causal inference.
+- Benchmark resources are not silently downloaded.
+- Prediction/outcome matching is auditable and chronology is surfaced.
+
+PERFORMANCE
+-----------
+The top-level Models & Evidence workspace uses lazy navigation. Inactive pages do not execute.
+Artifact loading, permutation importance, partial dependence, validation calculations, benchmark execution and legacy advanced tools require explicit researcher actions.
+Large registry tables are requested with bounded limits and scoped filters where applicable.
+
+KNOWN LIMITATIONS / DELIBERATE SAFEGUARDS
+-----------------------------------------
+1. A full interactive Streamlit browser session could not be run in this packaging environment because Streamlit is not installed here. RUN_APP.bat performs the target-environment preflight on Windows/Anaconda.
+2. Official CropNet/YieldSAT/WorldCereal dataset retrieval is not automatically initiated. Dataset sizes, licences and upstream schemas must be reviewed before retrieval; 11.14 executes benchmark evidence from explicit local resources.
+3. Generic learned stacking/ensemble weights are not automatically trained/promoted because safe stacking requires nested or out-of-fold meta-training separated from final evaluation.
+4. Generic SHAP remains model/backend dependent. Permutation importance and PDP provide broadly compatible predictive interpretation; the existing advanced pest workflow retains SHAP support.
+5. Automated prediction-outcome matching uses target, spatial context and season where available. It must be reviewed by the researcher and does not establish causal treatment effects.
+6. Drift diagnostics compare linked errors over time but do not identify the cause of performance degradation.
+7. Dataset snapshot manifests freeze provenance/transformation state. Raw data bytes are only immutable when a stable local file/hash is also recorded.
+8. Evidence status remains a scientific-governance judgement. An auditable override is possible but never creates missing empirical evidence.
+
+RESULT
+------
+AGROLATTICE 11.14 passed the available static, database, migration, functional and packaging-oriented verification checks and is ready for local Streamlit testing in the user's Windows/Anaconda environment.

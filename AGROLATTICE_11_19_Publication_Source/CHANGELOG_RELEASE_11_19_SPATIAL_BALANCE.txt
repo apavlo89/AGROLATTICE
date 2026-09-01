@@ -1,0 +1,36 @@
+AGROLATTICE 11.19 — spatially balanced climate clustering
+Build: SB1 (2026-08-14)
+
+1. Retains the AGROLATTICE 11.19 publication-reference identity and all existing
+   AC3 multi-method and focused K-means capabilities.
+2. Restores the authoritative Mexico climate table containing 1,012 locations
+   across 32 federal entities, including all 80 Oaxaca locations.
+3. Adds equal-area spatial support as the default sampling correction for every
+   climate-zone workflow.
+4. Uses a spherical Lambert cylindrical equal-area grid, with a user-adjustable
+   25–100 km cell size and a 50 km default.
+5. Averages location climate profiles inside occupied support cells and gives
+   every occupied cell one equal vote during variable selection, PCA, k/model
+   selection, clustering, silhouette calculation, stability analysis and
+   minimum-cluster safeguards.
+6. Preserves every eligible catalogue location in maps and exports by assigning
+   the final support-cell label back to all cell members.
+7. Exports per-location inverse-density weights (1/n within a cell), spatial
+   support identifiers and locations-per-cell counts.
+8. Adds an in-app method explanation, raw-versus-effective sample metrics,
+   density histogram, densest-cell table and a complete spatial sampling audit.
+9. Retains uncorrected raw-location weighting only as an explicitly labelled
+   diagnostic sensitivity option.
+10. Adds SPATIAL_CLUSTERING_METHOD.md and targeted deterministic verification.
+11. Removes the temporary Oaxaca-retention diagnostic from the user interface;
+    coverage reporting now remains geographically neutral and shows source,
+    eligible, mapped and excluded locations.
+
+Verified default Mexico support:
+- Catalogue locations: 1,012
+- Federal entities: 32
+- Oaxaca locations: 80
+- Occupied 50 km equal-area support cells: 377
+- Effective spatial sample size: 377
+- Maximum catalogue locations in one support cell: 25
+- Sum of location weights within every occupied support cell: 1.0

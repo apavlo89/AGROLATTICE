@@ -1,0 +1,34 @@
+{
+  "release": "AGROLATTICE 11.15",
+  "scientific_scope": "Persistent research reporting, evidence snapshots, manuscript versioning, claim-evidence traceability, citation provenance and reproducibility export.",
+  "methods": [
+    {
+      "name": "Frozen report-evidence snapshot",
+      "implementation": "Persisted Field/Trial/Twin/Model evidence tables are hashed as deterministic CSV and stored as reporting snapshot artifacts.",
+      "limitations": "A hash proves content identity, not scientific validity or completeness."
+    },
+    {
+      "name": "Claim-evidence ledger",
+      "implementation": "Manuscript claims can be linked to evidence type, source record and effect/statistic with automated high-risk wording checks.",
+      "limitations": "The wording audit is rule-based and cannot determine whether a causal/statistical interpretation is substantively correct."
+    },
+    {
+      "name": "Evidence-derived methods inventory",
+      "implementation": "Method candidates are inferred from persisted weather, EO, Twin, experiment, validation and model artifacts; researchers approve the final method list.",
+      "limitations": "Inference cannot replace manual verification of the exact analysis configuration."
+    },
+    {
+      "name": "Privacy-aware research export",
+      "implementation": "Public-package mode can redact identified coordinate, field, genotype and researcher columns and records the applied redaction rules.",
+      "limitations": "Automated redaction is not a guarantee of complete de-identification of free text or uncommon identifiers."
+    }
+  ],
+  "integrity_rules": [
+    "Do not generate manuscript numerical claims from evidence that is not present in the frozen/current artifact set.",
+    "Do not treat predictive or mechanistic evidence as causal evidence.",
+    "Do not call a report reproducible without recording the evidence snapshot/model/dataset provenance used.",
+    "Do not silently overwrite submitted/final report versions.",
+    "Do not fabricate citations or journal requirements.",
+    "AI-assisted reporting must remain author-reviewed and may not invent measurements, significance or references."
+  ]
+}

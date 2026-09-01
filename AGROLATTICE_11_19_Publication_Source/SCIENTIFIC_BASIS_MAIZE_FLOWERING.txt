@@ -1,0 +1,60 @@
+AGROLATTICE 11.8 - scientific basis for the Mechanistic Maize Twin (model unchanged from 11.0)
+==============================================================================
+
+Primary mechanistic source
+--------------------------
+Laurent A. et al. (2025). Predicting inbred parent synchrony at flowering for
+maize hybrid seed production by integrating crop growth model with whole genome
+prediction. Crop Science 65, e21453. DOI: 10.1002/csc2.21453.
+
+AGROLATTICE implements the equations disclosed in this paper's Maize Flowering
+Synchrony (MFS) crop-growth model:
+
+* 30.6 GDD from planting to emergence.
+* Leaf number = 2.5 * exp(post-emergence GDD * coblf), capped at tln.
+* Ear-growth onset at Vn = 0.67 * tln.
+* Ear biomass starts at 0.01 g and grows exponentially toward 5 g.
+* Female 50% silking occurs when predicted ear biomass reaches ebR1.
+* Male anthesis occurs 40 GDD after final-leaf expansion.
+
+The genotype-specific physiological parameters are total leaf number (tln),
+coefficient of leaf appearance (coblf), and ear biomass at 50% silking (ebR1).
+Publication priors used as defaults are tln N(19,2), coblf N(0.0019,0.00036),
+and ebR1 N(2,0.5). They are priors, not measurements for a local parent line.
+
+What is not reproduced
+----------------------
+The paper's commercial phenotype/genotype data and original C++ Bayesian
+CGM-WGP sampler are not public. AGROLATTICE does not claim to reproduce that
+proprietary layer. The optional SNP-marker feature is a transparent genomic
+ridge approximation that predicts calibrated physiological parameters. Its
+outputs are explicitly labelled as an approximation.
+
+Calibration and uncertainty
+---------------------------
+AGROLATTICE fits parent physiology with prior-regularised nonlinear least
+squares using observed flowering dates and repeated tagged-plant leaf counts.
+The priors are necessary because different parameter combinations can produce
+similar flowering dates. Uncertainty is propagated by Monte Carlo sampling of
+tln, coblf and ebR1. It does not cover every weather-forecast, water-stress,
+disease, pollen-quantity or operational source of uncertainty.
+
+Operational sowing strategy
+----------------------------
+The optimiser can compare one male sowing date with two staggered dates. It
+targets male shed timing approximately two days before and two days after
+female silking, following the operational example in Laurent et al. It predicts
+timing rather than pollen quantity and must be field-validated.
+
+Additional sources
+------------------
+Noriega Gonzalez L.A. et al. (2011). Fenologia, crecimiento y sincronia floral
+de los progenitores del hibrido de maiz QPM H-374C. Revista Mexicana de Ciencias
+Agricolas 2(4), 489-500. The parent-specific 30-GDD difference reported for its
+Celaya experiment is not treated as a universal offset.
+
+Astini J.P. et al. (2009). Predicting outcrossing in maize hybrid seed
+production. Agronomy Journal 101, 373-380. DOI: 10.2134/agronj2007.0328.
+
+Field observations remain primary evidence. All recommendations require
+independent validation across parent combinations, seasons and sites.

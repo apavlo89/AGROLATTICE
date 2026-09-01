@@ -1,0 +1,7 @@
+# AGROLATTICE 11.4 optional advanced research models
+# These are NOT required for normal application startup.
+# Install only when you intend to use the corresponding optional backend.
+
+# Small-data tabular foundation-model baseline. Availability/compatibility is
+# checked at runtime and its package/model licences remain the user's responsibility.
+tabpfn>=2.0

@@ -1,0 +1,24 @@
+{
+  "release": "AGROLATTICE 11.2",
+  "title": "Spatial & Upgrade Integrity Update",
+  "application_version": "20.2-release11.2-spatial-upgrade-integrity",
+  "based_on": "AGROLATTICE 11.1 — Research Integrity Update",
+  "readme": "README_START_HERE_RELEASE11_2.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_2.txt",
+  "changelog": "CHANGELOG_RELEASE_11_2.txt",
+  "database_schema_changes": false,
+  "database_migration": "No schema migration required; backup-first source-authoritative user-data migration workflow updated.",
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "module_versions": {
+    "maize_pollination_lab": "2.2.0",
+    "ui_release10_4_help": "10.4.3"
+  },
+  "key_fixes": [
+    "Existing-trial exact spatial match status/UI crash fix",
+    "Pre-commit treatment-unit containment validation during trial re-linking",
+    "Protected/archive-first deletion of data-bearing maize trials",
+    "Source-authoritative backup-first SQLite user-data migration with WAL-safe snapshots",
+    "Current Release 11.2 help and user-guide documentation"
+  ]
+}

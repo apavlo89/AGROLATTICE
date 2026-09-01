@@ -1,0 +1,8 @@
+Treatment,Male sowing offset days,Meaning
+Male -6 d,-6,Male before female
+Male -4 d,-4,Male before female
+Male -2 d,-2,Male before female
+Male 0 d,0,Same-day sowing
+Male +2 d,2,Male after female
+Male +4 d,4,Male after female
+Male +6 d,6,Male after female

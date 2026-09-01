@@ -1,0 +1,129 @@
+AGROLATTICE 11.10 — CLIMATE & EARTH OBSERVATION USER GUIDE
+==========================================================
+
+1. START WITH A FIELD WHEN POSSIBLE
+-----------------------------------
+Select Country → Research centre/farm → Field in the global context. Climate &
+Earth Observation will use that mapped field as its research context. You can
+still perform city/regional analyses when no field is selected.
+
+2. OVERVIEW
+-----------
+Environmental Pulse reads persisted summaries only. It shows whether field-linked
+weather, Sentinel-2, root-zone information and sensor readings are current,
+aging, stale or missing.
+
+Use:
+- Update NASA weather: explicit field-centroid retrieval through the existing
+  canonical Research Data Hub weather pathway.
+- Update field EO: move directly to Earth Observation with the field polygon
+  preloaded.
+- Research Data Hub: inspect/retrieve other supported data.
+- Open Twin / Open field: continue the linked research workflow.
+
+Nothing expensive is fetched or processed automatically when Overview opens.
+
+3. FIELD CLIMATE — 19 VARIABLES
+--------------------------------
+Choose a variable family and variable. For a mapped field, AGROLATTICE defaults
+to the nearest installed climate reference location. The displayed distance is
+important: this reference is gridded/location climate evidence, not a field
+station measurement.
+
+The explorer provides:
+- highlighted year versus long-term monthly mean;
+- ±1 standard-deviation context where available;
+- annual mean/trend view;
+- year × month heatmap;
+- coverage/provenance information;
+- separate local sensor evidence where available.
+
+Do not silently substitute a local sensor for gridded climate or vice versa.
+Their spatial support and measurement process differ.
+
+4. CLIMATE COMPARISON
+---------------------
+Use the existing comparison workflow to define reference environment, period,
+variables/crop profile and comparison universe. If Active mapped field is chosen,
+AGROLATTICE resolves its nearest installed climate reference transparently.
+
+Interpret similarity as environmental resemblance under the selected variables,
+period, scaling and weights. It is not evidence that two locations will have the
+same crop response or that a treatment will transfer successfully.
+
+5. SPATIAL & TRANSFERABILITY
+----------------------------
+Use the existing climate-space, clustering and migration/transferability analyses
+for hypothesis generation and site screening.
+
+PCA is preferred when interpretability matters because its axes can be related to
+climate-variable loadings. UMAP/t-SNE are useful visualisation tools but 2-D
+separation should not be read as a literal agronomic distance.
+
+6. CLIMATE RISK
+---------------
+The page keeps the active crop and season visible. Treat temperature/water/
+precipitation extremes as hazard or exposure evidence. A hazard threshold being
+exceeded does not by itself quantify yield loss. Consequence claims require a
+validated crop-response model or field evidence.
+
+7. EARTH OBSERVATION
+--------------------
+When an active mapped field exists, its authoritative geometry is preloaded.
+You can then:
+- run Quick update EO with conservative defaults; or
+- use the full advanced Sentinel-2 workflow.
+
+The advanced workflow retains manual AOI, catalogue, scene, cloud/SCL masking,
+resolution and index controls. Processed EO remains dependent on scene quality,
+usable pixel percentage and the relation between pixel size and plot/field size.
+
+Do not interpret EO crop/irrigation classification or vegetation indices as
+recorded management. Recorded crop/irrigation data remain authoritative records.
+
+8. EVIDENCE & DATA
+------------------
+This view lists field-linked Research Evidence acquisitions and Persistent Twin
+environmental attachments. Use "Save current climate / EO evidence snapshot" only
+when a session analysis is worth retaining in the research record.
+
+The saved JSON preserves analysis outputs and provenance. Saving does not turn
+an exploratory similarity, anomaly or EO result into a validated causal finding.
+
+9. DIRECT WEATHER RETRIEVAL DATE WINDOWS
+-----------------------------------------
+AGROLATTICE uses, in order:
+1) structured field-season sowing/harvest dates when actually recorded;
+2) the recorded season year when dates are unavailable;
+3) a rolling 12-month window when neither is available.
+
+It does not fabricate a sowing date to make the retrieval appear crop-specific.
+
+10. PERFORMANCE
+---------------
+The large country climate CSV is loaded/prepared once per Python process. Release
+11.10 also reuses a small precomputed climate-location catalogue and caches only
+the selected location subset for Field Climate.
+
+NASA requests, STAC catalogue searches, raster processing, climate similarity,
+PCA/clustering and risk calculations run only when you explicitly enter/use those
+tools.
+
+11. SCIENTIFIC LABELS
+---------------------
+Keep these distinctions explicit:
+- Measured: field/sensor/laboratory observations.
+- Retrieved: external/gridded data obtained from a provider.
+- Derived: deterministic calculation from source data.
+- EO-derived: result estimated from satellite observations.
+- Modelled: output of a crop/water/statistical model.
+- Forecast: future-facing model/provider estimate.
+
+12. TROUBLESHOOTING
+-------------------
+If the field has no geometry, create/fix it under Fields & Operations first.
+If the country climate dataset is missing, use Data & Settings → Dataset updater.
+If Sentinel/STAC fails, the full Earth Observation workflow surfaces provider
+errors and keeps manual controls available.
+If an optional package is missing, use the appropriate installer batch file or
+run RUN_APP.bat to see the dependency preflight message.

@@ -1,0 +1,119 @@
+AGROLATTICE 11.6 — BUILD VERIFICATION
+=====================================
+Release: AGROLATTICE 11.6 — Performance & Branding Update
+Application version: 20.6-release11.6-performance-branding
+Source release: AGROLATTICE 11.5 — Decision Intelligence & Research Optimisation
+Source ZIP SHA-256: 8a13d0ac770af63427b47e607a06368dadd172dece3de654fe5b1c1c60b44879
+Build date: 2026-08-10
+
+PURPOSE
+-------
+This release addresses ordinary Streamlit navigation/rerun latency and integrates
+AGROLATTICE's new brand logo. It does not change scientific algorithms or crop
+model parameters.
+
+PERFORMANCE AUDIT FINDING
+-------------------------
+The bundled Mexico climate table is 607,497,870 bytes (~579.4 MiB) with
+8,792,484 rows. Release 11.5 performed a redundant full active-country status
+CSV read during top-level script execution even after climate data had already
+been loaded. A build-container probe of that Release-11.5-style status read took
+~9.43 seconds and reached ~1.51 GB maximum resident memory. The exact timing is
+environment-specific; the important verified code change is that this redundant
+status-read call is absent from normal 11.6 top-level navigation execution.
+
+11.6 PERFORMANCE CHANGES VERIFIED
+---------------------------------
+- Active-country prepared climate runtime uses a process-local Streamlit resource
+  cache rather than repeatedly serialising/copying the multi-million-row table.
+- Cache invalidation uses source path + size + nanosecond mtime for the cities
+  catalogue and active climate file, avoiding a full-file hash on each rerun.
+- Dataset status is calculated from the already prepared climate DataFrame.
+- Latitude/longitude attachment uses the small location lookup; when every
+  climate location matches, the merged analysis frame aliases the climate frame
+  instead of duplicating the full climate columns.
+- Field Operations, Pollination Lab, Persistent Twin, Research Evidence,
+  ProjectStore and StudyStore service objects are cached between reruns while
+  SQLite connections remain short-lived per operation.
+- Unchanged country settings are no longer rewritten to disk on every rerun.
+- System Diagnostics includes runtime-cache metrics and explicit reload controls.
+- The new horizontal AGROLATTICE logo and square icon are bundled and wired to
+  the app branding path, with a safe fallback if the installed Streamlit lacks
+  the logo API.
+
+AUTOMATED VERIFICATION
+----------------------
+PASS — verify_release11_6.py
+       Includes carried-forward 11.5 scientific/decision regression checks plus:
+       * performance-runtime cleaning/equivalence test
+       * coordinate-alias behavior test
+       * file-signature invalidation test
+       * no-op country-settings write test
+       * logo PNG integrity/dimensions/transparency checks
+       * source-level performance regression guard
+       * release manifest/document/startup checks
+
+PASS — Python compilation of all 50 top-level Python modules.
+
+DATABASE INTEGRITY AND PROTECTION
+---------------------------------
+Field Operations DB
+  SHA-256: e1b2c1e4efe8a846a3fb6563262abcbd59d7ad2e057e70adb3bad3d03041f525
+  PRAGMA integrity_check: ok
+  foreign-key violations: 0
+  byte-for-byte equal to supplied 11.5: YES
+
+Maize Pollination Lab DB
+  SHA-256: 6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+  PRAGMA integrity_check: ok
+  foreign-key violations: 0
+  byte-for-byte equal to supplied 11.5: YES
+
+Persistent Twin DB
+  SHA-256: 2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a
+  PRAGMA integrity_check: ok
+  foreign-key violations: 0
+  byte-for-byte equal to supplied 11.5: YES
+
+Research Evidence DB
+  SHA-256: 516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+  PRAGMA integrity_check: ok
+  foreign-key violations: 0
+  byte-for-byte equal to supplied 11.5: YES
+
+DATABASE MIGRATION
+------------------
+None. No database schema change was required for 11.6.
+
+SCIENTIFIC INVARIANT
+--------------------
+maize_mechanistic_twin.py
+  SHA-256: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+  byte-for-byte equal to supplied 11.5: YES
+
+No climate values are rounded/recomputed by the performance layer. The existing
+19-variable global climate system, field geometry, Twin state, research evidence
+and decision-intelligence methods are carried forward.
+
+DEPENDENCIES
+------------
+No new mandatory Python dependency. Existing Streamlit >=1.48 startup requirement
+is retained. RUN_APP.bat preflights the new performance_runtime module and brand
+assets in the normal Windows/Anaconda environment.
+
+LIMITATIONS / HONEST TEST BOUNDARY
+----------------------------------
+- The first use of a very large active-country CSV in a fresh Python process still
+  requires one genuine parse/preparation pass. 11.6 primarily removes repeated
+  work on subsequent Streamlit reruns/navigation.
+- Satellite rendering, very large interactive maps, external API requests and
+  model training retain their inherent task latency.
+- Streamlit is not installed in the packaging container, therefore a full
+  interactive browser-navigation timing test was not performed or claimed.
+  RUN_APP.bat performs dependency/module/version preflight on the user's target
+  Windows/Anaconda installation.
+
+FINAL PACKAGE
+-------------
+The final ZIP archive is tested with unzip -t after packaging. Its SHA-256 is
+recorded separately in the release checksum file.

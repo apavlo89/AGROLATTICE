@@ -1,0 +1,49 @@
+{
+  "release": "AGROLATTICE 11.13",
+  "scientific_scope": "Experiment design, spatial randomisation, protocol-driven observation, maize flowering synchrony, GxExM analysis and climate-space cluster exploration.",
+  "methods": [
+    {
+      "name": "Factorial blocked experiment allocation",
+      "status": "existing method preserved and provenance strengthened",
+      "implementation": "Treatment combinations are assigned within declared blocks/replicates; seed and full allocation manifest are persisted in design_versions.",
+      "limitations": "Automatic allocation should not be treated as a universal split-plot/strip-plot/incomplete-block generator."
+    },
+    {
+      "name": "Spatial adjacency-constrained randomisation heuristic",
+      "status": "new optional 11.13 feature",
+      "implementation": "Multiple seeded candidate permutations are compared within the established block structure; where Shapely geometry is available the candidate with fewer shared borders between identical treatments is retained.",
+      "limitations": "This reduces one form of spatial clustering but does not prove optimality or eliminate spatial confounding."
+    },
+    {
+      "name": "Approximate two-group power planning",
+      "status": "new transparent planning calculation",
+      "implementation": "Normal-approximation sample size using alpha, desired power, standardised effect size and optional design-effect multiplier.",
+      "limitations": "Not a replacement for design-specific mixed-model/split-plot/longitudinal power simulation."
+    },
+    {
+      "name": "Block-aware mixed model",
+      "status": "new optional lightweight analysis",
+      "implementation": "statsmodels MixedLM with treatment fixed effect and block random intercept when sufficient data are present.",
+      "limitations": "Researchers must confirm the model matches the actual randomisation and error strata."
+    },
+    {
+      "name": "Mechanistic maize parent synchrony",
+      "status": "existing method unchanged; integrated as advanced experiment pathway",
+      "implementation": "Uses the established Laurent-derived mechanistic maize engine and local observations/calibration workflows.",
+      "limitations": "Timing predictions do not guarantee pollen quantity, fertilisation, seed purity or yield; publication priors are not local measurements."
+    },
+    {
+      "name": "Agroclimatic K-means plus PCA",
+      "status": "expanded k exploration in 11.13",
+      "implementation": "K-means uses the full standardised variable-by-month climate feature matrix; PCA provides a two-dimensional representation. Feasible k is bounded by min(20, n_samples-1, distinct climate profiles).",
+      "diagnostics": ["silhouette score", "K-means inertia", "smallest cluster size", "largest cluster size"],
+      "limitations": "Clusters are exploratory environmental groupings and are not official agroecological zones. PCA/UMAP/t-SNE plot distances should not be overinterpreted."
+    }
+  ],
+  "validation_principles": [
+    "Preserve trial/block/replicate/site/season/parent identifiers.",
+    "Prefer grouped, cross-season, cross-site or parent-aware validation over leakage-prone random row splits.",
+    "Distinguish measured outcomes, derived exposures, mechanistic predictions and model estimates.",
+    "Flag missing/inconsistent field data; do not silently delete or invent measurements."
+  ]
+}

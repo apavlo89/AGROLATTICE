@@ -1,0 +1,108 @@
+AGROLATTICE 11.4 USER GUIDE
+===========================
+
+RESEARCH DATA HUB
+-----------------
+Open Data & Settings -> Research Data Hub.
+
+NASA weather
+- Choose Mapped field to use the stored field centroid, or Manual coordinates.
+- Choose dates and Daily/Weekly/Monthly output.
+- Retrieve. The tool reuses AGROLATTICE's NASA POWER cache and harmonises available
+  variables to the established 19-variable climate profile.
+- Optional POWER variables that fail are reported rather than invented.
+
+Installed climate dataset
+- Choose a city/location from the selected country's currently installed dataset.
+- Select years and load the 19-variable monthly history.
+- Use Dataset updater if the country dataset has not been installed yet.
+
+Field records
+- Select a mapped field and reuse scouting observations, operations, sensors, sensor
+  readings, nutrients or crop history directly.
+- For scouting observations, the enrichment button can retrieve NASA weather and attach
+  environmental covariates by observation date.
+- A presence-only scouting record is not automatically a no-pest/absence dataset.
+
+Current app data
+- Run Daily Weather, Satellite Monitoring, Soil-water balance or Current-season Monitor.
+- Return to Research Data Hub and select the in-memory result instead of exporting CSV.
+
+Session/provenance
+- Inspect the current Research Data Hub table.
+- Register dataset + acquisition provenance when it will be used for reproducible model
+  work. Registration records source/request metadata; it does not change Field Operations.
+
+PHENOLOGY SERVICE
+-----------------
+Open Crop Decisions -> Phenology service.
+- Direct NASA mapped-field retrieval is the preferred no-upload route.
+- You may also use a daily Research Data Hub table or current Daily Weather data.
+- Weekly/monthly climate summaries are blocked because they cannot be treated as daily
+  GDD observations.
+- Generic GDD uses user/validated thresholds.
+- Mechanistic maize uses the unchanged Laurent-inspired AGROLATTICE maize model and can
+  propagate parameter uncertainty. Publication priors are not local genotype measurements.
+
+PEST EARLY WARNING
+------------------
+Open Crop Decisions -> Pest early warning.
+Training still requires a measured pest class/outcome.
+- Exact Wadhwa & Malik-style columns enable Temp_Diff, Hum_Diff, Avg_Hum and VPD.
+- NASA-derived inputs use a reduced defensible set with mean RH. Morning/evening RH is
+  never fabricated from NASA mean RH.
+- Use grouped/site/year/forward validation where possible.
+- If using SMOTE-ENN, it runs inside training folds.
+- Forecast new environmental rows from a mapped field through NASA retrieval or from the
+  current Research Data Hub table.
+- Predicted pest risk is not pest confirmation or disease diagnosis.
+
+ADAPTIVE MULTIMODAL FUSION
+--------------------------
+Open Models & Evidence -> Adaptive multimodal fusion.
+- Use the Research Data Hub or an already joined local table.
+- Define non-overlapping modality groups such as weather, soil, EO, management, sensors
+  and phenology.
+- Adaptive reliability gating learns each modality's out-of-fold absolute error and
+  changes the fusion weight by row. Missing modalities are renormalised automatically.
+- Weight != causal importance. Inter-modality SD != calibrated predictive uncertainty.
+
+HYBRID TWIN LEARNING
+--------------------
+Open Models & Evidence -> Hybrid Twin learning.
+Your table needs:
+1. an observed/measured outcome,
+2. an existing mechanistic/crop-model prediction,
+3. candidate G×E×M residual predictors.
+
+The model learns observed - base prediction. AGROLATTICE compares held-out base error
+with held-out corrected error. PASS means held-out RMSE improved under the chosen split;
+it does not establish external validity.
+
+WEAKLY SUPERVISED SPATIAL YIELD
+-------------------------------
+Open Models & Evidence -> Weakly supervised spatial yield.
+- Provide repeated fine rows belonging to independently labelled aggregate groups.
+- Each group must carry one authoritative aggregate yield label.
+- The current transparent baseline learns the aggregate response and then applies it to
+  fine rows.
+- The fine surface is a weakly supervised estimate. It requires independent fine-scale
+  yield observations before spatial accuracy can be claimed.
+
+G×E×M DATASET BUILDER
+---------------------
+Open Experiments -> G×E×M dataset builder.
+- Choose stored Maize Synchrony Lab trials.
+- Build an experimental-unit table directly from the protected pollination database.
+- The view can include parent/genotype, sowing dates/differences, density, block,
+  replicate, management, observed flowering/leaf summaries, harvest outcomes and stored
+  trial weather summaries.
+- The generated table becomes the current Research Data Hub table for Model Lab/Fusion.
+- Keep Trial ID, Source field ID, Season year, Block and Replicate for leakage-safe
+  validation.
+
+MODEL EVIDENCE
+--------------
+Prototype -> Internally validated -> Externally validated -> Operationally eligible.
+Do not promote a model merely because it matches a paper or performs well under random CV.
+Use site/season/field/genotype-aware tests that match intended deployment.

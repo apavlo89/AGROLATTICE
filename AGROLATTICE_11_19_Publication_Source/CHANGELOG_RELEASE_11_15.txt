@@ -1,0 +1,40 @@
+AGROLATTICE 11.15 — Research Reporting & Publication Command Centre
+
+ADDED
+- New report_command_centre.py lazy reporting workspace.
+- New reporting_registry.py / reports/reporting.sqlite schema 1.0.0.
+- Persistent studies, immutable report versions, evidence snapshots, report artifacts, claim ledger, citation links, exports and audit history.
+- Persistent Field/Trial/Twin/Research Evidence artifact collector.
+- Report readiness and evidence-gap checks.
+- Purpose-built report types and generic manuscript presets.
+- Structured abstract, authors/affiliations, ORCID, funding/conflicts/ethics/data/code availability and word counts.
+- Evidence-derived limitation suggestions.
+- Broader publication figure builder: interval, error-bar, violin, calibration, ROC, PR, confusion, residual, observed-vs-predicted, PCA/spatial views and multi-panel assembly.
+- Claim-language audit and selective-reporting/reproducibility checks.
+- Built-in and manual citation library.
+- Reproducibility manifest with database/schema/integrity context and optional full climate-file hashing.
+- Privacy-aware internal/public export packages with transparent redaction manifest.
+- DOCX/Markdown/HTML manuscript export with tables, figures, methods, references and supplementary evidence files.
+
+CHANGED
+- Reports main workspace no longer uses the old Release-3 two-tool launcher.
+- Models/statistics legacy tools no longer dominate Reports.
+- Statistics toolbox / robustness are categorized with Climate & Earth Observation; old publication/workflow tools are categorized as All Tools / Legacy.
+- publication_builder.py upgraded to module 2.0.0 while preserving legacy API entry points.
+- Generic methods registry updated for global AGROLATTICE and modern Field/Twin/Experiment/Model workflows.
+- safe_data_migration.py updated for 11.15 and the additive reporting database.
+
+UNCHANGED SCIENTIFIC SOURCES
+- Field Operations schema 8.0.0.
+- Pollination/Experiment schema 3.0.0.
+- Persistent Twin schema 3.0.0.
+- Research Evidence schema 2.0.0.
+- Crop Profile schema 1.0.0.
+- Mechanistic Maize Twin equations/source.
+- k=2..20 PCA/K-means exploration from Release 11.13.
+
+LIMITATIONS
+- Full interactive Streamlit browser QA requires the target Windows/Anaconda environment.
+- Automated public-package redaction cannot guarantee complete de-identification of arbitrary free text.
+- The report audit is a scientific checklist, not a substitute for author/statistical/peer review.
+- Journal-specific layout rules are not assumed unless explicitly configured and verified.

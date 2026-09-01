@@ -1,0 +1,97 @@
+AGROLATTICE 11.9 — BUILD VERIFICATION
+=====================================
+Release: Persistent Twin Command Centre & Mechanistic Integration
+Baseline: AGROLATTICE 11.8 — Field Command Centre & Operations Polish
+
+Verification completed: 2026-08-10
+
+1. Python/static verification
+-----------------------------
+PASS — verify_release11_9.py
+PASS — 56 top-level Python source files compiled with py_compile.
+PASS — twin_command_centre.py imports under a Streamlit stub.
+PASS — agrolattice_twin.py module version 3.0.0 / DB schema 3.0.0.
+PASS — twin_command_centre.py module version 1.0.0.
+PASS — app version string: 20.9-release11.9-persistent-twin-command-centre.
+PASS — RUN_APP.bat includes 11.9 Twin module/schema preflight.
+
+2. Mechanistic integration regression
+-------------------------------------
+PASS — a synthetic maize Twin with mapped sowing dates and daily weather selects
+       'Mechanistic maize' rather than the legacy 650/670-GDD fallback.
+PASS — male target equals the existing mechanistic 'Planting GDD to anthesis'.
+PASS — female target equals the existing mechanistic 'Planting GDD to silking'.
+PASS — projected male/female event dates are produced when the event has not yet
+       been reached and recent GDD is available.
+PASS — DOI provenance is retained: 10.1002/csc2.21453.
+PASS — generic/no-trial Twin retains transparent legacy fallback behaviour.
+PASS — prepared-weather rainfall and recent mean-temperature summaries are read
+       correctly after integration.
+
+The scientific source file maize_mechanistic_twin.py was not modified.
+SHA-256: a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+3. Twin DB migration
+--------------------
+Pre-11.9 backup:
+  agrolattice_twin/backups/pre_11_9_agrolattice_twin.sqlite
+SHA-256:
+  2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a
+
+Migrated DB schema: 3.0.0
+PASS — PRAGMA integrity_check = ok.
+PASS — PRAGMA foreign_key_check returned zero violations.
+PASS — new tables exist and contain zero synthetic verification rows:
+       twin_events, calibration_runs, analogue_seasons.
+PASS — every row in all pre-existing Twin data tables is unchanged relative to
+       the bundled pre-migration backup:
+       model_registry, recommendations, scenarios, snapshots, twin_links,
+       twin_root_zone, twin_satellite, twin_settings, twin_weather.
+PASS — metadata is unchanged except schema_version, which is now 3.0.0.
+
+4. Protected user-data verification
+-----------------------------------
+Byte-for-byte unchanged from supplied 11.8 baseline:
+PASS — field_operations/field_operations.sqlite
+       fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+PASS — pollination_lab/maize_flowering_trials.sqlite
+       6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+PASS — models_evidence/research_evidence.sqlite
+       516b3361c1bca07b76da4f033dcd4ec693324d41d1924120fded88353600f58b
+
+All three SQLite databases also pass integrity and foreign-key checks.
+
+5. Clean-database extension tests
+---------------------------------
+PASS — new Twin event storage.
+PASS — calibration-run storage.
+PASS — climate-analogue storage.
+PASS — Twin export includes events/calibrations/analogues.
+PASS — a fresh Maize Pollination database initialises the parent_physiology,
+       leaf_development_observations and plot_phenology_events tables used by
+       the 11.9 Calibration Assistant.
+
+6. Performance safeguards
+-------------------------
+Code inspection confirms opening AgroLattice Twin does NOT automatically:
+- call NASA POWER,
+- call Sentinel/STAC,
+- process satellite rasters,
+- fit/calibrate maize physiology,
+- run male-sowing optimisation,
+- run a scenario optimiser.
+
+Remote retrieval, maps and computationally expensive analyses remain explicit
+researcher actions inside their corresponding Twin views.
+
+7. Browser-test limitation
+--------------------------
+NOT EXECUTED — full interactive Streamlit browser testing.
+Reason: Streamlit is not installed in the packaging container. This limitation is
+explicitly reported rather than treated as a pass. RUN_APP.bat performs module,
+dependency and DB-schema preflight in the user's Windows/Anaconda environment.
+
+Result
+------
+PASS — release package is suitable for delivery subject to local interactive UI
+validation after launch in the supported Streamlit environment.

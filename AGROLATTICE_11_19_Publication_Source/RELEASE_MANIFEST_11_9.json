@@ -1,0 +1,44 @@
+{
+  "release": "AGROLATTICE 11.9",
+  "title": "Persistent Twin Command Centre & Mechanistic Integration",
+  "application_version": "20.9-release11.9-persistent-twin-command-centre",
+  "based_on": "AGROLATTICE 11.8 — Field Command Centre & Operations Polish",
+  "readme": "README_START_HERE_RELEASE11_9.txt",
+  "user_guide": "USER_GUIDE_RELEASE_11_9.txt",
+  "changelog": "CHANGELOG_RELEASE_11_9.txt",
+  "technical_basis": "TECHNICAL_BASIS_TWIN_11_9.md",
+  "database_schema_changes": true,
+  "database_migration": "Additive AgroLattice Twin 3.0.0 migration. Pre-11.9 backup + legacy-row equivalence + integrity/foreign-key verification.",
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "mechanistic_maize_integration_changed": true,
+  "protected_database_schema_changes": true,
+  "research_evidence_schema_changed": false,
+  "module_versions": {
+    "twin_command_centre": "1.0.0",
+    "agrolattice_twin": "3.0.0 / DB 3.0.0",
+    "field_command_centre": "1.0.0",
+    "field_operations_suite": "8.0.0 / DB 8.0.0",
+    "home_command_centre": "1.0.0",
+    "performance_runtime": "1.0.0",
+    "research_registry": "1.2.0 / DB 1.3.0",
+    "maize_pollination_lab": "2.2.0 / DB 2.0.0"
+  },
+  "twin_command_views": [
+    "Overview", "Spatial Twin", "Development & water", "Timeline", "Scenarios",
+    "Measurements & copilot", "Evidence & validation", "Setup"
+  ],
+  "performance_guards": [
+    "No automatic NASA POWER request on Twin entry",
+    "No automatic Sentinel/STAC request or raster processing on Twin entry",
+    "No automatic crop-model calibration on Twin entry",
+    "No automatic scenario optimisation on Twin entry",
+    "Spatial map built only in Spatial Twin view"
+  ],
+  "limitations": [
+    "The Laurent-derived MFS implementation is not the publication's proprietary C++ Bayesian sampler and does not reproduce proprietary data.",
+    "Parameter-uncertainty date intervals require weather coverage sufficient to reach simulated events.",
+    "Flowering timing does not guarantee pollen quantity, seed purity or yield.",
+    "Full interactive Streamlit browser testing requires the user's installed Windows/Anaconda environment."
+  ]
+}

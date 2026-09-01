@@ -1,0 +1,6 @@
+load base_simulation.apsimx
+[Weather].FileName=mexico_agroclimate.met
+[Clock].Start=2025-01-01
+[Clock].End=2025-12-31
+save configured_simulation.apsimx
+run

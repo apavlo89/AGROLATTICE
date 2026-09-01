@@ -1,0 +1,17 @@
+{
+  "release": "AGROLATTICE 11.19",
+  "title": "Publication Reference Adaptive Clustering Build AC2",
+  "application_version": "20.19-release11.19-publication-reference-adaptive-clustering-ac2",
+  "build_id": "AGROLATTICE-11.19-AC2-2026-08-12",
+  "base_publication_reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "base_archive_sha256": "d74eb3758a09762f1d52dedbdaea6da969613b442ba1de3b8705335f56b6f23a",
+  "readme": "README_START_HERE_RELEASE11_19_AC2.txt",
+  "changelog": "CHANGELOG_RELEASE_11_19_AC2.txt",
+  "methods_manifest": "RESEARCH_METHODS_MANIFEST_11_19_AC2.json",
+  "file_manifest": "FILE_MANIFEST_11_19_AC2.sha256",
+  "verification": "verify_release11_19_ac2.py",
+  "verification_report": "VERIFICATION_REPORT_11_19_AC2.txt",
+  "database_schema_changes": false,
+  "new_dependencies": [],
+  "original_manual_clustering_retained": true
+}

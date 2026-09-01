@@ -1,0 +1,132 @@
+AGROLATTICE 11.3 USER GUIDE — RESEARCH FOUNDATION
+================================================
+
+PURPOSE
+-------
+Release 11.3 adds a research evidence and predictive-model layer while keeping
+AGROLATTICE's persistent spatial field/Twin/experiment architecture authoritative.
+A model output never replaces a measured observation merely because it is newer.
+
+1. RESEARCH REGISTRY
+--------------------
+Open Models & Evidence > Research registry.
+
+Use it to review:
+• registered datasets and their source/version/provenance;
+• models and their promotion status;
+• predictions linked to fields/trials;
+• recommendations and later observed outcomes;
+• benchmark runs and model cards.
+
+Model statuses are:
+Prototype -> Internally validated -> Externally validated -> Operationally eligible -> Retired.
+Promotion is a scientific/governance decision. A high random-CV score is not enough.
+
+2. RESEARCH MODEL LAB
+---------------------
+Open Models & Evidence > Research model lab.
+Upload or select a research table, then choose target, predictors and task type.
+Prefer a deployment-relevant split:
+• LOYO for unseen seasons/years;
+• LORO for unseen regions;
+• grouped or leave-one-group-out for fields/sites/genotypes/parents;
+• forward validation for genuine future forecasting.
+
+Available core models do not need a GPU. XGBoost, LightGBM and CatBoost are
+supported when installed. TabPFN is optional.
+
+All imputation, scaling and encoding are contained in the sklearn pipeline and
+are fitted on training folds. A data-readiness panel checks rows, observed targets,
+feature completeness and split levels before training. Register only models whose
+validation context is understood. When producing new predictions, inspect
+applicability/support flags. Classification predictions are stored as class labels
+with probability maps where the fitted estimator supplies probabilities; they are
+not coerced into fake numeric values.
+
+3. PHENOLOGY SERVICE
+--------------------
+Open Crop Decisions > Phenology service.
+
+Generic thermal-time mode:
+• select/upload daily weather;
+• set planting date, base/upper temperature and stage GDD thresholds;
+• review accumulated GDD, current stage and next-stage estimate.
+
+Mechanistic maize mode:
+• uses the existing Mechanistic Maize Twin and disclosed Laurent-inspired MFS
+  equations/priors;
+• does not change the Release 11.0 biological constants;
+• separates model output from observed flowering/leaf-count evidence.
+
+Use observed field phenology for calibration wherever available.
+
+4. PEST EARLY WARNING
+---------------------
+Open Crop Decisions > Pest early warning.
+
+The 11.3 environmental workflow independently adapts Wadhwa & Malik (2024).
+It can derive:
+  Temp_Diff = MaxT - MinT
+  Hum_Diff = RH morning - RH evening
+  Avg_Hum  = mean of the two RH values
+  VPD      = saturation vapour pressure(Tmean) - actual vapour pressure(RHmean)
+
+Select an appropriate target and predictors, then use a grouped/year/region/
+forward validation design where possible. SMOTE-ENN, if selected, occurs within
+the training-fold pipeline. Optional SHAP explains fitted tree predictions.
+
+Important: predicted pest class/risk does not confirm disease. Pest-disease
+associations are contextual warnings and require crop scouting/diagnostic evidence.
+
+5. MULTIMODAL FUSION
+--------------------
+Open Models & Evidence > Multimodal fusion.
+Define at least two non-overlapping feature groups such as:
+  weather, EO, soil, terrain, sensors, management.
+
+Each modality receives its own model. Validation RMSE determines baseline fusion
+weights. If a modality is entirely missing for a new row, remaining weights are
+renormalized. The output includes modality predictions and inter-modality spread.
+Do not interpret the spread as Bayesian or calibrated uncertainty.
+
+6. EXTERNAL BENCHMARKS
+----------------------
+Open Models & Evidence > External benchmarks.
+11.3 includes metadata/adapters for CropNet, YieldSAT and WorldCereal, not their
+large source data. Obtain datasets under the original terms, keep their licence/
+version information, and register the local snapshot. Prefer benchmark-defined
+LOYO/LORO or transfer splits where available.
+
+7. TWIN RESEARCH EVIDENCE
+-------------------------
+Open AgroLattice Twin > Research evidence.
+The view surfaces registered predictions/recommendations linked to the active
+field/trial identifiers. When both a field and trial are active, evidence linked to
+either context is shown rather than requiring both IDs on the same record.
+Prototype/Internal models are visibly distinguished from stronger validation
+states. The existing Twin remains the persistent system of record for field/season
+state.
+
+8. RECOMMENDATION/OUTCOME SEPARATION
+------------------------------------
+The new registry distinguishes proposed recommendations from what was actually
+applied and what outcome was later measured. The Research Registry includes manual
+forms for recording a proposed research recommendation and a later observed
+treatment/outcome while preserving their separation. This data contract is
+deliberately implemented before causal-effect estimators. Do not call an association
+causal without a justified causal design.
+
+9. UPGRADE/MIGRATION
+--------------------
+MIGRATE_USER_DATA_FROM_EXISTING_APP.bat now also migrates the Research Evidence
+DB/model artifacts when a newer source contains them. When upgrading from 11.2,
+there is no research DB to migrate; the new 11.3 DB remains intact while the three
+legacy research/operations DBs are copied from the selected working source.
+
+10. WHAT IS NOT YET IMPLEMENTED
+-------------------------------
+11.3 is the foundation release. Exact MMST-ViT, PhenoYieldNet, PB-CNN, ALIC,
+weakly supervised subfield yield, SCM-GAT, causal estimators, N optimization,
+DRL irrigation, NSGA-II fertilizer optimization, price GNN/transformers and
+federated learning remain future research modules. They now have a common data,
+validation, provenance and deployment interface to plug into safely.

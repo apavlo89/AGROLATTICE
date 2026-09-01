@@ -1,0 +1,73 @@
+{
+  "build_id": "AGROLATTICE-11.19-AC3-2026-08-13",
+  "base_reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "analysis": "Staged variable selection and multi-algorithm agroclimatic clustering benchmark",
+  "feature_unit": "location by selected variable-calendar-month climatological mean over selected years",
+  "raw_daily_clustering": false,
+  "variable_strategies": [
+    "AC2 forward selection and backward removal followed by frozen subset",
+    "researcher-defined fixed subset"
+  ],
+  "inductive_families": {
+    "K-means": {"hyperparameters": "k=2..maximum_k", "prediction": "native nearest centroid"},
+    "Bisecting K-means": {"hyperparameters": "k=2..maximum_k; biggest-inertia bisection", "prediction": "native"},
+    "Gaussian mixture": {"hyperparameters": "k=2..maximum_k; diagonal or tied covariance", "prediction": "maximum posterior"},
+    "BIRCH": {"hyperparameters": "k=2..maximum_k; threshold 0.5 or 1.0", "prediction": "native subcluster-centroid"},
+    "Ward hierarchy": {"hyperparameters": "k=2..maximum_k", "prediction": "nearest training-cluster centroid surrogate under Euclidean distance"},
+    "Average-cosine hierarchy": {"hyperparameters": "k=2..maximum_k", "prediction": "nearest training-cluster centroid surrogate under cosine distance"}
+  },
+  "screening": {
+    "metric": "full-data Euclidean silhouette",
+    "role": "computational screening only",
+    "shortlist_per_family": 2
+  },
+  "championship": {
+    "train_fraction": 0.8,
+    "publication_search_repeats": 5,
+    "training_only_standardisation": true,
+    "held_out_metric": "Euclidean silhouette on common standardised held-out locations",
+    "stability_metric": "pairwise adjusted Rand index among full-location resampled predictions",
+    "tiny_cluster_definition": "fewer than max(3, ceil(2% of locations))",
+    "tiny_cluster_penalty": 0.1,
+    "quality": "harmonic mean of nonnegative held-out silhouette and stability minus tiny-cluster penalty"
+  },
+  "parsimony_rule": {
+    "type": "one-sided repeated-resampling operational non-inferiority",
+    "margin": 0.02,
+    "normal_quantile": 1.645,
+    "ordering": "algorithm complexity rank, then lower k, then higher quality",
+    "inferential_boundary": "not a population-level equivalence test"
+  },
+  "independent_audit": {
+    "publication_repeats": 10,
+    "audit_scope": "best searched configuration from every eligible family",
+    "champion_reselection_using_audit": false,
+    "seed_offset": 700001
+  },
+  "density_diagnostic": {
+    "algorithm": "HDBSCAN",
+    "minimum_cluster_fraction_grid": [0.02, 0.05, 0.1],
+    "minimum_samples_grid": [5, 10, 20],
+    "noise_label": -1,
+    "championship_eligible": false
+  },
+  "pca": {
+    "selection": "smallest component count reaching selected cumulative variance",
+    "default_threshold": 0.9,
+    "relationship_to_clustering": "independent descriptive dimensionality; clustering uses selected full feature space"
+  },
+  "mexico_reference_run": {
+    "period": "1985-2025",
+    "months": 12,
+    "locations": 1012,
+    "candidate_variables": 19,
+    "selected_variables": ["SURFACE_PRESSURE", "TEMPERATURE_MIN"],
+    "selected_configuration": "K-means (k=2)",
+    "independent_mean_held_out_silhouette": 0.6081137002940428,
+    "independent_held_out_silhouette_se": 0.006131540962442222,
+    "independent_stability_ari": 0.9726817586555888,
+    "independent_mean_assignment_confidence": 0.6925861617992137,
+    "independent_tiny_cluster_rate": 0.0
+  },
+  "scientific_boundary": "Exploratory empirical partition conditional on supplied data and candidate methods; not causal discovery, an official agroecological classification, crop-response validation or guaranteed transferability."
+}

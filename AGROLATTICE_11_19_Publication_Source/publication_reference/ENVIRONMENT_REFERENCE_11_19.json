@@ -1,0 +1,51 @@
+{
+  "reference_id": "AGROLATTICE-11.19-PRR-2026-08-12",
+  "generated_in_packaging_environment": true,
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "package_versions": {
+    "folium": "0.20.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.8",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "plotly": "6.5.2",
+    "seaborn": "0.13.2",
+    "scipy": "1.17.0",
+    "statsmodels": "0.14.6",
+    "scikit-learn": "1.8.0",
+    "openpyxl": "3.1.5",
+    "requests": "2.32.5",
+    "rasterio": "1.5.0",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "Pillow": "12.3.0",
+    "python-docx": "1.2.0",
+    "xgboost": "3.1.3",
+    "lightgbm": "4.6.0",
+    "catboost": "1.2.8",
+    "optuna": "4.8.0",
+    "imbalanced-learn": "0.14.1",
+    "shap": "0.50.0",
+    "packaging": "25.0",
+    "streamlit": null,
+    "streamlit-folium": null,
+    "umap-learn": null,
+    "openai": null,
+    "tabpfn": null
+  },
+  "target_runtime_note": "RUN_APP.bat remains the authoritative Windows/Anaconda runtime preflight. Missing packages in this Linux packaging environment are not evidence that the Windows target environment lacks them.",
+  "declared_requirement_files": [
+    "requirements_ml_agriculture.txt",
+    "requirements_research_optional.txt",
+    "requirements_aquacrop.txt"
+  ],
+  "protected_schemas": {
+    "Field Operations": "8.0.0",
+    "Experiments": "3.0.0",
+    "Persistent Twin": "3.0.0",
+    "Research Evidence": "2.0.0",
+    "Crop Profiles": "1.0.0",
+    "Reporting": "1.0.0"
+  }
+}

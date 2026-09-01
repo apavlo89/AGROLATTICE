@@ -1,0 +1,163 @@
+AGROLATTICE 11.5 USER GUIDE — DECISION INTELLIGENCE & RESEARCH OPTIMISATION
+==========================================================================
+
+WHERE TO FIND IT
+----------------
+Open Crop Decisions -> Decision intelligence & optimisation.
+The same workspace is also discoverable from Models & Evidence -> Decision & causal evidence.
+
+DECISION HOME
+-------------
+The home tab shows mapped-field, decision-run, recommendation, outcome and causal-audit counts.
+Readiness cards tell you whether spatial context, reusable Data Hub evidence, outcome tracking
+and enough follow-up records are available. The intended workflow is:
+
+  Compare -> choose -> record -> apply only if approved -> measure -> evaluate
+
+IRRIGATION POLICY STUDIO
+------------------------
+1. Select a mapped field. Field geometry remains authoritative.
+2. Select crop, crop-water profile, soil-water profile and planting/season start.
+3. Choose weather source:
+   - Research Data Hub daily weather,
+   - direct NASA POWER retrieval for the mapped-field centroid, or
+   - uploaded daily weather/forecast/scenario.
+4. Optional research controls expose stage-duration assumption, irrigation efficiency,
+   maximum event, initial/max root depth, runoff method, curve number/fixed runoff fraction,
+   RAW trigger range, deficit-refill range, optional seasonal irrigation allocation and maximum
+   event-count constraints. Infeasible scenarios remain visible with the reason they failed.
+5. If Field Operations contains a soil-moisture sensor with readings, optionally compare a
+   sensor-threshold strategy. Set the trigger, gross event and maximum reading age.
+6. Choose the decision objective: balanced, yield protection, water minimisation or
+   irrigation-adjusted profit. Economics are optional and require user-supplied yield/price/
+   water/event cost assumptions.
+7. Click Compare irrigation policies.
+
+Outputs include gross irrigation, event count, stress/severe-stress days, ET satisfaction,
+deep percolation and, where supported, a Ky-based relative-yield proxy. The Pareto indicator
+shows alternatives not dominated across the configured objectives. The objective-selected
+scenario is a research scenario, not an automatically applied irrigation prescription.
+
+Direct NASA retrieval is automatically recorded as a data acquisition in the Research Evidence
+database so a later report can reconstruct where the environmental evidence came from.
+
+NUTRIENT OPTIMISATION
+---------------------
+This is an empirical local response workflow, not a universal fertiliser calculator.
+
+1. Optionally select a field to inspect its existing nutrient samples and fertiliser operations.
+2. Select a Research Data Hub table or upload a trial/field study table.
+3. Choose:
+   - a measured outcome,
+   - actual N rate,
+   - actual P rate,
+   - actual K rate,
+   - a validation group such as trial/site/season/field when possible,
+   - optional numeric G×E×M covariates.
+4. Fit leakage-aware nutrient response.
+5. Inspect validation RMSE/MAE/R² and fold residuals before optimisation.
+6. Confirm/adjust N/P/K search ranges. Defaults are the observed min/max in the fitted data.
+7. For extra covariates, set the scenario values (defaults use observed medians).
+8. Optionally enter output price and N/P/K unit costs.
+9. Generate the candidate grid and choose the objective:
+   - balanced trade-off,
+   - maximum predicted yield,
+   - minimum total nutrient while retaining >=95% of predicted maximum,
+   - maximum input-adjusted margin.
+10. Inspect the Pareto alternatives and export/save the run or selected research recommendation.
+
+Do not infer elemental N/P/K from a commercial product rate unless product formulation and units
+are explicitly known. Do not extrapolate far outside observed rates without independent evidence.
+
+STATE ASSIMILATION
+------------------
+Use only when model/Twin states and observations represent the same physical quantity and units,
+or when you have a separately validated observation operator.
+
+Single observation
+  Enter model prior mean/SD and observed mean/SD. AGROLATTICE returns the uncertainty-weighted
+  posterior.
+
+Time-varying model-state table
+  Preferred for evolving states such as LAI, biomass or soil water. Reuse/load a table containing
+  model prior mean, model prior SD, observation, observation SD and optionally time. Each row is
+  updated independently against its own model prior. The previous posterior is NOT carried into
+  the next biological time point.
+
+Repeated-measurement static parameter
+  Use only for repeated measurements of the same latent state/calibration parameter. Here the
+  posterior from each measurement becomes the prior for the next. Do not use this mode for an
+  evolving crop state unless a process/state-transition model has propagated the prior between
+  times.
+
+The full assimilation sequence can be saved in the Research Evidence registry. An NDVI value is
+not automatically a biomass, LAI or N-status measurement.
+
+RECOMMENDATION TRIALS
+---------------------
+Use this tab to create the evidence chain required for later effectiveness evaluation.
+
+Recommendation record:
+  field/trial/experimental unit, action type/text, amount/unit where relevant, objective,
+  uncertainty/constraints/provenance and status.
+
+Status lifecycle:
+  Proposed -> Accepted/Rejected -> Applied -> Completed, with Superseded available when needed.
+
+Field Operations task:
+  A recommendation can be copied into the task system only after explicit acknowledgement that
+  it remains research decision support. Creating the task still does not mean the action occurred.
+
+Outcome record:
+  record whether recommendation was followed, actual action, action date, outcome variable/value/
+  unit, measurement date and contextual covariates. Prefer covariates measured before treatment
+  for future causal adjustment.
+
+CAUSAL AUDIT
+------------
+Sources:
+  - saved Recommendation/Outcome registry pairs,
+  - current Research Data Hub table,
+  - uploaded observational study table.
+
+Treatment may be numeric or categorical, but must have exactly two observed levels. Explicitly
+select which level is the treated/intervention level; the reported effect is treated minus control.
+Outcome must be numeric. Adjustment covariates may be numeric or categorical; categorical factors
+such as genotype/site/management class are reference-coded internally and their encoded levels
+appear in the balance diagnostics. Select only defensible PRE-TREATMENT adjustment covariates. Do not condition on
+mediators or post-treatment consequences merely because they improve prediction.
+
+Estimators:
+  - Doubly robust AIPW: default research estimator combining propensity and outcome models.
+  - IPW: useful when propensity modelling/overlap is defensible.
+  - Outcome regression T-learner: separate outcome models for treated/comparison groups.
+  - Naive difference: diagnostic only, not an adjusted causal estimate.
+
+Grouping:
+  Choose trial, site, field, season or another cluster when rows within groups are not independent.
+  AGROLATTICE uses grouped cross-fitting and clustered bootstrap where possible.
+
+Diagnostics to inspect BEFORE interpreting the estimate:
+  - propensity-score overlap / positivity warning,
+  - effective sample size under weighting,
+  - raw and weighted standardised mean differences,
+  - unit-level propensity/effect diagnostics,
+  - treatment-shuffle placebo/refutation result,
+  - assumptions shown under the estimate.
+
+A confidence interval does not eliminate unmeasured confounding. The audit supports transparent
+observational research; it does not convert field records into an RCT.
+
+METHOD BOUNDARIES
+-----------------
+Irrigation: transparent FAO-style root-zone policy comparison; no automatic controller/pump output.
+Nutrients: empirical second-order local response + Pareto grid; no universal N/P/K prescription.
+Assimilation: independent Gaussian same-state update; not a generic EO-to-crop-state converter.
+Causal audit: cross-fitted observational estimators with diagnostics; not proof of causality.
+
+DATA RETRIEVAL PRINCIPLE
+------------------------
+Use AGROLATTICE data automatically when a defensible source already exists. NASA POWER, mapped
+fields, Field Operations records, sensors, Research Data Hub tables, trials and Twin evidence are
+reused directly where appropriate. Upload remains available for external experiments/scenarios,
+but should not be required merely because a tool was implemented later than the data source.

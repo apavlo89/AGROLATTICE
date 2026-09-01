@@ -1,0 +1,20 @@
+{
+  "release": "AGROLATTICE 11.1",
+  "title": "Research Integrity Update",
+  "application_version": "20.1-release11.1-research-integrity",
+  "based_on": "AGROLATTICE 11.0 — Mechanistic Maize Twin",
+  "readme": "README_START_HERE_RELEASE11_1.txt",
+  "changelog": "CHANGELOG_RELEASE_11_1.txt",
+  "database_schema_changes": false,
+  "database_migration": "No schema migration required; application-level safety guards only.",
+  "streamlit_minimum": "1.48.0",
+  "mechanistic_maize_model_changed": false,
+  "key_fixes": [
+    "Non-destructive plot randomisation lock after scientific data collection",
+    "Atomic factor-design and plot-map save",
+    "Treatment-unit overlap rejection",
+    "Cross-database Trial/Twin deletion guards",
+    "Safe user-data migration backup/overwrite protection",
+    "Synchrony observation gap diagnostics"
+  ]
+}

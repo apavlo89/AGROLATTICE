@@ -1,0 +1,156 @@
+AGROLATTICE 11.11 — CROP DECISION COMMAND CENTRE & AGRONOMIC PLANNING
+=====================================================================
+
+Release purpose
+---------------
+Release 11.11 consolidates Crop Decisions into a field/season-aware agronomic
+workflow. It preserves the existing analytical methods while reducing duplicate
+data entry, reusing persisted evidence, separating operational inference from
+research model development and strengthening recommendation/action/outcome
+provenance.
+
+Crop Decision Command Centre
+----------------------------
+- New navigation:
+  Overview | Crop & planting | Water & irrigation | Nutrition |
+  Pest & crop health | Yield & economics | Crop models |
+  Recommendations & outcomes.
+- Persistent active field/season/Twin context across the workspace.
+- New lightweight Decision Pulse, priority-action/evidence-gap list and Decision
+  Inbox from persisted records.
+- No remote retrieval or expensive model/optimizer execution on workspace entry.
+- Development-era Release/Module wording removed from the main decision workflow;
+  detailed research tools remain accessible under their scientific function.
+
+Crop & planting
+---------------
+- Field-aware daily weather/phenology can reuse persisted field/Twin weather
+  rather than requiring repeated NASA retrieval.
+- Active mapped field is the preferred location context; manual city/custom point
+  workflows remain available.
+- Structured field-season sowing date is reused when it is genuinely recorded;
+  dates are not invented.
+- Added daily historical sowing-date climate exposure explorer with configurable:
+  historical years, candidate dates, season horizon, sensitive period, heat
+  threshold and GDD assumptions.
+- Reports climate-exposure distributions (heat days, water balance, rainfall,
+  dry-spell duration and GDD) across historical years instead of one opaque
+  "optimal" score.
+- Mexico-specific SIAP/INIFAP guidance appears only in Mexico; other countries
+  receive country-neutral local-authority guidance.
+
+Versioned Crop Profile Manager
+------------------------------
+- Added independent models_evidence/crop_profiles.sqlite registry (schema 1.0.0).
+- Research crop/cultivar profiles now support crop, cultivar, country, region,
+  source profile, author, evidence grade, citation, status and notes.
+- Every parameter edit creates a retained profile version with change note.
+- Profiles can be cloned for local adaptation without overwriting the source.
+- Legacy custom_crop_profiles.json remains supported and may be imported without
+  deleting the source file.
+
+Water & irrigation
+------------------
+- Crop Decisions now presents persisted root-zone status and recorded irrigation
+  alongside the richer Irrigation Policy Studio rather than treating separate
+  tools as competing primary workflows.
+- Research boundary between measured/recorded water evidence and recommended
+  irrigation is retained.
+
+Nutrition
+---------
+- Added nutrient data-readiness summary using structured samples, nutrient
+  operations, distinct application-rate support and observed yield outcomes.
+- The interface explicitly refuses to infer a defensible N/P/K optimum from
+  nutrient concentration alone, one treatment rate or inadequate outcome data.
+- Existing response/optimizer research workflow remains available when the data
+  support it.
+
+Pest & crop health
+------------------
+- Main Crop Decisions workflow now separates operational prediction from model
+  development.
+- Only registered models marked Operationally eligible may run operational pest
+  inference from Crop Decisions.
+- Explicit NASA weather retrieval is available for mapped fields when needed.
+- Feature construction honours the trained feature list and will not fabricate
+  unavailable morning/evening humidity variables from mean RH.
+- Applicability is calculated against registered model support where available.
+- Latest field-linked pest-risk prediction can be registered in Research Evidence.
+- UI states that pest risk is not pest confirmation, disease diagnosis or an
+  automatic pesticide instruction.
+- Full prototype model building/tuning/XAI remains available as an Advanced
+  research workflow.
+
+Yield & economics
+-----------------
+- Added Yield Evidence comparison of field-linked registered model predictions
+  and observed harvest outcomes without silently averaging incompatible models.
+- Model disagreement is presented as an evidence issue requiring inspection.
+- Economics can start from recorded field-operation costs and irrigation totals,
+  while keeping price/cost assumptions editable and explicit.
+- Field-context economics analyses can be stored in Research Evidence; legacy
+  Project workflow remains backward compatible.
+
+AquaCrop
+--------
+- AquaCrop can now build context directly from the active mapped field and
+  structured field season rather than requiring a legacy Project.
+- Persisted field/Twin weather can be used as a weather source.
+- Canonical NASA variable aliases are supported by AquaCrop preparation.
+- Added AquaCrop readiness view distinguishing mapped context, planting date,
+  weather availability, soil parameterisation, cultivar/genotype and backend.
+- Field-context runs can be saved as Research Evidence decision runs.
+- Generic parameterisation remains labelled exploratory/review-required; a run is
+  not described as locally calibrated unless supporting data exist.
+
+DSSAT / APSIM interoperability
+------------------------------
+- Canonical NASA weather aliases added to DSSAT/APSIM weather preparation.
+- Persisted Twin/field weather and active mapped-field centroid can provide the
+  environmental context when no legacy Project exists.
+- External run evidence can be saved for mapped fields as well as Projects.
+- Failed external executions are retained as provenance with status/error/output
+  inventory rather than silently disappearing.
+- Successful execution is explicitly separated from validation of cultivar,
+  soil, nitrogen or management parameterisation.
+
+Decision lifecycle
+------------------
+- Recommendation → Action → Outcome is surfaced as a first-class Crop Decisions
+  workflow.
+- Added a persisted Crop Decision Timeline combining operations, observations,
+  recommendations, model predictions and measured outcomes; chronology is
+  explicitly not interpreted as causality.
+- Recommendation status is presented as workflow state, not agronomic benefit.
+- Existing detailed Recommendation Trials / causal audit tools are preserved for
+  treatment/outcome evaluation.
+
+Polish and globalisation
+------------------------
+- Main Crop Decisions headers and labels now use scientific function names rather
+  than old Release/Module branding.
+- Legacy Current-Season Monitor is explicitly labelled as a backward-compatible
+  detailed monitor; the persisted Crop Decision Overview is preferred.
+- Help now points to the 11.11 user guide.
+- Current workspace branding consistently reports Release 11.11.
+
+Database / dependencies
+-----------------------
+- No migration of Field Operations, Maize Pollination, Persistent Twin or
+  Research Evidence database schemas.
+- New additive crop profile database: models_evidence/crop_profiles.sqlite,
+  schema 1.0.0.
+- No new mandatory dependency introduced by the Crop Decision Command Centre.
+
+Scientific limitations
+----------------------
+- Historical sowing-date analysis is climate-exposure screening, not an official
+  sowing calendar or cultivar-specific mechanistic yield optimiser.
+- Operational pest inference is limited to explicitly eligible registered model
+  artifacts and the predictors that can be reproduced without fabrication.
+- Crop-model execution does not itself establish calibration or cross-site/season
+  validity.
+- Cost records are starting evidence, not guaranteed complete farm accounting.
+- Full interactive browser testing requires the user's Windows/Anaconda
+  installation because Streamlit is not available in the build container.

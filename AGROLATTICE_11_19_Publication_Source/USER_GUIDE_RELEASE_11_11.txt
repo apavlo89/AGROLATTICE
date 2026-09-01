@@ -1,0 +1,176 @@
+AGROLATTICE 11.11 — CROP DECISION COMMAND CENTRE USER GUIDE
+============================================================
+
+1. SELECT THE FIELD / SEASON FIRST
+----------------------------------
+Where possible, use the global context to select Country → research centre/farm →
+Field. Crop Decisions will then resolve the current structured field season, crop,
+genotype, trial and linked Persistent Twin when available.
+
+Do not create a fake sowing date simply to unlock phenology or model functions.
+Release 11.11 treats missing dates as missing research information.
+
+2. OVERVIEW — DECISION PULSE
+----------------------------
+Overview reads persisted summaries only. It is designed to answer:
+- What is the crop/season state?
+- What water/crop-health evidence is available?
+- What decision evidence is missing or stale?
+- Which recommendations need review or outcomes?
+
+The page does not fetch remote data or run models just because you opened it.
+A read-only Crop Decision Timeline also combines persisted operations, field
+observations, recommendations, predictions and measured outcomes. It provides
+chronology for interpretation but does not imply causality.
+
+3. CROP & PLANTING
+------------------
+Use this area for crop-profile management, phenology, daily weather, planting
+planning and climate-exposure screening.
+
+Daily sowing-date climate risk:
+- Select a historical date range and candidate sowing-date window.
+- Define the crop-season horizon and a sensitive time window.
+- Define explicit heat/GDD assumptions.
+- Click Retrieve historical daily weather & compare sowing dates.
+
+The output compares candidate dates across historical years using quantities such
+as heat days in the sensitive window, water balance, dry-spell length, rainfall
+and GDD. It intentionally does not turn these into a single opaque "best sowing"
+score.
+
+Interpretation boundary: this is an environmental exposure screen. It is not an
+official planting calendar, calibrated cultivar simulation or yield optimiser.
+For Mexico, check relevant SIAP/INIFAP/local agronomic guidance. In other
+countries, use the relevant local extension/research/official authority.
+
+4. CROP PROFILE MANAGER
+-----------------------
+Use the versioned Crop Profile Manager for research profiles requiring provenance.
+A profile can store crop, cultivar, country/region, author, evidence grade,
+source/citation and parameters.
+
+Saving a new version retains the prior versions. Clone a profile when adapting a
+source profile for a new cultivar/location rather than overwriting the source.
+
+The older custom_crop_profiles.json editor remains available for backward
+compatibility but is no longer the preferred research-profile workflow.
+
+5. DAILY WEATHER & PHENOLOGY
+----------------------------
+For a mapped field, Crop Decisions can reuse saved field/Twin weather when it has
+adequate coverage. The page will not force another NASA download.
+
+Choose explicit retrieval only when evidence is absent/stale or when you require
+a different interval/source. Retrieved gridded weather remains labelled as such.
+
+For maize, prefer the Persistent Mechanistic Maize Twin when genotype-specific
+flowering/synchrony physiology is required. Generic thermal-time phenology remains
+useful for broader crop-stage screening.
+
+6. WATER & IRRIGATION
+---------------------
+This area combines persisted root-zone state, recorded irrigation evidence and the
+existing decision-analysis tools.
+
+Use root-zone analysis to understand water status. Use the Irrigation Policy
+Studio when comparing alternative policies/constraints. Recorded irrigation is
+never overwritten by a recommendation.
+
+Where measured soil-water properties/sensors are unavailable, generic parameters
+must remain visibly identified as assumptions.
+
+7. NUTRITION
+------------
+Before optimising N/P/K, inspect Data readiness. The command centre checks for:
+- structured soil/tissue/water samples;
+- recorded nutrient operations;
+- distinct treatment/application rates;
+- observed outcomes.
+
+A nutrient concentration, one application rate or an unreplicated treatment is
+not enough to estimate an agronomic optimum. The interface therefore separates
+response exploration from decision recommendation.
+
+8. PEST & CROP HEALTH
+---------------------
+The main operational path is "Use an eligible model", not "train a model".
+Crop Decisions only promotes registered models whose status is explicitly
+Operationally eligible.
+
+When you run pest-risk inference:
+- retrieval occurs only after you click the button;
+- the trained feature list is honoured;
+- missing unsupported features are not fabricated;
+- input applicability is assessed;
+- class probabilities/outputs retain model provenance.
+
+Important: predicted pest risk is not field confirmation, disease diagnosis or an
+automatic pesticide instruction. Use scouting/observation protocols to verify the
+field state.
+
+Prototype model construction, resampling, Optuna and SHAP research workflows are
+retained under the Advanced model-development path / Models & Evidence.
+
+9. YIELD & ECONOMICS
+--------------------
+Use Yield Evidence to compare available registered predictions and observed
+harvest outcomes. AGROLATTICE does not silently average predictions from models
+with different assumptions/validation scopes.
+
+Model disagreement is evidence. Inspect model version, applicability, uncertainty
+and source rather than selecting whichever estimate is most convenient.
+
+Economics can prepopulate starting context from recorded field-operation costs and
+irrigation totals. Review these values: recorded operations are not necessarily a
+complete whole-farm cost account. Market price and other assumptions remain
+explicit inputs.
+
+10. CROP MODELS
+---------------
+Use the model guide to choose a model appropriate to the question/data:
+- transparent climate/crop screening for limited local data;
+- root-zone/AquaCrop for water-focused crop simulation;
+- Mechanistic Maize Twin for maize flowering/synchrony physiology;
+- DSSAT/APSIM where detailed calibrated crop/soil/management parameterisation is
+  available;
+- registered ML when its validation/applicability supports the target field.
+
+AquaCrop now starts naturally from active field/season evidence. Its readiness
+panel distinguishes field-specific inputs from generic/review-required inputs.
+
+For DSSAT/APSIM, successful and failed external executions are both research
+provenance. An executable running successfully does not certify the cultivar,
+soil, nitrogen or management configuration.
+
+11. RECOMMENDATIONS & OUTCOMES
+------------------------------
+Use the lifecycle:
+  Proposed → Accepted/Rejected → Applied → Outcome recorded → Evaluated
+
+Recommendation status is a workflow state, not proof of benefit. Record the actual
+action separately from the proposed action and later attach the measured outcome.
+This is required before observational decision-effectiveness analysis can be
+interpreted responsibly.
+
+12. COUNTRY SAFETY
+------------------
+AGROLATTICE is global. Mexico-specific crop/calendar assumptions must not silently
+become defaults for another country. Country/region and parameter provenance are
+therefore visible in crop profiles and guidance.
+
+13. PERFORMANCE
+---------------
+Crop Decisions Overview is intentionally lightweight. NASA retrieval, root-zone
+models, pest inference, nutrient optimisation, AquaCrop and DSSAT/APSIM execute
+only after an explicit researcher action.
+
+14. TROUBLESHOOTING
+-------------------
+If field context is missing, create/select the field under Fields & Operations.
+If weather evidence is missing, use Climate & Earth Observation or the explicit
+weather retrieval in Crop & planting.
+If a model is unavailable operationally, inspect Models & Evidence to see its
+validation/status rather than forcing a prototype model into field inference.
+If RUN_APP.bat reports a dependency/schema failure, resolve that preflight before
+continuing research work.

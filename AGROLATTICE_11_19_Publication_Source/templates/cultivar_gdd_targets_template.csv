@@ -1,0 +1,6 @@
+Crop,Cultivar,Stage,Cumulative GDD target,Base temperature (C),Upper cap (C),GDD method,Source / note
+Maize,ENTER CULTIVAR,Emergence,,10,30,modified_average,Enter cultivar-specific published source
+Maize,ENTER CULTIVAR,Vegetative development,,10,30,modified_average,Enter cultivar-specific published source
+Maize,ENTER CULTIVAR,Flowering,,10,30,modified_average,Enter cultivar-specific published source
+Maize,ENTER CULTIVAR,Yield formation,,10,30,modified_average,Enter cultivar-specific published source
+Maize,ENTER CULTIVAR,Maturity,,10,30,modified_average,Enter cultivar-specific published source

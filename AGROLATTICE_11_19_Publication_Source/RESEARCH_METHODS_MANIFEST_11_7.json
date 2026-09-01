@@ -1,0 +1,12 @@
+{
+  "release": "AGROLATTICE 11.7",
+  "scientific_method_change": false,
+  "statement": "Release 11.7 is a Home/research-workflow UX release. It carries forward all mechanistic, multimodal, pest, validation, uncertainty, decision-intelligence and causal-audit methods from 11.6 unchanged.",
+  "new_research_workflow_logic": {
+    "priority_actions": "Transparent rule-based prompts from persisted operational/evidence state; not an agronomic model.",
+    "next_measurement": "Transparent evidence-gap heuristic; not formal information-gain optimization.",
+    "freshness": "Persistent metadata freshness with explicit historical-season handling."
+  },
+  "mechanistic_maize_changed": false,
+  "database_evidence_semantics_changed": false
+}

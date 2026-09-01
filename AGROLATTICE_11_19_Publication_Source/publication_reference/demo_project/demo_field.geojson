@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "field_id": "PUBREF-DEMO-FIELD",
+        "name": "AGROLATTICE Synthetic Publication Demo Field",
+        "country": "Synthetic / demonstration only",
+        "season_year": 2026,
+        "crop": "Maize",
+        "evidence_type": "Synthetic demonstration"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              33.0,
+              35.0
+            ],
+            [
+              33.0027,
+              35.0
+            ],
+            [
+              33.0027,
+              35.0012
+            ],
+            [
+              33.0,
+              35.0012
+            ],
+            [
+              33.0,
+              35.0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+$BATCH(DSSAT48)
+! Build the final batch file with DSSAT tools. Do not rely on this placeholder as a valid experiment definition.

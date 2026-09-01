@@ -1,0 +1,118 @@
+AGROLATTICE 11.19 — PUBLICATION REFERENCE RELEASE
+BUILD & VERIFICATION REPORT
+===============================================
+
+REFERENCE ID
+------------
+AGROLATTICE-11.19-PRR-2026-08-12
+
+BASELINE / SOURCE OF TRUTH
+--------------------------
+Built directly from:
+AGROLATTICE_Release_11_18_End_to_End_Reliability_Performance_Integration_QA.zip
+
+11.18 archive SHA-256:
+8b630d3cebf7619fbcbcb8a40a8b0c36cb90d54156e7c2b9855efbbc0a962026
+
+PURPOSE OF THIS RELEASE
+-----------------------
+11.19 is a publication freeze, not a new scientific-method release. Its purpose is to provide one stable software identity for the AGROLATTICE platform manuscript, together with citation/archive metadata, deterministic demonstration assets, publication figures, environment-freeze tooling, source integrity manifests, schema-only database documentation, and a publication-safe source archive.
+
+SCIENTIFIC METHOD / DATABASE CHANGE STATUS
+------------------------------------------
+Scientific-method changes: NONE.
+Scientific database schema migrations: NONE.
+New mandatory Python dependencies: NONE.
+Mechanistic Maize Twin changes: NONE.
+
+The following scientific/reporting schemas remain unchanged from 11.18:
+- Field Operations: 8.0.0
+- Maize Experiments / Pollination: 3.0.0
+- Persistent Twin: 3.0.0
+- Research Evidence: 2.0.0
+- Crop Profile Registry: 1.0.0
+- Reporting Registry: 1.0.0
+
+PROTECTED ARTIFACT VERIFICATION
+-------------------------------
+All protected artifacts were SHA-256 compared with the 11.18 baseline and are unchanged:
+
+field_operations/field_operations.sqlite
+fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+
+pollination_lab/maize_flowering_trials.sqlite
+87511c0a9921e731f8bd8b3111118e452b9aa6d6ee32905fee3b7af73a258819
+
+agrolattice_twin/agrolattice_twin.sqlite
+ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+
+models_evidence/research_evidence.sqlite
+7e80e599285753c026ff47e86127ad3df42b4cfdb7ff662fb6cd1011b1052a25
+
+models_evidence/crop_profiles.sqlite
+84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+
+reports/reporting.sqlite
+f1e3cd3dfce0a91e65db13f282d940245d5f42716551c276a6cef5af3d5e81d4
+
+maize_mechanistic_twin.py
+a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+Every packaged SQLite database was checked with PRAGMA integrity_check and returned "ok". PRAGMA foreign_key_check returned zero violations for every database.
+
+PUBLICATION REFERENCE ASSETS
+----------------------------
+Added and verified:
+- Stable internal publication reference identifier.
+- CITATION.cff, codemeta.json and archive-ready .zenodo.json metadata.
+- MIT LICENSE and THIRD_PARTY_NOTICE.md.
+- PAPER_STARTER_AGROLATTICE_11_19.md.
+- Publication workflow and screenshot/figure capture checklist.
+- requirements_publication_reference_lock.txt.
+- FREEZE_PUBLICATION_ENV.bat for recording the exact Windows/Anaconda paper environment.
+- RUN_PUBLICATION_REFERENCE_DEMO.bat.
+- Deterministic synthetic reference project using fixed seed 1119.
+- 24 synthetic experimental units, 4 blocks and 6 treatment levels.
+- 145 synthetic daily environmental records containing exactly the established 19 canonical AGROLATTICE weather variables.
+- Deterministic demonstration flowering/model-output tables.
+- Four reference figures in both 300-dpi PNG and SVG.
+- Deterministic publication example tables/results summary.
+- Schema-only SQL exports for all six protected databases; no user rows are included.
+- Full source-tree SHA-256 manifest.
+- Publication-safe source-only archive builder and documented exclusions.
+
+SYNTHETIC DEMONSTRATION SCIENTIFIC BOUNDARY
+-------------------------------------------
+The bundled demonstration project is synthetic and is used only to verify software plumbing, reproducibility, figures and example export structure. It is not field evidence, NASA data, Sentinel data, sensor data, or empirical model-validation evidence. Its apparent predictive metrics must not be reported as agronomic performance.
+
+PUBLICATION FIGURE REVIEW
+-------------------------
+The four generated reference figures were opened and visually inspected during packaging. Layout issues found in early drafts of the architecture/workflow figures were corrected and the figures regenerated. The final figures contain explicit software-demonstration/scientific-boundary wording where applicable.
+
+CODE / PACKAGE VERIFICATION
+---------------------------
+- 82 top-level Python modules compiled successfully with py_compile.
+- Recursive Python compileall: PASS.
+- publication_reference.py deterministic bundle verification: PASS.
+- verify_release11_19.py: PASS.
+- Existing 11.18 end-to-end integration chain rerun on isolated temporary database copies: PASS.
+- Workflow stages covered Field → Season → Operations/observations → Experiment → Experimental Unit → flowering/harvest → Persistent Twin/weather/state → model/validation → prediction → recommendation → measured outcome → report.
+- 11.19 safe-data-migration regression on isolated database copies: PASS.
+- Publication-safe source archive build regression: PASS.
+- Public archive contains no SQLite databases and no installed Datasets tree.
+- Public archive retains source code, documentation, deterministic demo assets, citation metadata and schema-only SQL exports.
+- Packaged cache file count: 0.
+- PCA/K-means exploratory upper bound k=20 remains present.
+- Established 19-variable NASA-derived global climate architecture remains present.
+
+ARCHIVE / CITATION BOUNDARY
+---------------------------
+AGROLATTICE 11.19 contains a stable internal reference identifier but does not claim a DOI. A DOI can only be assigned after depositing the exact frozen archive in an external DOI-granting repository. The supplied .zenodo.json is archive-ready metadata and must be updated with the actual external identifier after deposition if appropriate.
+
+UI TEST LIMITATION
+------------------
+A complete interactive Streamlit browser test could not be executed in the build container because Streamlit/streamlit-folium are not installed and the container has no network access to install them. Therefore no claim of a full browser-session test is made. RUN_APP.bat contains the 11.19 runtime/module/reference preflight for the intended Windows + Python/Anaconda environment, and SCREENSHOT_AND_FIGURE_CAPTURE_CHECKLIST.md identifies the genuine UI screenshots that should be captured from that target environment for the manuscript.
+
+CONCLUSION
+----------
+AGROLATTICE 11.19 fulfils its intended role as a frozen Publication Reference Release: the mature 11.x scientific platform is preserved without changing protected research databases or mechanistic maize biology, while the release adds the reproducibility, citation, archival, deterministic demonstration, schema documentation, environment-freeze and publication-support assets needed to describe and archive the application rigorously.

@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use AGROLATTICE in research, please cite the archived AGROLATTICE 11.19 Publication Reference Release and the associated platform paper when available."
+title: "AGROLATTICE: Publication Reference Release"
+type: software
+authors:
+  - family-names: "Pavlou"
+    given-names: "Achilleas"
+    affiliation: "University of Nicosia"
+version: "11.19"
+date-released: "2026-08-12"
+license: MIT
+keywords:
+  - agricultural informatics
+  - digital twin
+  - precision agriculture
+  - crop modelling
+  - remote sensing
+  - GxExM
+  - maize
+  - field experiments
+  - scientific reproducibility
+abstract: >-
+  AGROLATTICE is a spatial agricultural intelligence and persistent digital-twin
+  platform integrating field geometry, climate and weather, soil-water state,
+  Earth observation, sensors, crop physiology, management, experiments,
+  predictive models, validation, recommendations, outcomes and reproducible
+  research reporting. Version 11.19 is the frozen publication-reference release.

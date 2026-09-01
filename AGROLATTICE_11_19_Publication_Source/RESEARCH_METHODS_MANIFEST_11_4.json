@@ -1,0 +1,43 @@
+{
+  "release": "AGROLATTICE 11.4",
+  "implemented_adaptations": [
+    {
+      "method": "Environmental pest early warning",
+      "paper": "Wadhwa & Malik (2024)",
+      "doi": "10.1016/j.compag.2024.109472",
+      "status": "Independent AGROLATTICE adaptation extended with direct NASA retrieval",
+      "guardrail": "NASA mean RH does not reproduce morning/evening RH; source-incompatible features are not fabricated."
+    },
+    {
+      "method": "Adaptive multimodal fusion",
+      "paper_family": "Adaptive multi-modal remote-sensing yield fusion",
+      "status": "Independent CPU reliability-gating adaptation",
+      "guardrail": "Gate weights are predictive reliability, not causal importance."
+    },
+    {
+      "method": "Weakly supervised spatial yield",
+      "paper": "Paudel et al. (2023)",
+      "doi": "10.1088/1748-9326/acf50e",
+      "status": "Transparent aggregate-consistency Ridge baseline; not exact neural reproduction",
+      "guardrail": "Aggregate agreement does not validate fine-scale accuracy."
+    },
+    {
+      "method": "Hybrid mechanistic + residual ML",
+      "status": "AGROLATTICE architecture",
+      "guardrail": "Correction accepted only when held-out RMSE improves."
+    }
+  ],
+  "reviewed_but_deferred": [
+    "MMST-ViT",
+    "PhenoYieldNet",
+    "PB-CNN",
+    "ALIC",
+    "SCM-GAT",
+    "Causal recommendation-effect estimators",
+    "EO + crop-model nitrogen optimization",
+    "Seq2Seq + deep-RL irrigation",
+    "NSGA-II fertilizer optimization",
+    "Market forecasting GNN/Transformers",
+    "Federated plant-disease learning"
+  ]
+}

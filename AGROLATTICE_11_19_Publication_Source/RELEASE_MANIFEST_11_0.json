@@ -1,0 +1,35 @@
+{
+  "release": "AGROLATTICE 11.0",
+  "release_name": "Mechanistic Maize Twin",
+  "application_version": "20.0-release11.0-mechanistic-maize-twin",
+  "release_date": "2026-08-07",
+  "base_release": "AGROLATTICE 10.12 Field Command Centre",
+  "modules": {
+    "maize_pollination_lab": "2.0.0",
+    "maize_mechanistic_twin": "1.0.0",
+    "pollination_database_schema": "2.0.0",
+    "field_operations_suite": "7.0.0",
+    "local_boundary_editor": "1.0.0"
+  },
+  "scientific_method": {
+    "mechanistic_model": "Laurent et al. (2025) disclosed MFS equations",
+    "doi": "10.1002/csc2.21453",
+    "genomic_layer": "Transparent genomic-ridge approximation; not the unavailable Bayesian C++ CGM-WGP sampler"
+  },
+  "data_migration": "Non-destructive, idempotent SQLite schema extension",
+  "boundary_editor": "Locally bundled Leaflet and Leaflet.draw assets with offline-grid fallback",
+  "verification": [
+    "Python compilation",
+    "Mechanistic equation invariants",
+    "Monte Carlo event uncertainty",
+    "Prior-regularised calibration",
+    "Genomic bridge cross-validation",
+    "Signed-gap objective correction",
+    "Single and staggered sowing strategies",
+    "Database migration idempotency",
+    "Trial export completeness",
+    "Streamlit trial and analysis page rendering",
+    "ZIP CRC integrity",
+    "Protected data entries retained from the supplied base archive"
+  ]
+}

@@ -1,0 +1,30 @@
+AGROLATTICE 11.2 - Spatial & Upgrade Integrity Update
+
+Fixed:
+- Existing-trial Spatial linkage no longer crashes on a missing exact_match status key.
+- Trial spatial re-linking is validated before commit; a field/boundary change is blocked
+  if any saved treatment unit would lie outside the proposed trial boundary.
+- Exact mapped-field mode now uses the authoritative mapped-field geometry explicitly.
+- Hard deletion of data-bearing maize trials requires an explicit cascade opt-in and the
+  exact trial name at the database layer as well as the UI.
+- Trial library now shows affected record counts and promotes Archive as the safe default.
+- User-data migration is source-authoritative after explicit confirmation instead of
+  silently retaining packaged SQLite snapshots.
+- Migration uses SQLite online backup snapshots so committed WAL content is captured,
+  backs up destination and selected source databases, verifies integrity/foreign keys,
+  checks table row counts, rolls back research databases if activation fails, and writes migration_report.json.
+- Current contextual-help wording and current user-guide documentation updated for 11.2.
+- Legacy Release 10.3 PDF clearly relabelled as historical documentation.
+
+Preserved:
+- Release 11.0 Mechanistic Maize Twin equations, priors and uncertainty methods unchanged.
+- Release 11.1 randomisation/data-loss protection, atomic design save, overlap rejection,
+  cross-database deletion guards and synchrony gap diagnostics.
+- Database schema versions unchanged; no schema migration is required from 11.1 to 11.2.
+
+Verification:
+- Python compilation: PASS
+- Release 11.0 mechanistic regression suite: PASS
+- Release 11.1 research-integrity regression suite: PASS
+- Release 11.2 spatial/upgrade-integrity regression suite: PASS
+- Packaged SQLite integrity_check + foreign_key_check: PASS

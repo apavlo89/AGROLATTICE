@@ -1,0 +1,21 @@
+{
+  "Example Crop": {
+    "windows": {
+      "Full growing season": ["May", "June", "July", "August"]
+    },
+    "thresholds": {
+      "Full growing season": {
+        "temp_min_abs": 8,
+        "temp_min_opt": 18,
+        "temp_max_opt": 30,
+        "temp_max_abs": 40,
+        "precip_min_abs": 150,
+        "precip_min_opt": 300,
+        "precip_max_opt": 700,
+        "precip_max_abs": 1100,
+        "water_deficit_abs": -400,
+        "water_deficit_opt": 0
+      }
+    }
+  }
+}

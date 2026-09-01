@@ -1,0 +1,129 @@
+AGROLATTICE 11.4 — Multimodal Crop Intelligence & Hybrid Twin Learning
+======================================================================
+Based on: AGROLATTICE 11.3 — Research Foundation & Predictive Evidence Update
+Application version: 20.4-release11.4-multimodal-hybrid
+
+WHAT CHANGED
+------------
+1. Integrated Research Data Hub
+   - Adds an in-app acquisition layer so new research tools do not depend on CSV upload.
+   - Reuses the established NASA POWER daily client and preserves the full 19-variable
+     AGROLATTICE canonical agroclimate profile.
+   - Retrieves weather by mapped field centroid or manual coordinates, with daily,
+     weekly or monthly outputs and local NASA cache reuse/force-refresh controls.
+   - Reads the currently installed country agroclimate dataset directly and pivots its
+     long-format variables to an analysis-ready monthly table.
+   - Reads existing Field Operations scouting observations, operations, sensors,
+     sensor readings, nutrient samples and crop history without modifying those records.
+   - Reuses existing Daily Weather, Sentinel-2, root-zone balance and Current-season
+     Monitor session tables without export/re-upload.
+   - Adds date-matched NASA environmental covariates to existing scouting records while
+     explicitly warning that presence-only scouting is not a valid no-pest/absence label.
+   - Retrieved datasets and requests can be registered with source, dates, variables,
+     coordinates, field/trial links and provenance.
+
+2. Direct weather retrieval for Phenology
+   - Central Phenology Service can retrieve NASA POWER weather directly for a mapped
+     field instead of requiring a user-provided CSV.
+   - It can also reuse the Research Data Hub or the existing Daily Weather workspace.
+   - Daily resolution is enforced: monthly/weekly climatology is not silently treated as
+     daily phenology input.
+   - Generic GDD and the unchanged Mechanistic Maize Twin consume the same retrieved
+     weather while preserving model/source provenance.
+
+3. Direct environmental retrieval for Pest Early Warning
+   - Pest-model training can use a labelled table from the Research Data Hub or upload.
+   - New pest forecasts can retrieve NASA weather directly for a mapped field.
+   - Adds a defensible NASA-compatible feature set: Tmax, Tmin, mean RH, rainfall, wind,
+     solar radiation/evaporation when available, temperature range, average RH and VPD.
+   - Does NOT fabricate the Wadhwa & Malik paper's morning/evening RH values from NASA
+     mean RH; models requiring source-specific RH1/RH2 are blocked on incompatible data.
+   - Existing source-paper feature engineering, fold-contained imbalance handling,
+     agricultural validation, Optuna/CatBoost and SHAP support remain available.
+
+4. Adaptive multimodal fusion
+   - Replaces the 11.3 global-only fusion baseline with sample-specific reliability gating.
+   - Separate modality models are evaluated out-of-fold; per-modality error models learn
+     when a modality is relatively reliable and inverse predicted error is normalized per row.
+   - Weather, soil, EO, management, sensors and phenology can be represented separately.
+   - Missing modalities are handled row-by-row and global held-out inverse-RMSE weights
+     remain as a safe fallback.
+   - Gate weights are explicitly predictive reliability signals, not causal importance.
+
+5. Hybrid Mechanistic + ML Twin Learning
+   - Adds a residual-learning workflow: observed outcome - mechanistic/base prediction is
+     modelled using selected G×E×M covariates.
+   - Supports grouped, LOYO, LORO, forward-time and random-diagnostic validation.
+   - Compares held-out base-model error with held-out hybrid error.
+   - The hybrid correction receives a PASS only when held-out RMSE improves; a failed
+     correction is not presented as an improvement over the mechanistic model.
+   - Registered models retain the base-prediction column, residual predictors and
+     validation evidence.
+
+6. Weakly supervised spatial-yield baseline
+   - Adds a transparent aggregate-consistency Ridge baseline inspired by weakly
+     supervised high-resolution yield research.
+   - Fits aggregate group labels using group-mean fine-resolution covariates, validates
+     by leaving one independently labelled aggregate group out, then applies the learned
+     response surface to fine rows.
+   - Fine outputs are explicitly labelled weakly supervised estimates; reproducing an
+     aggregate label is not treated as independent subfield/10 m validation.
+
+7. G×E×M research dataset builder
+   - Builds analysis-ready experimental-unit tables directly from the existing Maize
+     Synchrony Lab database instead of requiring CSV export/re-upload.
+   - Retains Trial ID, source field, season, block, replicate, parent/genotype columns,
+     sowing/density/management factors, repeated flowering/leaf summaries, phenology,
+     harvest outcomes and available trial-weather summaries.
+   - Protected Pollination Lab records remain read-only in this workflow.
+
+8. Research Evidence database schema 1.2.0
+   - Adds an additive data_acquisitions table for source/request/provenance records.
+   - No schema changes are made to the Field Operations, Maize Pollination Lab or
+     Persistent Twin databases.
+   - Upgrade initialization was tested against the 11.3 schema and preserves existing
+     research-registry records.
+
+9. Workspace integration
+   - Data & Settings now exposes Research Data Hub directly.
+   - Models & Evidence exposes Adaptive multimodal fusion, Hybrid Twin learning and
+     Weakly supervised spatial yield directly.
+   - Experiments exposes the G×E×M dataset builder directly.
+   - Crop Decisions retains direct Phenology and Pest Early Warning access.
+   - Country changes clear country-scoped 11.4 research/data-hub/fusion/hybrid state.
+
+DATABASE CHANGES
+----------------
+Additive Research Evidence DB:
+  models_evidence/research_evidence.sqlite — schema 1.1.0 -> 1.2.0
+  New table: data_acquisitions
+
+UNCHANGED protected databases:
+  field_operations/field_operations.sqlite
+  pollination_lab/maize_flowering_trials.sqlite
+  agrolattice_twin/agrolattice_twin.sqlite
+
+The Mechanistic Maize Twin implementation is unchanged.
+
+DEPENDENCIES
+------------
+No additional mandatory Python package is required beyond the 11.3 research stack.
+TabPFN remains optional through requirements_research_optional.txt.
+
+SCIENTIFIC LIMITS
+-----------------
+- NASA POWER is gridded environmental information, not a local weather-station
+  measurement. Field polygons remain authoritative for spatial EO.
+- Weather retrieval cannot create yield, phenotype, pest-presence/absence or seed-purity
+  labels. Supervised learning still requires measured outcomes.
+- Phenology requires daily weather; coarse monthly climate summaries are blocked.
+- NASA mean RH is not substituted for the source pest paper's morning/evening RH.
+- Adaptive fusion gate weights are predictive reliability, not causal importance.
+- Inter-modality disagreement is not a calibrated uncertainty interval.
+- Hybrid residual correction is accepted only when held-out error improves and remains a
+  research model until independent site/season validation supports promotion.
+- Weakly supervised fine-scale yield surfaces are estimates, not measured or independently
+  validated subfield yield.
+- Exact MMST-ViT, PhenoYieldNet, PB-CNN, ALIC, SCM-GAT, causal treatment-effect
+  estimators, EO/crop-model nitrogen optimization, DRL irrigation, NSGA-II fertilizer
+  optimization, market GNNs/transformers and federated learning are not claimed here.

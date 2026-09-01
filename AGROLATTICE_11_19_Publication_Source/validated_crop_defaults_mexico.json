@@ -1,0 +1,2027 @@
+{
+  "schema_version": "2.0.0",
+  "title": "Validated agronomic defaults for the Mexico Agroclimate Research Tool",
+  "generated_on": "2026-07-24",
+  "core_method": {
+    "crop_evapotranspiration": "ETc = Kc × ETo",
+    "yield_response": "1 - Ya/Ym = Ky × (1 - ETa/ETm)",
+    "important_distinction": "Ecological rainfall envelopes are not crop water requirements and must be stored separately.",
+    "planting_calendar_rule": "Do not use one national fixed month sequence. Use state × crop × cycle × irrigation regime from SIAP or local agronomic guidance."
+  },
+  "evidence_grades": {
+    "A": "Official crop-specific standard or direct peer-reviewed field measurement",
+    "B": "Authoritative broad ecological envelope or strong regional evidence",
+    "C": "Transparent synthesis/proxy requiring local validation",
+    "D": "Insufficient evidence; no default should be generated"
+  },
+  "crops": {
+    "Maize": {
+      "profiles": [
+        {
+          "profile_name": "Grain maize – broad screening",
+          "scientific_name": "Zea mays ssp. mays",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 10,
+            "optimal_min_c": 18,
+            "optimal_max_c": 33,
+            "absolute_max_c": 47,
+            "basis": "Broad ecological mean-temperature envelope"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 400,
+            "optimal_min_mm": 600,
+            "optimal_max_mm": 1200,
+            "absolute_max_mm": 1800,
+            "basis": "Broad crop-cycle/ecological rainfall envelope; do not substitute for ETc"
+          },
+          "crop_water_requirement": {
+            "min_mm": 500,
+            "max_mm": 800,
+            "period": "Medium-maturity crop cycle"
+          },
+          "crop_duration_days": {
+            "min": 85,
+            "max": 150
+          },
+          "kc_default": null,
+          "kc_range_note": "Use stage-specific Kc",
+          "evidence_grade": "A/B",
+          "implementation_status": "Ready",
+          "notes": "Use Ecocrop only for broad climatic screening. Use FAO Kc/Ky for water adequacy and yield-loss calculations.",
+          "source_ids": [
+            "ECO_MAIZE",
+            "FAO_MAIZE",
+            "FAO56",
+            "FAO_KY"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Grain maize",
+          "stage": "Initial",
+          "duration_days": {
+            "min": 15,
+            "max": 30
+          },
+          "kc": {
+            "min": 0.3,
+            "max": 0.5
+          },
+          "ky": 0.4,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Establishment",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_MAIZE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Grain maize",
+          "stage": "Development",
+          "duration_days": {
+            "min": 30,
+            "max": 45
+          },
+          "kc": {
+            "min": 0.7,
+            "max": 0.85
+          },
+          "ky": 0.4,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Vegetative development",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_MAIZE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Grain maize",
+          "stage": "Mid-season",
+          "duration_days": {
+            "min": 30,
+            "max": 45
+          },
+          "kc": {
+            "min": 1.05,
+            "max": 1.2
+          },
+          "ky": 1.3,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Flowering and early yield formation; highest water sensitivity",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_MAIZE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Grain maize",
+          "stage": "Late season",
+          "duration_days": {
+            "min": 10,
+            "max": 30
+          },
+          "kc": {
+            "min": 0.8,
+            "max": 0.9
+          },
+          "ky": 0.5,
+          "depletion_fraction_p": 0.8,
+          "interpretation": "Grain filling/maturation",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_MAIZE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Grain maize",
+          "stage": "Harvest endpoint",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.55,
+            "max": 0.6
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "End-of-season Kc",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_MAIZE"
+          ]
+        },
+        {
+          "profile": "Grain maize",
+          "stage": "Whole season",
+          "duration_days": {
+            "min": 85,
+            "max": 150
+          },
+          "kc": {
+            "min": null,
+            "max": null
+          },
+          "ky": 1.25,
+          "depletion_fraction_p": null,
+          "interpretation": "Seasonal Ky",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_MAIZE",
+            "FAO_KY"
+          ]
+        }
+      ]
+    },
+    "Coffee": {
+      "profiles": [
+        {
+          "profile_name": "Productive Arabica – unshaded screening",
+          "scientific_name": "Coffea arabica",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 10,
+            "optimal_min_c": 14,
+            "optimal_max_c": 28,
+            "absolute_max_c": 34,
+            "basis": "Broad ecological annual-mean envelope"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 750,
+            "optimal_min_mm": 1400,
+            "optimal_max_mm": 2300,
+            "absolute_max_mm": 4200,
+            "basis": "Annual rainfall envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": null,
+            "max_mm": null,
+            "period": "No universal validated annual ET requirement identified"
+          },
+          "crop_duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc_default": 0.95,
+          "kc_range_note": "0.87–0.99 for young-to-productive full-sun systems; broader published site range 0.44–1.50",
+          "evidence_grade": "B",
+          "implementation_status": "Ready with canopy/age warning",
+          "notes": "Kc varies materially with age, pruning, shade and canopy. Do not use one value as a universal irrigation prescription.",
+          "source_ids": [
+            "ECO_COFFEE",
+            "COFFEE_COLOMBIA_KC",
+            "COFFEE_BRAZIL_KC"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Coffee–maize / young plantation",
+          "stage": "0–12 months after transplanting",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.87,
+            "max": 0.87
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Measured eddy-covariance Kc in Colombia",
+          "evidence_grade": "A",
+          "source_ids": [
+            "COFFEE_COLOMBIA_KC"
+          ]
+        },
+        {
+          "profile": "Productive full-sun coffee",
+          "stage": "13–43 months after transplanting",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.97,
+            "max": 0.99
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Measured eddy-covariance Kc in Colombia",
+          "evidence_grade": "A",
+          "source_ids": [
+            "COFFEE_COLOMBIA_KC"
+          ]
+        },
+        {
+          "profile": "Mature 16-year coffee",
+          "stage": "Site study range",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.72,
+            "max": 1.5
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Brazilian water-balance study; do not generalise blindly",
+          "evidence_grade": "B",
+          "source_ids": [
+            "COFFEE_BRAZIL_KC"
+          ]
+        },
+        {
+          "profile": "Pruned 3-year coffee",
+          "stage": "Site study range",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.44,
+            "max": 0.87
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Brazilian water-balance study",
+          "evidence_grade": "B",
+          "source_ids": [
+            "COFFEE_BRAZIL_KC"
+          ]
+        }
+      ]
+    },
+    "Wheat": {
+      "profiles": [
+        {
+          "profile_name": "Bread wheat – Mexico screening",
+          "scientific_name": "Triticum aestivum",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 5,
+            "optimal_min_c": 15,
+            "optimal_max_c": 23,
+            "absolute_max_c": 27,
+            "basis": "Mexico-relevant INIFAP table sourced from Ecocrop"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 300,
+            "optimal_min_mm": 750,
+            "optimal_max_mm": 900,
+            "absolute_max_mm": 1600,
+            "basis": "Broad agroclimatic envelope; not crop water consumption"
+          },
+          "crop_water_requirement": {
+            "min_mm": 450,
+            "max_mm": 650,
+            "period": "Crop cycle"
+          },
+          "crop_duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc_default": null,
+          "kc_range_note": "Use stage-specific Kc",
+          "evidence_grade": "A",
+          "implementation_status": "Ready",
+          "notes": "Separate spring and winter wheat Ky/p profiles where the user knows the production type.",
+          "source_ids": [
+            "INIFAP_WHEAT",
+            "FAO_WHEAT",
+            "FAO56",
+            "FAO_KY"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Spring wheat",
+          "stage": "Initial",
+          "duration_days": {
+            "min": 15,
+            "max": 20
+          },
+          "kc": {
+            "min": 0.3,
+            "max": 0.4
+          },
+          "ky": 0.2,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Establishment",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_WHEAT",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Spring wheat",
+          "stage": "Development",
+          "duration_days": {
+            "min": 25,
+            "max": 30
+          },
+          "kc": {
+            "min": 0.7,
+            "max": 0.8
+          },
+          "ky": 0.65,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Vegetative development",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_WHEAT",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Spring wheat",
+          "stage": "Mid-season",
+          "duration_days": {
+            "min": 50,
+            "max": 65
+          },
+          "kc": {
+            "min": 1.05,
+            "max": 1.2
+          },
+          "ky": 0.55,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Heading/flowering/grain formation",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_WHEAT",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Spring wheat",
+          "stage": "Late season",
+          "duration_days": {
+            "min": 30,
+            "max": 40
+          },
+          "kc": {
+            "min": 0.65,
+            "max": 0.7
+          },
+          "ky": null,
+          "depletion_fraction_p": 0.8,
+          "interpretation": "Maturation",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_WHEAT",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Spring wheat",
+          "stage": "Harvest endpoint",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.2,
+            "max": 0.25
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "End-of-season Kc",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_WHEAT"
+          ]
+        },
+        {
+          "profile": "Spring wheat",
+          "stage": "Whole season",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": null,
+            "max": null
+          },
+          "ky": 1.05,
+          "depletion_fraction_p": 0.55,
+          "interpretation": "Seasonal Ky/p",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_WHEAT",
+            "FAO_KY"
+          ]
+        }
+      ]
+    },
+    "Beans": {
+      "profiles": [
+        {
+          "profile_name": "Dry common bean",
+          "scientific_name": "Phaseolus vulgaris",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 7,
+            "optimal_min_c": 16,
+            "optimal_max_c": 25,
+            "absolute_max_c": 32,
+            "basis": "Ecological envelope; FAO physiological growth optimum is narrower (15–20°C; growth limits about 10–27°C)"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 300,
+            "optimal_min_mm": 500,
+            "optimal_max_mm": 2000,
+            "absolute_max_mm": 4300,
+            "basis": "Broad annual/ecological envelope; use ETc for stage water adequacy"
+          },
+          "crop_water_requirement": {
+            "min_mm": 300,
+            "max_mm": 500,
+            "period": "60–120 day crop"
+          },
+          "crop_duration_days": {
+            "min": 90,
+            "max": 120
+          },
+          "kc_default": null,
+          "kc_range_note": "Use dry-bean stage-specific Kc",
+          "evidence_grade": "A/B",
+          "implementation_status": "Ready",
+          "notes": "The app should distinguish dry bean from green bean because late-season Kc and Ky differ.",
+          "source_ids": [
+            "ECO_BEAN",
+            "FAO_BEAN",
+            "FAO56",
+            "FAO_KY"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Dry common bean",
+          "stage": "Initial",
+          "duration_days": {
+            "min": 15,
+            "max": 20
+          },
+          "kc": {
+            "min": 0.3,
+            "max": 0.4
+          },
+          "ky": 0.2,
+          "depletion_fraction_p": 0.45,
+          "interpretation": "Establishment",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_BEAN"
+          ]
+        },
+        {
+          "profile": "Dry common bean",
+          "stage": "Development",
+          "duration_days": {
+            "min": 15,
+            "max": 20
+          },
+          "kc": {
+            "min": 0.7,
+            "max": 0.8
+          },
+          "ky": 1.1,
+          "depletion_fraction_p": 0.45,
+          "interpretation": "Vegetative to early flowering; high sensitivity",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_BEAN"
+          ]
+        },
+        {
+          "profile": "Dry common bean",
+          "stage": "Mid-season",
+          "duration_days": {
+            "min": 35,
+            "max": 45
+          },
+          "kc": {
+            "min": 1.05,
+            "max": 1.2
+          },
+          "ky": 0.75,
+          "depletion_fraction_p": 0.45,
+          "interpretation": "Flowering/pod set and yield formation",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_BEAN"
+          ]
+        },
+        {
+          "profile": "Dry common bean",
+          "stage": "Late season",
+          "duration_days": {
+            "min": 20,
+            "max": 25
+          },
+          "kc": {
+            "min": 0.65,
+            "max": 0.75
+          },
+          "ky": 0.2,
+          "depletion_fraction_p": 0.6,
+          "interpretation": "Ripening",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_BEAN"
+          ]
+        },
+        {
+          "profile": "Dry common bean",
+          "stage": "Harvest endpoint",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.25,
+            "max": 0.3
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "End-of-season Kc",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_BEAN"
+          ]
+        },
+        {
+          "profile": "Dry common bean",
+          "stage": "Whole season",
+          "duration_days": {
+            "min": 90,
+            "max": 120
+          },
+          "kc": {
+            "min": null,
+            "max": null
+          },
+          "ky": 1.5,
+          "depletion_fraction_p": null,
+          "interpretation": "Seasonal Ky",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_BEAN"
+          ]
+        }
+      ]
+    },
+    "Sorghum": {
+      "profiles": [
+        {
+          "profile_name": "Grain sorghum",
+          "scientific_name": "Sorghum bicolor",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 8,
+            "optimal_min_c": 22,
+            "optimal_max_c": 35,
+            "absolute_max_c": 40,
+            "basis": "Ecological envelope; FAO notes poor grain set below 15°C or above 35°C during reproductive stages"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 300,
+            "optimal_min_mm": 400,
+            "optimal_max_mm": 600,
+            "absolute_max_mm": 700,
+            "basis": "Broad ecological envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": 450,
+            "max_mm": 650,
+            "period": "110–130 day crop"
+          },
+          "crop_duration_days": {
+            "min": 95,
+            "max": 125
+          },
+          "kc_default": null,
+          "kc_range_note": "Use stage-specific Kc",
+          "evidence_grade": "A/B",
+          "implementation_status": "Ready",
+          "notes": "Flowering to early yield formation is the priority period when water is limited.",
+          "source_ids": [
+            "ECO_SORGHUM",
+            "FAO_SORGHUM",
+            "FAO56",
+            "FAO_KY"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Grain sorghum",
+          "stage": "Initial",
+          "duration_days": {
+            "min": 20,
+            "max": 25
+          },
+          "kc": {
+            "min": 0.4,
+            "max": 0.4
+          },
+          "ky": 0.2,
+          "depletion_fraction_p": 0.6,
+          "interpretation": "Establishment",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SORGHUM"
+          ]
+        },
+        {
+          "profile": "Grain sorghum",
+          "stage": "Development",
+          "duration_days": {
+            "min": 30,
+            "max": 40
+          },
+          "kc": {
+            "min": 0.7,
+            "max": 0.75
+          },
+          "ky": 0.55,
+          "depletion_fraction_p": 0.6,
+          "interpretation": "Vegetative development",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SORGHUM"
+          ]
+        },
+        {
+          "profile": "Grain sorghum",
+          "stage": "Mid-season",
+          "duration_days": {
+            "min": 40,
+            "max": 45
+          },
+          "kc": {
+            "min": 1.0,
+            "max": 1.15
+          },
+          "ky": null,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Flowering to early yield formation; priority irrigation period. Stage Ky is omitted because the FAO HTML table renders an ambiguous value.",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SORGHUM"
+          ]
+        },
+        {
+          "profile": "Grain sorghum",
+          "stage": "Late season",
+          "duration_days": {
+            "min": 30,
+            "max": 30
+          },
+          "kc": {
+            "min": 0.75,
+            "max": 0.8
+          },
+          "ky": 0.2,
+          "depletion_fraction_p": 0.8,
+          "interpretation": "Late yield formation/ripening",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SORGHUM"
+          ]
+        },
+        {
+          "profile": "Grain sorghum",
+          "stage": "Harvest endpoint",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.5,
+            "max": 0.55
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "End-of-season Kc",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SORGHUM"
+          ]
+        },
+        {
+          "profile": "Grain sorghum",
+          "stage": "Whole season",
+          "duration_days": {
+            "min": 95,
+            "max": 125
+          },
+          "kc": {
+            "min": null,
+            "max": null
+          },
+          "ky": 0.9,
+          "depletion_fraction_p": 0.55,
+          "interpretation": "Seasonal Ky/p",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SORGHUM",
+            "FAO_KY"
+          ]
+        }
+      ]
+    },
+    "Avocado": {
+      "profiles": [
+        {
+          "profile_name": "Hass-like Mexican × Guatemalan composite",
+          "scientific_name": "Persea americana",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 10,
+            "optimal_min_c": 14,
+            "optimal_max_c": 24,
+            "absolute_max_c": 30,
+            "basis": "Derived conservative union of Mexican and Guatemalan race envelopes; not a direct Hass physiological experiment"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 660,
+            "optimal_min_mm": 1000,
+            "optimal_max_mm": 1400,
+            "absolute_max_mm": 1800,
+            "basis": "Race-specific annual rainfall envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": 713,
+            "max_mm": 1028,
+            "period": "Seasonal orchard ET observed at California Hass sites"
+          },
+          "crop_duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc_default": 0.65,
+          "kc_range_note": "0.55–0.85; site- and canopy-specific",
+          "evidence_grade": "B",
+          "implementation_status": "Ready as labelled composite",
+          "notes": "Offer separate race profiles. Irrigation outputs require local canopy, salinity, soil and climate adjustment.",
+          "source_ids": [
+            "ECO_AVOCADO_MEX",
+            "ECO_AVOCADO_GUA",
+            "AVOCADO_KC_2025",
+            "UCR_AVOCADO_KC"
+          ]
+        },
+        {
+          "profile_name": "Mexican race",
+          "scientific_name": "Persea americana ssp. mexican",
+          "default_for_app": "Optional",
+          "temperature": {
+            "absolute_min_c": 10,
+            "optimal_min_c": 14,
+            "optimal_max_c": 22,
+            "absolute_max_c": 28,
+            "basis": "Race-specific Ecocrop envelope"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 660,
+            "optimal_min_mm": 1000,
+            "optimal_max_mm": 1400,
+            "absolute_max_mm": 1800,
+            "basis": "Annual rainfall envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": null,
+            "max_mm": null,
+            "period": "Use local orchard ET"
+          },
+          "crop_duration_days": {
+            "min": 270,
+            "max": 365
+          },
+          "kc_default": 0.65,
+          "kc_range_note": "0.55–0.85 as Hass/avocado orchard reference, not race-specific",
+          "evidence_grade": "B",
+          "implementation_status": "Ready",
+          "notes": "More cold-tolerant race; Kc is not race-specific.",
+          "source_ids": [
+            "ECO_AVOCADO_MEX",
+            "AVOCADO_KC_2025"
+          ]
+        },
+        {
+          "profile_name": "Guatemalan race",
+          "scientific_name": "Persea americana ssp. guatemalan",
+          "default_for_app": "Optional",
+          "temperature": {
+            "absolute_min_c": 12,
+            "optimal_min_c": 15,
+            "optimal_max_c": 24,
+            "absolute_max_c": 30,
+            "basis": "Race-specific Ecocrop envelope"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 660,
+            "optimal_min_mm": 1000,
+            "optimal_max_mm": 1400,
+            "absolute_max_mm": 1800,
+            "basis": "Annual rainfall envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": null,
+            "max_mm": null,
+            "period": "Use local orchard ET"
+          },
+          "crop_duration_days": {
+            "min": 300,
+            "max": 365
+          },
+          "kc_default": 0.65,
+          "kc_range_note": "0.55–0.85 as Hass/avocado orchard reference, not race-specific",
+          "evidence_grade": "B",
+          "implementation_status": "Ready",
+          "notes": "Kc is not race-specific.",
+          "source_ids": [
+            "ECO_AVOCADO_GUA",
+            "AVOCADO_KC_2025"
+          ]
+        },
+        {
+          "profile_name": "West Indian race",
+          "scientific_name": "Persea americana ssp. west indian",
+          "default_for_app": "Optional",
+          "temperature": {
+            "absolute_min_c": 12,
+            "optimal_min_c": 15,
+            "optimal_max_c": 26,
+            "absolute_max_c": 34,
+            "basis": "Race-specific Ecocrop envelope"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 660,
+            "optimal_min_mm": 1000,
+            "optimal_max_mm": 1400,
+            "absolute_max_mm": 1800,
+            "basis": "Annual rainfall envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": null,
+            "max_mm": null,
+            "period": "Use local orchard ET"
+          },
+          "crop_duration_days": {
+            "min": 365,
+            "max": 365
+          },
+          "kc_default": 0.65,
+          "kc_range_note": "0.55–0.85 as avocado orchard reference, not race-specific",
+          "evidence_grade": "B",
+          "implementation_status": "Ready",
+          "notes": "Warm-adapted race; Kc is not race-specific.",
+          "source_ids": [
+            "ECO_AVOCADO_WI",
+            "AVOCADO_KC_2025"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Hass orchards",
+          "stage": "Seasonal orchard coefficient",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.55,
+            "max": 0.85
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Multi-site California 2025 study; local adjustment required",
+          "evidence_grade": "A",
+          "source_ids": [
+            "AVOCADO_KC_2025"
+          ]
+        }
+      ]
+    },
+    "Agave": {
+      "profiles": [
+        {
+          "profile_name": "Blue agave – Mexico observational screening",
+          "scientific_name": "Agave tequilana Weber var. azul",
+          "default_for_app": "Provisional only",
+          "temperature": {
+            "absolute_min_c": null,
+            "optimal_min_c": 23,
+            "optimal_max_c": 25,
+            "absolute_max_c": null,
+            "basis": "Observed annual mean in 84% of cultivated area; not absolute biological limits"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 500,
+            "optimal_min_mm": 600,
+            "optimal_max_mm": 1000,
+            "absolute_max_mm": 1200,
+            "basis": "Producing-zone synthesis; <500 mm associated with poor quality, >1000 mm requires well-drained soils"
+          },
+          "crop_water_requirement": {
+            "min_mm": null,
+            "max_mm": null,
+            "period": "No validated FAO-style ETc/Kc default identified"
+          },
+          "crop_duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc_default": null,
+          "kc_range_note": "Do not supply a universal Kc",
+          "evidence_grade": "B/C",
+          "implementation_status": "Do not use four-point temperature trapezoid",
+          "notes": "Show observed cultivated-site ranges and an explicit provisional badge. Do not compute precise irrigation or yield loss without local calibration.",
+          "source_ids": [
+            "INIFAP_AGAVE"
+          ]
+        }
+      ]
+    },
+    "Tomato": {
+      "profiles": [
+        {
+          "profile_name": "Field tomato",
+          "scientific_name": "Solanum lycopersicum",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 7,
+            "optimal_min_c": 18,
+            "optimal_max_c": 25,
+            "absolute_max_c": 35,
+            "basis": "Ecocrop absolute envelope combined with FAO physiological optimum"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 400,
+            "optimal_min_mm": 600,
+            "optimal_max_mm": 1300,
+            "absolute_max_mm": 1800,
+            "basis": "Broad ecological envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": 400,
+            "max_mm": 600,
+            "period": "90–120 days after transplanting"
+          },
+          "crop_duration_days": {
+            "min": 100,
+            "max": 140
+          },
+          "kc_default": null,
+          "kc_range_note": "Use stage-specific Kc",
+          "evidence_grade": "A/B",
+          "implementation_status": "Ready",
+          "notes": "Flowering/yield formation and the post-transplant period are water-sensitive.",
+          "source_ids": [
+            "FAO_TOMATO",
+            "ECO_TOMATO",
+            "FAO56",
+            "FAO_KY"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Field tomato",
+          "stage": "Initial",
+          "duration_days": {
+            "min": 10,
+            "max": 15
+          },
+          "kc": {
+            "min": 0.4,
+            "max": 0.5
+          },
+          "ky": 0.4,
+          "depletion_fraction_p": 0.3,
+          "interpretation": "Immediately after transplanting; sensitive",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_TOMATO"
+          ]
+        },
+        {
+          "profile": "Field tomato",
+          "stage": "Development",
+          "duration_days": {
+            "min": 20,
+            "max": 30
+          },
+          "kc": {
+            "min": 0.7,
+            "max": 0.8
+          },
+          "ky": 1.1,
+          "depletion_fraction_p": 0.3,
+          "interpretation": "Vegetative/early flowering",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_TOMATO"
+          ]
+        },
+        {
+          "profile": "Field tomato",
+          "stage": "Mid-season",
+          "duration_days": {
+            "min": 30,
+            "max": 40
+          },
+          "kc": {
+            "min": 1.05,
+            "max": 1.25
+          },
+          "ky": 0.8,
+          "depletion_fraction_p": 0.4,
+          "interpretation": "Flowering and yield formation; highest demand",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_TOMATO"
+          ]
+        },
+        {
+          "profile": "Field tomato",
+          "stage": "Late season",
+          "duration_days": {
+            "min": 30,
+            "max": 40
+          },
+          "kc": {
+            "min": 0.8,
+            "max": 0.9
+          },
+          "ky": 0.4,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Ripening",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_TOMATO"
+          ]
+        },
+        {
+          "profile": "Field tomato",
+          "stage": "Harvest endpoint",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.6,
+            "max": 0.65
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "End-of-season Kc",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_TOMATO"
+          ]
+        },
+        {
+          "profile": "Field tomato",
+          "stage": "Whole season",
+          "duration_days": {
+            "min": 100,
+            "max": 140
+          },
+          "kc": {
+            "min": null,
+            "max": null
+          },
+          "ky": 1.05,
+          "depletion_fraction_p": 0.3,
+          "interpretation": "Seasonal Ky/p",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_TOMATO"
+          ]
+        }
+      ]
+    },
+    "Sugarcane": {
+      "profiles": [
+        {
+          "profile_name": "Commercial sugarcane",
+          "scientific_name": "Saccharum officinarum",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 15,
+            "optimal_min_c": 22,
+            "optimal_max_c": 30,
+            "absolute_max_c": 41,
+            "basis": "FAO growth optimum combined with Ecocrop absolute envelope; sprouting optimum and ripening optimum are stage-specific"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 1000,
+            "optimal_min_mm": 1500,
+            "optimal_max_mm": 2000,
+            "absolute_max_mm": 5000,
+            "basis": "Annual ecological envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": 1500,
+            "max_mm": 2500,
+            "period": "Growing season"
+          },
+          "crop_duration_days": {
+            "min": 210,
+            "max": 365
+          },
+          "kc_default": null,
+          "kc_range_note": "Use seven-stage Kc curve",
+          "evidence_grade": "A/B",
+          "implementation_status": "Ready",
+          "notes": "Use 32–38°C for sprouting, 22–30°C for active growth and 10–20°C for ripening rather than one temperature optimum for all stages.",
+          "source_ids": [
+            "FAO_SUGARCANE",
+            "ECO_SUGARCANE",
+            "FAO56",
+            "FAO_KY"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "Planting to 25% canopy",
+          "duration_days": {
+            "min": 30,
+            "max": 60
+          },
+          "kc": {
+            "min": 0.45,
+            "max": 0.6
+          },
+          "ky": 0.75,
+          "depletion_fraction_p": null,
+          "interpretation": "Establishment",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "25% to 50% canopy",
+          "duration_days": {
+            "min": 30,
+            "max": 40
+          },
+          "kc": {
+            "min": 0.75,
+            "max": 0.85
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Canopy development",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "50% to 75% canopy",
+          "duration_days": {
+            "min": 15,
+            "max": 25
+          },
+          "kc": {
+            "min": 0.9,
+            "max": 1.0
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Canopy development",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "75% to full canopy",
+          "duration_days": {
+            "min": 45,
+            "max": 55
+          },
+          "kc": {
+            "min": 1.0,
+            "max": 1.2
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Grand growth",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "Peak use",
+          "duration_days": {
+            "min": 180,
+            "max": 330
+          },
+          "kc": {
+            "min": 1.05,
+            "max": 1.3
+          },
+          "ky": 0.5,
+          "depletion_fraction_p": null,
+          "interpretation": "Peak vegetative/cane growth",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "Early senescence",
+          "duration_days": {
+            "min": 30,
+            "max": 150
+          },
+          "kc": {
+            "min": 0.8,
+            "max": 1.05
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "Declining water use",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "Ripening",
+          "duration_days": {
+            "min": 30,
+            "max": 60
+          },
+          "kc": {
+            "min": 0.6,
+            "max": 0.75
+          },
+          "ky": 0.1,
+          "depletion_fraction_p": null,
+          "interpretation": "Restricted water and cooler conditions support sucrose accumulation",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE",
+            "FAO_KY"
+          ]
+        },
+        {
+          "profile": "Commercial sugarcane",
+          "stage": "Whole season",
+          "duration_days": {
+            "min": 210,
+            "max": 365
+          },
+          "kc": {
+            "min": null,
+            "max": null
+          },
+          "ky": 1.2,
+          "depletion_fraction_p": null,
+          "interpretation": "Seasonal Ky",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_SUGARCANE",
+            "FAO_KY"
+          ]
+        }
+      ]
+    },
+    "Barley": {
+      "profiles": [
+        {
+          "profile_name": "Grain barley",
+          "scientific_name": "Hordeum vulgare",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 2,
+            "optimal_min_c": 15,
+            "optimal_max_c": 20,
+            "absolute_max_c": 40,
+            "basis": "Broad ecological envelope"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 200,
+            "optimal_min_mm": 500,
+            "optimal_max_mm": 1000,
+            "absolute_max_mm": 2000,
+            "basis": "Broad ecological envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": 450,
+            "max_mm": 650,
+            "period": "Crop cycle; FAO groups barley/oats/wheat"
+          },
+          "crop_duration_days": {
+            "min": 90,
+            "max": 240
+          },
+          "kc_default": null,
+          "kc_range_note": "Use grouped small-grain Kc with proxy warning",
+          "evidence_grade": "B/C",
+          "implementation_status": "Ready with proxy warning",
+          "notes": "Barley-specific Kc evidence was not located in the reviewed official sources; grouped small-grain values are a transparent proxy.",
+          "source_ids": [
+            "ECO_BARLEY",
+            "FAO56"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Small-grain proxy",
+          "stage": "Initial",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.35,
+            "max": 0.35
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "FAO grouped barley/oats/wheat teaching value; proxy",
+          "evidence_grade": "C",
+          "source_ids": [
+            "FAO56"
+          ]
+        },
+        {
+          "profile": "Small-grain proxy",
+          "stage": "Development",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.75,
+            "max": 0.75
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "FAO grouped barley/oats/wheat teaching value; proxy",
+          "evidence_grade": "C",
+          "source_ids": [
+            "FAO56"
+          ]
+        },
+        {
+          "profile": "Small-grain proxy",
+          "stage": "Mid-season",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 1.15,
+            "max": 1.15
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "FAO grouped barley/oats/wheat teaching value; proxy",
+          "evidence_grade": "C",
+          "source_ids": [
+            "FAO56"
+          ]
+        },
+        {
+          "profile": "Small-grain proxy",
+          "stage": "Late season",
+          "duration_days": {
+            "min": null,
+            "max": null
+          },
+          "kc": {
+            "min": 0.45,
+            "max": 0.45
+          },
+          "ky": null,
+          "depletion_fraction_p": null,
+          "interpretation": "FAO grouped barley/oats/wheat teaching value; proxy",
+          "evidence_grade": "C",
+          "source_ids": [
+            "FAO56"
+          ]
+        }
+      ]
+    },
+    "Citrus": {
+      "profiles": [
+        {
+          "profile_name": "Mature sweet orange orchard",
+          "scientific_name": "Citrus sinensis",
+          "default_for_app": "Yes",
+          "temperature": {
+            "absolute_min_c": 13,
+            "optimal_min_c": 20,
+            "optimal_max_c": 30,
+            "absolute_max_c": 38,
+            "basis": "Species-specific Ecocrop envelope, consistent with FAO growth range"
+          },
+          "rainfall_envelope": {
+            "absolute_min_mm": 450,
+            "optimal_min_mm": 1200,
+            "optimal_max_mm": 2000,
+            "absolute_max_mm": 2700,
+            "basis": "Annual ecological envelope"
+          },
+          "crop_water_requirement": {
+            "min_mm": 900,
+            "max_mm": 1200,
+            "period": "Year"
+          },
+          "crop_duration_days": {
+            "min": 180,
+            "max": 365
+          },
+          "kc_default": 0.7,
+          "kc_range_note": "0.65–0.75 for mature clean-cultivated ~70% canopy; 0.85–0.90 with uncontrolled ground cover",
+          "evidence_grade": "A/B",
+          "implementation_status": "Ready",
+          "notes": "Use species-specific citrus profiles where available. Flowering and early fruit set are especially sensitive.",
+          "source_ids": [
+            "ECO_CITRUS_ORANGE",
+            "FAO_CITRUS",
+            "FAO56"
+          ]
+        }
+      ],
+      "stage_water_parameters": [
+        {
+          "profile": "Mature sweet orange; clean cultivated",
+          "stage": "Annual/monthly orchard coefficient",
+          "duration_days": {
+            "min": 365,
+            "max": 365
+          },
+          "kc": {
+            "min": 0.65,
+            "max": 0.75
+          },
+          "ky": 0.8,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Approx. 70% canopy; monthly values vary slightly",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_CITRUS"
+          ]
+        },
+        {
+          "profile": "Mature sweet orange; uncontrolled ground cover",
+          "stage": "Annual/monthly orchard coefficient",
+          "duration_days": {
+            "min": 365,
+            "max": 365
+          },
+          "kc": {
+            "min": 0.85,
+            "max": 0.9
+          },
+          "ky": 1.1,
+          "depletion_fraction_p": 0.5,
+          "interpretation": "Includes ground-cover water use",
+          "evidence_grade": "A",
+          "source_ids": [
+            "FAO_CITRUS"
+          ]
+        }
+      ]
+    }
+  },
+  "sources": {
+    "FAO_MAIZE": {
+      "source_id": "FAO_MAIZE",
+      "citation": "FAO Crop Water Information: Maize",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/maize/ar/",
+      "supports": "Maize crop water requirement, Kc ranges and stage durations",
+      "quality": "A"
+    },
+    "FAO_BEAN": {
+      "source_id": "FAO_BEAN",
+      "citation": "FAO Crop Water Information: Bean",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/bean/en/",
+      "supports": "Bean temperature, duration, water requirement, Kc, Ky, depletion fraction and sensitive stages",
+      "quality": "A"
+    },
+    "FAO_SORGHUM": {
+      "source_id": "FAO_SORGHUM",
+      "citation": "FAO Crop Water Information: Sorghum",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/sorghum/es/",
+      "supports": "Sorghum temperature response, water requirement, Kc, stage durations, depletion fraction and sensitive stages",
+      "quality": "A"
+    },
+    "FAO_WHEAT": {
+      "source_id": "FAO_WHEAT",
+      "citation": "FAO Crop Water Information: Wheat",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/wheat/zh/",
+      "supports": "Wheat crop water requirement, Kc ranges and stage durations",
+      "quality": "A"
+    },
+    "FAO_TOMATO": {
+      "source_id": "FAO_TOMATO",
+      "citation": "FAO Crop Water Information: Tomato",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/tomato/ar/",
+      "supports": "Tomato temperature, duration, crop water requirement, Kc, Ky, p and water-sensitive stages",
+      "quality": "A"
+    },
+    "FAO_SUGARCANE": {
+      "source_id": "FAO_SUGARCANE",
+      "citation": "FAO Crop Water Information: Sugarcane",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/sugarcane/en/",
+      "supports": "Sugarcane stage temperatures, annual water requirement and detailed Kc curve",
+      "quality": "A"
+    },
+    "FAO_CITRUS": {
+      "source_id": "FAO_CITRUS",
+      "citation": "FAO Crop Water Information: Citrus",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "FAO legacy crop-water database",
+      "source_type": "Official crop-water guidance",
+      "url": "https://www.fao.org/land-water/databases-and-software/crop-information/citrus/en/",
+      "supports": "Citrus temperature, annual water requirement, Kc, Ky, p and sensitive stages",
+      "quality": "A"
+    },
+    "FAO56": {
+      "source_id": "FAO56",
+      "citation": "Allen et al. FAO Irrigation and Drainage Paper 56",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": 1998,
+      "source_type": "Official technical standard",
+      "url": "https://www.fao.org/4/x0490e/x0490e0b.htm",
+      "supports": "ETc = Kc × ETo framework and standard Kc methodology",
+      "quality": "A"
+    },
+    "FAO_KY": {
+      "source_id": "FAO_KY",
+      "citation": "Steduto et al. Crop yield response to water, FAO Irrigation and Drainage Paper 66",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": 2012,
+      "source_type": "Official technical standard",
+      "url": "https://www.fao.org/4/i2800e/i2800e.pdf",
+      "supports": "Yield-response factor Ky and relative yield-loss method",
+      "quality": "A"
+    },
+    "ECO_MAIZE": {
+      "source_id": "ECO_MAIZE",
+      "citation": "FAO Ecocrop: Zea mays ssp. mays",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=238663",
+      "supports": "Broad temperature, rainfall and crop-cycle envelope for maize",
+      "quality": "B"
+    },
+    "ECO_BEAN": {
+      "source_id": "ECO_BEAN",
+      "citation": "FAO Ecocrop: Phaseolus vulgaris",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=1668",
+      "supports": "Broad temperature and rainfall envelope for common bean",
+      "quality": "B"
+    },
+    "ECO_SORGHUM": {
+      "source_id": "ECO_SORGHUM",
+      "citation": "FAO Ecocrop: Sorghum bicolor",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=48747",
+      "supports": "Broad temperature, rainfall and crop-cycle envelope for sorghum",
+      "quality": "B"
+    },
+    "INIFAP_WHEAT": {
+      "source_id": "INIFAP_WHEAT",
+      "citation": "INIFAP agroclimatic wheat requirements table using Ecocrop",
+      "organization": "Instituto Nacional de Investigaciones Forestales, Agrícolas y Pecuarias",
+      "year": 2018,
+      "source_type": "Mexico-specific peer-reviewed/official research",
+      "url": "https://cienciasagricolas.inifap.gob.mx/index.php/agricolas/es/article/download/1391/1482/4911?inline=1",
+      "supports": "Mexico-relevant wheat optimum and absolute temperature and precipitation ranges",
+      "quality": "A"
+    },
+    "ECO_BARLEY": {
+      "source_id": "ECO_BARLEY",
+      "citation": "FAO Ecocrop: Hordeum vulgare",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=1232",
+      "supports": "Broad temperature, rainfall and crop-cycle envelope for barley",
+      "quality": "B"
+    },
+    "ECO_TOMATO": {
+      "source_id": "ECO_TOMATO",
+      "citation": "FAO Ecocrop: Lycopersicon esculentum / Solanum lycopersicum",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=1379",
+      "supports": "Broad temperature and rainfall envelope for tomato",
+      "quality": "B"
+    },
+    "ECO_SUGARCANE": {
+      "source_id": "ECO_SUGARCANE",
+      "citation": "FAO Ecocrop: Saccharum officinarum",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=1884",
+      "supports": "Broad temperature, rainfall and crop-cycle envelope for sugarcane",
+      "quality": "B"
+    },
+    "ECO_COFFEE": {
+      "source_id": "ECO_COFFEE",
+      "citation": "FAO Ecocrop: Coffea arabica",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Broad ecological envelope database",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=749",
+      "supports": "Broad temperature and rainfall envelope for Arabica coffee",
+      "quality": "B"
+    },
+    "COFFEE_COLOMBIA_KC": {
+      "source_id": "COFFEE_COLOMBIA_KC",
+      "citation": "Castaño-Marín et al. Evapotranspiration and crop coefficients for coffee production systems in Colombia",
+      "organization": "Agronomy Journal / Cenicafé",
+      "year": 2022,
+      "source_type": "Peer-reviewed field measurement",
+      "url": "https://acsess.onlinelibrary.wiley.com/doi/10.1002/agj2.20960",
+      "supports": "Coffee Kc by plantation age under Colombian conditions",
+      "quality": "A"
+    },
+    "COFFEE_BRAZIL_KC": {
+      "source_id": "COFFEE_BRAZIL_KC",
+      "citation": "Oliveira et al. Coffee evapotranspiration and crop coefficient",
+      "organization": "IRRIGA",
+      "year": 2003,
+      "source_type": "Peer-reviewed field water-balance study",
+      "url": "https://revistas.fca.unesp.br/index.php/irriga/article/view/3142",
+      "supports": "Kc variation for mature and pruned coffee",
+      "quality": "B"
+    },
+    "ECO_AVOCADO_MEX": {
+      "source_id": "ECO_AVOCADO_MEX",
+      "citation": "FAO Ecocrop: Mexican avocado race",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Race-specific ecological envelope",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=17644",
+      "supports": "Temperature, rainfall and crop-cycle envelope for Mexican avocado race",
+      "quality": "B"
+    },
+    "ECO_AVOCADO_GUA": {
+      "source_id": "ECO_AVOCADO_GUA",
+      "citation": "FAO Ecocrop: Guatemalan avocado race",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Race-specific ecological envelope",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=17645",
+      "supports": "Temperature, rainfall and crop-cycle envelope for Guatemalan avocado race",
+      "quality": "B"
+    },
+    "ECO_AVOCADO_WI": {
+      "source_id": "ECO_AVOCADO_WI",
+      "citation": "FAO Ecocrop: West Indian avocado race",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Race-specific ecological envelope",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=17646",
+      "supports": "Temperature, rainfall and crop-cycle envelope for West Indian avocado race",
+      "quality": "B"
+    },
+    "AVOCADO_KC_2025": {
+      "source_id": "AVOCADO_KC_2025",
+      "citation": "California Hass avocado ET and crop coefficients",
+      "organization": "Agricultural Water Management",
+      "year": 2025,
+      "source_type": "Peer-reviewed multi-site field measurement",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0378377425001957",
+      "supports": "Hass avocado seasonal ET and Kc range",
+      "quality": "A"
+    },
+    "UCR_AVOCADO_KC": {
+      "source_id": "UCR_AVOCADO_KC",
+      "citation": "University of California avocado monthly crop coefficients",
+      "organization": "University of California Riverside",
+      "year": "Research synthesis",
+      "source_type": "University extension based on field research",
+      "url": "https://avocado.ucr.edu/crop-coefficients-avocados",
+      "supports": "Monthly avocado Kc values under California conditions",
+      "quality": "B"
+    },
+    "INIFAP_AGAVE": {
+      "source_id": "INIFAP_AGAVE",
+      "citation": "Agroclimatic characterization of Agave tequilana in the Santiago River ravine",
+      "organization": "INIFAP / Revista Mexicana de Ciencias Agrícolas",
+      "year": 2023,
+      "source_type": "Mexico-specific peer-reviewed spatial study",
+      "url": "https://www.scielo.org.mx/scielo.php?pid=S2007-09342023000300375&script=sci_arttext&tlng=en",
+      "supports": "Observed temperature and precipitation ranges in cultivated blue-agave areas",
+      "quality": "A"
+    },
+    "ECO_CITRUS_ORANGE": {
+      "source_id": "ECO_CITRUS_ORANGE",
+      "citation": "FAO Ecocrop: Citrus sinensis",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "year": "Ecocrop database",
+      "source_type": "Species-specific ecological envelope",
+      "url": "https://ecocrop.apps.fao.org/ecocrop/srv/en/dataSheet?id=720",
+      "supports": "Temperature, rainfall and crop-cycle envelope for sweet orange",
+      "quality": "B"
+    },
+    "SIAP_CALENDAR": {
+      "source_id": "SIAP_CALENDAR",
+      "citation": "Mexican agricultural calendar",
+      "organization": "Servicio de Información Agroalimentaria y Pesquera / Secretaría de Agricultura",
+      "year": 2026,
+      "source_type": "Official Mexico production calendar",
+      "url": "https://nube.agricultura.gob.mx/calendario_agricola/",
+      "supports": "State/cycle/month planting and harvest timing; use instead of national fixed month presets",
+      "quality": "A"
+    }
+  },
+  "app_replacement_rules": [
+    {
+      "current_component": "CROP_SEASONAL_WINDOWS fixed national months",
+      "action": "Replace",
+      "replacement": "Require planting date or state/cycle/irrigation-mode calendar; derive stages from day lengths",
+      "basis": "SIAP calendar and local INIFAP guidance",
+      "rationale": "Mexico has spring–summer and autumn–winter cycles, irrigated and rainfed systems. One national month sequence is not defensible.",
+      "source_ids": [
+        "SIAP_CALENDAR"
+      ]
+    },
+    {
+      "current_component": "Stage-specific precipitation trapezoids",
+      "action": "Replace",
+      "replacement": "Use broad rainfall envelope only for ecological screening; use ETc = Kc × ETo for water adequacy",
+      "basis": "FAO56 + crop-specific FAO Kc",
+      "rationale": "Rainfall totals are not equivalent to crop water supply and should not be universal stage thresholds.",
+      "source_ids": [
+        "FAO56"
+      ]
+    },
+    {
+      "current_component": "water_deficit_abs / water_deficit_opt fixed mm values",
+      "action": "Remove",
+      "replacement": "Use actual/maximum ET ratio and Ky: 1 − Ya/Ym = Ky(1 − ETa/ETm)",
+      "basis": "FAO Irrigation and Drainage Papers 33/66",
+      "rationale": "A fixed deficit in mm has different biological meaning across climate, crop duration, soil and stage.",
+      "source_ids": [
+        "FAO_KY"
+      ]
+    },
+    {
+      "current_component": "Single crop-wide Kc in irrigation estimator",
+      "action": "Replace",
+      "replacement": "Use stage-specific Kc curve; adjust Kc ini for wetting frequency and local climate",
+      "basis": "FAO56 and crop pages",
+      "rationale": "Kc changes across development and with canopy/ground cover.",
+      "source_ids": [
+        "FAO56"
+      ]
+    },
+    {
+      "current_component": "Generic avocado profile",
+      "action": "Replace",
+      "replacement": "Offer Hass-like composite plus Mexican, Guatemalan and West Indian race profiles",
+      "basis": "FAO Ecocrop race records",
+      "rationale": "Avocado races have materially different temperature envelopes.",
+      "source_ids": [
+        "ECO_AVOCADO_MEX",
+        "ECO_AVOCADO_GUA",
+        "ECO_AVOCADO_WI"
+      ]
+    },
+    {
+      "current_component": "Agave four-point trapezoid and Kc",
+      "action": "Disable by default",
+      "replacement": "Display observed cultivated-site climate ranges; no precise irrigation score until local Kc/calibration exists",
+      "basis": "INIFAP 2023",
+      "rationale": "Available evidence supports observational zoning, not universal physiological limits or Kc.",
+      "source_ids": [
+        "INIFAP_AGAVE"
+      ]
+    },
+    {
+      "current_component": "Coffee fixed Kc",
+      "action": "Replace",
+      "replacement": "Expose age/canopy/shade/pruning selector; default productive full-sun Kc ≈0.95 with warning",
+      "basis": "Colombia and Brazil field studies",
+      "rationale": "Published Kc spans roughly 0.44–1.50 depending on system.",
+      "source_ids": [
+        "COFFEE_COLOMBIA_KC",
+        "COFFEE_BRAZIL_KC"
+      ]
+    },
+    {
+      "current_component": "Perennial crop 'full growing season' precipitation sums",
+      "action": "Replace",
+      "replacement": "Use annual climate envelope and annual/monthly orchard Kc",
+      "basis": "FAO citrus; Ecocrop perennial records",
+      "rationale": "Perennials transpire year-round and do not follow one annual crop cycle.",
+      "source_ids": [
+        "FAO_CITRUS"
+      ]
+    },
+    {
+      "current_component": "Maize/coffee fixed potential yield ceilings",
+      "action": "Disable as scientific default",
+      "replacement": "Require user value or fit against observed yield data; label any fallback as illustrative",
+      "basis": "Observed-yield validation",
+      "rationale": "Potential yield is cultivar-, environment- and management-specific.",
+      "source_ids": []
+    },
+    {
+      "current_component": "Reliability score weights",
+      "action": "Retain with relabelling",
+      "replacement": "Label as application-defined index and expose weights/sensitivity",
+      "basis": "No external biological validation",
+      "rationale": "Validated crop inputs do not validate a custom composite score.",
+      "source_ids": []
+    },
+    {
+      "current_component": "Portfolio/substitution scores",
+      "action": "Retain with relabelling",
+      "replacement": "Label as exploratory application-defined rankings; show component values",
+      "basis": "No external biological validation",
+      "rationale": "Do not imply agronomic or economic recommendation.",
+      "source_ids": []
+    },
+    {
+      "current_component": "Suitability class cut-offs 20/40/60/80",
+      "action": "Retain only as UI categories",
+      "replacement": "Label as conventional app categories, not published crop standards",
+      "basis": "No crop-specific validation",
+      "rationale": "Scores are continuous model outputs; categorical labels are convenience thresholds.",
+      "source_ids": []
+    },
+    {
+      "current_component": "Temperature thresholds copied identically to every stage",
+      "action": "Use cautiously",
+      "replacement": "Apply broad crop envelope by default; use stage-specific temperature rules only where directly supported",
+      "basis": "FAO crop physiology and Ecocrop",
+      "rationale": "Stage-specific thresholds are often cultivar- and context-dependent.",
+      "source_ids": []
+    },
+    {
+      "current_component": "Source provenance absent from UI",
+      "action": "Add",
+      "replacement": "Display source title, URL, evidence grade, parameter basis and last review date beside defaults",
+      "basis": "Source register in this package",
+      "rationale": "Allows peer review, audit and future updating.",
+      "source_ids": []
+    },
+    {
+      "current_component": "No distinction between ecological rainfall and crop water use",
+      "action": "Add explicit distinction",
+      "replacement": "Store `rainfall_envelope_mm` separately from `crop_water_requirement_mm`",
+      "basis": "FAO Ecocrop + FAO56",
+      "rationale": "These quantities answer different questions and must not share the same field.",
+      "source_ids": [
+        "FAO56"
+      ]
+    }
+  ],
+  "evidence_gaps": [
+    {
+      "crop_or_module": "Agave tequilana",
+      "gap": "Universal Kc, Ky, absolute temperature limits and stage-specific ET demand",
+      "priority": "High",
+      "recommended_action": "Do not generate irrigation/yield-loss defaults. Obtain INIFAP or field-calibrated parameters for target denomination-of-origin zones."
+    },
+    {
+      "crop_or_module": "Coffee",
+      "gap": "Universal stage-specific Kc and water-deficit threshold",
+      "priority": "Medium",
+      "recommended_action": "Use age/canopy/shade-specific options; validate in Mexican coffee regions."
+    },
+    {
+      "crop_or_module": "Avocado",
+      "gap": "Mexico-specific Hass Kc and crop-water requirement across production regions",
+      "priority": "Medium",
+      "recommended_action": "Use 0.55–0.85 as a research prior; calibrate with Mexican orchard ET or irrigation records."
+    },
+    {
+      "crop_or_module": "Barley",
+      "gap": "Barley-specific Kc/Ky in the reviewed official sources",
+      "priority": "Medium",
+      "recommended_action": "Use transparent small-grain proxy and flag it in the interface."
+    },
+    {
+      "crop_or_module": "All annual crops",
+      "gap": "National fixed planting months",
+      "priority": "High",
+      "recommended_action": "Import SIAP calendars by state, cycle and irrigation regime; permit local user overrides."
+    },
+    {
+      "crop_or_module": "All crops",
+      "gap": "Cultivar-specific heat thresholds and phenology",
+      "priority": "High",
+      "recommended_action": "Add optional cultivar profiles and growing-degree-day phenology when reliable sources are available."
+    },
+    {
+      "crop_or_module": "All crops",
+      "gap": "Soil-water storage, rooting depth, runoff and effective rainfall",
+      "priority": "High",
+      "recommended_action": "Add a soil-water balance layer before calling irrigation estimates operational."
+    },
+    {
+      "crop_or_module": "Yield module",
+      "gap": "Validated potential yield and response calibration",
+      "priority": "High",
+      "recommended_action": "Train/calibrate against SIAP or experimental observed yields; remove universal ceilings."
+    }
+  ]
+}

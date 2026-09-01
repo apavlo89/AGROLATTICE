@@ -1,0 +1,40 @@
+AGROLATTICE 11.13 USER GUIDE — EXPERIMENTS
+==========================================
+
+EXPERIMENT COMMAND CENTRE
+Choose one Active experiment. The selection persists across Overview, Design, Spatial layout, Data collection, Development & synchrony, Outcomes, Analysis and Evidence & export.
+
+OVERVIEW
+Experiment Pulse summarises lifecycle state, mapped experimental units, flowering coverage, synchrony evidence, weather/EO linkage, outcomes and model runs. Priority actions are evidence-gap prompts, not automated scientific conclusions.
+
+DESIGN
+- Record lifecycle state.
+- Version objective, hypotheses, primary/secondary outcomes, planned analysis and protocol notes.
+- Lock the protocol for field deployment when appropriate. Later edits create a new version/audit event.
+- Store first-class factor definitions and levels.
+- Review factorial treatment matrix and required experimental-unit count before randomisation.
+- Use the approximate power calculator only as planning support; it is not a design-specific power simulation.
+- Select a declared design family. Automatic allocation is strongest for the current blocked/factorial workflow. Split-plot, strip-plot and incomplete-block structures must have their strata explicitly documented and mapped; 11.13 does not pretend the current allocator is a universal design generator.
+- Randomisation versions retain seed, algorithm, constraints, factor matrix and allocation manifest.
+- The optional constrained randomisation searches candidate allocations to reduce identical-treatment shared borders while retaining the declared block/factor structure.
+
+SPATIAL LAYOUT
+The field boundary remains authoritative. Colour experimental units by parent, density, sowing timing, treatment or block. Spatial diagnostics report replication balance, unit-area variation and same-treatment adjacency. Use the Experimental-unit data card to inspect treatment and linked evidence for a single unit.
+
+DATA COLLECTION
+The completeness matrix shows expected/available measurements by experimental unit. Broad QC flags impossible dates and ranges but never silently deletes data. Measurement requirements can link to Field Operations observation protocols. Field-work tasks can be created for the whole trial or a specific experimental unit.
+
+DEVELOPMENT & SYNCHRONY
+Persisted approved weather is used when stored with the trial. If missing, open Climate & Earth Observation to retrieve/review field weather rather than duplicating detached CSV workflows. Flowering curves, synchrony metrics, parent physiology and the existing mechanistic calibration/strategy tools remain available. Timing synchrony does not guarantee pollen quantity, fertilisation, seed purity or yield.
+
+OUTCOMES
+Record and compare plot-level seed set, yield, purity, germination, kernel/ear traits and other supported endpoints. Outcome data remain linked to the same experimental unit and treatment allocation.
+
+ANALYSIS
+The analysis-ready G×E×M table preserves trial, block, replicate, parent and experimental-unit identities. Treatment means, uncertainty summaries and optional block-aware mixed models are available when data are sufficient. Confirm that the model matches the actual randomisation/error strata before inference. Cross-trial G×E×M and advanced synchrony prediction tools are loaded only on request.
+
+EVIDENCE & EXPORT
+Download the complete experiment package or a publication/evidence bundle containing protocol, factors, completeness, audit trail and analysis-ready data. Audit events record important 11.13 design/protocol/lifecycle changes.
+
+CLIMATE PCA/K-MEANS
+Manual and automatic K-means exploration supports k up to 20 when enough independent climate profiles exist. Inspect silhouette, inertia and smallest-cluster size. A 20-cluster exploratory solution is not automatically better than a lower-k solution.

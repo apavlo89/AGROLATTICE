@@ -1,0 +1,4 @@
+Record ID,Location,Year,Observed yield (t/ha),AquaCrop prediction,Suitability model prediction,Satellite model prediction
+field_a_2024,Field A,2024,6.2,5.9,5.5,6.0
+field_b_2024,Field B,2024,4.8,5.1,4.6,4.9
+field_a_2025,Field A,2025,6.7,6.4,5.8,6.5

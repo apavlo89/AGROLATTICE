@@ -1,0 +1,63 @@
+AGROLATTICE 11.3 — BUILD VERIFICATION
+====================================
+Release: AGROLATTICE 11.3 — Research Foundation & Predictive Evidence Update
+Application version: 20.3-release11.3-research-foundation
+Source archive: AGROLATTICE_Release_11_2_Spatial_Upgrade_Integrity_Update(2).zip
+Source archive SHA-256: 2293fa7f3018fd34127f5cbbe3a933bff61c50ed9a452dc3ba8250de80a26eb8
+
+VERIFICATION RESULTS
+--------------------
+PASS  Release 11.3 standalone regression suite (verify_release11_3.py).
+PASS  All 40 Python source files compile with py_compile.
+PASS  New Research Evidence Registry is SQLite schema 1.1.0, integrity_check=ok,
+      foreign_key_check has no findings, and the packaged registry contains no
+      synthetic/test user records.
+PASS  Field Operations database integrity_check=ok and foreign_key_check=0.
+PASS  Maize Pollination Lab database integrity_check=ok and foreign_key_check=0.
+PASS  AgroLattice Twin database integrity_check=ok and foreign_key_check=0.
+PASS  The three protected Release 11.2 SQLite databases are byte-for-byte unchanged
+      in the packaged Release 11.3 build:
+      field_operations/field_operations.sqlite
+        e1b2c1e4efe8a846a3fb6563262abcbd59d7ad2e057e70adb3bad3d03041f525
+      pollination_lab/maize_flowering_trials.sqlite
+        6dec74ccdb70bcffb9530bf08c6e36eba9827cef0790af0552e8ae4db0c1cd30
+      agrolattice_twin/agrolattice_twin.sqlite
+        2c36a232474b494f2dcef8cf1f4561cc4c94b291ae85752db3f54f1f3c131d2a
+PASS  maize_mechanistic_twin.py is byte-for-byte unchanged from Release 11.2:
+        a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+PASS  Safe migration regression covers both an 11.3-style source with all four
+      databases and an 11.2-style source with only the three protected databases.
+PASS  Agricultural validation test confirms LOYO train/test years do not overlap.
+PASS  Applicability test flags out-of-support cases.
+PASS  Wadhwa & Malik environmental feature engineering/VPD regression checks pass.
+PASS  Pest imbalance handling is contained inside the training-fold pipeline.
+PASS  Multimodal fusion regression covers a missing-modality prediction case.
+PASS  Mechanistic maize constants/priors asserted by the Release 11.3 regression
+      suite remain unchanged.
+
+SCIENTIFIC / RELEASE SCOPE CHECK
+--------------------------------
+PASS  Model outputs are stored separately from measured observations.
+PASS  Prediction registry supports numeric regression outputs and categorical class
+      labels/probability maps.
+PASS  Recommendation records are separate from later applied-treatment/outcome data.
+PASS  External benchmark connectors do not silently download or bundle CropNet,
+      YieldSAT or WorldCereal source datasets.
+PASS  Research models start as Prototype unless explicitly promoted by the user.
+PASS  Exact MMST-ViT, PhenoYieldNet, PB-CNN, ALIC, causal-effect, DRL, NSGA-II,
+      market-GNN and federated-learning implementations are NOT claimed in 11.3.
+
+RUNTIME NOTE
+------------
+The build container used for packaging does not contain Streamlit, so a full
+interactive Streamlit browser-session startup was not executed in this environment.
+This is an environment limitation, not a recorded application failure. Release 11.3
+retains Streamlit in requirements_ml_agriculture.txt and RUN_APP.bat performs a
+startup preflight requiring Streamlit >= 1.48 plus all core/research module imports
+on the user's AGROLATTICE environment.
+
+OPTIONAL DEPENDENCY NOTE
+------------------------
+TabPFN is intentionally optional and was not installed in the build container.
+AGROLATTICE 11.3 does not require TabPFN to start. Use
+INSTALL_OPTIONAL_RESEARCH_MODELS.bat if that backend is wanted.

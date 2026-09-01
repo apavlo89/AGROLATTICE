@@ -1,0 +1,44 @@
+AGROLATTICE 11.16 — Platform Control Centre, Data Settings & Tool Catalogue
+==========================================================================
+
+Based on: AGROLATTICE 11.15 — Research Reporting & Publication Command Centre
+
+Headline changes
+----------------
+1. Rebuilt Data & Settings as a dedicated Platform Control Centre with lazy navigation.
+2. Added Data Sources overview distinguishing measured, retrieved, derived/modelled evidence sources.
+3. Added a metadata-only Data Library covering installed climate workspaces, caches, model artifacts, report assets and attachments without loading large files.
+4. Added Country Climate management with all installed country workspaces in the same canonical global storage model.
+5. Added Connections & optional backends page for NASA POWER, Sentinel STAC providers, optional research Python packages and reusable DSSAT/APSIM executable paths.
+6. Added verified Database & Backup Centre. Scientific SQLite backups use SQLite's online backup API, include committed WAL content and pass integrity/foreign-key checks.
+7. Added explicit restore workflow for recognised scientific SQLite databases. Restore validates the backup first, creates an independent pre-restore recovery backup, verifies replacement databases, and requires typed confirmation.
+8. Added Performance & Storage page with cache/storage inventory and safe cache cleanup restricted to reproducible NASA/Sentinel/updater caches.
+9. Added persistent platform preferences for default workspace preset and advanced-tool catalogue visibility.
+10. Added Updates & Migration view explaining backup-first migration and exposing current database schema/health information.
+11. Rebuilt All Tools as a searchable catalogue with scientific-task search, workspace filters, maturity labels, data requirements, favourites, recently used tools and active-context suggestions.
+12. Legacy and advanced tools remain available but are clearly labelled instead of visually competing with primary modern workflows.
+13. User-data migration now preserves platform_settings.json and existing system_backups in addition to all existing protected stores.
+14. No scientific database schema or mechanistic crop model changes.
+
+Scientific/data safeguards
+--------------------------
+- Opening Data & Settings never contacts NASA, STAC providers or external crop-model executables automatically.
+- Cache cleanup never targets installed climate datasets, scientific SQLite databases, field attachments, model artifacts or report evidence.
+- Scientific-database restore is limited to recognised AGROLATTICE SQLite stores and requires a verified AGROLATTICE backup package.
+- Backups are snapshots of committed database state rather than unsafe raw copies of potentially WAL-backed live databases.
+- Historical climate datasets remain country scoped and global; no Mexico assumption was added.
+
+Database migration
+------------------
+None. Field Operations 8.0.0, Experiment 3.0.0, Persistent Twin 3.0.0,
+Research Evidence 2.0.0, Crop Profiles 1.0.0 and Reporting 1.0.0 are unchanged.
+
+Dependencies
+------------
+No new mandatory third-party dependencies.
+
+Known limitations
+-----------------
+- Full browser interaction timing/testing must be performed in the target Streamlit/Windows environment.
+- The built-in restore tool intentionally restores recognised scientific SQLite databases only; use the bundled full-folder migration utility for moving complete installations between releases.
+- Network-service health tests are not run on page entry; availability depends on the user's network and provider status when retrieval is explicitly requested.

@@ -1,0 +1,45 @@
+AGROLATTICE 11.17 — Help, Onboarding & Researcher Guidance
+===========================================================
+
+Based on: AGROLATTICE 11.16 — Platform Control Centre, Data Settings & Tool Catalogue
+
+Headline changes
+----------------
+1. Rebuilt Help as a dedicated Help, Onboarding & Researcher Guidance Command Centre with lazy navigation.
+2. Added context-aware Start Here dashboard using only small persisted summaries from Fields, Experiments, Twins, Models/Evidence and Reports.
+3. Added guided workflows for first mapped field/season, first mapped experiment, maize synchrony, Persistent Twin, model training/validation, decision-to-outcome and reproducible reporting.
+4. Added workspace-specific guidance for Home, Fields & Operations, AgroLattice Twin, Climate & Earth Observation, Crop Decisions, Experiments, Models & Evidence, Reports, Data & Settings and Help.
+5. Added a consistent "What do I need here?" panel to every primary research workspace. Missing prerequisites point researchers toward the relevant source tool without automatically retrieving data or running analyses.
+6. Added a global Data Requirements & Readiness matrix covering mapped fields, seasons, experiments, observations, weather, EO, root-zone state, models, validation, outcomes and report evidence.
+7. Standardised scientific evidence terminology across the guidance layer: Observed, Recorded, Retrieved, Derived, Mechanistic, ML prediction, Forecast, Scenario, Recommendation, Actual operation, Outcome and Causal estimate.
+8. Added explicit interpretation boundaries for predictive importance, climate similarity, mechanistic outputs, model validation, recommendations and causal estimates.
+9. Added a searchable AGROLATTICE glossary covering G×E×M, experimental units, Persistent Twins, applicability/OOD, LOYO/LORO, leave-one-parent-pair-out, uncertainty types, weak supervision and Mechanistic Maize Twin parameters.
+10. Added troubleshooting guides for disappearing maps, non-responsive navigation actions, NASA/STAC failures, slow pages, optional backends, database/schema problems and likely model leakage.
+11. Contextual hover-help guide updated for the current release and expanded with Experimental Unit, Applicability, Forecast and Mechanistic Model terminology.
+12. Existing workspace command centres now expose the same evidence-label vocabulary and prerequisite logic instead of each workspace inventing its own help wording.
+13. Updated current-release documentation, release notes and RUN_APP preflight for 11.17.
+14. No scientific database schema, climate dataset, mechanistic maize equation, crop-model method or mandatory dependency changed.
+
+Scientific/data safeguards
+--------------------------
+- Help/readiness checks read small persisted metadata only; they never trigger NASA POWER, STAC, model fitting, crop-model execution or the 579 MB+ country climate table.
+- A green readiness item means the required record/evidence exists. It does not certify data quality, validation, experimental design or model applicability.
+- Publication priors remain clearly separate from local genotype measurements/calibration.
+- Climate similarity remains environmental similarity under a specified metric and is not presented as agronomic equivalence.
+- Model explanations/SHAP/attention/gating are described as predictive explanations, not causal effects.
+- Recommendations remain separate from actual operations and observed outcomes.
+
+Database migration
+------------------
+None. Field Operations 8.0.0, Experiment 3.0.0, Persistent Twin 3.0.0,
+Research Evidence 2.0.0, Crop Profiles 1.0.0 and Reporting 1.0.0 are unchanged.
+
+Dependencies
+------------
+No new mandatory third-party dependencies.
+
+Known limitations
+-----------------
+- Readiness is intentionally metadata-based. It does not attempt to re-run QC/validation for every linked dataset each time a workspace opens.
+- Full interactive browser verification requires the target Streamlit/Windows environment.
+- Guided workflows cover the principal research paths; highly specialised legacy/advanced tools remain discoverable through All Tools.

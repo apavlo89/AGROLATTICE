@@ -1,0 +1,58 @@
+AGROLATTICE 11.19 — ADAPTIVE CLUSTERING BUILD AC2
+VERIFICATION REPORT
+=================================================
+
+Build identifier: AGROLATTICE-11.19-AC2-2026-08-12
+Verification date: 2026-08-12
+
+Checks passed
+-------------
+- Python compilation of agrolattice.py, agroclimatic_selection_ac2.py and the
+  AC2 verifier.
+- Deterministic synthetic test: recovered PRECIPITATION_AVG and TEMPERATURE as
+  the two signal blocks and recovered the known three-cluster structure.
+- Synthetic independent audit: held-out silhouette 0.754 and stability ARI
+  1.000.
+- Six canonical SQLite databases retained their original Release 11.19 hashes
+  and passed integrity and foreign-key checks.
+- Full publication-level Mexico benchmark completed with 1,012 locations,
+  1991–2020, all twelve months and all 19 canonical candidate variables.
+- The original Release 11.19 source archive remained a separate file with
+  SHA-256 d74eb3758a09762f1d52dedbdaea6da969613b442ba1de3b8705335f56b6f23a.
+
+Mexico benchmark result
+-----------------------
+Candidate variables: 19
+Selected variables: SURFACE_PRESSURE, TEMPERATURE_MIN
+Selected k: 2
+Independent audit repeats: 10
+Independent mean held-out silhouette: 0.601182
+Independent held-out silhouette SE: 0.007966
+Independent mean stability ARI: 0.969991
+Independent tiny-cluster rate: 0.000000
+Full-data silhouette: 0.597277
+Cluster sizes: 419 and 593 locations
+Approximate publication-search runtime in verification container: 3 minutes
+
+PCA benchmark at the default 90% threshold
+-------------------------------------------
+Selected variable-month features: 24
+Components retained: 1
+PC1 variance explained: 94.1859%
+PC2 remains available only as a supplementary visual axis in this case.
+
+Interpretation
+--------------
+The benchmark indicates a strong, stable altitudinal/thermal partition of the
+supplied Mexico profiles. This is the clearest empirical partition found under
+the AC2 objective; it is not proof that surface pressure and minimum
+temperature are the only or most causally important agricultural variables.
+Researchers may restrict the candidate-variable list or use the retained
+manual workflow when the scientific question requires prespecified domains.
+
+Environment note
+----------------
+The verification container did not contain Streamlit, so browser-level startup
+was not executed there. Source integration, compilation, deterministic engine
+behaviour, real-data execution, database preservation and launcher preflight
+content were verified directly.

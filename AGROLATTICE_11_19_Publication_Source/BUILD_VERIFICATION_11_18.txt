@@ -1,0 +1,139 @@
+AGROLATTICE 11.18 — BUILD & VERIFICATION REPORT
+================================================
+Release: AGROLATTICE 11.18 — End-to-End Reliability, Performance Profiling & Integration QA
+Application version: 20.18-release11.18-end-to-end-reliability-performance-integration-qa
+Build date: 2026-08-12
+
+SOURCE OF TRUTH
+---------------
+Built directly from the supplied AGROLATTICE 11.17 — Help, Onboarding & Researcher Guidance archive.
+Baseline archive SHA-256:
+9b66c9bf44fd372d69dad36ecf5d57987c07946a8038924a452c65b8952c84e1
+
+SCOPE OF 11.18
+--------------
+• New read-only integration_reliability.py module 1.0.0.
+• Cross-workspace integrity audit across all six user-owned SQLite stores.
+• Persisted workflow-chain readiness from mapped Field through Experiment, Twin, model evidence, decision/outcome and Report.
+• Bounded in-session top-level page and embedded-tool performance profiling with median/P95/max/error summaries.
+• Streamlit rerun/stop control-flow events are timed without being misclassified as reliability errors.
+• Safe queued routing extended to Fields & Operations and remaining Home/deep-link shortcuts.
+• Data & Settings receives Performance profiling plus Integration & reliability views.
+• Migration/diagnostic/installer Windows scripts updated to current Release 11.18 naming and six-database protection.
+• No scientific model, climate-variable definition, database schema, or mandatory dependency change.
+
+PROTECTED ARTIFACT VERIFICATION
+-------------------------------
+The following SHA-256 values are byte-for-byte identical to the supplied 11.17 baseline:
+
+field_operations/field_operations.sqlite
+fbf5ab2de711830a50bed5acfae84a86ec58efc45448d18ea7b88e04b4ff69b5
+
+pollination_lab/maize_flowering_trials.sqlite
+87511c0a9921e731f8bd8b3111118e452b9aa6d6ee32905fee3b7af73a258819
+
+agrolattice_twin/agrolattice_twin.sqlite
+ea5746651e6fb6c3de409ec8cf64d6e68409b40c0a7853f33982b2fb3f006bb4
+
+models_evidence/research_evidence.sqlite
+7e80e599285753c026ff47e86127ad3df42b4cfdb7ff662fb6cd1011b1052a25
+
+models_evidence/crop_profiles.sqlite
+84da237e7a8f20b3c84da7c9c423d0aa5a2dab130608c1eebfc2b06885c9e3a6
+
+reports/reporting.sqlite
+f1e3cd3dfce0a91e65db13f282d940245d5f42716551c276a6cef5af3d5e81d4
+
+maize_mechanistic_twin.py
+a62679f3aef1db8dfa4b459db8701cbf8502e7955b88daa520135b905e9400e8
+
+For every packaged primary SQLite database before packaging:
+• PRAGMA integrity_check = ok
+• PRAGMA foreign_key_check = 0 issues
+
+DATABASE / MIGRATION
+--------------------
+No database schema migration is required by 11.18.
+Existing schemas remain:
+• Field Operations 8.0.0
+• Maize Experiments / Pollination Lab 3.0.0
+• Persistent Twin 3.0.0
+• Research Evidence 2.0.0
+• Crop Profile Registry 1.0.0
+• Reporting Registry 1.0.0
+
+safe_data_migration.py remains source-authoritative and backup-first. A temporary migration regression copied all six databases into isolated source/destination trees, added a harmless source-only reporting record, migrated the source into the destination, and verified:
+• all six databases migrated;
+• before_11_18_<timestamp> recovery backup created;
+• source snapshots and destination-before snapshots created;
+• source row counts exactly matched activated destination row counts;
+• source-only record reached destination;
+• integrity/foreign-key checks remained clean.
+No packaged scientific database was modified by that test.
+
+END-TO-END INTEGRATION REGRESSION
+---------------------------------
+A complete synthetic workflow was constructed ONLY in temporary copies of the six databases:
+
+Mapped Field
+→ structured season
+→ field observation/operation
+→ Experiment
+→ Experimental Unit
+→ flowering observation
+→ harvest outcome
+→ Persistent Twin link/weather/state
+→ registered model + validation
+→ context-linked prediction
+→ recommendation
+→ measured decision outcome
+→ traceable Report
+
+All 14 workflow readiness stages returned Ready.
+The cross-workspace audit returned PASS for the intact synthetic chain.
+Additional fault-injection checks confirmed:
+• changing the authoritative Field geometry hash after trial mapping raises a WARN rather than silently rewriting the Trial;
+• an unresolved Research Evidence field reference raises a WARN.
+
+These are structural/reproducibility checks. They do not establish agronomic, statistical, predictive, mechanistic, or causal validity.
+
+PERFORMANCE / NAVIGATION REGRESSION
+-----------------------------------
+• Runtime event history is bounded to 250 events.
+• Median, P95, maximum, run count and propagated error count are computed from session events.
+• Explicit Streamlit-like rerun control flow is recorded as control, not error.
+• Session timing history can be cleared without touching caches or scientific data.
+• Fields & Operations consumes queued navigation before its radio widget is instantiated.
+• Home shortcuts use current command-centre route requests rather than obsolete release10 workspace mirrors.
+• Embedded advanced tools are profiled only when explicitly rendered.
+• No remote NASA/STAC request, model fit, EO processing, or full climate-table scan was added to command-centre page entry.
+
+SCIENTIFIC REGRESSION GUARDS
+----------------------------
+• Established 19-variable NASA-derived agroclimate support preserved.
+• Global country support preserved; no new Mexico-only assumption added to global functions.
+• PCA/K-means exploration up to k=20 from 11.13+ preserved.
+• Mechanistic Maize Twin source is byte-for-byte unchanged.
+• No model-status, validation, uncertainty, experimental-design or reporting scientific method was changed by this reliability release.
+
+CODE VERIFICATION
+-----------------
+• 79 top-level Python modules parsed/compiled successfully.
+• Recursive python -m compileall completed successfully.
+• verify_release11_18.py passed.
+• RUN_APP.bat requires the 11.18 reliability module/docs/verifier and checks current module/schema versions before launch.
+• DIAGNOSE_APP.bat now reports the current command-centre/reliability modules.
+
+INTERACTIVE TEST LIMITATION
+---------------------------
+The packaging container does not have Streamlit installed (ModuleNotFoundError), so a full browser/UI session was not claimed or simulated. RUN_APP.bat performs the Release 11.18 Streamlit/version/module/schema preflight in the target Windows/Anaconda environment.
+
+FINAL-PACKAGE CHECKS
+--------------------
+A packaged ZIP was tested with unzip -t and reported no compressed-data errors. It was then extracted into a clean directory and the following were rerun against that packaged copy:
+• verify_release11_18.py — passed;
+• recursive Python compileall — passed;
+• PRAGMA integrity_check for all six primary SQLite databases — ok;
+• PRAGMA foreign_key_check for all six primary SQLite databases — 0 issues.
+
+After this report was finalized, the release archive was rebuilt and the same clean-extraction verification was repeated on the final archive before delivery.

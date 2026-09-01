@@ -1,0 +1,170 @@
+AGROLATTICE 11.5 — Decision Intelligence & Research Optimisation
+================================================================
+Based on: AGROLATTICE 11.4 — Multimodal Crop Intelligence & Hybrid Twin Learning
+Application version: 20.5-release11.5-decision-intelligence
+
+PURPOSE
+-------
+Release 11.5 turns the modelling/evidence infrastructure into a researcher-facing decision
+workflow. It deliberately separates prediction, recommendation, actual field operation and
+measured outcome. The new tools compare alternatives, expose trade-offs, retain provenance
+and support later observational effectiveness audits instead of presenting one opaque "AI
+recommendation" as agronomic truth.
+
+WHAT CHANGED
+------------
+1. Decision Intelligence & Research Optimisation workspace
+   - Added to Crop Decisions and discoverable from Models & Evidence.
+   - Seven researcher-oriented tabs: Decision home, Irrigation policy studio, Nutrient
+     optimisation, State assimilation, Recommendation trials, Causal audit, and Methods &
+     safeguards.
+   - Readiness/status cards explain which evidence is available before analysis.
+   - Compare -> choose -> record -> apply only if approved -> measure -> evaluate workflow.
+
+2. Irrigation Policy Studio
+   - Uses mapped fields and validated crop/soil profiles rather than requiring CSV setup.
+   - Weather can come directly from NASA POWER for the mapped field, the Research Data Hub,
+     or an uploaded future scenario/forecast table.
+   - Automatically records NASA acquisition provenance in the Research Evidence database.
+   - Reuses the existing FAO-style daily root-zone water balance and crop-stage parameters.
+   - Compares rainfed, RAW-trigger, deficit-refill and fixed-interval strategies under the
+     same weather/soil/crop assumptions.
+   - Can add a recorded soil-moisture sensor-threshold strategy using existing Field
+     Operations sensor readings. This remains simulation/decision support only.
+   - Exposes application efficiency, maximum event, initial depletion, root depths, runoff,
+     trigger/refill ranges, optional seasonal water-allocation/event-count constraints and economics.
+   - Infeasible alternatives remain visible with constraint reasons instead of disappearing.
+   - Computes water use, event count, stress/severe-stress days, ET satisfaction, deep
+     percolation, optional Ky-based relative-yield proxy and optional irrigation-adjusted
+     margin.
+   - Displays Pareto-efficient alternatives and water-vs-crop-stress trade-offs before any
+     objective-selected scenario is shown.
+   - Saves the whole comparison as a decision run and can save a selected scenario as a
+     research recommendation without silently writing it as an applied irrigation event.
+
+3. Local N-P-K response and multi-objective optimisation
+   - Can use the Research Data Hub or a researcher-supplied trial/field table.
+   - Existing nutrient samples and fertiliser operations are shown as field context when a
+     field is selected; product rate is not silently converted to elemental N/P/K.
+   - Fits a second-order empirical N/P/K response surface with Ridge regularisation.
+   - Supports additional numeric G×E×M covariates and group-aware validation by site,
+     season, trial or another researcher-selected grouping variable.
+   - Search ranges default to the observed support of the fitted data.
+   - Generates a transparent candidate grid and Pareto screens predicted outcome against
+     total nutrient use and optional margin.
+   - Researcher objectives: balanced trade-off, maximum predicted yield, minimum nutrient
+     rate retaining >=95% of predicted maximum, or maximum margin when economics are given.
+   - Provides validation residuals, explicit extrapolation boundaries, export and persistent
+     decision/recommendation records.
+
+4. Uncertainty-weighted state assimilation
+   - Adds single-observation Gaussian updates, independent time-varying model-state updates, and
+     recursive repeated-measurement updates for a static/calibration state.
+   - Evolving states such as LAI can use per-time-point model prior mean/SD and observation
+     mean/SD; AGROLATTICE does not incorrectly carry a posterior across biological time.
+   - Recursive sequential updating is explicitly restricted to repeated measurements of the same
+     latent state/parameter unless a process/state-transition model has propagated the prior.
+   - Displays posterior trajectory and persists state-assimilation evidence.
+   - The UI explicitly requires model and observation to represent the same physical state
+     and units, or to use a separately validated observation operator.
+   - EO indices are not automatically treated as LAI, biomass, N status or soil water.
+
+5. Recommendation trials and outcome tracking
+   - Universal recommendation records can be created for a field/trial/experimental unit.
+   - Status lifecycle supports Proposed, Accepted, Rejected, Applied, Completed and
+     Superseded, with an append-only status-history event and optional researcher reason for
+     every transition.
+   - Researchers can record whether a recommendation was followed, the actual action,
+     action date, measured outcome, unit and pre-treatment/context covariates.
+   - Recommendations and treatment outcomes remain separate records.
+   - Creating a Field Operations task from a research recommendation requires explicit user
+     acknowledgement; no recommendation is automatically treated as an operation.
+
+6. Observational causal-effect audit
+   - Can analyse recommendation/outcome records directly from the registry, a Data Hub table
+     or an uploaded study table.
+   - Accepts numeric or categorical binary treatment labels (e.g. Yes/No, A/B, True/False) and requires an explicit treated/intervention level so effect direction is never inferred alphabetically.
+   - Provides naive difference as a diagnostic only, inverse-probability weighting, separate
+     outcome-model/T-learner estimates and a doubly robust AIPW-style estimate.
+   - Pre-treatment adjustment can include numeric and categorical factors such as genotype,
+     site or management class; categorical levels are reference-coded and exposed in balance diagnostics.
+   - Nuisance models are cross-fitted; researcher can select a field/site/season/trial group
+     for grouped cross-fitting and clustered bootstrap.
+   - Reports propensity overlap, positivity warnings, IPW effective sample size, raw and
+     weighted standardised mean differences, unit-level diagnostics and a treatment-shuffle
+     placebo/refutation diagnostic.
+   - Confidence intervals use a fast non-parametric bootstrap of the cross-fitted effect
+     scores (cluster bootstrap when a group is supplied); nuisance models are not refit in
+     every bootstrap replicate and the app states this limitation.
+   - Researchers can save an adjustment rationale / causal-graph note explaining why selected
+     covariates are plausible pre-treatment common causes and why post-treatment variables are excluded.
+   - Results are explicitly conditional on consistency, exchangeability given the selected
+     pre-treatment covariates, positivity, no interference and model/measurement assumptions.
+   - Causal audits are saved with assumptions and diagnostics, never promoted as causal proof.
+
+7. Research Evidence database schema 1.3.0
+   - Additive new tables: decision_runs, state_assimilations, causal_analyses and
+     recommendation_status_history; state_assimilations also stores optional sequence_json.
+   - Existing datasets, acquisitions, models, predictions, recommendations and treatment
+     outcomes remain intact.
+   - Automatic pre-upgrade SQLite backup, migration, integrity and foreign-key verification.
+   - Field Operations, Maize Pollination Lab and Persistent Twin database schemas are unchanged.
+
+8. Research Evidence UI
+   - Registry summary now includes treatment outcomes, decision runs and causal audits.
+   - New Decision evidence tab exposes decision runs, state assimilations and causal analyses.
+
+9. Release/startup/migration integration
+   - RUN_APP.bat preflights the new decision modules and Research Evidence schema 1.3.0.
+   - Backup-first migration scripts now identify Release 11.5 and retain source-authoritative
+     database migration with rollback/integrity/row-count safeguards.
+   - Current user guide and Help workspace point to Release 11.5 documentation.
+
+SCIENTIFIC ADAPTATIONS, NOT CLAIMED REPRODUCTIONS
+-------------------------------------------------
+- Irrigation decision structure is inspired by the reviewed Seq2Seq + deep-RL irrigation
+  literature, but Release 11.5 does NOT claim the exact published Seq2Seq or DRL policy.
+  It uses transparent root-zone policy comparison as the safer researcher-facing baseline.
+- Multi-objective nutrient optimisation adapts the Pareto concept from spatial fertiliser
+  optimisation research. Release 11.5 uses a transparent empirical response surface and
+  exhaustive candidate grid, NOT the paper's exact NSGA-II workflow.
+- State assimilation provides a general uncertainty-weighted same-state update foundation;
+  it is NOT an exact reproduction of crop-specific EO/crop-model N assimilation.
+- Causal recommendation auditing independently adapts standard backdoor-adjusted observational
+  estimators motivated by Tsoumas et al. It does not reproduce a proprietary pipeline and does
+  not replace randomised or well-designed field experiments.
+
+DATABASE CHANGES
+----------------
+Additive Research Evidence DB:
+  models_evidence/research_evidence.sqlite — schema 1.2.0 -> 1.3.0
+  New tables: decision_runs, state_assimilations, causal_analyses, recommendation_status_history
+  Additive column: state_assimilations.sequence_json
+
+UNCHANGED protected database schemas:
+  field_operations/field_operations.sqlite
+  pollination_lab/maize_flowering_trials.sqlite
+  agrolattice_twin/agrolattice_twin.sqlite
+
+The Mechanistic Maize Twin equations/implementation are unchanged.
+
+DEPENDENCIES
+------------
+No new mandatory third-party package was added for Release 11.5. The decision engine uses the
+existing NumPy, pandas, scikit-learn, Plotly and AGROLATTICE root-zone/crop libraries. Optional
+research-model dependencies from 11.4 remain optional.
+
+KNOWN LIMITATIONS
+-----------------
+- NASA POWER is gridded historical/near-real-time environmental data, not a local station and
+  not a future operational forecast.
+- Irrigation policy outputs do not control pumps, valves or external controllers.
+- Ky-based relative yield in irrigation comparison is a water-stress proxy, not a calibrated
+  field yield model unless independently calibrated.
+- Empirical nutrient optimisation requires measured outcomes and real N/P/K rate variation.
+  Its recommendation validity is limited by the fitted data and validation design.
+- The state-assimilation tool assumes compatible states/units and independent Gaussian errors.
+- Observational causal estimates can remain biased by unmeasured confounding, poor overlap,
+  interference, measurement error or misspecified adjustment sets.
+- Pareto membership does not mean an alternative is agronomically safe or operationally valid.
+- Research recommendations require researcher review and remain distinct from applied operations.

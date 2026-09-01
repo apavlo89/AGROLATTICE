@@ -1,0 +1,55 @@
+AGROLATTICE 11.18 — END-TO-END RELIABILITY, PERFORMANCE & INTEGRATION QA
+========================================================================
+
+BASELINE
+--------
+Built from AGROLATTICE 11.17 — Help, Onboarding & Researcher Guidance.
+
+ADDED
+-----
+1. New integration_reliability.py module 1.0.0.
+2. Data & Settings → Integration & reliability.
+3. Lightweight cross-workspace referential audit across all six scientific/reporting SQLite stores.
+4. Active end-to-end workflow-chain readiness from Field to Report.
+5. Bounded in-session top-level page and embedded-tool performance profiling.
+6. Performance table with run count, median, P95, maximum render time and error count.
+7. Session performance-history reset that does not delete caches or scientific data.
+8. Dedicated 11.18 verifier with a complete synthetic persisted workflow on temporary database copies.
+
+RELIABILITY FIXES
+-----------------
+• Fields & Operations command-centre navigation now consumes queued view requests safely before the radio widget is instantiated.
+• Home deep links now route through current command-centre request keys instead of old release10 workspace mirror keys.
+• Field tasks/scouting, crop health, Earth Observation, water/irrigation, experiment design, validation, evidence and decision shortcuts now target the modern command-centre destinations.
+• Embedded advanced tools are timed and their propagated errors are included in the session performance event history.
+
+INTEGRATION AUDIT
+-----------------
+The audit checks:
+• SQLite integrity and local foreign keys;
+• Trial → authoritative Field references;
+• whether a Trial's saved source-field geometry hash became stale after field-boundary editing;
+• Persistent Twin → Field/Trial references;
+• Research Evidence Field/Trial/Experimental Unit references where those context IDs are present;
+• explicit report Field/Trial scope references.
+
+These checks are integration/reproducibility safeguards, not scientific validation.
+
+PERFORMANCE
+-----------
+No large climate-table scan, remote retrieval, model fit or EO processing is added to page entry. Runtime profiling is in-memory/session-only and bounded to 250 events.
+
+DATABASES / MIGRATION
+---------------------
+No scientific schema changes.
+Safe migration remains backup-first and now labels migration recovery folders before_11_18_<timestamp>.
+
+PROTECTED SCIENTIFIC ARTIFACTS
+------------------------------
+The Field Operations, Experiment, Persistent Twin, Research Evidence, Crop Profile and Reporting databases are unchanged from the supplied 11.17 baseline. maize_mechanistic_twin.py is unchanged.
+
+LIMITATIONS
+-----------
+• Full interactive browser testing still requires the user's target Streamlit/Windows environment.
+• Session timings include whatever explicit work the researcher triggered during that render; they are diagnostics, not standardized benchmarks.
+• Cross-database reference checks cannot establish agronomic, statistical or causal validity.

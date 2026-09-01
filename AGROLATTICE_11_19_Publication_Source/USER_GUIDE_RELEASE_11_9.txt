@@ -1,0 +1,75 @@
+AGROLATTICE 11.9 — AGROLATTICE TWIN QUICK USER GUIDE
+====================================================
+
+1. Select a Twin once
+---------------------
+Open AgroLattice Twin and select the Active Twin. The selection is retained while
+you move among Twin views.
+
+2. Start with Overview
+----------------------
+Use Twin Pulse to review current development, water, EO, synchrony, model
+agreement and outstanding field execution. The Persistent Twin state chain shows
+which evidence components are Ready, Observed, Modelled, Partial or Missing.
+
+3. Inspect the Spatial Twin
+---------------------------
+Open Spatial Twin only when you need the map. Toggle sensor points, scouting /
+observations and operation polygons. Where a maize trial is linked, plots /
+experimental units can display analytical metrics.
+
+4. Inspect crop development
+---------------------------
+For a linked maize synchrony trial, Development & water shows the male and female
+parent physiology parameters and their provenance. 'Publication prior' means the
+line has not yet been locally calibrated. Flowering timing is a model output, not
+an observation unless an observed marker is explicitly shown.
+
+5. Calibrate local parent physiology
+------------------------------------
+Setup → Crop model & calibration.
+Use stored flowering-event dates and collared-leaf observations. Run the
+prior-regularised fit, inspect fitted values/warnings, then explicitly save the
+fit to the Maize Synchrony parent registry if scientifically acceptable.
+
+6. Explore sowing strategies
+----------------------------
+Scenarios includes the mechanistic male-sowing strategy explorer. It compares
+candidate male offsets against female silking timing under parameter uncertainty.
+It optimises timing coverage only; it does not guarantee pollen quantity or seed
+purity.
+
+7. Use time travel
+------------------
+Timeline reconstructs the Twin as of a selected date. Mechanistic event detection
+uses weather available up to that date. Saved checkpoints remain auditable.
+
+8. Collect the next useful measurement
+---------------------------------------
+Measurements & copilot ranks plots/experimental units using the saved Twin state.
+You can create linked field tasks and reuse the Maize Flowering Synchrony
+observation protocol rather than entering generic notes.
+
+9. Preserve decision evidence
+------------------------------
+A Twin recommendation can be copied into the Research Evidence
+Recommendation → Action → Outcome ledger. A recommendation is not an operation;
+actual application/action and subsequent outcome remain separate records.
+
+10. Review evidence before acting
+---------------------------------
+Evidence & validation displays source coverage, physiology provenance,
+calibration runs, model disagreement, outcomes and linked prediction evidence.
+Use the raw manifest only when you need low-level provenance details.
+
+11. Retrieve/update data deliberately
+-------------------------------------
+Setup → Data sources exposes persistent weather, root-zone and Sentinel-2 tools.
+Opening the Twin never automatically launches expensive remote retrieval. This
+preserves responsive navigation and makes data acquisition explicit/auditable.
+
+12. Export
+----------
+Setup → Export & advanced can download a complete Twin package. Destructive
+record clearing is isolated under an Advanced expander and never deletes the
+linked field/trial databases.
