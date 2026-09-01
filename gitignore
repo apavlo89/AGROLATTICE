@@ -1,0 +1,134 @@
+# AGROLATTICE repository hygiene
+# Keep source, documentation, deterministic publication-reference assets,
+# manifests, and schema-only exports under version control. Keep local research
+# data, runtime state, credentials, caches, and generated working artifacts out.
+
+# -----------------------------------------------------------------------------
+# Python bytecode / caches / test artifacts
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.ipynb_checkpoints/
+
+# -----------------------------------------------------------------------------
+# Python / Conda virtual environments
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.conda/
+conda-env/
+.python-version
+
+# -----------------------------------------------------------------------------
+# IDE / editor / operating-system files
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# Secrets and local credentials
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+secrets.toml
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+service_account*.json
+
+# -----------------------------------------------------------------------------
+# Logs / temporary files / local scratch outputs
+# -----------------------------------------------------------------------------
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# -----------------------------------------------------------------------------
+# AGROLATTICE user-specific configuration and analysis history
+# These are recreated or populated by a working installation and may reveal
+# local research choices, locations, or user preferences.
+# -----------------------------------------------------------------------------
+analysis_history.json
+analysis_presets.json
+custom_crop_profiles.json
+global_country_settings.json
+platform_settings.json
+
+# -----------------------------------------------------------------------------
+# AGROLATTICE local scientific databases and SQLite sidecars
+# Never publish research databases from a working installation.
+# -----------------------------------------------------------------------------
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+*.db-wal
+*.db-shm
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# -----------------------------------------------------------------------------
+# AGROLATTICE local datasets, stores, caches, attachments, and run outputs
+# Mirrors the publication-safe exclusions in build_public_archive.py.
+# -----------------------------------------------------------------------------
+Datasets/
+cache/
+dataset_updates/
+project_store/
+study_store/
+system_backups/
+migration_backups/
+satellite_exports/
+external_model_runs/
+field_operations/attachments/
+reports/assets/
+
+# -----------------------------------------------------------------------------
+# Generated release/source archives
+# -----------------------------------------------------------------------------
+AGROLATTICE_11_19_PUBLICATION_SOURCE_ONLY*.zip
+AGROLATTICE_*PUBLICATION_SOURCE_ONLY*.zip
+
+# -----------------------------------------------------------------------------
+# Build / packaging artifacts
+# -----------------------------------------------------------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# NOTE:
+# Do NOT ignore publication_reference/environment/*.txt globally. Those files
+# are intended to be committed when the manuscript environment is frozen.
+# Do NOT ignore CSV/JSON/GeoJSON/XLSX globally: the repository intentionally
+# contains deterministic demo assets, manifests, templates, and research-safe
+# reference material in these formats.
